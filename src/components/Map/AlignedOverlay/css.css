@@ -1,0 +1,27 @@
+.alignment {
+	position: absolute;
+}
+
+.top {
+	top: 0
+}
+.bottom {
+	bottom: 0
+}
+.middle {
+	transform: translateY(calc(-50%));
+}
+
+.left {
+	left: 0
+}
+.right {
+	right: 0
+}
+.center {
+	transform: translateX(calc(-50%));
+}
+
+.middle.center {
+	transform: translateY(calc(-50%)) translateX(calc(-50%));
+}

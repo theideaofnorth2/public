@@ -1,0 +1,12 @@
+.background {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: url('tion2Static/images/IMG_1126-rtchd-1080.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
