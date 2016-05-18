@@ -1,6 +1,6 @@
 const defaultState = {
 	status: 'initial',
-	data: [],
+	data: new Map(),
 };
 
 export default function reducer(state = defaultState, action = null) {

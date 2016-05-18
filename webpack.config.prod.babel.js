@@ -20,6 +20,9 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env': { NODE_ENV: JSON.stringify('production') },
 		}),
+		new webpack.ProvidePlugin({
+			fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+		}),
 	],
 	resolve: {
 		alias: {
