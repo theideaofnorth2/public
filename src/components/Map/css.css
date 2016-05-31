@@ -11,21 +11,30 @@
 	left: -256px;
 	right: -256px;
 	background: transparent !important;
-	opacity: 0;
-}
-
-.initialized {
-	opacity: 0.5;
-	transition: opacity 500ms linear;
 }
 .ready {
 	opacity: 1;
-	transition: opacity 500ms linear;
+}
+.zooming {
+	opacity: 0;
 }
 
 .layer1 {
-	opacity: 0.7;
+	opacity: 0.4;
 }
 .layer4 {
 	opacity: 1;
+}
+
+.capture .layer1 {
+	opacity: 1;
+}
+.capture .layer4 {
+	opacity: 0;
+}
+
+
+.positionedContent {
+	position: absolute;
+	z-index: -1;
 }

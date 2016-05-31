@@ -1,0 +1,17 @@
+.interview {
+	background: rgba(255, 255, 255, 0.8);
+	position: absolute;
+	bottom: 0;
+	display: none;
+	color: black;
+	padding: 10px 16px;
+	border-radius: 4px;
+}
+
+.interview.visible {
+	display: block;
+}
+
+.interview.playing {
+	background: rgba(0, 255, 255, 0.8);
+}

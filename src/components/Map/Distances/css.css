@@ -1,2 +1,42 @@
-.distances {
+.distance {
+	background: rgba(255, 255, 255, 0);
+	height: 100%;
+	transform: scale(1);
+	transform-origin: 100% 100%;
+	transition: transform 500ms cubic-bezier(0,0,0.32,1);
+}
+
+.distance.hover {
+	transform: scale(1);
+}
+
+.svg {
+	width: 100%;
+	height: 100%;
+}
+
+.path {
+	stroke: rgba(255,255,255,0.8);
+	stroke-width: 1.5;
+	animation: dashOut 150ms cubic-bezier(0,0,0.32,1) forwards;
+}
+
+.path.hover,
+.path.delayedHover {
+  animation: dashIn 300ms cubic-bezier(0,0,0.32,1) forwards;
+}
+.path.delayedHover {
+  animation-delay: 200ms;
+}
+
+@keyframes dashIn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dashOut {
+  from {
+    stroke-dashoffset: 0;
+  }
 }

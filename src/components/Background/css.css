@@ -7,6 +7,5 @@
 	background: url('tion2Static/images/IMG_1126-rtchd-1080.jpg');
 	background-position: center center;
 	background-repeat: no-repeat;
-	-webkit-filter: grayscale(100%);
-	filter: grayscale(100%);
+	opacity: 0.5;
 }

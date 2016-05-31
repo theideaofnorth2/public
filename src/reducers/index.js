@@ -3,14 +3,14 @@ import app from './app';
 import cities from './cities';
 import interviews from './interviews';
 import map from './map';
-import ui from './ui';
+import zoomer from './zoomer';
 
 const rootReducer = combineReducers({
 	app,
 	cities,
 	interviews,
 	map,
-	ui,
+	zoomer,
 });
 
 export default rootReducer;

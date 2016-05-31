@@ -1,0 +1,10 @@
+.interview {
+	background: rgba(0,0,0,0.7);
+	padding: 8px 12px;
+	background-clip: padding-box;
+	transition: all 100ms linear;
+}
+
+.interview:hover {
+	background: rgba(0,0,0,1);
+}

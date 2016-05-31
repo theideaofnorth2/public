@@ -3,6 +3,9 @@ export function TION2Overlay(bounds, div, map) {
 	this.div_ = div;
 	this.map_ = map;
 	this.setMap(map);
+	this.callbacks = {
+		mount: [],
+	};
 }
 
 TION2Overlay.prototype = new google.maps.OverlayView();
@@ -10,6 +13,10 @@ TION2Overlay.prototype = new google.maps.OverlayView();
 TION2Overlay.prototype.onAdd = function onAdd() {
 	const panes = this.getPanes();
 	panes.overlayMouseTarget.appendChild(this.div_);
+};
+
+TION2Overlay.prototype.on = function on(event, callback) {
+	this.callbacks[event].push(callback);
 };
 
 TION2Overlay.prototype.draw = function draw() {
@@ -21,6 +28,8 @@ TION2Overlay.prototype.draw = function draw() {
 	div.style.top = `${ne.y}px`;
 	div.style.width = `${ne.x - sw.x}px`;
 	div.style.height = `${sw.y - ne.y}px`;
+	this.callbacks.mount.forEach(callback => callback());
+	this.callbacks.mount = [];
 };
 
 TION2Overlay.prototype.onRemove = function onRemove() {

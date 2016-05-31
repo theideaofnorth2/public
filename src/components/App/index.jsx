@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GoogleMap from 'tion2/components/Map';
+import Map from 'tion2/components/Map';
+import Sounds from 'tion2/components/Sounds';
 import Background from 'tion2/components/Background';
+import Zoomer from 'tion2/components/Zoomer';
+import Interface from 'tion2/components/Interface';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -12,12 +15,20 @@ export class MyComponent extends Component {
 	componentDidMount() {
 	}
 	render() {
-		return (
+		const content = this.props.capture ? (
+			<div className={css.capture}>
+				<Map capture />
+			</div>
+		) : (
 			<div className={css.app}>
+				<Sounds />
 				<Background />
-				<GoogleMap />
+				<Map />
+				<Zoomer />
+				<Interface />
 			</div>
 		);
+		return content;
 	}
 }
 

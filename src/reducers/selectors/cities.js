@@ -1,18 +1,36 @@
 import { createSelector } from 'reselect';
 
-const getCities = (state) => state.cities.data;
-const getInterviews = (state) => state.interviews.data;
+const getCities = (state) => [...state.cities.data.values()];
+const getInterviews = (state) => [...state.interviews.data.values()];
 
-export const getFullCities = createSelector(
+export const getOrigins = createSelector(
 	[getCities, getInterviews],
 	(cities, interviews) => {
-		const flatCities = [...cities.values()];
-		const flatInterviews = [...interviews.values()];
-		const fullCities = flatCities.map(citie => Object.assign({
-			...citie,
-			originOf: flatInterviews.filter(interview => citie._id === interview.origin),
-			destinationOf: flatInterviews.filter(interview => citie._id === interview.destination),
-		}));
-		return fullCities;
+		const fullCities = cities.map(citie => {
+			const originOf = interviews.filter(interview => citie._id === interview.origin);
+			const destinationOf = interviews.filter(interview => citie._id === interview.destination);
+			if (originOf.length === 0 || destinationOf.length !== 0) return null;
+			return Object.assign({
+				...citie,
+				originOf,
+			});
+		});
+		return fullCities.filter(citie => citie !== null);
+	}
+);
+
+export const getDestinations = createSelector(
+	[getCities, getInterviews],
+	(cities, interviews) => {
+		const fullCities = cities.map(citie => {
+			const originOf = interviews.filter(interview => citie._id === interview.origin);
+			const destinationOf = interviews.filter(interview => citie._id === interview.destination);
+			if (destinationOf.length === 0 || originOf.length !== 0) return null;
+			return Object.assign({
+				...citie,
+				destinationOf,
+			});
+		});
+		return fullCities.filter(citie => citie !== null);
 	}
 );

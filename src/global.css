@@ -4,10 +4,9 @@
 
 body {
 	margin: 0;
-	width: 1920px;
-	height: 1080px;
 	background: #000;
 	color: rgba(255,255,255,0.9);
 	transform-origin: 0 0;
 	overflow: hidden;
+	font-family: arial;
 }

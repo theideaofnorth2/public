@@ -1,58 +1,112 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+import canadaCoords from './data/canadaCoords';
+import worldCoords from './data/worldCoords';
+import mainStyles from './data/mainStyles.json';
+import originStyles from './data/originStyles.json';
+import Interviews from 'tion2/components/Map/Interviews';
+import Distances from 'tion2/components/Map/Distances';
+import Origins from 'tion2/components/Map/Origins';
+import Destinations from 'tion2/components/Map/Destinations';
+import { waitForMapIdle, setLayers, getGmapOptions, setMapOptionsFromUrl } from './utils';
 import css from './css';
-import { delay } from 'redux-saga';
-import { mapOptions, polygonOptions } from 'tion2/data/settings';
-import Distances from './Distances';
-import Cities from './Cities';
-import { waitForMapIdle } from './utils';
+
+const startGmapOptions = getGmapOptions({
+	zoom: 4,
+	styles: mainStyles,
+	center: { lat: 62.536813, lng: -97.445291 },
+});
+
+const polygonOptions = {
+	strokeWeight: 0,
+	fillColor: '#000000',
+	fillOpacity: 0.8,
+	paths: [worldCoords, canadaCoords],
+};
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.initialized = true;
+		this.gmapOptions = startGmapOptions;
+		this.animateMapOptions = this.animateMapOptions.bind(this);
+		this.getOriginMapOptions = this.getOriginMapOptions.bind(this);
 	}
 	componentDidMount() {
-		async function onMount() {
-			this.gmap = new google.maps.Map(this.refs.map, mapOptions);
+		async function asyncFunc() {
+			this.gmap = new google.maps.Map(this.refs.map, this.gmapOptions);
 			this.props.dispatch({ type: 'MAP_INITIALIZED' });
 			const polygon = new google.maps.Polygon(polygonOptions);
 			polygon.setMap(this.gmap);
 			await waitForMapIdle(this.gmap);
-			this.setLayers.call(this);
-			await delay(100);
+			setLayers(this.refs.map, css.layer1, css.layer4);
 			this.props.dispatch({ type: 'MAP_READY' });
+			if (this.props.capture) setMapOptionsFromUrl(this.gmap, this.props.cities);
 		}
-		onMount.call(this);
+		asyncFunc.call(this);
 	}
-	setLayers() {
-		const gmContainer = this.refs.map.querySelector('.gm-style > div:nth-child(1)');
-		const layer1 = gmContainer.querySelector(':scope > div:nth-child(1)');
-		const layer4 = gmContainer.querySelector(':scope > div:nth-child(4)');
-		layer1.classList.add(css.layer1);
-		layer4.classList.add(css.layer4);
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.map.selectedOrigin !== this.props.map.selectedOrigin) {
+			this.animateMapOptions(nextProps);
+		}
+	}
+	getOriginMapOptions(originId) {
+		return getGmapOptions({
+			zoom: 13,
+			center: {
+				lat: this.props.cities.data.get(originId).lat,
+				lng: this.props.cities.data.get(originId).lng,
+			},
+			styles: originStyles,
+		});
+	}
+	animateMapOptions(nextProps) {
+		async function asyncFunc() {
+			const nextGmapOptions = !nextProps.map.selectedOrigin ?
+				startGmapOptions : this.getOriginMapOptions(nextProps.map.selectedOrigin);
+			const center = !nextProps.map.selectedOrigin ?
+				this.gmapOptions.center : nextGmapOptions.center;
+			this.gmap.panTo(center);
+			this.props.dispatch({ type: 'MAP_CENTERING_STARTED' });
+			await waitForMapIdle(this.gmap);
+			this.props.dispatch({ type: 'MAP_CENTERING_FINISHED' });
+			this.gmap.setOptions({
+				minZoom: undefined,
+				maxZoom: undefined,
+			});
+			this.gmapOptions = Object.assign({}, nextGmapOptions);
+			nextGmapOptions.center = undefined;
+			this.gmap.setOptions(nextGmapOptions);
+		}
+		asyncFunc.call(this, nextProps);
 	}
 	render() {
-		const mapClass = classnames(css.map, {
-			[css.initialized]: this.props.initialized,
-			[css.ready]: this.props.ready,
-		});
 		const content = !this.gmap ? null : (
-			<div>
+			<div className={css.positionedContent}>
 				<Distances gmap={this.gmap} />
-				<Cities gmap={this.gmap} />
+				<Origins gmap={this.gmap} />
+				<Destinations gmap={this.gmap} />
+				<Interviews gmap={this.gmap} />
 			</div>
 		);
+		const mapClass = classnames(css.map, {
+			[css.capture]: this.props.capture,
+			[css.zooming]: this.props.map.zooming,
+			[css.ready]: this.props.map.ready,
+			[css.zooming]: this.props.map.zooming,
+		});
 		return (
 			<div>
-				<div ref="map" className={mapClass}></div>
 				{content}
+				<div ref="map" className={mapClass}></div>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => state.map;
+const mapStateToProps = (state) => Object.assign({
+	cities: state.cities,
+	map: state.map,
+});
 
 export default connect(mapStateToProps)(MyComponent);

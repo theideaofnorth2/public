@@ -13,6 +13,6 @@ export const getFullInterviews = createSelector(
 			origin: flatCities.get(interview.origin),
 			destination: flatCities.get(interview.destination),
 		}));
-		return fullInterviews;
+		return fullInterviews.filter(interview => interview.parent === 'location');
 	}
 );

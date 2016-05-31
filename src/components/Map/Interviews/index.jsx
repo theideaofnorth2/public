@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Citie from 'tion2/components/Map/Citie';
-import css from './css';
-import { getFullCities } from 'tion2/reducers/selectors/cities';
+import { getFullInterviews } from 'tion2/reducers/selectors/interviews';
+import Interview from './Interview';
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
 	}
+	// componentWillReceiveProps(nextProps) {
+	// }
 	render() {
-		const content = this.props.cities.map(citie => Object.assign(
-			<Citie
-				key={citie.name}
+		const content = this.props.interviews.map(interview => Object.assign(
+			<Interview
+				key={interview._id}
 				gmap={this.props.gmap}
-				citie={citie}
+				interview={interview}
 			/>
 		));
 		return (
-			<div className={css.cities}>
+			<div>
 				{content}
 			</div>
 		);
@@ -26,7 +27,8 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	cities: getFullCities(state),
+	map: state.map,
+	interviews: getFullInterviews(state),
 });
 
 export default connect(mapStateToProps)(MyComponent);

@@ -1,0 +1,23 @@
+.zoomerContainer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+}
+.zoomerContainer.mounted {
+	opacity: 0.4;
+	display: none;
+}
+.zoomerContainer.zooming {
+	display: block;
+}
+.zoomer {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 1920px;
+	height: 1080px;
+	transform: translateY(calc(-50%)) translateX(calc(-50%));
+}

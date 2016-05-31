@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getFullInterviews } from 'tion2/reducers/selectors/interviews';
-import Distance from './Distance';
-import css from './css';
+import Sound from './Sound';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -11,14 +10,13 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const content = this.props.interviews.map(interview => Object.assign(
-			<Distance
+			<Sound
 				key={interview._id}
-				gmap={this.props.gmap}
 				interview={interview}
 			/>
 		));
 		return (
-			<div className={css.distances}>
+			<div>
 				{content}
 			</div>
 		);
@@ -26,6 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
+	map: state.map,
 	interviews: getFullInterviews(state),
 });
 

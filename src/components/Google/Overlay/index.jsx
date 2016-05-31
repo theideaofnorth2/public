@@ -14,6 +14,7 @@ export class MyComponent extends Component {
 			new google.maps.LatLng(this.props.northEastLat, this.props.northEastLng)
 		);
 		this.overlay = new TION2Overlay(bounds, this.refs.overlay, this.props.gmap);
+		if (this.props.onMount) this.overlay.on('mount', this.props.onMount);
 	}
 	componentDidUpdate() {
 	}
