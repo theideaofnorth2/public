@@ -25,7 +25,7 @@ function ReadFolderDirectory($dir,$listDir= array())
 }
 
 $config = json_decode(file_get_contents('./config.json'));
-$config->assets = ReadFolderDirectory("../assets")[0];
+$config->assets = ReadFolderDirectory("../assets");
 
 echo json_encode($config);
 
