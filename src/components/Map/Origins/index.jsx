@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Origin from './Origin';
-import { getOrigins } from 'tion2/reducers/selectors/cities';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -9,7 +8,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.origins.map(origin => Object.assign(
+		const content = this.props.origins.data.map(origin => Object.assign(
 			<Origin
 				key={origin.name}
 				gmap={this.props.gmap}
@@ -25,7 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	origins: getOrigins(state),
+	origins: state.origins,
 });
 
 export default connect(mapStateToProps)(MyComponent);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFullInterviews } from 'tion2/reducers/selectors/interviews';
 import Interview from './Interview';
 
 export class MyComponent extends Component {
@@ -11,7 +10,7 @@ export class MyComponent extends Component {
 	// componentWillReceiveProps(nextProps) {
 	// }
 	render() {
-		const content = this.props.interviews.map(interview => Object.assign(
+		const content = this.props.interviews.data.map(interview => Object.assign(
 			<Interview
 				key={interview._id}
 				gmap={this.props.gmap}
@@ -28,7 +27,7 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	map: state.map,
-	interviews: getFullInterviews(state),
+	interviews: state.interviews,
 });
 
 export default connect(mapStateToProps)(MyComponent);

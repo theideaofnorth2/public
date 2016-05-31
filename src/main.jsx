@@ -11,15 +11,13 @@ import './global.css';
 // 	whyDidYouUpdate(React);
 // }
 
-const capture = document.location.search.indexOf('capture') !== -1;
-
 sagaMiddleware.run(rootSaga);
 
 const rootElement = document.querySelector('.root');
 const renderApp = () => {
 	render(
 		<Provider store={store}>
-			<App capture={capture} />
+			<App />
 		</Provider>,
 		rootElement
 	);

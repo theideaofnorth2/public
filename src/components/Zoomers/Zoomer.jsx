@@ -14,15 +14,18 @@ export class MyComponent extends Component {
 	componentDidMount() {
 		this.mountZoomer();
 	}
-	componentWillReceiveProps(nextProps) {
-		if (!this.props.map.zooming && nextProps.map.zooming) {
-			const direction = nextProps.map.selectedOrigin ? 'in' : 'out';
+	componentDidUpdate() {
+		if (
+			this.props.origin._id === this.props.map.animatingTo ||
+			this.props.origin._id === this.props.map.animatingFrom
+		) {
+			const direction = this.props.map.selectedOrigin ? 'in' : 'out';
 			this.animateZoomer(direction);
 		}
 	}
 	mountZoomer() {
 		this.zoomer = new Zoomer({
-			selector: '#zoomerElement',
+			selector: `#zoomer_${this.props.origin.key}`,
 			width: 1920,
 			height: 1080,
 			stepsPerLevel: 7,
@@ -68,13 +71,17 @@ export class MyComponent extends Component {
 	render() {
 		const thisClass = classnames(css.zoomerContainer, {
 			[css.mounted]: this.state.mounted,
-			[css.zooming]: this.props.map.zooming,
+			[css.zooming]: this.props.map.zooming &&
+				(
+					this.props.origin._id === this.props.map.animatingTo ||
+					this.props.origin._id === this.props.map.animatingFrom
+				),
 		});
 		return (
 			<div className={thisClass}>
 				<div
 					className={css.zoomer}
-					id="zoomerElement"
+					id={`zoomer_${this.props.origin.key}`}
 				></div>
 			</div>
 		);

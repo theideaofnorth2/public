@@ -1,18 +1,22 @@
 const defaultState = {
-	status: 'initial',
-	data: new Map(),
+	data: [],
 };
+
+const getInterviews = (interviews, cities) =>
+	interviews
+		.map(interview => Object.assign({
+			...interview,
+			origin: cities.find(c => c._id === interview.origin),
+			destination: cities.find(c => c._id === interview.destination),
+		}))
+		.filter(interview => interview.parent === 'location');
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
-			const mapFromArray = new Map(action.data.interviews.map(
-				interview => [interview._id, interview])
-			);
 			return {
 				...state,
-				status: 'fetched',
-				data: new Map(mapFromArray),
+				data: getInterviews(action.data.interviews, action.data.cities),
 			};
 		}
 		default:

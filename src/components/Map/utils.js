@@ -10,23 +10,16 @@ export const getGmapOptions = (options) => Object.assign({}, {
 	styles: options.styles,
 });
 
-export const setMapOptionsFromUrl = (gmap, cities) => {
+export const getMapOptionsFromUrl = (cities) => {
 	const params = new URLSearchParams(window.location);
 	const { lat, lng } = [...cities.data.values()].filter(citie =>
 		citie.key === params.get('citie')
 	)[0];
-	console.log(lat, lng);
-	const mapOptions = getGmapOptions({
+	return getGmapOptions({
 		zoom: params.get('zoom'),
 		center: { lat, lng },
 		styles: mainStyles,
 	});
-	console.log(mapOptions);
-	gmap.setOptions({
-		minZoom: undefined,
-		maxZoom: undefined,
-	});
-	gmap.setOptions(mapOptions);
 };
 
 export const waitForMapIdle = (map) => {

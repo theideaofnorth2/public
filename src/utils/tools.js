@@ -5,3 +5,5 @@ export const SuperPromise = () => {
 	});
 	return superPromise;
 };
+
+export const isCapture = document.location.search.indexOf('capture') !== -1;

@@ -9,7 +9,8 @@ import Interviews from 'tion2/components/Map/Interviews';
 import Distances from 'tion2/components/Map/Distances';
 import Origins from 'tion2/components/Map/Origins';
 import Destinations from 'tion2/components/Map/Destinations';
-import { waitForMapIdle, setLayers, getGmapOptions, setMapOptionsFromUrl } from './utils';
+import { waitForMapIdle, setLayers, getGmapOptions, getMapOptionsFromUrl } from './utils';
+import { isCapture } from 'tion2/utils/tools';
 import css from './css';
 
 const startGmapOptions = getGmapOptions({
@@ -41,7 +42,11 @@ export class MyComponent extends Component {
 			await waitForMapIdle(this.gmap);
 			setLayers(this.refs.map, css.layer1, css.layer4);
 			this.props.dispatch({ type: 'MAP_READY' });
-			if (this.props.capture) setMapOptionsFromUrl(this.gmap, this.props.cities);
+			if (isCapture) {
+				const captureMapOptions = getMapOptionsFromUrl(this.props.cities);
+				this.gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
+				this.gmap.setOptions(captureMapOptions);
+			}
 		}
 		asyncFunc.call(this);
 	}
@@ -51,11 +56,12 @@ export class MyComponent extends Component {
 		}
 	}
 	getOriginMapOptions(originId) {
+		const origin = this.props.origins.data.find(c => c._id === originId);
 		return getGmapOptions({
 			zoom: 13,
 			center: {
-				lat: this.props.cities.data.get(originId).lat,
-				lng: this.props.cities.data.get(originId).lng,
+				lat: origin.lat,
+				lng: origin.lng,
 			},
 			styles: originStyles,
 		});
@@ -70,10 +76,7 @@ export class MyComponent extends Component {
 			this.props.dispatch({ type: 'MAP_CENTERING_STARTED' });
 			await waitForMapIdle(this.gmap);
 			this.props.dispatch({ type: 'MAP_CENTERING_FINISHED' });
-			this.gmap.setOptions({
-				minZoom: undefined,
-				maxZoom: undefined,
-			});
+			this.gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
 			this.gmapOptions = Object.assign({}, nextGmapOptions);
 			nextGmapOptions.center = undefined;
 			this.gmap.setOptions(nextGmapOptions);
@@ -90,8 +93,7 @@ export class MyComponent extends Component {
 			</div>
 		);
 		const mapClass = classnames(css.map, {
-			[css.capture]: this.props.capture,
-			[css.zooming]: this.props.map.zooming,
+			[css.capture]: isCapture,
 			[css.ready]: this.props.map.ready,
 			[css.zooming]: this.props.map.zooming,
 		});
@@ -106,6 +108,7 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	cities: state.cities,
+	origins: state.origins,
 	map: state.map,
 });
 

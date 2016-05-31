@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Map from 'tion2/components/Map';
 import Sounds from 'tion2/components/Sounds';
 import Background from 'tion2/components/Background';
-import Zoomer from 'tion2/components/Zoomer';
+import Zoomers from 'tion2/components/Zoomers';
 import Interface from 'tion2/components/Interface';
+import { isCapture } from 'tion2/utils/tools';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -15,7 +16,7 @@ export class MyComponent extends Component {
 	componentDidMount() {
 	}
 	render() {
-		const content = this.props.capture ? (
+		const content = isCapture ? (
 			<div className={css.capture}>
 				<Map capture />
 			</div>
@@ -24,7 +25,7 @@ export class MyComponent extends Component {
 				<Sounds />
 				<Background />
 				<Map />
-				<Zoomer />
+				<Zoomers />
 				<Interface />
 			</div>
 		);

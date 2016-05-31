@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Destination from './Destination';
-import { getDestinations } from 'tion2/reducers/selectors/cities';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -9,7 +8,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.destinations.map(destination => Object.assign(
+		const content = this.props.destinations.data.map(destination => Object.assign(
 			<Destination
 				key={destination.name}
 				gmap={this.props.gmap}
@@ -25,7 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	destinations: getDestinations(state),
+	destinations: state.destinations,
 });
 
 export default connect(mapStateToProps)(MyComponent);

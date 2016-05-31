@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0">
+	</head>
+	<body>
+		<div class="root">
+			<h1>Capture Tool</h1>
+			<p>
+				You should allow your browser to open multiple tabs for this domain.
+			</p>
+			<form id="captureForm">
+				<select></select>
+				<input type="submit" value="Open tabs for this city">
+			</form>
+		</div>
+		<script type="text/javascript">
+			(function() {
+				var form = document.querySelector('#captureForm');
+				var select = form.querySelector('select');
+				form.addEventListener('submit', function(e) {
+					e.preventDefault();
+					[4, 6, 8, 10, 12, 13].forEach(function(zoomLevel) {
+						window.open(`/?capture&citie=${select.value}&zoom=${zoomLevel}`)
+					})
+				});
+				var fillCities = function(config) {
+					config.cities.forEach(function(citie) {
+						var option = document.createElement("option");
+						option.value = citie.key;
+						option.innerHTML = citie.name;
+						select.appendChild(option);
+					})
+				}
+				fetch('http://theideaofnorth2.com/api/')
+					.then(function(response) { return response.json(); })
+					.then(fillCities)
+			})();
+		</script>
+	</body>
+</html>

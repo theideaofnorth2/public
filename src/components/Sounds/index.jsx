@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFullInterviews } from 'tion2/reducers/selectors/interviews';
 import Sound from './Sound';
 
 export class MyComponent extends Component {
@@ -9,7 +8,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.interviews.map(interview => Object.assign(
+		const content = this.props.interviews.data.map(interview => Object.assign(
 			<Sound
 				key={interview._id}
 				interview={interview}
@@ -25,7 +24,7 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	map: state.map,
-	interviews: getFullInterviews(state),
+	interviews: state.interviews,
 });
 
 export default connect(mapStateToProps)(MyComponent);

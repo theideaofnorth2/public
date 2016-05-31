@@ -1,6 +1,9 @@
 const defaultState = {
 	initialized: false,
 	ready: false,
+	animating: false,
+	animatingFrom: null,
+	animatingTo: null,
 	centering: false,
 	zooming: false,
 	hoveredCitie: null,
@@ -20,22 +23,6 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				ready: true,
-			};
-		case 'MAP_CENTERING_STARTED':
-			return {
-				...state,
-				centering: true,
-			};
-		case 'MAP_CENTERING_FINISHED':
-			return {
-				...state,
-				centering: false,
-				zooming: true,
-			};
-		case 'MAP_ZOOMING_FINISHED':
-			return {
-				...state,
-				zooming: false,
 			};
 		case 'CITIE_MOUSE_ENTER':
 			return {
@@ -60,19 +47,47 @@ export default function reducer(state = defaultState, action = null) {
 		case 'DESTINATIONER_CLICK':
 			return {
 				...state,
+				animating: true,
+				animatingFrom: 'map',
+				animatingTo: action.citie,
 				selectedOrigin: action.citie,
 				selectedInterview: action.interview,
 			};
 		case 'ORIGIN_CLICK':
 			return {
 				...state,
+				animating: true,
+				animatingFrom: 'map',
+				animatingTo: action.citie,
 				selectedOrigin: action.citie,
 			};
 		case 'ORIGIN_CLOSE':
 			return {
 				...state,
+				animating: true,
+				animatingFrom: state.selectedOrigin,
+				animatingTo: 'map',
 				selectedOrigin: null,
 				selectedInterview: null,
+			};
+		case 'MAP_CENTERING_STARTED':
+			return {
+				...state,
+				centering: true,
+			};
+		case 'MAP_CENTERING_FINISHED':
+			return {
+				...state,
+				centering: false,
+				zooming: true,
+			};
+		case 'MAP_ZOOMING_FINISHED':
+			return {
+				...state,
+				animating: false,
+				animatingFrom: null,
+				animatingTo: null,
+				zooming: false,
 			};
 		case 'INTERVIEW_CLICK': {
 			const selectedInterview = state.selectedInterview === action.interview ?

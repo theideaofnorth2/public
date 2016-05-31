@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 import app from './app';
-import cities from './cities';
+import destinations from './destinations';
 import interviews from './interviews';
 import map from './map';
+import origins from './origins';
 import zoomer from './zoomer';
 
 const rootReducer = combineReducers({
 	app,
-	cities,
+	destinations,
 	interviews,
 	map,
+	origins,
 	zoomer,
 });
 

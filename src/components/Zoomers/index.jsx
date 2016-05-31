@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Distance from './Distance';
+import Zoomer from './Zoomer';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -9,15 +9,14 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.interviews.data.map(interview => Object.assign(
-			<Distance
-				key={interview._id}
-				gmap={this.props.gmap}
-				interview={interview}
+		const content = this.props.origins.data.map(origin => Object.assign(
+			<Zoomer
+				key={origin.name}
+				origin={origin}
 			/>
 		));
 		return (
-			<div className={css.distances}>
+			<div className={css.zoomers}>
 				{content}
 			</div>
 		);
@@ -25,7 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	interviews: state.interviews,
+	origins: state.origins,
 });
 
 export default connect(mapStateToProps)(MyComponent);
