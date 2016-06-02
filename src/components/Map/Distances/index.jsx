@@ -16,7 +16,7 @@ export class MyComponent extends Component {
 				interview={interview}
 			/>
 		));
-		return (
+		return !this.props.gmap ? null : (
 			<div className={css.distances}>
 				{content}
 			</div>

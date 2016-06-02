@@ -1,5 +1,7 @@
 const defaultState = {
 	data: [],
+	hoveredOrigin: null,
+	selectedOrigin: null,
 };
 
 const getOrigins = (cities, interviews) =>
@@ -23,6 +25,26 @@ export default function reducer(state = defaultState, action = null) {
 				data: getOrigins(action.data.cities, action.data.interviews),
 			};
 		}
+		case 'ORIGIN_MOUSE_ENTER':
+			return {
+				...state,
+				hoveredOrigin: action.origin,
+			};
+		case 'ORIGIN_MOUSE_LEAVE':
+			return {
+				...state,
+				hoveredOrigin: null,
+			};
+		case 'ORIGIN_CLICK':
+			return {
+				...state,
+				selectedOrigin: action.origin,
+			};
+		case 'DESTINATION_INTERVIEW_CLICK':
+			return {
+				...state,
+				selectedOrigin: action.origin,
+			};
 		default:
 			return state;
 	}

@@ -1,18 +1,22 @@
 const defaultState = {
-	visible: false,
+	zooming: false,
+	direction: 'in',
+	origin: null,
 };
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
-		case 'MAP_CENTERING_FINISHED':
+		case 'MAP_ZOOM':
 			return {
 				...state,
-				visible: true,
+				zooming: true,
+				direction: action.direction,
+				origin: action.origin,
 			};
-		case 'MAP_ZOOMING_FINISHED':
+		case 'MAP_ZOOM_FINISHED':
 			return {
 				...state,
-				visible: false,
+				zooming: false,
 			};
 		default:
 			return state;

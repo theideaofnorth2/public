@@ -1,23 +1,24 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Howl } from 'howler';
+import { baseUri } from 'tion2/utils/tools';
 
-const soundsBaseUri = 'http://theideaofnorth2.com/assets/sounds/';
+const soundsUri = `${baseUri}/assets/sounds`;
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.sounds = new Howl({
-			src: [`${soundsBaseUri}${this.props.interview.sound}`],
+			src: [`${soundsUri}/${this.props.interview.sound}`],
 			html5: true,
 		});
 	}
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.map.selectedInterview === this.props.map.selectedInterview) return;
-		if (nextProps.map.selectedInterview !== this.props.interview._id) {
+		if (nextProps.interviews.playingInterview === this.props.interviews.playingInterview) return;
+		if (nextProps.interviews.playingInterview !== this.props.interview._id) {
 			this.sounds.stop();
 		}
-		if (nextProps.map.selectedInterview === this.props.interview._id) {
+		if (nextProps.interviews.playingInterview === this.props.interview._id) {
 			this.sounds.play();
 		}
 		return;

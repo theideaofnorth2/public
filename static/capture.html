@@ -16,18 +16,11 @@
 		</div>
 		<script type="text/javascript">
 			(function() {
-				var form = document.querySelector('#captureForm');
-				var select = form.querySelector('select');
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
-					[4, 6, 8, 10, 12, 13].forEach(function(zoomLevel) {
-						window.open(`/?capture&citie=${select.value}&zoom=${zoomLevel}`)
-					})
-				});
+
 				var fillCities = function(config) {
 					config.cities.forEach(function(citie) {
 						var option = document.createElement("option");
-						option.value = citie.key;
+						option.value = `/?capture&citie=${citie.key}&lat=${citie.lat}&lng=${citie.lng}`;
 						option.innerHTML = citie.name;
 						select.appendChild(option);
 					})
@@ -35,6 +28,17 @@
 				fetch('http://theideaofnorth2.com/api/')
 					.then(function(response) { return response.json(); })
 					.then(fillCities)
+
+
+
+				var form = document.querySelector('#captureForm');
+				var select = form.querySelector('select');
+				form.addEventListener('submit', function(e) {
+					e.preventDefault();
+					[4, 6, 8, 10, 12, 14].forEach(function(zoomLevel) {
+						window.open(`${select.value}&zoom=${zoomLevel}`)
+					})
+				});
 			})();
 		</script>
 	</body>

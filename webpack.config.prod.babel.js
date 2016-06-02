@@ -23,6 +23,7 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
 		}),
+		new webpack.IgnorePlugin(/\.png|\.jpg$/),
 	],
 	resolve: {
 		alias: {
@@ -69,10 +70,6 @@ module.exports = {
 					'css-loader?modules&localIdentName=[local]'
 				),
 				include: [/node_modules/],
-			},
-			{
-				test: /\.png|\.jpg$/,
-				loader: 'url-loader?limit=25000',
 			},
 			{
 				test: /\.svg$/,

@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Zoomer from 'zoomer';
 import classnames from 'classnames';
+import { assetsUri } from 'tion2/utils/tools';
 import css from './css';
+
+const originsImagesUri = `${assetsUri}/assets/images/origins`;
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
+		this.images = [0, 2, 4, 6, 8, 10].map(level => Object.assign({
+			level,
+			src: `${originsImagesUri}/${this.props.origin.key}/${level + 4}.png`,
+		}));
 		this.mountZoomer = this.mountZoomer.bind(this);
 		this.animateZoomer = this.animateZoomer.bind(this);
 	}
@@ -16,11 +23,10 @@ export class MyComponent extends Component {
 	}
 	componentDidUpdate() {
 		if (
-			this.props.origin._id === this.props.map.animatingTo ||
-			this.props.origin._id === this.props.map.animatingFrom
+			this.props.zoomers.zooming &&
+			this.props.origin._id === this.props.zoomers.origin
 		) {
-			const direction = this.props.map.selectedOrigin ? 'in' : 'out';
-			this.animateZoomer(direction);
+			this.animateZoomer();
 		}
 	}
 	mountZoomer() {
@@ -31,51 +37,30 @@ export class MyComponent extends Component {
 			stepsPerLevel: 7,
 			step: 0,
 			opacityTransitionDuration: 0,
-			images: [{
-				src: './images/churchill/4.png',
-				level: 0,
-			}, {
-				src: './images/churchill/6.png',
-				level: 2,
-			}, {
-				src: './images/churchill/8.png',
-				level: 4,
-			}, {
-				src: './images/churchill/10.png',
-				level: 6,
-			}, {
-				src: './images/churchill/12.png',
-				level: 8,
-			}, {
-				src: './images/churchill/13.png',
-				level: 9,
-			}],
+			images: this.images,
 		});
 		this.zoomer.on('ready', () => {
 			this.setState({ mounted: true });
 		});
 	}
-	animateZoomer(direction) {
+	animateZoomer() {
 		const spl = 7;
-		const fromStep = direction === 'in' ? 0 : spl * 9;
-		const toStep = direction === 'in' ? spl * 9 : 0;
+		const fromStep = this.props.zoomers.direction === 'in' ? 0 : spl * 10;
+		const toStep = this.props.zoomers.direction === 'in' ? spl * 10 : 0;
 		this.zoomer.animateZoom({
 			opacityTransitionDuration: 0,
 			stepsPerLevel: spl,
 			fromStep,
 			toStep,
 		}).then(() => {
-			this.props.dispatch({ type: 'MAP_ZOOMING_FINISHED' });
+			this.props.dispatch({ type: 'MAP_ZOOM_FINISHED' });
 		});
 	}
 	render() {
 		const thisClass = classnames(css.zoomerContainer, {
 			[css.mounted]: this.state.mounted,
-			[css.zooming]: this.props.map.zooming &&
-				(
-					this.props.origin._id === this.props.map.animatingTo ||
-					this.props.origin._id === this.props.map.animatingFrom
-				),
+			[css.zooming]: this.props.zoomers.zooming &&
+				this.props.origin._id === this.props.zoomers.origin,
 		});
 		return (
 			<div className={thisClass}>
@@ -89,7 +74,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	map: state.map,
+	zoomers: state.zoomers,
 });
 
 export default connect(mapStateToProps)(MyComponent);

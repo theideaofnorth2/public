@@ -1,15 +1,11 @@
 const defaultState = {
 	initialized: false,
 	ready: false,
-	animating: false,
-	animatingFrom: null,
-	animatingTo: null,
+	dragging: false,
 	centering: false,
 	zooming: false,
-	hoveredCitie: null,
-	hoveredDestinationer: null,
-	selectedOrigin: null,
-	selectedInterview: null,
+	level: 'main',
+	center: { lat: 62.536813, lng: -97.445291 },
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -24,79 +20,38 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				ready: true,
 			};
-		case 'CITIE_MOUSE_ENTER':
+		case 'MAP_DRAG_START':
 			return {
 				...state,
-				hoveredCitie: action.citie,
+				dragging: true,
 			};
-		case 'CITIE_MOUSE_LEAVE':
+		case 'MAP_DRAG_END':
 			return {
 				...state,
-				hoveredCitie: null,
+				dragging: false,
 			};
-		case 'DESTINATIONER_MOUSE_ENTER':
+		case 'MAP_CENTER':
 			return {
 				...state,
-				hoveredDestinationer: action.interview,
-			};
-		case 'DESTINATIONER_MOUSE_LEAVE':
-			return {
-				...state,
-				hoveredDestinationer: null,
-			};
-		case 'DESTINATIONER_CLICK':
-			return {
-				...state,
-				animating: true,
-				animatingFrom: 'map',
-				animatingTo: action.citie,
-				selectedOrigin: action.citie,
-				selectedInterview: action.interview,
-			};
-		case 'ORIGIN_CLICK':
-			return {
-				...state,
-				animating: true,
-				animatingFrom: 'map',
-				animatingTo: action.citie,
-				selectedOrigin: action.citie,
-			};
-		case 'ORIGIN_CLOSE':
-			return {
-				...state,
-				animating: true,
-				animatingFrom: state.selectedOrigin,
-				animatingTo: 'map',
-				selectedOrigin: null,
-				selectedInterview: null,
-			};
-		case 'MAP_CENTERING_STARTED':
-			return {
-				...state,
+				center: action.center,
 				centering: true,
 			};
-		case 'MAP_CENTERING_FINISHED':
+		case 'MAP_CENTER_FINISHED':
 			return {
 				...state,
 				centering: false,
-				zooming: true,
 			};
-		case 'MAP_ZOOMING_FINISHED':
+		case 'MAP_ZOOM':
 			return {
 				...state,
-				animating: false,
-				animatingFrom: null,
-				animatingTo: null,
+				zooming: true,
+				level: action.direction === 'in' ? 'origin' : 'main',
+			};
+		case 'MAP_ZOOM_FINISHED':
+			return {
+				...state,
 				zooming: false,
 			};
-		case 'INTERVIEW_CLICK': {
-			const selectedInterview = state.selectedInterview === action.interview ?
-				null : action.interview;
-			return {
-				...state,
-				selectedInterview,
-			};
-		}
 		default:
 			return state;
 	}

@@ -14,17 +14,19 @@ export class MyComponent extends Component {
 		this.onMouseLeave = this.onMouseLeave.bind(this);
 	}
 	onClick() {
-		this.props.dispatch({ type: 'ORIGIN_CLICK', citie: this.props.origin._id });
+		if (!this.props.map.dragging) {
+			this.props.dispatch({ type: 'ORIGIN_CLICK', origin: this.props.origin._id });
+		}
 	}
 	onMouseEnter() {
-		this.props.dispatch({ type: 'CITIE_MOUSE_ENTER', citie: this.props.origin._id });
+		this.props.dispatch({ type: 'ORIGIN_MOUSE_ENTER', origin: this.props.origin._id });
 	}
 	onMouseLeave() {
-		this.props.dispatch({ type: 'CITIE_MOUSE_LEAVE', citie: this.props.origin._id });
+		this.props.dispatch({ type: 'ORIGIN_MOUSE_LEAVE', origin: this.props.origin._id });
 	}
 	render() {
 		const originClass = classnames(css.origin, {
-			[css.visible]: this.props.map.selectedOrigin === null || this.props.map.centering,
+			[css.visible]: this.props.map.level === 'main',
 		});
 		return (
 			<AlignedOverlay

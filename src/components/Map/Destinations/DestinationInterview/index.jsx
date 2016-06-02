@@ -12,17 +12,25 @@ export class MyComponent extends Component {
 		this.onMouseLeave = this.onMouseLeave.bind(this);
 	}
 	onClick() {
+		if (!this.props.map.dragging) {
+			this.props.dispatch({
+				type: 'DESTINATION_INTERVIEW_CLICK',
+				origin: this.props.interview.origin,
+				interview: this.props.interview._id,
+			});
+		}
+	}
+	onMouseEnter() {
 		this.props.dispatch({
-			type: 'DESTINATIONER_CLICK',
-			citie: this.props.interview.origin,
+			type: 'DESTINATION_INTERVIEW_MOUSE_ENTER',
 			interview: this.props.interview._id,
 		});
 	}
-	onMouseEnter() {
-		this.props.dispatch({ type: 'DESTINATIONER_MOUSE_ENTER', interview: this.props.interview._id });
-	}
 	onMouseLeave() {
-		this.props.dispatch({ type: 'DESTINATIONER_MOUSE_LEAVE', interview: this.props.interview._id });
+		this.props.dispatch({
+			type: 'DESTINATION_INTERVIEW_MOUSE_LEAVE',
+			interview: this.props.interview._id,
+		});
 	}
 	render() {
 		const interviewClass = classnames(css.interview);
@@ -39,6 +47,8 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => Object.assign({
+	map: state.map,
+});
 
 export default connect(mapStateToProps)(MyComponent);

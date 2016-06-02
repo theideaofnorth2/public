@@ -7,8 +7,6 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 	}
-	// componentWillReceiveProps(nextProps) {
-	// }
 	render() {
 		const content = this.props.interviews.data.map(interview => Object.assign(
 			<Interview
@@ -17,7 +15,7 @@ export class MyComponent extends Component {
 				interview={interview}
 			/>
 		));
-		return (
+		return !this.props.gmap ? null : (
 			<div>
 				{content}
 			</div>
@@ -26,7 +24,6 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	map: state.map,
 	interviews: state.interviews,
 });
 

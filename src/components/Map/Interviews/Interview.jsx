@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Overlay from 'tion2/components/Google/Overlay';
+import AlignedOverlay from 'tion2/components/Google/AlignedOverlay';
+import interview from './interview.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -18,38 +19,41 @@ export class MyComponent extends Component {
 		this.props.dispatch({ type: 'INTERVIEW_CLICK', interview: this.props.interview._id });
 	}
 	render() {
+		const isVisible = this.props.origins.selectedOrigin === this.props.interview.origin._id &&
+			this.props.map.level === 'origin';
+		const isPlaying = this.props.interviews.playingInterview === this.props.interview._id &&
+			this.props.map.level === 'origin';
 		const thisClass = classnames(
 			css.interview, {
-				[css.visible]:
-					this.props.map.selectedOrigin === this.props.interview.origin._id &&
-					!this.props.map.centering,
-				[css.playing]:
-					this.props.map.selectedInterview === this.props.interview._id &&
-					!this.props.map.centering,
+				[css.visible]: isVisible,
+				[css.playing]: isPlaying,
 			}
 		);
 		return (
-			<Overlay
+			<AlignedOverlay
 				gmap={this.props.gmap}
-				southWestLat={this.props.interview.lat}
-				southWestLng={this.props.interview.lng}
-				northEastLat={this.props.interview.lat}
-				northEastLng={this.props.interview.lng}
+				lat={this.props.interview.lat}
+				lng={this.props.interview.lng}
+				vertical="bottom"
+				horizontal="center"
+				zIndex={isPlaying ? 5 : 0}
 				onMount={this.onMount}
 			>
 				<div
 					ref="interview"
 					className={thisClass}
 					onClick={this.onClick}
+					dangerouslySetInnerHTML={{ __html: interview }}
 				>
-					{this.props.interview.name}
 				</div>
-			</Overlay>
+			</AlignedOverlay>
 		);
 	}
 }
 
 const mapStateToProps = (state) => Object.assign({
+	origins: state.origins,
+	interviews: state.interviews,
 	map: state.map,
 });
 

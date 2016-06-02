@@ -4,10 +4,6 @@ import css from './css';
 import { TION2Overlay } from './utils';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	componentDidMount() {
 		const bounds = new google.maps.LatLngBounds(
 			new google.maps.LatLng(this.props.southWestLat, this.props.southWestLng),
@@ -16,11 +12,13 @@ export class MyComponent extends Component {
 		this.overlay = new TION2Overlay(bounds, this.refs.overlay, this.props.gmap);
 		if (this.props.onMount) this.overlay.on('mount', this.props.onMount);
 	}
-	componentDidUpdate() {
-	}
 	render() {
 		return (
-			<div ref="overlay" className={css.overlay}>
+			<div
+				ref="overlay"
+				className={css.overlay}
+				style={{ zIndex: this.props.zIndex || 'auto' }}
+			>
 				{this.props.children}
 			</div>
 		);

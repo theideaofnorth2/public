@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import AlignedOverlay from 'tion2/components/Google/AlignedOverlay';
-import Destinationer from './Destinationer';
+import DestinationInterview from './DestinationInterview';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -13,23 +13,29 @@ export class MyComponent extends Component {
 		this.onMouseLeave = this.onMouseLeave.bind(this);
 	}
 	onMouseEnter() {
-		this.props.dispatch({ type: 'CITIE_MOUSE_ENTER', citie: this.props.destination._id });
+		this.props.dispatch({
+			type: 'DESTINATION_MOUSE_ENTER',
+			destination: this.props.destination._id,
+		});
 	}
 	onMouseLeave() {
-		this.props.dispatch({ type: 'CITIE_MOUSE_LEAVE', citie: this.props.destination._id });
+		this.props.dispatch({
+			type: 'DESTINATION_MOUSE_LEAVE',
+			destination: this.props.destination._id,
+		});
 	}
 	onMouseEnterName() {
 	}
 	render() {
 		const destinationOf = this.props.destination.destinationOf.map(interview => Object.assign(
-			<Destinationer key={interview._id} interview={interview} />
+			<DestinationInterview key={interview._id} interview={interview} />
 		));
 		const citieClass = classnames(
 			css.citie,
 			css[this.props.destination.vertical],
 			css[this.props.destination.horizontal],
 			{
-				[css.hover]: this.props.map.hoveredCitie === this.props.destination._id,
+				[css.hover]: this.props.destinations.hoveredDestination === this.props.destination._id,
 			},
 		);
 		return (

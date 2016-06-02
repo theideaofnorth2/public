@@ -22,6 +22,7 @@ export class MyComponent extends Component {
 				southWestLng={this.props.lng}
 				northEastLat={this.props.lat}
 				northEastLng={this.props.lng}
+				zIndex={this.props.zIndex}
 			>
 				<div className={alignmentClass}>
 					{this.props.children}

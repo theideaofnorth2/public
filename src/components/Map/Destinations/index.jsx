@@ -15,7 +15,7 @@ export class MyComponent extends Component {
 				destination={destination}
 			/>
 		));
-		return (
+		return !this.props.gmap ? null : (
 			<div>
 				{content}
 			</div>

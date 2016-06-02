@@ -46,14 +46,14 @@ export class MyComponent extends Component {
 	render() {
 		const thisClass = classnames(
 			css.distance, {
-				[css.hover]: this.props.map.hoveredDestinationer === this.props.interview._id,
+				[css.hover]: this.props.interviews.hoveredDestinationInterview === this.props.interview._id,
 			}
 		);
 		const pathClass = classnames(
 			css.path,
 			{
-				[css.hover]: this.props.map.hoveredDestinationer === this.props.interview._id,
-				[css.delayedHover]: this.props.map.hoveredCitie === this.props.interview.origin._id,
+				[css.hover]: this.props.interviews.hoveredDestinationInterview === this.props.interview._id,
+				[css.delayedHover]: this.props.origins.hoveredOrigin === this.props.interview.origin._id,
 			}
 		);
 		const pathStyle = {
@@ -89,6 +89,8 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	map: state.map,
+	interviews: state.interviews,
+	origins: state.origins,
 });
 
 export default connect(mapStateToProps)(MyComponent);

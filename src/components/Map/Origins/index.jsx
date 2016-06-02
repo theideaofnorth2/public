@@ -15,7 +15,7 @@ export class MyComponent extends Component {
 				origin={origin}
 			/>
 		));
-		return (
+		return !this.props.gmap ? null : (
 			<div>
 				{content}
 			</div>
@@ -24,6 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
+	map: state.map,
 	origins: state.origins,
 });
 

@@ -1,33 +1,31 @@
 import { SuperPromise } from 'tion2/utils/tools';
 import mainStyles from './data/mainStyles.json';
 
-export const getGmapOptions = (options) => Object.assign({}, {
-	disableDefaultUI: true,
-	zoom: parseInt(options.zoom, 10),
-	minZoom: parseInt(options.zoom, 10),
-	maxZoom: parseInt(options.zoom, 10),
-	center: options.center,
-	styles: options.styles,
-});
-
-export const getMapOptionsFromUrl = (cities) => {
+const getMapOptionsFromUrl = () => {
 	const params = new URLSearchParams(window.location);
-	const { lat, lng } = [...cities.data.values()].filter(citie =>
-		citie.key === params.get('citie')
-	)[0];
-	return getGmapOptions({
-		zoom: params.get('zoom'),
-		center: { lat, lng },
+	return {
+		disableDefaultUI: true,
+		zoom: parseInt(params.get('zoom'), 10),
+		minZoom: parseInt(params.get('zoom'), 10),
+		maxZoom: parseInt(params.get('zoom'), 10),
+		center: {
+			lat: parseFloat(params.get('lat')),
+			lng: parseFloat(params.get('lng')),
+		},
 		styles: mainStyles,
-	});
+	};
+};
+
+export const setMapCaptureOptions = (gmap) => {
+	const captureMapOptions = getMapOptionsFromUrl();
+	gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
+	gmap.setOptions(captureMapOptions);
 };
 
 export const waitForMapIdle = (map) => {
 	const myPromise = new SuperPromise();
 	google.maps.event.addListenerOnce(map, 'idle', () => {
-		setTimeout(() => {
-			myPromise.resolve(map);
-		}, 150);
+		myPromise.resolve(map);
 	});
 	return myPromise.promise;
 };
@@ -38,4 +36,13 @@ export const setLayers = (node, layer1Class, layer4Class) => {
 	const layer4 = gmContainer.querySelector(':scope > div:nth-child(4)');
 	layer1.classList.add(layer1Class);
 	layer4.classList.add(layer4Class);
+};
+
+export const areCentersEqual = (propsCenter, LatLng) => {
+	const gmapCenter = {
+		lat: LatLng.lat(),
+		lng: LatLng.lng(),
+	};
+	return Math.abs(propsCenter.lat - gmapCenter.lat) < 0.0001 &&
+		Math.abs(propsCenter.lng - gmapCenter.lng) < 0.0001;
 };

@@ -22,13 +22,12 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
 		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('development'),
-			},
+			'process.env': { 	NODE_ENV: JSON.stringify('development') },
 		}),
 		new webpack.ProvidePlugin({
 			fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
 		}),
+		new webpack.IgnorePlugin(/\.png|\.jpg$/),
 	],
 	module: {
 		preLoaders: [
@@ -62,10 +61,6 @@ module.exports = {
 				test: /\.css$/,
 				loader: 'style-loader!css-loader?modules&localIdentName=[local]',
 				include: [/node_modules/],
-			},
-			{
-				test: /\.png|\.jpg$/,
-				loader: 'url-loader?limit=25000',
 			},
 			{
 				test: /\.svg$/,

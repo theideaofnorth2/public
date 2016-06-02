@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import canada from './canada.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -14,7 +15,8 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const closeClass = classnames(css.close, {
-			[css.visible]: this.props.map.selectedOrigin !== null,
+			[css.visible]: this.props.map.level === 'origin' &&
+				!this.props.map.zooming,
 		});
 		const menuClass = classnames(css.menu);
 		return (
@@ -27,7 +29,8 @@ export class MyComponent extends Component {
 				<div
 					onClick={this.onCloseClick}
 					className={closeClass}
-				>X</div>
+					dangerouslySetInnerHTML={{ __html: canada }}
+				></div>
 			</div>
 		);
 	}

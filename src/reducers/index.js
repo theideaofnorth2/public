@@ -4,7 +4,7 @@ import destinations from './destinations';
 import interviews from './interviews';
 import map from './map';
 import origins from './origins';
-import zoomer from './zoomer';
+import zoomers from './zoomers';
 
 const rootReducer = combineReducers({
 	app,
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 	interviews,
 	map,
 	origins,
-	zoomer,
+	zoomers,
 });
 
 export default rootReducer;
