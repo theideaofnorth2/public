@@ -6,25 +6,21 @@ import { baseUri } from 'tion2/utils/tools';
 const soundsUri = `${baseUri}/assets/sounds`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.sounds = new Howl({
+	componentDidUpdate(prevProps) {
+		if (prevProps.interviews.playingInterview === this.props.interviews.playingInterview) return;
+		if (this.props.interview._id !== this.props.interviews.playingInterview) {
+			if (this.sound) this.sound.stop();
+		}
+		if (this.props.interview._id === this.props.interviews.playingInterview) {
+			if (!this.sound) this.loadSound();
+			this.sound.play();
+		}
+	}
+	loadSound() {
+		this.sound = new Howl({
 			src: [`${soundsUri}/${this.props.interview.sound}`],
 			html5: true,
 		});
-	}
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.interviews.playingInterview === this.props.interviews.playingInterview) return;
-		if (nextProps.interviews.playingInterview !== this.props.interview._id) {
-			this.sounds.stop();
-		}
-		if (nextProps.interviews.playingInterview === this.props.interview._id) {
-			this.sounds.play();
-		}
-		return;
-	}
-	shouldComponentUpdate() {
-		return false;
 	}
 	render() {
 		return null;
