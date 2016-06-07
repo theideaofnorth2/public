@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import Map from 'tion2/components/Map';
 import Sounds from 'tion2/components/Sounds';
 import Background from 'tion2/components/Background';
+import Eggs from 'tion2/components/Eggs';
+import EggInterviews from 'tion2/components/EggInterviews';
+import Stories from 'tion2/components/Stories';
 import Zoomers from 'tion2/components/Zoomers';
 import Interface from 'tion2/components/Interface';
 import { isCapture } from 'tion2/utils/tools';
@@ -22,10 +25,13 @@ export class MyComponent extends Component {
 			</div>
 		) : (
 			<div className={css.app}>
-				<Sounds />
 				<Background />
 				<Map />
 				<Zoomers />
+				<Eggs />
+				<EggInterviews />
+				<Sounds />
+				<Stories />
 				<Interface />
 			</div>
 		);

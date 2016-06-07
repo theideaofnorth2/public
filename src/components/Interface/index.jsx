@@ -8,29 +8,44 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onCloseClick = this.onCloseClick.bind(this);
+		this.onCloseOriginClick = this.onCloseOriginClick.bind(this);
+		this.onCloseEggClick = this.onCloseEggClick.bind(this);
 	}
-	onCloseClick() {
+	onCloseOriginClick() {
 		this.props.dispatch({ type: 'ORIGIN_CLOSE' });
 	}
+	onCloseEggClick() {
+		this.props.dispatch({ type: 'EGG_CLOSE' });
+	}
 	render() {
-		const closeClass = classnames(css.close, {
+		const interfaceClass = classnames(css.interface, {
+			[css.animating]: this.props.map.animating,
+		});
+		const closeOriginClass = classnames(css.closeOrigin, {
 			[css.visible]: this.props.map.level === 'origin' &&
-				!this.props.map.zooming,
+				!this.props.map.zooming &&
+				!this.props.eggs.selectedEggId,
+		});
+		const closeEggClass = classnames(css.closeEgg, {
+			[css.visible]: this.props.eggs.selectedEggId,
 		});
 		const menuClass = classnames(css.menu);
 		return (
-			<div className={css.interface}>
+			<div className={interfaceClass}>
 				<div className={menuClass}>
 					<div className={css.home}>Home</div>
 					<div className={css.about}>About</div>
 					<div className={css.contact}>Contact</div>
 				</div>
 				<div
-					onClick={this.onCloseClick}
-					className={closeClass}
+					onClick={this.onCloseOriginClick}
+					className={closeOriginClass}
 					dangerouslySetInnerHTML={{ __html: canada }}
 				></div>
+				<div
+					onClick={this.onCloseEggClick}
+					className={closeEggClass}
+				>X</div>
 			</div>
 		);
 	}

@@ -15,14 +15,14 @@ export class MyComponent extends Component {
 	}
 	onClick() {
 		if (!this.props.map.dragging) {
-			this.props.dispatch({ type: 'ORIGIN_CLICK', origin: this.props.origin._id });
+			this.props.dispatch({ type: 'ORIGIN_CLICK', originId: this.props.origin._id });
 		}
 	}
 	onMouseEnter() {
-		this.props.dispatch({ type: 'ORIGIN_MOUSE_ENTER', origin: this.props.origin._id });
+		this.props.dispatch({ type: 'ORIGIN_MOUSE_ENTER', originId: this.props.origin._id });
 	}
 	onMouseLeave() {
-		this.props.dispatch({ type: 'ORIGIN_MOUSE_LEAVE', origin: this.props.origin._id });
+		this.props.dispatch({ type: 'ORIGIN_MOUSE_LEAVE', originId: this.props.origin._id });
 	}
 	render() {
 		const originClass = classnames(css.origin, {

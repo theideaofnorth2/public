@@ -1,52 +1,60 @@
 const defaultState = {
 	data: [],
-	hoveredDestinationInterview: null,
-	playingInterview: null,
+	locationData: [],
+	eggData: [],
+	hoveredDestinationInterviewId: null,
+	playingInterviewId: null,
 };
 
-const getInterviews = (interviews, cities) =>
-	interviews
+const getInterviews = (data) =>
+	data.interviews
 		.map(interview => Object.assign({
 			...interview,
-			origin: cities.find(c => c._id === interview.origin),
-			destination: cities.find(c => c._id === interview.destination),
-		}))
-		.filter(interview => interview.parent === 'location');
+			origin: data.origins.find(o => o._id === interview.originId),
+			destination: data.destinations.find(d => d._id === interview.destinationId),
+		}));
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
 			return {
 				...state,
-				data: getInterviews(action.data.interviews, action.data.cities),
+				data: getInterviews(action.data),
+				locationData: getInterviews(action.data).filter(i => i.parent === 'location'),
+				eggData: getInterviews(action.data).filter(i => i.parent === 'egg'),
 			};
 		}
 		case 'DESTINATION_INTERVIEW_MOUSE_ENTER':
 			return {
 				...state,
-				hoveredDestinationInterview: action.interview,
+				hoveredDestinationInterviewId: action.interviewId,
 			};
 		case 'DESTINATION_INTERVIEW_MOUSE_LEAVE':
 			return {
 				...state,
-				hoveredDestinationInterview: null,
+				hoveredDestinationInterviewId: null,
 			};
 		case 'INTERVIEW_PLAY':
 			return {
 				...state,
-				playingInterview: action.interview,
+				playingInterviewId: action.interviewId,
 			};
 		case 'INTERVIEW_STOP':
 			return {
 				...state,
-				playingInterview: null,
+				playingInterviewId: null,
 			};
-		case 'INTERVIEW_CLICK': {
-			const playingInterview = state.playingInterview === action.interview ?
-				null : action.interview;
+		case 'EGG_CLOSE':
 			return {
 				...state,
-				playingInterview,
+				playingInterviewId: null,
+			};
+		case 'INTERVIEW_CLICK': {
+			const playingInterviewId = state.playingInterviewId === action.interviewId ?
+				null : action.interviewId;
+			return {
+				...state,
+				playingInterviewId,
 			};
 		}
 		default:

@@ -1,0 +1,50 @@
+.sound {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	background: rgba(255, 255, 255, 0.35);
+	display: none;
+}
+
+.sound.visible {
+	display: block;
+}
+
+.button {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+
+.button.playing {
+	background: green;
+}
+
+.seekContainer {
+	position: absolute;
+	bottom: 0;
+	left: 100px;
+	right: 100px;
+	height: 100px;
+}
+.seek {
+	position: absolute;
+	left: 0;
+	width: 0;
+	height: 100px;
+	background: orange;
+}
+
+.options {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 100px;
+	height: 100px;
+	background: blue;
+}

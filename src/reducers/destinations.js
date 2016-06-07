@@ -1,40 +1,38 @@
 const defaultState = {
 	data: [],
-	hoveredDestination: null,
+	hoveredDestinationId: null,
 };
 
-const getDestinations = (cities, interviews) =>
-	cities
-		.map(citie => {
-			const originOf = interviews.filter(interview => citie._id === interview.origin);
-			const destinationOf = interviews.filter(
-				interview => citie._id === interview.destination
+const getDestinations = (data) =>
+	data.destinations
+		.map(destination => {
+			const interviews = data.interviews.filter(
+				interview => destination._id === interview.destinationId
 			);
-			if (destinationOf.length === 0 || originOf.length !== 0) return null;
-			return Object.assign({
-				...citie,
-				destinationOf,
+			return interviews.length === 0 ? null : Object.assign({
+				...destination,
+				interviews,
 			});
 		})
-		.filter(citie => citie !== null);
+		.filter(destination => destination !== null);
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
 			return {
 				...state,
-				data: getDestinations(action.data.cities, action.data.interviews),
+				data: getDestinations(action.data),
 			};
 		}
 		case 'DESTINATION_MOUSE_ENTER':
 			return {
 				...state,
-				hoveredDestination: action.destination,
+				hoveredDestinationId: action.destinationId,
 			};
 		case 'DESTINATION_MOUSE_LEAVE':
 			return {
 				...state,
-				hoveredDestination: null,
+				hoveredDestinationId: null,
 			};
 		default:
 			return state;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Sound from './Sound';
+import Egg from './Egg';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -8,11 +8,10 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.interviews.data.map(interview => Object.assign(
-			<Sound
-				key={interview._id}
-				interview={interview}
-				play={interview._id === this.props.interviews.playingInterviewId}
+		const content = this.props.eggs.data.map(egg => Object.assign(
+			<Egg
+				key={egg._id}
+				egg={egg}
 			/>
 		));
 		return (
@@ -24,8 +23,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	map: state.map,
-	interviews: state.interviews,
+	eggs: state.eggs,
 });
 
 export default connect(mapStateToProps)(MyComponent);

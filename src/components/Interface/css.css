@@ -7,7 +7,23 @@
 	pointer-events: none;
 }
 
-.close {
+.interface.animating:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	pointer-events: all;
+}
+
+.closeOrigin,
+.closeEgg,
+.menu {
+	pointer-events: all;
+}
+
+.closeOrigin {
 	position: absolute;
 	top: 50px;
 	right: 25px;
@@ -18,19 +34,36 @@
 	cursor: pointer;
 }
 
-.close.visible {
+.closeOrigin.visible {
 	display: block;
-	pointer-events:all;
 }
 
-.close svg :global(#canada-content) {
+.closeOrigin svg :global(#canada-content) {
 	stroke: rgba(255,255,255,0.6);
 	stroke-width: 1;
 	transition: stroke 200ms cubic-bezier(0,0,0.32,1);
 }
 
-.close:hover svg :global(#canada-content) {
+.closeOrigin:hover svg :global(#canada-content) {
 	stroke: rgba(255,255,255,1);
+}
+
+.closeEgg {
+	position: absolute;
+	top: 50px;
+	right: 25px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: white;
+	background: rgba(0,0,0,0.8);
+	display: none;
+	cursor: pointer;
+}
+
+.closeEgg.visible {
+	display: block;
 }
 
 .menu {

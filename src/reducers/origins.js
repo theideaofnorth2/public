@@ -1,49 +1,49 @@
 const defaultState = {
 	data: [],
-	hoveredOrigin: null,
-	selectedOrigin: null,
+	hoveredOriginId: null,
+	selectedOriginId: null,
 };
 
-const getOrigins = (cities, interviews) =>
-	cities
-		.map(citie => {
-			const originOf = interviews.filter(interview => citie._id === interview.origin);
-			const destinationOf = interviews.filter(interview => citie._id === interview.destination);
-			if (originOf.length === 0 || destinationOf.length !== 0) return null;
-			return Object.assign({
-				...citie,
-				originOf,
+const getOrigins = (data) =>
+	data.origins
+		.map(origin => {
+			const interviews = data.interviews.filter(interview => origin._id === interview.originId);
+			const eggs = data.eggs.filter(egg => origin._id === egg.originId);
+			return interviews.length === 0 ? null : Object.assign({
+				...origin,
+				interviews,
+				eggs,
 			});
 		})
-		.filter(citie => citie !== null);
+		.filter(origin => origin !== null);
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
 			return {
 				...state,
-				data: getOrigins(action.data.cities, action.data.interviews),
+				data: getOrigins(action.data),
 			};
 		}
 		case 'ORIGIN_MOUSE_ENTER':
 			return {
 				...state,
-				hoveredOrigin: action.origin,
+				hoveredOriginId: action.originId,
 			};
 		case 'ORIGIN_MOUSE_LEAVE':
 			return {
 				...state,
-				hoveredOrigin: null,
+				hoveredOriginId: null,
 			};
 		case 'ORIGIN_CLICK':
 			return {
 				...state,
-				selectedOrigin: action.origin,
+				selectedOriginId: action.originId,
 			};
 		case 'DESTINATION_INTERVIEW_CLICK':
 			return {
 				...state,
-				selectedOrigin: action.origin,
+				selectedOriginId: action.originId,
 			};
 		default:
 			return state;

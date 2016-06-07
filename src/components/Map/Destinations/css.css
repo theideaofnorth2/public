@@ -1,4 +1,4 @@
-.citie {
+.destination {
 }
 .circle {
 	position: absolute;
@@ -180,7 +180,6 @@
 	animation-duration: 550ms;
 	animation-timing-function: cubic-bezier(0,0,0.32,1);
 	animation-fill-mode: forwards;
-	pointer-events: all;
 }
 .top.hover .interviews {
 	animation-name: expandInterviewsFromTop;
@@ -220,6 +219,5 @@
 	100% {
 		transform: translateY(0);
 		opacity: 1;
-		pointer-events: auto;
 	}
 }

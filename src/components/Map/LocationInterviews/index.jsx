@@ -8,7 +8,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const content = this.props.interviews.data.map(interview => Object.assign(
+		const content = this.props.interviews.map(interview => Object.assign(
 			<Interview
 				key={interview._id}
 				gmap={this.props.gmap}
@@ -24,7 +24,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	interviews: state.interviews,
+	interviews: state.interviews.locationData,
 });
 
 export default connect(mapStateToProps)(MyComponent);

@@ -2,6 +2,7 @@ const defaultState = {
 	initialized: false,
 	ready: false,
 	dragging: false,
+	animating: false,
 	centering: false,
 	zooming: false,
 	level: 'main',
@@ -34,6 +35,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				center: action.center,
+				animating: true,
 				centering: true,
 			};
 		case 'MAP_CENTER_FINISHED':
@@ -50,6 +52,7 @@ export default function reducer(state = defaultState, action = null) {
 		case 'MAP_ZOOM_FINISHED':
 			return {
 				...state,
+				animating: false,
 				zooming: false,
 			};
 		default:

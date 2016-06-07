@@ -1,7 +1,7 @@
 const defaultState = {
 	zooming: false,
 	direction: 'in',
-	origin: null,
+	originId: null,
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -11,7 +11,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				zooming: true,
 				direction: action.direction,
-				origin: action.origin,
+				originId: action.originId,
 			};
 		case 'MAP_ZOOM_FINISHED':
 			return {

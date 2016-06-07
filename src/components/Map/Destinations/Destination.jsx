@@ -15,27 +15,24 @@ export class MyComponent extends Component {
 	onMouseEnter() {
 		this.props.dispatch({
 			type: 'DESTINATION_MOUSE_ENTER',
-			destination: this.props.destination._id,
+			destinationId: this.props.destination._id,
 		});
 	}
 	onMouseLeave() {
-		this.props.dispatch({
-			type: 'DESTINATION_MOUSE_LEAVE',
-			destination: this.props.destination._id,
-		});
+		this.props.dispatch({ type: 'DESTINATION_MOUSE_LEAVE' });
 	}
 	onMouseEnterName() {
 	}
 	render() {
-		const destinationOf = this.props.destination.destinationOf.map(interview => Object.assign(
+		const interviews = this.props.destination.interviews.map(interview => Object.assign(
 			<DestinationInterview key={interview._id} interview={interview} />
 		));
-		const citieClass = classnames(
-			css.citie,
+		const destinationClass = classnames(
+			css.destination,
 			css[this.props.destination.vertical],
 			css[this.props.destination.horizontal],
 			{
-				[css.hover]: this.props.destinations.hoveredDestination === this.props.destination._id,
+				[css.hover]: this.props.destinations.hoveredDestinationId === this.props.destination._id,
 			},
 		);
 		return (
@@ -47,7 +44,7 @@ export class MyComponent extends Component {
 				horizontal={this.props.destination.horizontal}
 			>
 				<div
-					className={citieClass}
+					className={destinationClass}
 					onMouseEnter={this.onMouseEnter}
 					onMouseLeave={this.onMouseLeave}
 				>
@@ -59,7 +56,7 @@ export class MyComponent extends Component {
 								</span>
 							</div>
 							<div className={css.interviews}>
-								{destinationOf}
+								{interviews}
 							</div>
 						</div>
 					</div>

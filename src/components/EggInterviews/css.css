@@ -1,0 +1,40 @@
+.interview {
+	position: absolute;
+	z-index: 0;
+	width: 63px;
+	height: 83px;
+	display: none;
+}
+
+.interview.visible {
+	display: block;
+}
+
+.interview.playing {
+	z-index: 1;
+}
+
+.interview svg {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.interview svg :global(#marker) {
+	fill: black;
+}
+.interview.playing svg :global(#marker) {
+	fill: orange;
+}
+
+.interview svg :global(#oval) {
+	fill: white;
+}
+.interview.playing svg :global(#oval) {
+	fill: black;
+}
+.interview svg :global(#arrow) {
+	stroke: black;
+}
+.interview.playing svg :global(#arrow) {
+	stroke: white;
+}

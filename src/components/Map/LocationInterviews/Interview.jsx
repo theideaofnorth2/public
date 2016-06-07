@@ -16,12 +16,12 @@ export class MyComponent extends Component {
 		this.setState({ mounted: true });
 	}
 	onClick() {
-		this.props.dispatch({ type: 'INTERVIEW_CLICK', interview: this.props.interview._id });
+		this.props.dispatch({ type: 'INTERVIEW_CLICK', interviewId: this.props.interview._id });
 	}
 	render() {
-		const isVisible = this.props.origins.selectedOrigin === this.props.interview.origin._id &&
+		const isVisible = this.props.origins.selectedOriginId === this.props.interview.originId &&
 			this.props.map.level === 'origin';
-		const isPlaying = this.props.interviews.playingInterview === this.props.interview._id &&
+		const isPlaying = this.props.interviews.playingInterviewId === this.props.interview._id &&
 			this.props.map.level === 'origin';
 		const thisClass = classnames(
 			css.interview, {

@@ -15,21 +15,21 @@ export class MyComponent extends Component {
 		if (!this.props.map.dragging) {
 			this.props.dispatch({
 				type: 'DESTINATION_INTERVIEW_CLICK',
-				origin: this.props.interview.origin,
-				interview: this.props.interview._id,
+				originId: this.props.interview.originId,
+				interviewId: this.props.interview._id,
 			});
 		}
 	}
 	onMouseEnter() {
 		this.props.dispatch({
 			type: 'DESTINATION_INTERVIEW_MOUSE_ENTER',
-			interview: this.props.interview._id,
+			interviewId: this.props.interview._id,
 		});
 	}
 	onMouseLeave() {
 		this.props.dispatch({
 			type: 'DESTINATION_INTERVIEW_MOUSE_LEAVE',
-			interview: this.props.interview._id,
+			interviewId: this.props.interview._id,
 		});
 	}
 	render() {

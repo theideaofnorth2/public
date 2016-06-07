@@ -24,7 +24,7 @@ export class MyComponent extends Component {
 	componentDidUpdate() {
 		if (
 			this.props.zoomers.zooming &&
-			this.props.origin._id === this.props.zoomers.origin
+			this.props.origin._id === this.props.zoomers.originId
 		) {
 			this.animateZoomer();
 		}
@@ -60,7 +60,7 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.zoomerContainer, {
 			[css.mounted]: this.state.mounted,
 			[css.zooming]: this.props.zoomers.zooming &&
-				this.props.origin._id === this.props.zoomers.origin,
+				this.props.origin._id === this.props.zoomers.originId,
 		});
 		return (
 			<div className={thisClass}>

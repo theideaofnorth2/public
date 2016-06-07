@@ -46,14 +46,17 @@ export class MyComponent extends Component {
 	render() {
 		const thisClass = classnames(
 			css.distance, {
-				[css.hover]: this.props.interviews.hoveredDestinationInterview === this.props.interview._id,
+				[css.hover]:
+					this.props.interviews.hoveredDestinationInterviewId === this.props.interview._id,
 			}
 		);
 		const pathClass = classnames(
 			css.path,
 			{
-				[css.hover]: this.props.interviews.hoveredDestinationInterview === this.props.interview._id,
-				[css.delayedHover]: this.props.origins.hoveredOrigin === this.props.interview.origin._id,
+				[css.hover]:
+					this.props.interviews.hoveredDestinationInterviewId === this.props.interview._id,
+				[css.delayedHover]:
+					this.props.origins.hoveredOriginId === this.props.interview.origin._id,
 			}
 		);
 		const pathStyle = {
