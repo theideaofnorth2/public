@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import AlignedOverlay from 'tion2/components/Google/AlignedOverlay';
-import egg from './egg.svg';
+import rail from './rail.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -41,7 +41,7 @@ export class MyComponent extends Component {
 					ref="egg"
 					className={thisClass}
 					onClick={this.onClick}
-					dangerouslySetInnerHTML={{ __html: egg }}
+					dangerouslySetInnerHTML={{ __html: rail }}
 				>
 				</div>
 			</AlignedOverlay>
