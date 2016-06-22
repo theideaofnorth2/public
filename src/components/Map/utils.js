@@ -1,7 +1,7 @@
 import { SuperPromise } from 'tion2/utils/tools';
 import mainStyles from './data/mainStyles.json';
 
-const getMapOptionsFromUrl = () => {
+export const getMapOptionsFromUrl = () => {
 	const params = new URLSearchParams(window.location);
 	return {
 		disableDefaultUI: true,
@@ -14,12 +14,6 @@ const getMapOptionsFromUrl = () => {
 		},
 		styles: mainStyles,
 	};
-};
-
-export const setMapCaptureOptions = (gmap) => {
-	const captureMapOptions = getMapOptionsFromUrl();
-	gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
-	gmap.setOptions(captureMapOptions);
 };
 
 export const waitForMapIdle = (map) => {

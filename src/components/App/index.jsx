@@ -31,8 +31,8 @@ export class MyComponent extends Component {
 				<Eggs />
 				<EggInterviews />
 				<Sounds />
-				<Stories />
 				<Interface />
+				<Stories />
 			</div>
 		);
 		return content;

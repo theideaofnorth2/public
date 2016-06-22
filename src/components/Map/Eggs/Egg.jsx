@@ -16,7 +16,11 @@ export class MyComponent extends Component {
 		this.setState({ mounted: true });
 	}
 	onClick() {
-		this.props.dispatch({ type: 'EGG_CLICK', eggId: this.props.egg._id });
+		this.props.dispatch({
+			type: 'EGG_CLICK',
+			eggId: this.props.egg._id,
+			originId: this.props.egg.originId,
+		});
 	}
 	render() {
 		const isVisible = this.props.origins.selectedOriginId === this.props.egg.originId &&

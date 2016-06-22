@@ -6,10 +6,10 @@
 
 .map {
 	position: absolute;
-	top: -256px;
-	bottom: -256px;
-	left: -256px;
-	right: -256px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	background: transparent !important;
 }
 .ready {

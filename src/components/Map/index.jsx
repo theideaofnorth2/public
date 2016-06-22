@@ -11,7 +11,7 @@ import Eggs from 'tion2/components/Map/Eggs';
 import Distances from 'tion2/components/Map/Distances';
 import Origins from 'tion2/components/Map/Origins';
 import Destinations from 'tion2/components/Map/Destinations';
-import { waitForMapIdle, setLayers, setMapCaptureOptions, areCentersEqual } from './utils';
+import { waitForMapIdle, setLayers, getMapOptionsFromUrl, areCentersEqual } from './utils';
 import { isCapture } from 'tion2/utils/tools';
 import css from './css';
 
@@ -54,9 +54,18 @@ export class MyComponent extends Component {
 			await waitForMapIdle(this.gmap);
 			setLayers(this.refs.map, css.layer1, css.layer4);
 			this.props.dispatch({ type: 'MAP_READY' });
-			if (isCapture) setMapCaptureOptions(this.gmap);
+			if (isCapture) this.setCaptureMapOptions.call(this);
 		}
 		asyncFunc.call(this);
+	}
+	setCaptureMapOptions() {
+		this.gmapOptions = getMapOptionsFromUrl();
+		this.gmap.panTo(this.gmapOptions.center);
+		this.gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
+		this.gmap.setOptions({ zoom: 16 });
+		setTimeout(() => {
+			this.gmap.setOptions(this.gmapOptions);
+		}, 0);
 	}
 	setGmapOptions() {
 		const zoom = this.props.map.level === 'main' ? 4 : 14;

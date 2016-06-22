@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Zoomer from 'zoomer';
 import classnames from 'classnames';
-import { assetsUri } from 'tion2/utils/tools';
+import { imagesUri } from 'tion2/utils/tools';
 import css from './css';
 
-const originsImagesUri = `${assetsUri}/assets/images/origins`;
+const originsImagesUri = `${imagesUri}/origins`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -34,9 +34,8 @@ export class MyComponent extends Component {
 			selector: `#zoomer_${this.props.origin.key}`,
 			width: 1920,
 			height: 1080,
-			stepsPerLevel: 7,
+			stepsPerLevel: 6,
 			step: 0,
-			opacityTransitionDuration: 0,
 			images: this.images,
 		});
 		this.zoomer.on('ready', () => {
@@ -44,11 +43,10 @@ export class MyComponent extends Component {
 		});
 	}
 	animateZoomer() {
-		const spl = 7;
+		const spl = 6;
 		const fromStep = this.props.zoomers.direction === 'in' ? 0 : spl * 10;
 		const toStep = this.props.zoomers.direction === 'in' ? spl * 10 : 0;
 		this.zoomer.animateZoom({
-			opacityTransitionDuration: 0,
 			stepsPerLevel: spl,
 			fromStep,
 			toStep,

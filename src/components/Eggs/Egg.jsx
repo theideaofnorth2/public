@@ -14,11 +14,22 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.egg, {
 			[css.visible]: isVisible,
 		});
+		const videoUri = `https://player.vimeo.com/video/170188778?autoplay=${isVisible ? 1 : 0}&loop=1&title=0&byline=0&portrait=0`;
 		return (
 			<div
 				ref="egg"
 				className={thisClass}
 			>
+				<iframe
+					src={videoUri}
+					width="1920"
+					height="1080"
+					frameBorder="0"
+					webkitallowfullscreen
+					mozallowfullscreen
+					allowFullScreen
+				>
+				</iframe>
 				{this.props.egg.name}
 			</div>
 		);

@@ -8,7 +8,12 @@ export const SuperPromise = () => {
 
 export const isCapture = document.location.search.indexOf('capture') !== -1;
 
-export const baseUri = 'http://theideaofnorth2.com';
+const baseUri = 'http://theideaofnorth2.com';
+
+export const apiUri = `${baseUri}/api/`;
 
 export const assetsUri = 	process.env.NODE_ENV === 'development' ?
-	'' : 'http://theideaofnorth2.com';
+	'/assets' : 'http://theideaofnorth2.com/assets';
+
+export const imagesUri = `${assetsUri}/images`;
+export const soundsUri = `${assetsUri}/sounds`;

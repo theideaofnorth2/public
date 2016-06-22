@@ -18,10 +18,10 @@
 			(function() {
 
 				var fillCities = function(config) {
-					config.cities.forEach(function(citie) {
+					config.origins.forEach(function(origin) {
 						var option = document.createElement("option");
-						option.value = `/?capture&citie=${citie.key}&lat=${citie.lat}&lng=${citie.lng}`;
-						option.innerHTML = citie.name;
+						option.value = `/?capture&origin=${origin.key}&lat=${origin.lat}&lng=${origin.lng}`;
+						option.innerHTML = origin.name;
 						select.appendChild(option);
 					})
 				}

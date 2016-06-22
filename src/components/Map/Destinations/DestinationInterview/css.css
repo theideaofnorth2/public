@@ -1,4 +1,5 @@
 .interview {
+	position: relative;
 	background: rgba(0,0,0,0.7);
 	padding: 8px 12px;
 	background-clip: padding-box;
@@ -6,5 +7,12 @@
 }
 
 .interview:hover {
-	background: rgba(0,0,0,1);
+	padding: 8px 0 8px 24px;
+}
+
+.interview:hover::before {
+	content: '♫';
+	position: absolute;
+	top: 8px;
+	left: 12px;
 }

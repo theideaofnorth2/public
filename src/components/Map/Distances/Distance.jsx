@@ -34,13 +34,16 @@ export class MyComponent extends Component {
 	getPathDirection() {
 		const origin = this.props.interview.origin;
 		const destination = this.props.interview.destination;
-		return origin.lng > destination.lng ? 'toLeft' : 'toRight';
+		return {
+			horizontal: origin.lng > destination.lng ? 'toLeft' : 'toRight',
+			vertical: origin.lat > destination.lat ? 'toBottom' : 'toTop',
+		};
 	}
 	getPathD() {
-		const x0 = this.pathDirection === 'toRight' ? 0 : this.divRect.width;
-		const x1 = this.pathDirection === 'toRight' ? this.divRect.width : 0;
-		const y0 = this.divRect.height;
-		const y1 = 0;
+		const x0 = this.pathDirection.horizontal === 'toRight' ? 0 : this.divRect.width;
+		const x1 = this.pathDirection.horizontal === 'toRight' ? this.divRect.width : 0;
+		const y0 = this.pathDirection.vertical === 'toBottom' ? 0 : this.divRect.height;
+		const y1 = this.pathDirection.vertical === 'toBottom' ? this.divRect.height : 0;
 		return `M ${x0},${y0} L ${x1},${y1}`;
 	}
 	render() {

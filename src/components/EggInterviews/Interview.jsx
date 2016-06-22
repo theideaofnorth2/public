@@ -11,7 +11,11 @@ export class MyComponent extends Component {
 		this.onClick = this.onClick.bind(this);
 	}
 	onClick() {
-		this.props.dispatch({ type: 'INTERVIEW_CLICK', interviewId: this.props.interview._id });
+		this.props.dispatch({
+			type: 'INTERVIEW_CLICK',
+			interviewId: this.props.interview._id,
+			originId: this.props.interview.originId,
+		});
 	}
 	render() {
 		const isVisible = this.props.eggs.selectedEggId === this.props.interview.eggId;

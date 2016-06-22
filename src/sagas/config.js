@@ -1,7 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { baseUri } from 'tion2/utils/tools';
-
-const apiUri = `${baseUri}/api/`;
+import { apiUri } from 'tion2/utils/tools';
 
 export function* loadConfig() {
 	yield put({ type: 'CONFIG_FETCH' });

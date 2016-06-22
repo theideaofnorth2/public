@@ -9,7 +9,13 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'static'),
 		filename: '[name].js',
-		publicPath: '',
+	},
+	resolve: {
+		alias: {
+			tion2: path.resolve(__dirname, 'src'),
+			tion2Static: path.resolve(__dirname, 'static'),
+		},
+		extensions: ['', '.js', '.jsx', '.json', '.css'],
 	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
@@ -25,19 +31,12 @@ module.exports = {
 		}),
 		new webpack.IgnorePlugin(/\.png|\.jpg$/),
 	],
-	resolve: {
-		alias: {
-			tion2: path.resolve(__dirname, 'src'),
-			tion2Static: path.resolve(__dirname, 'static'),
-		},
-		extensions: ['', '.js', '.jsx', '.json', '.css'],
-	},
 	module: {
 		preLoaders: [
 			{
 				test: /\.js|\.jsx$/,
 				loader: 'eslint-loader',
-				exclude: /node_modules/,
+				exclude: [/node_modules/, /zoomer/],
 			},
 		],
 		loaders: [
