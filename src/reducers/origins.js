@@ -35,15 +35,15 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				hoveredOriginId: null,
 			};
-		case 'ORIGIN_CLICK':
+		case 'ORIGIN_SELECTION':
 			return {
 				...state,
 				selectedOriginId: action.originId,
 			};
-		case 'DESTINATION_INTERVIEW_CLICK':
+		case 'ORIGIN_UNSELECTION':
 			return {
 				...state,
-				selectedOriginId: action.originId,
+				selectedOriginId: null,
 			};
 		default:
 			return state;

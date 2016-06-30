@@ -1,0 +1,39 @@
+:global(.gm-style > div:nth-child(2)),
+:global(.gmnoprint),
+:global(.gm-style-cc) {
+	display: none !important;
+}
+
+.map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: transparent !important;
+}
+.ready {
+	opacity: 1;
+}
+.zooming {
+	opacity: 0;
+}
+
+.layer1 {
+	opacity: 0.4;
+}
+.layer3 {
+	opacity: 1;
+}
+
+.capture .layer1 {
+	opacity: 1;
+}
+.capture .layer3 {
+	opacity: 0;
+}
+
+.geoPositionedContent {
+	position: absolute;
+	z-index: -1;
+}

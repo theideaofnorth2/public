@@ -33,12 +33,12 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				hoveredEggId: null,
 			};
-		case 'EGG_CLICK':
+		case 'EGG_SELECTION':
 			return {
 				...state,
 				selectedEggId: action.eggId,
 			};
-		case 'EGG_CLOSE':
+		case 'EGG_UNSELECTION':
 			return {
 				...state,
 				selectedEggId: null,

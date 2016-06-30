@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Map from 'tion2/components/Map';
-import Sounds from 'tion2/components/Sounds';
-import Background from 'tion2/components/Background';
-import Eggs from 'tion2/components/Eggs';
-import EggInterviews from 'tion2/components/EggInterviews';
-import Stories from 'tion2/components/Stories';
-import Zoomers from 'tion2/components/Zoomers';
-import Interface from 'tion2/components/Interface';
+import Layer0 from 'tion2/components/Layer0';
+import Layer2 from 'tion2/components/Layer2';
+import Layer4 from 'tion2/components/Layer4';
+import Mapp from 'tion2/components/Mapp';
 import { isCapture } from 'tion2/utils/tools';
 import css from './css';
 
@@ -16,29 +12,23 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 	}
-	componentDidMount() {
-	}
 	render() {
 		const content = isCapture ? (
 			<div className={css.capture}>
-				<Map capture />
+				<Mapp capture />
 			</div>
 		) : (
 			<div className={css.app}>
-				<Background />
-				<Map />
-				<Zoomers />
-				<Eggs />
-				<EggInterviews />
-				<Sounds />
-				<Interface />
-				<Stories />
+				<Layer0 />
+				<Layer2 />
+				<Mapp />
+				<Layer4 />
 			</div>
 		);
 		return content;
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(MyComponent);

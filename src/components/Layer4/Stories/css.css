@@ -1,0 +1,77 @@
+.stories {
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 200px;
+	transform: translateX(calc(-100% + 30px));
+	transition: transform 200ms cubic-bezier(0,0,0.32,1);
+	display: flex;
+	flex-direction: column-reverse;
+	pointer-events: all;
+}
+
+.stories:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 15px;
+	right: 14px;
+	width: 2px;
+	background: rgba(255, 255, 255, 0.9);
+}
+.stories.open {
+	transform: translateX(0);
+	background: rgba(0,0,0,0.5);
+}
+
+.toggle {
+	height: 30px;
+	background: rgba(255,255,255,1);
+	color: black;
+	text-align: right;
+	padding: 7px 6px;
+}
+
+.toggle:before {
+	content: '>>';
+}
+
+.stories.open .toggle:before {
+	content: '<<';
+}
+
+.storie {
+	position: relative;
+  transition: all 500ms linear;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-bottom: 1px solid rgba(255,255,255,0);
+	transform: scaleY(0);
+  animation: flexGrow 500ms ease forwards;
+}
+
+@keyframes flexGrow {
+  to {
+		transform: scaleY(1);
+  }
+}
+
+.stories.open .storie {
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+.storie.future {
+	color: #999;
+}
+
+.storie:after {
+	content: '';
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: rgba(255,255,255,1);
+	border: 1px solid rgba(255,255,255,1);
+	border-radius: 100%;
+}

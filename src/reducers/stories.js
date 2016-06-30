@@ -6,29 +6,16 @@ const defaultState = {
 	open: false,
 	currentIndex: null,
 	nextIndex: null,
-	triggering: false,
 };
 
 const getPastData = (data) => data.filter(entrie => !entrie.future);
 
 export default function reducer(state = defaultState, action = null) {
-	if (state.triggering && action.type !== 'STORIE_ANIMATION_END') return state;
 	switch (action.type) {
 		case 'ORIGIN_CLICK': {
 			const data = [...getPastData(state.data), {
 				view: 'origin',
 				originId: action.originId,
-				future: false,
-			}];
-			return {
-				...state,
-				data,
-				currentIndex: data.length - 1,
-			};
-		}
-		case 'ORIGIN_CLOSE': {
-			const data = [...getPastData(state.data), {
-				view: 'main',
 				future: false,
 			}];
 			return {
@@ -50,12 +37,17 @@ export default function reducer(state = defaultState, action = null) {
 				currentIndex: data.length - 1,
 			};
 		}
-		case 'EGG_CLOSE': {
-			const data = [...getPastData(state.data), {
+		case 'EXIT_CLICK': {
+			const storie = action.originId ?
+			{
 				view: 'origin',
 				originId: action.originId,
 				future: false,
-			}];
+			} : {
+				view: 'main',
+				future: false,
+			};
+			const data = [...getPastData(state.data), storie];
 			return {
 				...state,
 				data,
@@ -67,6 +59,7 @@ export default function reducer(state = defaultState, action = null) {
 				view: 'interview',
 				interviewId: action.interviewId,
 				originId: action.originId,
+				eggId: action.eggId,
 				future: false,
 			}];
 			return {
@@ -75,13 +68,14 @@ export default function reducer(state = defaultState, action = null) {
 				currentIndex: data.length - 1,
 			};
 		}
-		case 'INTERVIEW_CLICK': {
+		case 'INTERVIEW_SELECTION_CLICK': {
 			const lastItem = state.data[state.data.length - 1];
 			if (lastItem.interviewId === action.interviewId) return state;
 			const data = [...getPastData(state.data), {
 				view: 'interview',
 				interviewId: action.interviewId,
 				originId: action.originId,
+				eggId: action.eggId,
 				future: false,
 			}];
 			return {
@@ -109,7 +103,6 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data: [...pastData, ...futureData],
 				nextIndex: action.index,
-				triggering: true,
 			};
 		}
 		case 'STORIE_ANIMATION_END': {
@@ -117,7 +110,6 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				currentIndex: state.nextIndex,
 				nextIndex: null,
-				triggering: false,
 			};
 		}
 		default:

@@ -1,9 +1,10 @@
 const defaultState = {
 	data: [],
-	locationData: [],
+	originData: [],
 	eggData: [],
 	hoveredDestinationInterviewId: null,
-	playingInterviewId: null,
+	hoveredInterviewId: null,
+	selectedInterviewId: null,
 };
 
 const getInterviews = (data) =>
@@ -20,7 +21,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data: getInterviews(action.data),
-				locationData: getInterviews(action.data).filter(i => i.parent === 'location'),
+				originData: getInterviews(action.data).filter(i => i.parent === 'origin'),
 				eggData: getInterviews(action.data).filter(i => i.parent === 'egg'),
 			};
 		}
@@ -34,29 +35,26 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				hoveredDestinationInterviewId: null,
 			};
-		case 'INTERVIEW_PLAY':
+		case 'INTERVIEW_MOUSE_ENTER':
 			return {
 				...state,
-				playingInterviewId: action.interviewId,
+				hoveredInterviewId: action.interviewId,
 			};
-		case 'INTERVIEW_STOP':
+		case 'INTERVIEW_MOUSE_LEAVE':
 			return {
 				...state,
-				playingInterviewId: null,
+				hoveredInterviewId: null,
 			};
-		case 'EGG_CLOSE':
+		case 'INTERVIEW_SELECTION':
 			return {
 				...state,
-				playingInterviewId: null,
+				selectedInterviewId: action.interviewId,
 			};
-		case 'INTERVIEW_CLICK': {
-			const playingInterviewId = state.playingInterviewId === action.interviewId ?
-				null : action.interviewId;
+		case 'INTERVIEW_UNSELECTION':
 			return {
 				...state,
-				playingInterviewId,
+				selectedInterviewId: null,
 			};
-		}
 		default:
 			return state;
 	}

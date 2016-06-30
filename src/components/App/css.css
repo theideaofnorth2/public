@@ -6,3 +6,27 @@
 	height: 1080px;
 	overflow: hidden;
 }
+.layer0,
+.layer2,
+.map,
+.layer4 {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+.layer0 {
+	background: url('http://theideaofnorth2.com/assets/images/backgrounds/IMG_1126-rtchd-1080.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: 0.5;
+}
+.layer2 {
+	z-index: 3;
+}
+.map {
+}
+.layer4 {
+	pointer-events: none;
+}
