@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import css from './css';
+import { imagesUri } from 'tion2/utils/tools';
+
+const destinationsImagesUri = `${imagesUri}/destinations`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -12,7 +15,7 @@ export class MyComponent extends Component {
 		const content = this.props.destinations.data
 			.map(destination => {
 				const thisStyle = {
-					backgroundImage: `url(/assets/images/destinations/${destination.image})`,
+					backgroundImage: `url(${destinationsImagesUri}/${destination.image})`,
 				};
 				const thisClass = classnames(css.destination, {
 					[css.visible]: this.props.destinations.coverDestinationId === destination._id,

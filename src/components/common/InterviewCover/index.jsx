@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { imagesUri } from 'tion2/utils/tools';
 import css from './css';
+
+const interviewsImagesUri = `${imagesUri}/interviews`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -10,7 +13,7 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisStyle = {
-			backgroundImage: `url(/assets/images/interviews/${this.props.interview.image})`,
+			backgroundImage: `url(${interviewsImagesUri}/${this.props.interview.image})`,
 		};
 		const thisClass = classnames(css.interview, {
 			[css.visible]: this.props.interviews.hoveredInterviewId === this.props.interview._id,
