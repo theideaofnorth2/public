@@ -17,7 +17,7 @@ export class MyComponent extends Component {
 				origin={origin}
 			/>
 		));
-		const thisClass = classnames(css.stories, layer4Css.pointable);
+		const thisClass = classnames(css.zoomers, layer4Css.pointable);
 		return (
 			<div className={thisClass}>
 				{content}
