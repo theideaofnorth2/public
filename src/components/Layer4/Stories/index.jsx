@@ -14,6 +14,17 @@ export class MyComponent extends Component {
 	toggleStories() {
 		this.props.dispatch({ type: 'STORIES_TOGGLE' });
 	}
+	componentDidUpdate(prevProps) {
+		const sLDiff = this.props.stories.data.length - prevProps.stories.data.length;
+		if (sLDiff !== 0) {
+			this.refs.stories.style.transition = 'none';
+			this.refs.stories.style.transform = `translateY(${-30 * sLDiff}px)`;
+			setTimeout(() => {
+				this.refs.stories.style.transition = 'transform 250ms linear';
+				this.refs.stories.style.transform = 'translateY(0)';
+			}, 0);
+		}
+	}
 	render() {
 		const content = this.props.stories.data.map((storie, index) => {
 			if (storie.view === 'main') {
@@ -58,12 +69,18 @@ export class MyComponent extends Component {
 				/>
 			);
 		});
-		const thisClass = classnames(css.stories, layer4Css.pointable, {
+		const thisClass = classnames(css.container, layer4Css.pointable, {
 			[css.open]: this.props.stories.open,
 		});
+		const storiesClass = classnames(css.stories);
 		return (
 			<div className={thisClass}>
-				{content}
+				<div
+					ref="stories"
+					className={storiesClass}
+				>
+					{content}
+				</div>
 				<div
 					className={css.toggle}
 					onClick={this.toggleStories}

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sounds from './Sounds';
 import Eggs from './Eggs';
-import Interviews from './Interviews';
+import EggInterviews from './EggInterviews';
 import Stories from './Stories';
 import Zoomers from './Zoomers';
 import Interface from './Interface';
+import Slideshow from './Slideshow';
 import appCss from 'tion2/components/App/css';
 import InterviewCover from 'tion2/components/common/InterviewCover';
 
@@ -27,7 +28,8 @@ export class MyComponent extends Component {
 				<Zoomers />
 				<Eggs />
 				{interviewCoversContent}
-				<Interviews />
+				<EggInterviews />
+				<Slideshow />
 				<Sounds />
 				<Interface />
 				<Stories />

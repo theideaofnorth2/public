@@ -6,7 +6,7 @@ import canadaCoords from './data/canadaCoords';
 import worldCoords from './data/worldCoords';
 import mainStyles from './data/mainStyles.json';
 import originStyles from './data/originStyles.json';
-import Interviews from 'tion2/components/Mapp/Interviews';
+import OriginInterviews from 'tion2/components/Mapp/OriginInterviews';
 import Eggs from 'tion2/components/Mapp/Eggs';
 import Distances from 'tion2/components/Mapp/Distances';
 import Origins from 'tion2/components/Mapp/Origins';
@@ -115,7 +115,7 @@ export class MyComponent extends Component {
 					<Distances gmap={this.gmap} />
 					<Origins gmap={this.gmap} />
 					<Destinations gmap={this.gmap} />
-					<Interviews gmap={this.gmap} />
+					<OriginInterviews gmap={this.gmap} />
 					<Eggs gmap={this.gmap} />
 				</div>
 				<div ref="map" className={mapClass}></div>

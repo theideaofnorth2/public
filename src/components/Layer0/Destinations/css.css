@@ -6,9 +6,11 @@
 	right: 0;
 	background-size: cover;
 	background-position: center center;
-	display: none;
+	opacity: 0;
+	transition: opacity 1000ms linear;
 }
 
 .destination.visible {
-	display: block;
+	opacity: 1;
+	transition: opacity 500ms linear;
 }

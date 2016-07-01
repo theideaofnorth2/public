@@ -62,7 +62,8 @@ function* fromOriginToMain() {
 }
 
 function* onExitClick(arg) {
-	if (arg.originId) yield put({ type: 'EGG_UNSELECTION' });
+	if (arg.interviewId) yield put({ type: 'INTERVIEW_UNSELECTION' });
+	else if (arg.eggId) yield put({ type: 'EGG_UNSELECTION' });
 	else yield fromOriginToMain();
 }
 

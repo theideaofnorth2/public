@@ -8,26 +8,22 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onCloseOriginClick = this.onCloseOriginClick.bind(this);
-		this.onCloseEggClick = this.onCloseEggClick.bind(this);
+		this.onCloseClick = this.onCloseClick.bind(this);
 	}
-	onCloseOriginClick() {
-		this.props.dispatch({ type: 'EXIT_CLICK' });
-	}
-	onCloseEggClick() {
-		this.props.dispatch({ type: 'EXIT_CLICK', originId: this.props.origins.selectedOriginId });
+	onCloseClick() {
+		this.props.dispatch({
+			type: 'EXIT_CLICK',
+			originId: this.props.origins.selectedOriginId,
+			eggId: this.props.eggs.selectedEggId,
+			interviewId: this.props.interviews.selectedInterviewId,
+		});
 	}
 	render() {
 		const interfaceClass = classnames(css.interface, {
 			[css.animating]: this.props.map.animating,
 		});
-		const closeOriginClass = classnames(css.exit, {
-			[css.visible]: this.props.map.level === 'origin' &&
-				!this.props.map.zooming &&
-				!this.props.eggs.selectedEggId,
-		});
-		const closeEggClass = classnames(css.exit, {
-			[css.visible]: this.props.eggs.selectedEggId,
+		const closeClass = classnames(css.exit, {
+			[css.visible]: this.props.origins.selectedOriginId,
 		});
 		const menuClass = classnames(css.menu);
 		return (
@@ -38,13 +34,8 @@ export class MyComponent extends Component {
 					<div className={css.home}>Home</div>
 				</div>
 				<div
-					onClick={this.onCloseOriginClick}
-					className={closeOriginClass}
-					dangerouslySetInnerHTML={{ __html: exit }}
-				></div>
-				<div
-					onClick={this.onCloseEggClick}
-					className={closeEggClass}
+					onClick={this.onCloseClick}
+					className={closeClass}
 					dangerouslySetInnerHTML={{ __html: exit }}
 				></div>
 			</div>

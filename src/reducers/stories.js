@@ -38,15 +38,29 @@ export default function reducer(state = defaultState, action = null) {
 			};
 		}
 		case 'EXIT_CLICK': {
-			const storie = action.originId ?
-			{
-				view: 'origin',
-				originId: action.originId,
-				future: false,
-			} : {
-				view: 'main',
-				future: false,
-			};
+			let storie;
+			if (action.interviewId && action.eggId) {
+				storie = {
+					view: 'egg',
+					eggId: action.eggId,
+					originId: action.originId,
+					future: false,
+				};
+			} else if (
+				(action.interviewId && !action.eggId) ||
+				(!action.interviewId && action.eggId)
+			) {
+				storie = {
+					view: 'origin',
+					originId: action.originId,
+					future: false,
+				};
+			} else {
+				storie = {
+					view: 'main',
+					future: false,
+				};
+			}
 			const data = [...getPastData(state.data), storie];
 			return {
 				...state,
