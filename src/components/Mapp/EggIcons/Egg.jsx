@@ -40,7 +40,7 @@ export class MyComponent extends Component {
 				gmap={this.props.gmap}
 				lat={this.props.egg.lat}
 				lng={this.props.egg.lng}
-				vertical="bottom"
+				vertical="top"
 				horizontal="center"
 				onMount={this.onMount}
 			>

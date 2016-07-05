@@ -19,7 +19,7 @@ export class MyComponent extends Component {
 						gmap={this.props.gmap}
 						lat={interview.lat}
 						lng={interview.lng}
-						vertical="bottom"
+						vertical="top"
 						horizontal="center"
 						zIndex={isPlaying ? 5 : 0}
 					>
