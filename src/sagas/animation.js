@@ -32,7 +32,7 @@ function* fromMainToOrigin(arg) {
 	const origin = state.origins.data.find(o => o._id === arg.originId);
 	yield put({ type: 'MAP_CENTER', center: { lat: origin.lat, lng: origin.lng } });
 	yield take('MAP_CENTER_FINISHED');
-	yield put({ type: 'MAP_ZOOM', direction: 'in', originId: arg.originId });
+	yield put({ type: 'MAP_ZOOM', direction: 'in', originId: arg.originId, zoom: origin.zoom });
 	yield take('MAP_ZOOM_FINISHED');
 	yield put({ type: 'ORIGIN_SELECTION', originId: arg.originId });
 }

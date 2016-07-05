@@ -35,7 +35,7 @@
 				var select = form.querySelector('select');
 				form.addEventListener('submit', function(e) {
 					e.preventDefault();
-					[4, 6, 8, 10, 12, 14].forEach(function(zoomLevel) {
+					[4, 6, 8, 10, 12, 13, 14].forEach(function(zoomLevel) {
 						window.open(`${select.value}&zoom=${zoomLevel}`)
 					})
 				});

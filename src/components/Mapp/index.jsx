@@ -76,12 +76,11 @@ export class MyComponent extends Component {
 		}, 0);
 	}
 	setGmapOptions() {
-		const zoom = this.props.map.level === 'main' ? 4 : 14;
 		this.gmapOptions = {
 			disableDefaultUI: true,
-			zoom,
-			minZoom: zoom,
-			maxZoom: zoom,
+			zoom: this.props.map.zoom,
+			minZoom: this.props.map.zoom,
+			maxZoom: this.props.map.zoom,
 			styles: this.props.map.styles === 'main' ? mainStyles : originStyles,
 			center: this.props.map.center,
 		};

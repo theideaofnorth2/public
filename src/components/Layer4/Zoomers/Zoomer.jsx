@@ -11,9 +11,10 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.images = [0, 2, 4, 6, 8, 10].map(level => Object.assign({
+		this.lastLevel = parseInt(this.props.origin.zoom, 10);
+		this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => Object.assign({
 			level,
-			src: `${originsImagesUri}/${this.props.origin.key}/${level + 4}.png`,
+			src: `${originsImagesUri}/${this.props.origin.key}/${level}.png`,
 		}));
 		this.mountZoomer = this.mountZoomer.bind(this);
 		this.animateZoomer = this.animateZoomer.bind(this);
@@ -35,7 +36,7 @@ export class MyComponent extends Component {
 			width: 1920,
 			height: 1080,
 			stepsPerLevel: 6,
-			step: 0,
+			step: 24,
 			images: this.images,
 		});
 		this.zoomer.on('ready', () => {
@@ -44,8 +45,8 @@ export class MyComponent extends Component {
 	}
 	animateZoomer() {
 		const spl = 6;
-		const fromStep = this.props.zoomers.direction === 'in' ? 0 : spl * 10;
-		const toStep = this.props.zoomers.direction === 'in' ? spl * 10 : 0;
+		const fromStep = this.props.zoomers.direction === 'in' ? spl * 4 : spl * this.lastLevel;
+		const toStep = this.props.zoomers.direction === 'in' ? spl * this.lastLevel : spl * 4;
 		this.zoomer.animateZoom({
 			stepsPerLevel: spl,
 			fromStep,
