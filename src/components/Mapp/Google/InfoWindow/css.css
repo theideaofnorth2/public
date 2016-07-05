@@ -22,17 +22,17 @@
 	Vertical
 */
 
-.iwc_top {
+.iwc_bottom {
 	margin-top: 42px;
 }
-.iw_top {
+.iw_bottom {
 	top: -9px;
 }
 
-.iwc_bottom {
+.iwc_top {
 	margin-top: 24px;
 }
-.iw_bottom {
+.iw_top {
 	bottom: -9px;
 }
 
@@ -47,17 +47,17 @@
 	Horizontal
 */
 
-.iwc_left {
+.iwc_right {
 	margin-left: 25px;
 }
-.iw_left {
+.iw_right {
 	left: -15px;
 }
 
-.iwc_right {
+.iwc_left {
 	margin-left: -29px;
 }
-.iw_right {
+.iw_left {
 	right: -17px;
 }
 

@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { videosUri } from 'tion2/utils/tools';
 import css from './css';
+
+const eggsVideosUri = `${videosUri}/eggs`;
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
+	}
+	componentDidUpdate() {
+		if (this.props.eggs.selectedEggId === this.props.egg._id &&
+		this.props.map.level === 'origin' && !this.props.map.animating) {
+			console.log('playing');
+			this.refs.video.play();
+		} else {
+			this.refs.video.pause();
+		}
 	}
 	render() {
 		const isVisible = this.props.eggs.selectedEggId === this.props.egg._id &&
@@ -14,22 +26,24 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.egg, {
 			[css.visible]: isVisible,
 		});
-		const videoUri = `https://player.vimeo.com/video/170188778?autoplay=${isVisible ? 1 : 0}&loop=1&title=0&byline=0&portrait=0`;
+		const videoUri = `${eggsVideosUri}/${this.props.egg.video}`;
 		return (
 			<div
 				ref="egg"
 				className={thisClass}
 			>
-				<iframe
-					src={videoUri}
-					width="1920"
-					height="1080"
-					frameBorder="0"
-					webkitallowfullscreen
-					mozallowfullscreen
-					allowFullScreen
+				<video
+					ref="video"
+					mute
+					poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
+					id="bgvid"
+					loop
 				>
-				</iframe>
+					<source
+						src={videoUri}
+						type="video/mp4"
+					/>
+				</video>
 				{this.props.egg.name}
 			</div>
 		);

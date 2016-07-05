@@ -2,20 +2,20 @@
 	position: absolute;
 }
 
-.top {
+.bottom {
 	top: 0
 }
-.bottom {
+.top {
 	bottom: 0
 }
 .middle {
 	transform: translateY(calc(-50%));
 }
 
-.left {
+.right {
 	left: 0
 }
-.right {
+.left {
 	right: 0
 }
 .center {

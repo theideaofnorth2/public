@@ -16,4 +16,5 @@ export const assetsUri = 	process.env.NODE_ENV === 'development' ?
 	'/assets' : 'http://theideaofnorth2.com/assets';
 
 export const imagesUri = `${assetsUri}/images`;
+export const videosUri = `${assetsUri}/videos`;
 export const soundsUri = `${assetsUri}/sounds`;

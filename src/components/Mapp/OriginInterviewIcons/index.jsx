@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
-import Interview from 'tion2/components/common/Interview';
+import InterviewIcon from 'tion2/components/common/InterviewIcon';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -23,7 +23,7 @@ export class MyComponent extends Component {
 						horizontal="center"
 						zIndex={isPlaying ? 5 : 0}
 					>
-						<Interview
+						<InterviewIcon
 							interview={interview}
 						/>
 					</AlignedOverlay>

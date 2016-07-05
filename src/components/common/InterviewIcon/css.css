@@ -4,6 +4,7 @@
 	width: 63px;
 	height: 83px;
 	display: none;
+	transition: opacity 200ms linear;
 }
 
 .interview.egg {
@@ -14,7 +15,11 @@
 	display: block;
 }
 
-.interview.playing {
+.interview.faded {
+	opacity: 0;
+}
+
+.interview.hoverede {
 	z-index: 1;
 }
 
@@ -26,19 +31,19 @@
 .interview svg :global(#marker) {
 	fill: black;
 }
-.interview.playing svg :global(#marker) {
+.interview.hoverede svg :global(#marker) {
 	fill: orange;
 }
 
 .interview svg :global(#oval) {
 	fill: white;
 }
-.interview.playing svg :global(#oval) {
+.interview.hoverede svg :global(#oval) {
 	fill: black;
 }
 .interview svg :global(#arrow) {
 	stroke: black;
 }
-.interview.playing svg :global(#arrow) {
+.interview.hoverede svg :global(#arrow) {
 	stroke: white;
 }

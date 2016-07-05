@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sounds from './Sounds';
-import Eggs from './Eggs';
-import EggInterviews from './EggInterviews';
+import EggCovers from './EggCovers';
+import EggInterviewIcons from './EggInterviewIcons';
 import Stories from './Stories';
 import Zoomers from './Zoomers';
 import Interface from './Interface';
@@ -26,9 +26,9 @@ export class MyComponent extends Component {
 		return (
 			<div className={appCss.layer4}>
 				<Zoomers />
-				<Eggs />
+				<EggCovers />
 				{interviewCoversContent}
-				<EggInterviews />
+				<EggInterviewIcons />
 				<Slideshow />
 				<Sounds />
 				<Interface />

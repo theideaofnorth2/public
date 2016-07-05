@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Interview from 'tion2/components/common/Interview';
+import InterviewIcon from 'tion2/components/common/InterviewIcon';
 import layer4Css from '../css';
 
 export class MyComponent extends Component {
@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 	render() {
 		const content = this.props.interviews.eggData
 			.map(interview => Object.assign(
-				<Interview
+				<InterviewIcon
 					key={interview._id}
 					interview={interview}
 				/>

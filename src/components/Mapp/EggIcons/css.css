@@ -1,0 +1,18 @@
+.egg {
+	position: relative;
+	z-index: 0;
+	width: 63px;
+	height: 63px;
+	display: none;
+	transition: opacity 200ms linear;
+	opacity: 1;
+	background-size: contain;
+}
+
+.egg.visible {
+	display: block;
+}
+
+.egg.faded {
+	opacity: 0;
+}
