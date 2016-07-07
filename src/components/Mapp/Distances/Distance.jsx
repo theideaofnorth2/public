@@ -49,6 +49,8 @@ export class MyComponent extends Component {
 	render() {
 		const thisClass = classnames(
 			css.distance, {
+				[css.visible]: this.props.map.level === 'main' &&
+					!this.props.map.animating,
 				[css.hover]:
 					this.props.interviews.hoveredDestinationInterviewId === this.props.interview._id,
 			}

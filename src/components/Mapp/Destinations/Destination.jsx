@@ -31,6 +31,7 @@ export class MyComponent extends Component {
 			css[this.props.destination.horizontal],
 			{
 				[css.hover]: this.props.destinations.hoveredDestinationId === this.props.destination._id,
+				[css.visible]: this.props.map.level === 'main',
 			},
 		);
 		return (

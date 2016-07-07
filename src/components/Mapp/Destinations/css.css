@@ -1,4 +1,8 @@
 .destination {
+	display: none;
+}
+.destination.visible {
+	display: block;
 }
 .circle {
 	position: absolute;

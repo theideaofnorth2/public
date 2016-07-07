@@ -54,9 +54,9 @@ export function* watchDestinationInterviewClick() {
 function* fromOriginToMain() {
 	const state = yield select(getState);
 	const origin = state.origins.data.find(o => o._id === state.origins.selectedOriginId);
-	yield put({ type: 'ORIGIN_UNSELECTION' });
 	yield put({ type: 'MAP_CENTER', center: { lat: origin.lat, lng: origin.lng } });
 	yield take('MAP_CENTER_FINISHED');
+	yield put({ type: 'ORIGIN_UNSELECTION' });
 	yield put({ type: 'MAP_ZOOM', direction: 'out', originId: origin._id });
 	yield take('MAP_ZOOM_FINISHED');
 }

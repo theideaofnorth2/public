@@ -1,10 +1,9 @@
 .origin {
 	position: absolute;
-	top: -30px;
-	left: -30px;
-	width: 60px;
-	height: 60px;
-	border-radius: 100px;
+	top: -20px;
+	left: -20px;
+	width: 40px;
+	height: 40px;
 	display: none;
 }
 .origin.visible {
@@ -14,9 +13,9 @@
 .origin svg {
 	max-width: 100%;
 	max-height: 100%;
-	transform: scale(0.3);
+	transform: scale(0.5);
 	transition: transform 150ms linear;
 }
 .origin:hover svg {
-	transform: scale(0.6);
+	transform: scale(0.9);
 }
