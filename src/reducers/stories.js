@@ -3,6 +3,7 @@ const defaultState = {
 		view: 'main',
 		future: false,
 	}],
+	guides: [],
 	open: false,
 	currentIndex: null,
 	nextIndex: null,
@@ -12,6 +13,27 @@ const getPastData = (data) => data.filter(entrie => !entrie.future);
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
+		case 'CONFIG_READY': {
+			const guides = action.data.guides.map(guide => Object.assign({
+				view: guide.view,
+				interviewId: guide.interviewId,
+				originId: guide.originId,
+				eggId: guide.eggId,
+				future: true,
+			}));
+			return {
+				...state,
+				guides,
+			};
+		}
+		case 'HOME_CHOICE': {
+			const data = action.choice === 'interactive' ? state.data : state.guides;
+			return {
+				...state,
+				data,
+				currentIndex: 0,
+			};
+		}
 		case 'ORIGIN_CLICK': {
 			const data = [...getPastData(state.data), {
 				view: 'origin',

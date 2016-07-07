@@ -8,6 +8,7 @@ import Stories from './Stories';
 import Zoomers from './Zoomers';
 import Exit from './Exit';
 import Interface from './Interface';
+import Loader from './Loader';
 import Menu from './Menu';
 import Slideshow from './Slideshow';
 import Home from './Home';
@@ -19,7 +20,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		return (
+		return !this.props.app.configed ? (<Loader />) : (
 			<div className={appCss.layer4}>
 				<Zoomers />
 				<EggCovers />

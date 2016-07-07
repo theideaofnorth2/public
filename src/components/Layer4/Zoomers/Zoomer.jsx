@@ -41,6 +41,7 @@ export class MyComponent extends Component {
 		});
 		this.zoomer.on('ready', () => {
 			this.setState({ mounted: true });
+			this.props.onMount(this.props.origin.key);
 		});
 	}
 	animateZoomer() {

@@ -1,10 +1,16 @@
 const defaultState = {
 	home: true,
 	ready: false,
+	configed: false,
 };
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
+		case 'CONFIG_READY':
+			return {
+				...state,
+				configed: true,
+			};
 		case 'APP_READY':
 			return {
 				...state,
