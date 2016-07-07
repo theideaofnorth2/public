@@ -12,7 +12,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisStyle = {
+		const thisStyle = !this.props.interview.image ? {} : {
 			backgroundImage: `url(${interviewsImagesUri}/${this.props.interview.image})`,
 		};
 		const thisClass = classnames(css.interview, {

@@ -9,11 +9,13 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const interfaceClass = classnames(css.interface, {
-			[css.animating]: this.props.map.animating,
-		});
+		const menuClass = classnames(css.menu);
 		return (
-			<div className={interfaceClass}></div>
+			<div className={menuClass}>
+				<div className={css.about}>About</div>
+				<div className={css.approach}>Approach</div>
+				<div className={css.home}>Home</div>
+			</div>
 		);
 	}
 }

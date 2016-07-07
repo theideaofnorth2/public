@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import Sounds from './Sounds';
 import EggCovers from './EggCovers';
 import EggInterviewIcons from './EggInterviewIcons';
+import EggInterviewCovers from './EggInterviewCovers';
 import Stories from './Stories';
 import Zoomers from './Zoomers';
+import Exit from './Exit';
 import Interface from './Interface';
+import Menu from './Menu';
 import Slideshow from './Slideshow';
+import Home from './Home';
 import appCss from 'tion2/components/App/css';
-import InterviewCover from 'tion2/components/common/InterviewCover';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -16,23 +19,19 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const interviewCoversContent = this.props.interviews.eggData
-			.map(interview => Object.assign(
-				<InterviewCover
-					key={interview._id}
-					interview={interview}
-				/>
-			));
 		return (
 			<div className={appCss.layer4}>
 				<Zoomers />
 				<EggCovers />
-				{interviewCoversContent}
+				<EggInterviewCovers />
 				<EggInterviewIcons />
 				<Slideshow />
 				<Sounds />
-				<Interface />
+				<Exit />
+				<Menu />
 				<Stories />
+				<Home />
+				<Interface />
 			</div>
 		);
 	}

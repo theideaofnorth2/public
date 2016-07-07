@@ -14,7 +14,6 @@ export class MyComponent extends Component {
 	componentDidUpdate() {
 		if (this.props.eggs.selectedEggId === this.props.egg._id &&
 		this.props.map.level === 'origin' && !this.props.map.animating) {
-			console.log('playing');
 			this.refs.video.play();
 		} else {
 			this.refs.video.pause();

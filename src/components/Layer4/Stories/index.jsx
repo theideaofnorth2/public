@@ -26,49 +26,13 @@ export class MyComponent extends Component {
 		}
 	}
 	render() {
-		const content = this.props.stories.data.map((storie, index) => {
-			if (storie.view === 'main') {
-				return (
-					<Storie
-						key={index}
-						index={index}
-						storie={storie}
-						name="Canada"
-					/>
-				);
-			}
-			if (storie.view === 'origin') {
-				const origin = this.props.origins.data.find(o => o._id === storie.originId);
-				return (
-					<Storie
-						key={index}
-						index={index}
-						storie={storie}
-						name={origin.name}
-					/>
-				);
-			}
-			if (storie.view === 'egg') {
-				const egg = this.props.eggs.data.find(e => e._id === storie.eggId);
-				return (
-					<Storie
-						key={index}
-						index={index}
-						storie={storie}
-						name={egg.name}
-					/>
-				);
-			}
-			const interview = this.props.interviews.data.find(o => o._id === storie.interviewId);
-			return (
-				<Storie
-					key={index}
-					index={index}
-					storie={storie}
-					name={interview.name}
-				/>
-			);
-		});
+		const content = this.props.stories.data.map((storie, index) => Object.assign(
+			<Storie
+				key={index}
+				index={index}
+				storie={storie}
+			/>
+		));
 		const thisClass = classnames(css.container, layer4Css.pointable, {
 			[css.open]: this.props.stories.open,
 		});
@@ -92,9 +56,6 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	stories: state.stories,
-	origins: state.origins,
-	eggs: state.eggs,
-	interviews: state.interviews,
 });
 
 export default connect(mapStateToProps)(MyComponent);
