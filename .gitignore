@@ -31,6 +31,8 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
 static/assets*
 static/experiments*
 src/**/*.json
+.vscode*
