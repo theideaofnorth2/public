@@ -43,7 +43,8 @@ export default function reducer(state = defaultState, action = null) {
 			};
 		}
 		case 'HOME_CHOICE': {
-			const data = action.choice === 'interactive' ? state.data : state.guides;
+			const data = action.choice === 'interactive' ? state.data :
+				[].concat(...defaultState.data, ...state.guides);
 			return {
 				...state,
 				data,
