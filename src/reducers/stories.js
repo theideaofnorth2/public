@@ -11,14 +11,30 @@ const defaultState = {
 
 const getPastData = (data) => data.filter(entrie => !entrie.future);
 
+const getFullGuide = (data, guide) => {
+	const interview = data.interviews.find(i => i._id === guide.interviewId);
+	const egg = data.eggs.find(e => e._id === guide.eggId);
+	const interviewId = guide.interviewId;
+	let eggId;
+	if (guide.eggId) eggId = guide.eggId;
+	else if (interview && interview.eggId) eggId = interview.eggId;
+	let originId;
+	if (guide.originId) originId = guide.originId;
+	else if (egg && egg.originId) originId = egg.originId;
+	else if (interview && interview.originId) originId = interview.originId;
+	return {
+		interviewId,
+		eggId,
+		originId,
+	};
+};
+
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
 			const guides = action.data.guides.map(guide => Object.assign({
 				view: guide.view,
-				interviewId: guide.interviewId,
-				originId: guide.originId,
-				eggId: guide.eggId,
+				...getFullGuide(action.data, guide),
 				future: true,
 			}));
 			return {
