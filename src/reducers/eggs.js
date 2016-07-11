@@ -8,12 +8,11 @@ const getEggs = (data) =>
 	data.eggs
 		.map(egg => {
 			const interviews = data.interviews.filter(interview => egg._id === interview.eggId);
-			return interviews.length === 0 ? null : Object.assign({
+			return Object.assign({
 				...egg,
 				interviews,
 			});
-		})
-		.filter(egg => egg !== null);
+		});
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
