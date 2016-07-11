@@ -6,7 +6,7 @@ import css from './css';
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { mounted: false };
+		this.state = {};
 		this.onClick = this.onClick.bind(this);
 	}
 	onClick() {
@@ -39,7 +39,7 @@ export class MyComponent extends Component {
 				name = 'Storie';
 		}
 		const thisClass = classnames(css.storie, {
-			[css.current]: this.props.index === this.props.stories.timelineIndex,
+			[css.future]: this.props.storie.future,
 		});
 		return (
 			<div
@@ -55,7 +55,6 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	origins: state.origins,
-	stories: state.stories,
 	eggs: state.eggs,
 	interviews: state.interviews,
 });

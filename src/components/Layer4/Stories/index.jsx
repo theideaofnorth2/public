@@ -9,46 +9,81 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.toggleStories = this.toggleStories.bind(this);
+		this.state = { diff: 1 };
+		this.onStoriesLengthChange = this.onStoriesLengthChange.bind(this);
+		this.prevClick = this.prevClick.bind(this);
+		this.nextClick = this.nextClick.bind(this);
 	}
-	toggleStories() {
-		this.props.dispatch({ type: 'STORIES_TOGGLE' });
+	componentWillReceiveProps(nextProps) {
+		if (
+			this.props.stories.data.length - this.props.stories.timelineIndex !==
+			nextProps.stories.data.length - nextProps.stories.timelineIndex
+		) {
+			this.setState({ diff: nextProps.stories.data.length - nextProps.stories.timelineIndex });
+		}
+		console.log(nextProps.stories.data.length, nextProps.stories.timelineIndex);
 	}
 	componentDidUpdate(prevProps) {
 		const sLDiff = this.props.stories.data.length - prevProps.stories.data.length;
-		if (sLDiff !== 0) {
-			this.refs.stories.style.transition = 'none';
-			this.refs.stories.style.transform = `translateY(${-30 * sLDiff}px)`;
-			setTimeout(() => {
-				this.refs.stories.style.transition = 'transform 250ms linear';
-				this.refs.stories.style.transform = 'translateY(0)';
-			}, 0);
-		}
+		if (sLDiff !== 0) this.onStoriesLengthChange(sLDiff);
+	}
+	onStoriesLengthChange() {
+		Object.assign(this.refs.stories.style, {
+			transition: 'none',
+			transform: `translateX(${(this.state.diff) * 100}px)`,
+		});
+		setTimeout(() => {
+			Object.assign(this.refs.stories.style, {
+				transition: 'transform 300ms cubic-bezier(0,0,0.32,1)',
+				transform: `translateX(${(this.state.diff - 1) * 100}px)`,
+			});
+		}, 0);
+	}
+	prevClick() {
+		this.setState({ diff: this.state.diff + 4 });
+		console.log(this.state.diff);
+	}
+	nextClick() {
+		this.setState({ diff: this.state.diff - 4 });
+		console.log(this.state.diff);
 	}
 	render() {
-		const content = this.props.stories.data.map((storie, index) => Object.assign(
+		const storiesContent = this.props.stories.data.map((storie, index) => Object.assign(
 			<Storie
 				key={index}
 				index={index}
 				storie={storie}
 			/>
 		));
-		const thisClass = classnames(css.container, layer4Css.pointable, {
-			[css.open]: this.props.stories.open,
-		});
+		const timelineClass = classnames(css.timeline, layer4Css.pointable);
 		const storiesClass = classnames(css.stories);
+		const thisDiff = this.state.diff - 1;
+		const storiesStyle = {
+			transform: `translateX(${thisDiff * 100}px)`,
+		};
 		return (
-			<div className={thisClass}>
+			<div
+				className={timelineClass}
+			>
 				<div
-					ref="stories"
-					className={storiesClass}
+					className={css.timelineContent}
 				>
-					{content}
+					<div
+						ref="stories"
+						className={storiesClass}
+						style={storiesStyle}
+					>
+						{storiesContent}
+					</div>
 				</div>
 				<div
-					className={css.toggle}
-					onClick={this.toggleStories}
-				></div>
+					className={css.prevButton}
+					onClick={this.prevClick}
+				>&lt;</div>
+				<div
+					className={css.nextButton}
+					onClick={this.nextClick}
+				>&gt;</div>
 			</div>
 		);
 	}

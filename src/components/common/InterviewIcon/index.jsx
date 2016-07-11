@@ -18,7 +18,7 @@ export class MyComponent extends Component {
 	}
 	onClick() {
 		return this.props.dispatch({
-			type: 'INTERVIEW_SELECTION_CLICK',
+			type: 'INTERVIEW_CLICK',
 			interviewId: this.props.interview._id,
 			originId: this.props.interview.originId,
 			eggId: this.props.interview.eggId,

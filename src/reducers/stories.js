@@ -5,7 +5,8 @@ const defaultState = {
 	}],
 	guides: [],
 	open: false,
-	currentIndex: null,
+	currentIndex: 0,
+	timelineIndex: 0,
 	nextIndex: null,
 };
 
@@ -49,6 +50,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: 0,
+				timelineIndex: 0,
 			};
 		}
 		case 'ORIGIN_CLICK': {
@@ -61,6 +63,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: data.length - 1,
+				timelineIndex: data.length - 1,
 			};
 		}
 		case 'EGG_CLICK': {
@@ -74,6 +77,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: data.length - 1,
+				timelineIndex: data.length - 1,
 			};
 		}
 		case 'EXIT_CLICK': {
@@ -105,6 +109,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: data.length - 1,
+				timelineIndex: data.length - 1,
 			};
 		}
 		case 'DESTINATION_INTERVIEW_CLICK': {
@@ -119,9 +124,10 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: data.length - 1,
+				timelineIndex: data.length - 1,
 			};
 		}
-		case 'INTERVIEW_SELECTION_CLICK': {
+		case 'INTERVIEW_CLICK': {
 			const lastItem = state.data[state.data.length - 1];
 			if (lastItem.interviewId === action.interviewId) return state;
 			const data = [...getPastData(state.data), {
@@ -135,6 +141,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				currentIndex: data.length - 1,
+				timelineIndex: data.length - 1,
 			};
 		}
 		case 'STORIES_TOGGLE': {
@@ -156,6 +163,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data: [...pastData, ...futureData],
 				nextIndex: action.index,
+				timelineIndex: action.index,
 			};
 		}
 		case 'STORIE_ANIMATION_END': {

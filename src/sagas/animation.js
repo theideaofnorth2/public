@@ -8,7 +8,7 @@ function* onInterviewSelectionClick(arg) {
 }
 
 export function* watchInterviewSelectionClick() {
-	yield* takeEvery(['INTERVIEW_SELECTION_CLICK'], onInterviewSelectionClick);
+	yield* takeEvery(['INTERVIEW_CLICK'], onInterviewSelectionClick);
 }
 
 function* onInterviewUnselectionClick() {

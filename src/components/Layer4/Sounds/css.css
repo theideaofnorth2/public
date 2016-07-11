@@ -3,21 +3,22 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 100px;
+	height: 60px;
 	background: rgba(255, 255, 255, 0.35);
-	display: none;
+	transform: translateY(60px);
+	transition: transform 200ms cubic-bezier(0,0,0.32,1);
 }
 
 .sound.visible {
-	display: block;
+	transform: translateY(0);
 }
 
 .button {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 100px;
-	height: 100px;
+	width: 60px;
+	height: 60px;
 	background: red;
 }
 
@@ -28,15 +29,15 @@
 .seekContainer {
 	position: absolute;
 	bottom: 0;
-	left: 100px;
-	right: 100px;
-	height: 100px;
+	left: 60px;
+	right: 60px;
+	height: 60px;
 }
 .seek {
 	position: absolute;
 	left: 0;
 	width: 0;
-	height: 100px;
+	height: 60px;
 	background: orange;
 }
 
@@ -44,7 +45,7 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	width: 100px;
-	height: 100px;
+	width: 60px;
+	height: 60px;
 	background: blue;
 }
