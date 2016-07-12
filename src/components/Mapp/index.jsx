@@ -109,11 +109,11 @@ export class MyComponent extends Component {
 			[css.zooming]: this.props.map.zooming,
 		});
 		return (
-			<div className={appCss.map}>
+			<div className={appCss.mapp}>
 				<div className={css.geoPositionedContent}>
 					<Distances gmap={this.gmap} />
-					<Origins gmap={this.gmap} />
 					<Destinations gmap={this.gmap} />
+					<Origins gmap={this.gmap} />
 					<OriginInterviewIcons gmap={this.gmap} />
 					<EggIcons gmap={this.gmap} />
 				</div>

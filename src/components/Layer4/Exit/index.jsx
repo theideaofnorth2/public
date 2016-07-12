@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import exit from 'tion2/components/common/exit.svg';
+import exit from './exit.svg';
 import css from './css';
 
 export class MyComponent extends Component {

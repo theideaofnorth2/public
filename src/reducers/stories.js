@@ -4,10 +4,8 @@ const defaultState = {
 		future: false,
 	}],
 	guides: [],
-	open: false,
-	currentIndex: 0,
 	timelineIndex: 0,
-	nextIndex: null,
+	scrollingIndex: 0,
 };
 
 const getPastData = (data) => data.filter(entrie => !entrie.future);
@@ -49,8 +47,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data,
-				currentIndex: 0,
-				timelineIndex: 0,
+				timelineIndex: data.length - 1,
 			};
 		}
 		case 'ORIGIN_CLICK': {
@@ -62,8 +59,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data,
-				currentIndex: data.length - 1,
-				timelineIndex: data.length - 1,
+				timelineIndex: 0,
 			};
 		}
 		case 'EGG_CLICK': {
@@ -76,8 +72,35 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data,
-				currentIndex: data.length - 1,
-				timelineIndex: data.length - 1,
+				timelineIndex: 0,
+			};
+		}
+		case 'DESTINATION_INTERVIEW_CLICK': {
+			const data = [...getPastData(state.data), {
+				view: 'interview',
+				interviewId: action.interviewId,
+				originId: action.originId,
+				eggId: action.eggId,
+				future: false,
+			}];
+			return {
+				...state,
+				data,
+				timelineIndex: 0,
+			};
+		}
+		case 'INTERVIEW_CLICK': {
+			const data = [...getPastData(state.data), {
+				view: 'interview',
+				interviewId: action.interviewId,
+				originId: action.originId,
+				eggId: action.eggId,
+				future: false,
+			}];
+			return {
+				...state,
+				data,
+				timelineIndex: 0,
 			};
 		}
 		case 'EXIT_CLICK': {
@@ -108,49 +131,10 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data,
-				currentIndex: data.length - 1,
-				timelineIndex: data.length - 1,
+				timelineIndex: 0,
 			};
 		}
-		case 'DESTINATION_INTERVIEW_CLICK': {
-			const data = [...getPastData(state.data), {
-				view: 'interview',
-				interviewId: action.interviewId,
-				originId: action.originId,
-				eggId: action.eggId,
-				future: false,
-			}];
-			return {
-				...state,
-				data,
-				currentIndex: data.length - 1,
-				timelineIndex: data.length - 1,
-			};
-		}
-		case 'INTERVIEW_CLICK': {
-			const lastItem = state.data[state.data.length - 1];
-			if (lastItem.interviewId === action.interviewId) return state;
-			const data = [...getPastData(state.data), {
-				view: 'interview',
-				interviewId: action.interviewId,
-				originId: action.originId,
-				eggId: action.eggId,
-				future: false,
-			}];
-			return {
-				...state,
-				data,
-				currentIndex: data.length - 1,
-				timelineIndex: data.length - 1,
-			};
-		}
-		case 'STORIES_TOGGLE': {
-			return {
-				...state,
-				open: !state.open,
-			};
-		}
-		case 'STORIE_CLICK': {
+		case 'STORIE_SELECTION': {
 			const pastData = state.data.slice(0, action.index + 1)
 				.map(storie => Object.assign({}, storie, {
 					future: false,
@@ -162,15 +146,20 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data: [...pastData, ...futureData],
-				nextIndex: action.index,
-				timelineIndex: action.index,
+				timelineIndex: futureData.length,
+				scrollingIndex: 0,
 			};
 		}
-		case 'STORIE_ANIMATION_END': {
+		case 'STORIES_PREVIOUS_CLICK': {
 			return {
 				...state,
-				currentIndex: state.nextIndex,
-				nextIndex: null,
+				scrollingIndex: Math.max(-state.data.length + 3, state.scrollingIndex - 4),
+			};
+		}
+		case 'STORIES_NEXT_CLICK': {
+			return {
+				...state,
+				scrollingIndex: Math.min(state.data.length + 1, state.scrollingIndex + 4),
 			};
 		}
 		default:

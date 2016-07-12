@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
-import home from './home.svg';
+import origin from './origin.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -41,7 +41,7 @@ export class MyComponent extends Component {
 					onMouseEnter={this.onMouseEnter}
 					onMouseLeave={this.onMouseLeave}
 					className={originClass}
-					dangerouslySetInnerHTML={{ __html: home }}
+					dangerouslySetInnerHTML={{ __html: origin }}
 				></div>
 			</AlignedOverlay>
 		);

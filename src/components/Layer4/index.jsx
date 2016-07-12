@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import Sounds from './Sounds';
 import EggCovers from './EggCovers';
 import EggInterviewIcons from './EggInterviewIcons';
@@ -13,6 +14,7 @@ import Menu from './Menu';
 import Slideshow from './Slideshow';
 import Home from './Home';
 import appCss from 'tion2/components/App/css';
+import css from './css';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -20,8 +22,9 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
+		const thisClass = classnames(appCss.layer4, css.layer4);
 		return !this.props.app.configed ? (<Loader />) : (
-			<div className={appCss.layer4}>
+			<div className={thisClass}>
 				<Zoomers />
 				<EggCovers />
 				<EggInterviewCovers />
@@ -29,6 +32,8 @@ export class MyComponent extends Component {
 				<Slideshow />
 				<Sounds />
 				<Exit />
+				<div className={css.topBar} />
+				<div className={css.logo}>The Idea Of North 2.0</div>
 				<Menu />
 				<Stories />
 				<Home />

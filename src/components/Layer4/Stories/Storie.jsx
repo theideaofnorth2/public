@@ -39,7 +39,7 @@ export class MyComponent extends Component {
 				name = 'Storie';
 		}
 		const thisClass = classnames(css.storie, {
-			[css.current]: this.props.index === this.props.stories.timelineIndex,
+			[css.white]: !this.props.storie.future,
 		});
 		return (
 			<div

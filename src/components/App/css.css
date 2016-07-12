@@ -8,7 +8,7 @@
 }
 .layer0,
 .layer2,
-.map,
+.mapp,
 .layer4 {
 	position: absolute;
 	top: 0;
@@ -21,9 +21,4 @@
 }
 .layer2 {
 	z-index: 3;
-}
-.map {
-}
-.layer4 {
-	pointer-events: none;
 }

@@ -3,16 +3,25 @@
 	background: rgba(0,0,0,0.7);
 	padding: 8px 12px;
 	background-clip: padding-box;
-	transition: all 100ms linear;
+	transition: all 120ms linear;
 }
 
 .interview:hover {
-	padding: 8px 0 8px 24px;
+	padding: 8px 0 8px 26px;
 }
-
-.interview:hover::before {
-	content: '♫';
+.circledArrow {
 	position: absolute;
-	top: 8px;
+	top: 9px;
 	left: 12px;
+	width: 10px;
+	height: 10px;
+	opacity: 0;
+}
+.circledArrow svg {
+	max-width: 100%;
+	max-height: 100%;
+}
+.interview:hover .circledArrow {
+	transition: opacity 120ms linear;
+	opacity: 1;
 }

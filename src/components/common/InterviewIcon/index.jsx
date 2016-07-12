@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import interview from 'tion2/components/common/interview.svg';
+import interview from './interview.svg';
 import css from './css';
 
 export class MyComponent extends Component {

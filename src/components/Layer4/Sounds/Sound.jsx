@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import play from './play.svg';
+import pause from './pause.svg';
 import { Howl } from 'howler';
 import { soundsUri } from 'tion2/utils/tools';
 import css from './css';
@@ -85,7 +87,16 @@ export class MyComponent extends Component {
 				<div
 					className={buttonClass}
 					onClick={this.togglePlay}
-				></div>
+				>
+					<div
+						className={css.play}
+						dangerouslySetInnerHTML={{ __html: play }}
+					></div>
+					<div
+						className={css.pause}
+						dangerouslySetInnerHTML={{ __html: pause }}
+					></div>
+				</div>
 				<div
 					ref="seekContainer"
 					className={css.seekContainer}

@@ -19,11 +19,15 @@
 	left: 0;
 	width: 60px;
 	height: 60px;
-	background: red;
 }
-
-.button.playing {
-	background: green;
+.button.playing .play {
+	display: none;
+}
+.button .pause {
+	display: none;
+}
+.button.playing .pause {
+	display: block;
 }
 
 .seekContainer {
@@ -38,7 +42,7 @@
 	left: 0;
 	width: 0;
 	height: 60px;
-	background: orange;
+	background: #000;
 }
 
 .options {

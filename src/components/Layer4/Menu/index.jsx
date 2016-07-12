@@ -12,9 +12,9 @@ export class MyComponent extends Component {
 		const menuClass = classnames(css.menu);
 		return (
 			<div className={menuClass}>
-				<div className={css.home}>Home</div>
-				<div className={css.approach}>Approach</div>
 				<div className={css.about}>About</div>
+				<div className={css.approach}>Approach</div>
+				<div className={css.home}>Home</div>
 			</div>
 		);
 	}

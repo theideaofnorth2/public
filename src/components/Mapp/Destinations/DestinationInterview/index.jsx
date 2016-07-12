@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import circledArrow from './circled-arrow.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -42,6 +43,10 @@ export class MyComponent extends Component {
 				onMouseEnter={this.onMouseEnter}
 				onMouseLeave={this.onMouseLeave}
 			>
+				<div
+					className={css.circledArrow}
+					dangerouslySetInnerHTML={{ __html: circledArrow }}
+				/>
 				{this.props.interview.name}
 			</div>
 		);

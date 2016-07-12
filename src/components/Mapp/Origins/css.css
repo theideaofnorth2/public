@@ -11,11 +11,14 @@
 }
 
 .origin svg {
+	position: relative;
+	bottom: 19px;
 	max-width: 100%;
 	max-height: 100%;
-	transform: scale(0.5);
+	transform: scale(0.6);
 	transition: transform 150ms linear;
+	transform-origin: 50% 100%;
 }
 .origin:hover svg {
-	transform: scale(0.9);
+	transform: scale(1);
 }

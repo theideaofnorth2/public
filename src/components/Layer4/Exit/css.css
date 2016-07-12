@@ -1,7 +1,7 @@
 .exit {
 	pointer-events: all;
 	position: absolute;
-	top: 80px;
+	top: 100px;
 	right: 20px;
 	color: white;
 	display: none;

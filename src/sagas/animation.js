@@ -84,10 +84,12 @@ function* changeOriginAndEggIfNecessary(currentStorie, nextStorie) {
 	}
 }
 
-function* onStorieClick() {
+function* onStorieClick(arg) {
 	const state = yield select(getState);
-	const currentStorie = state.stories.data[state.stories.currentIndex];
-	const nextStorie = state.stories.data[state.stories.nextIndex];
+	const lastPastStorieIndex = state.stories.data.filter(s => !s.future).length - 1;
+	const currentStorie = state.stories.data[lastPastStorieIndex];
+	const nextStorie = state.stories.data[arg.index];
+	yield put(Object.assign({}, arg, { type: 'STORIE_SELECTION' }));
 	switch (`${currentStorie.view}_${nextStorie.view}`) {
 		case 'origin_main': {
 			yield fromOriginToMain();
@@ -161,7 +163,6 @@ function* onStorieClick() {
 		}
 		default: break;
 	}
-	yield put({ type: 'STORIE_ANIMATION_END' });
 }
 
 export function* watchStorieClick() {
