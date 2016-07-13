@@ -33,7 +33,6 @@ export class MyComponent extends Component {
 				<Sounds />
 				<Exit />
 				<div className={css.topBar} />
-				<div className={css.logo}>The Idea Of North 2.0</div>
 				<Menu />
 				<Stories />
 				<Home />

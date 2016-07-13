@@ -39,7 +39,7 @@ export class MyComponent extends Component {
 				name = 'Storie';
 		}
 		const thisClass = classnames(css.storie, {
-			[css.white]: !this.props.storie.future,
+			[css.active]: !this.props.storie.future,
 		});
 		return (
 			<div

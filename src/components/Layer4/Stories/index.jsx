@@ -21,14 +21,14 @@ export class MyComponent extends Component {
 		Object.assign(this.refs.stories.style, {
 			transition: 'none',
 			transform: `translateX(${
-				(this.props.stories.timelineIndex + this.props.stories.scrollingIndex + 1) * 100
+				(this.props.stories.positionIndex + 1) * 100
 			}px)`,
 		});
 		setTimeout(() => {
 			Object.assign(this.refs.stories.style, {
 				transition: 'transform 300ms cubic-bezier(0,0,0.32,1)',
 				transform: `translateX(${
-					(this.props.stories.timelineIndex + this.props.stories.scrollingIndex) * 100
+					(this.props.stories.positionIndex) * 100
 				}px)`,
 			});
 		}, 0);
@@ -49,9 +49,10 @@ export class MyComponent extends Component {
 		));
 		const timelineClass = classnames(css.timeline, layer4Css.pointable);
 		const storiesStyle = {
-			transform: `translateX(${
-				(this.props.stories.timelineIndex - this.props.stories.scrollingIndex) * 100
-			}px)`,
+			transform: `translateX(${this.props.stories.positionIndex * 100}px)`,
+			// transform: `translateX(${
+			// 	(this.props.stories.timelineIndex - this.props.stories.scrollingIndex) * 100
+			// }px)`,
 		};
 		const lineStyle = {
 			transform: `translateX(${this.props.stories.timelineIndex * -100}px)`,

@@ -5,6 +5,7 @@ const defaultState = {
 	}],
 	guides: [],
 	timelineIndex: 0,
+	positionIndex: 0,
 	scrollingIndex: 0,
 };
 
@@ -48,6 +49,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: data.length - 1,
+				positionIndex: data.length - 1,
 			};
 		}
 		case 'ORIGIN_CLICK': {
@@ -60,6 +62,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: 0,
+				positionIndex: 0,
 			};
 		}
 		case 'EGG_CLICK': {
@@ -73,6 +76,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: 0,
+				positionIndex: 0,
 			};
 		}
 		case 'DESTINATION_INTERVIEW_CLICK': {
@@ -87,6 +91,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: 0,
+				positionIndex: 0,
 			};
 		}
 		case 'INTERVIEW_CLICK': {
@@ -101,6 +106,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: 0,
+				positionIndex: 0,
 			};
 		}
 		case 'EXIT_CLICK': {
@@ -132,6 +138,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data,
 				timelineIndex: 0,
+				positionIndex: 0,
 			};
 		}
 		case 'STORIE_SELECTION': {
@@ -147,19 +154,19 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				data: [...pastData, ...futureData],
 				timelineIndex: futureData.length,
-				scrollingIndex: 0,
+				positionIndex: futureData.length,
 			};
 		}
 		case 'STORIES_PREVIOUS_CLICK': {
 			return {
 				...state,
-				scrollingIndex: Math.max(-state.data.length + 3, state.scrollingIndex - 4),
+				positionIndex: Math.min(state.data.length + 1, state.positionIndex + 4),
 			};
 		}
 		case 'STORIES_NEXT_CLICK': {
 			return {
 				...state,
-				scrollingIndex: Math.min(state.data.length + 1, state.scrollingIndex + 4),
+				positionIndex: Math.max(state.positionIndex - 4, -2),
 			};
 		}
 		default:
