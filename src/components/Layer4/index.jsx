@@ -9,6 +9,8 @@ import Stories from './Stories';
 import Zoomers from './Zoomers';
 import Exit from './Exit';
 import Interface from './Interface';
+import Language from './Language';
+import Exploration from './Exploration';
 import Loader from './Loader';
 import Menu from './Menu';
 import Slideshow from './Slideshow';
@@ -36,6 +38,8 @@ export class MyComponent extends Component {
 				<Menu />
 				<Stories />
 				<Home />
+				<Language />
+				<Exploration />
 				<Interface />
 			</div>
 		);

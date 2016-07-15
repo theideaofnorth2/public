@@ -2,6 +2,8 @@ const defaultState = {
 	home: true,
 	ready: false,
 	configed: false,
+	language: 'english',
+	exploration: 'interactive',
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -10,6 +12,17 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				configed: true,
+			};
+		case 'LANGUAGE_SELECTION':
+			return {
+				...state,
+				language: action.language,
+			};
+		case 'EXPLORATION_SELECTION':
+			return {
+				...state,
+				exploration: action.exploration,
+				home: false,
 			};
 		case 'APP_READY':
 			return {
@@ -20,11 +33,6 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				home: true,
-			};
-		case 'HOME_CHOICE':
-			return {
-				...state,
-				home: false,
 			};
 		default:
 			return state;

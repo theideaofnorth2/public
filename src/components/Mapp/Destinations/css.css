@@ -6,16 +6,16 @@
 }
 .circle {
 	position: absolute;
-	width: 60px;
-	height: 60px;
+	width: 40px;
+	height: 40px;
 	border-radius: 100px;
 	display: inline-block;
 }
 .circle:before {
 	content: '';
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: 0px;
+	left: 0px;
 	width: 40px;
 	height: 40px;
 	border-radius: 100px;
@@ -31,25 +31,25 @@
 }
 
 .bottom .circle {
-	top: -30px;
+	top: -20px;
 }
 .top .circle {
-	bottom: -30px;
+	bottom: -20px;
 }
 .middle .circle {
 	top: 50%;
-	margin-top: -30px;
+	margin-top: -20px;
 }
 
 .right .circle {
-	left: -30px;
+	left: -20px;
 }
 .left .circle {
-	right: -30px;
+	right: -20px;
 }
 .center .circle {
 	left: 50%;
-	margin-left: -30px;
+	margin-left: -20px;
 }
 
 .content {

@@ -169,6 +169,13 @@ function* onStorieClick(arg) {
 export function* watchStorieClick() {
 	yield* takeEvery(['STORIE_CLICK'], onStorieClick);
 }
+
+function* onExplorationClick(arg) {
+	const state = yield select(getState);
+	const lastPastStorieIndex = state.stories.data.filter(s => !s.future).length - 1;
+	yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
+}
+
 export function* watchExplorationClick() {
-	yield* takeEvery(['EXPLORATION_SELECTION'], onStorieClick.bind(null, { index: 0 }));
+	yield* takeEvery(['EXPLORATION_CLICK'], onExplorationClick);
 }
