@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Storie from './Storie';
 import next from './next.svg';
 import css from './css';
-import layer4Css from '../css';
+import layer4Css from '../../css';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -47,12 +47,12 @@ export class MyComponent extends Component {
 				storie={storie}
 			/>
 		));
-		const timelineClass = classnames(css.timeline, layer4Css.pointable);
+		const timelineClass = classnames(css.timeline, layer4Css.pointable, {
+			[css.home]: this.props.app.home,
+			[css.interactive]: this.props.exploration.mode === 'interactive',
+		});
 		const storiesStyle = {
 			transform: `translateX(${this.props.stories.positionIndex * 100}px)`,
-			// transform: `translateX(${
-			// 	(this.props.stories.timelineIndex - this.props.stories.scrollingIndex) * 100
-			// }px)`,
 		};
 		const lineStyle = {
 			transform: `translateX(${this.props.stories.timelineIndex * -100}px)`,
@@ -88,6 +88,8 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
+	app: state.app,
+	exploration: state.exploration,
 	stories: state.stories,
 });
 

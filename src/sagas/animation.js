@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga';
+import { takeEvery, delay } from 'redux-saga';
 import { take, put, select } from 'redux-saga/effects';
 
 export const getState = state => state;
@@ -86,11 +86,11 @@ function* changeOriginAndEggIfNecessary(currentStorie, nextStorie) {
 
 function* onStorieClick(arg) {
 	const state = yield select(getState);
-	const lastPastStorieIndex = state.stories.data.filter(s => !s.future).length - 1;
-	const currentStorie = state.stories.data[lastPastStorieIndex];
+	const currentStorieIndex = state.stories.data.filter(s => !s.future).length - 1;
+	const currentStorie = state.stories.data[currentStorieIndex];
 	const nextStorie = state.stories.data[arg.index];
+	if (arg.mode) yield put({ type: 'EXPLORATION_SELECTION', mode: 'tour' });
 	yield put(Object.assign({}, arg, { type: 'STORIE_SELECTION' }));
-	console.log(currentStorie, nextStorie);
 	switch (`${currentStorie.view}_${nextStorie.view}`) {
 		case 'origin_main': {
 			yield fromOriginToMain();
@@ -169,6 +169,32 @@ function* onStorieClick(arg) {
 export function* watchStorieClick() {
 	yield* takeEvery(['STORIE_CLICK'], onStorieClick);
 }
+
+function* onExplorationClick(arg) {
+	const state = yield select(getState);
+	if (state.app.home) {
+		yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
+		yield put({ type: 'EXPLORATION_ANIMATION_NON_DESCRIPTIVE' });
+		yield delay(400);
+		yield put({ type: 'EXPLORATION_ANIMATION_NON_SPLIT' });
+		yield delay(1000);
+		yield put({ type: 'EXPLORATION_ANIMATION_NON_OPEN' });
+		yield delay(1000);
+		yield put({ type: 'EXPLORATION_ANIMATION_NON_CENTERED' });
+		yield delay(1000);
+		yield put({ type: 'EXPLORATION_ANIMATION_FINISHED' });
+	} else {
+		const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
+		if (window.confirm(message)) {
+			if (arg.mode === 'tour') {
+				yield onStorieClick.call(null, { index: 0, mode: 'tour' });
+			} else {
+				yield put({ type: 'EXPLORATION_SELECTION', mode: 'interactive' });
+			}
+		}
+	}
+}
+
 export function* watchExplorationClick() {
-	yield* takeEvery(['EXPLORATION_SELECTION'], onStorieClick.bind(null, { index: 0 }));
+	yield* takeEvery(['EXPLORATION_CLICK'], onExplorationClick);
 }

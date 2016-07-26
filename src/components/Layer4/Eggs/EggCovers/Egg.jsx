@@ -25,7 +25,7 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.egg, {
 			[css.visible]: isVisible,
 		});
-		const videoUri = `${eggsVideosUri}/${this.props.egg.video}`;
+		const videoUri = !this.props.egg.video ? '' : `${eggsVideosUri}/${this.props.egg.video}`;
 		return (
 			<div
 				ref="egg"

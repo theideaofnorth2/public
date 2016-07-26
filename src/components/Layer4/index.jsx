@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import TopBar from './Bar/TopBar';
+import Menu from './Bar/Menu';
+import Language from './Bar/Language';
+import Exploration from './Bar/Exploration';
+import Timeline from './Bar/Timeline';
+import EggCovers from './Eggs/EggCovers';
+import EggInterviewIcons from './Eggs/EggInterviewIcons';
+import EggInterviewCovers from './Eggs/EggInterviewCovers';
 import Sounds from './Sounds';
-import EggCovers from './EggCovers';
-import EggInterviewIcons from './EggInterviewIcons';
-import EggInterviewCovers from './EggInterviewCovers';
-import Stories from './Stories';
 import Zoomers from './Zoomers';
 import Exit from './Exit';
 import Interface from './Interface';
-import Language from './Language';
-import Exploration from './Exploration';
 import Loader from './Loader';
-import Menu from './Menu';
 import Slideshow from './Slideshow';
-import Home from './Home';
 import appCss from 'tion2/components/App/css';
 import css from './css';
 
@@ -34,10 +34,9 @@ export class MyComponent extends Component {
 				<Slideshow />
 				<Sounds />
 				<Exit />
-				<div className={css.topBar} />
+				<TopBar />
 				<Menu />
-				<Stories />
-				<Home />
+				<Timeline />
 				<Language />
 				<Exploration />
 				<Interface />

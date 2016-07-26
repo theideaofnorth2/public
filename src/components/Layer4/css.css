@@ -4,9 +4,3 @@
 .layer4 {
 	pointer-events: none;
 }
-.topBar {
-	position: absolute;
-	width: 100%;
-	height: 80px;
-	background: black;
-}

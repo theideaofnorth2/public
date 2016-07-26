@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
-import layer4Css from '../css';
-import css from './css';
+import Egg from './Egg';
+import layer4Css from '../../css';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -10,17 +9,22 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(layer4Css.pointable, css.home, {
-			[css.visible]: this.props.app.home,
-		});
+		const content = this.props.eggs.data.map(egg => Object.assign(
+			<Egg
+				key={egg._id}
+				egg={egg}
+			/>
+		));
 		return (
-			<div className={thisClass}></div>
+			<div className={layer4Css.pointable}>
+				{content}
+			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => Object.assign({
-	app: state.app,
+	eggs: state.eggs,
 });
 
 export default connect(mapStateToProps)(MyComponent);

@@ -8,6 +8,6 @@
 	display: none;
 }
 
-.interface.animating {
+.interface.displayed {
 	display: block;
 }

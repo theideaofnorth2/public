@@ -9,13 +9,11 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const menuClass = classnames(css.menu);
+		const thisClass = classnames(css.topBar, {
+			[css.home]: this.props.app.home,
+		});
 		return (
-			<div className={menuClass}>
-				<div className={css.home}>Home</div>
-				<div className={css.approach}>Approach</div>
-				<div className={css.about}>About</div>
-			</div>
+			<div className={thisClass}></div>
 		);
 	}
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InterviewIcon from 'tion2/components/common/InterviewIcon';
-import layer4Css from '../css';
+import layer4Css from '../../css';
 
 export class MyComponent extends Component {
 	constructor(props) {

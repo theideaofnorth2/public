@@ -6,7 +6,6 @@ const defaultState = {
 	guides: [],
 	timelineIndex: 0,
 	positionIndex: 0,
-	scrollingIndex: 0,
 };
 
 const getPastData = (data) => data.filter(entrie => !entrie.future);
@@ -43,13 +42,13 @@ export default function reducer(state = defaultState, action = null) {
 			};
 		}
 		case 'EXPLORATION_SELECTION': {
-			const data = action.exploration === 'interactive' ? state.data :
+			const data = action.mode === 'interactive' ? getPastData(state.data) :
 				[].concat(...defaultState.data, ...state.guides);
 			return {
 				...state,
 				data,
-				timelineIndex: data.length - 1,
-				positionIndex: data.length - 1,
+				timelineIndex: action.mode === 'interactive' ? 0 : data.length - 1,
+				positionIndex: action.mode === 'interactive' ? 0 : data.length - 1,
 			};
 		}
 		case 'ORIGIN_CLICK': {

@@ -12,20 +12,23 @@ export class MyComponent extends Component {
 		this.onInteractiveClick = this.onInteractiveClick.bind(this);
 	}
 	onTourClick() {
-		this.props.dispatch({ type: 'EXPLORATION_SELECTION', exploration: 'tour' });
+		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'tour' });
 	}
 	onInteractiveClick() {
-		this.props.dispatch({ type: 'EXPLORATION_SELECTION', exploration: 'interactive' });
+		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'interactive' });
 	}
 	render() {
 		const explorationClass = classnames(dropdownCss.dropdown, css.exploration, {
-			[css.home]: this.props.app.home,
+			[css.centered]: this.props.exploration.centered,
+			[css.open]: this.props.exploration.open,
+			[css.split]: this.props.exploration.split,
+			[css.descriptive]: this.props.exploration.descriptive,
 		});
 		const tourClass = classnames(css.tour, {
-			[dropdownCss.selected]: this.props.app.exploration === 'tour',
+			[dropdownCss.selected]: this.props.exploration.mode === 'tour',
 		});
 		const interactiveClass = classnames(css.interactive, {
-			[dropdownCss.selected]: this.props.app.exploration === 'interactive',
+			[dropdownCss.selected]: this.props.exploration.mode === 'interactive',
 		});
 		return (
 			<div className={explorationClass}>
