@@ -6,6 +6,7 @@ import {
 	watchInterviewUnselectionClick,
 	watchExitClick,
 	watchStorieClick,
+	watchTourerClick,
 	watchExplorationClick,
 } from './animation';
 import { watchApp } from './app';
@@ -21,6 +22,7 @@ export default function *rootSaga() {
 		watchEggClick(),
 		watchExitClick(),
 		watchStorieClick(),
+		watchTourerClick(),
 		watchExplorationClick(),
 		loadConfig(),
 	];

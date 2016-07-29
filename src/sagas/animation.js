@@ -170,6 +170,18 @@ export function* watchStorieClick() {
 	yield* takeEvery(['STORIE_CLICK'], onStorieClick);
 }
 
+function* onTourerClick(arg) {
+	const state = yield select(getState);
+	const indexDiff = arg.direction === 'previous' ? -1 : 1;
+	const currentIndex = state.stories.data.filter(s => !s.future).length - 1;
+	const nextIndex = Math.min(state.stories.data.length - 1, Math.max(0, currentIndex + indexDiff));
+	yield onStorieClick.call(null, { index: nextIndex });
+}
+
+export function* watchTourerClick() {
+	yield* takeEvery(['TOURER_CLICK'], onTourerClick);
+}
+
 function* onExplorationClick(arg) {
 	const state = yield select(getState);
 	if (state.app.home) {

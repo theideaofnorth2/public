@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -9,7 +10,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const menuClass = classnames(css.menu, {
+		const menuClass = classnames(utilsCss.pointable, css.menu, {
 			[css.hidden]: this.props.app.home,
 		});
 		return (

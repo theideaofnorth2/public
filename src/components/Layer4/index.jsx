@@ -14,9 +14,9 @@ import Zoomers from './Zoomers';
 import Exit from './Exit';
 import Interface from './Interface';
 import Loader from './Loader';
+import Tourer from './Tourer';
 import Slideshow from './Slideshow';
 import appCss from 'tion2/components/App/css';
-import css from './css';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -24,7 +24,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(appCss.layer4, css.layer4);
+		const thisClass = classnames(appCss.layer4);
 		return !this.props.app.configed ? (<Loader />) : (
 			<div className={thisClass}>
 				<Zoomers />
@@ -32,6 +32,7 @@ export class MyComponent extends Component {
 				<EggInterviewCovers />
 				<EggInterviewIcons />
 				<Slideshow />
+				<Tourer />
 				<Sounds />
 				<Exit />
 				<TopBar />

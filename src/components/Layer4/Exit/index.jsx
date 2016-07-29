@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import exit from './exit.svg';
+import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -19,8 +20,9 @@ export class MyComponent extends Component {
 		});
 	}
 	render() {
-		const exitClass = classnames(css.exit, {
-			[css.visible]: this.props.origins.selectedOriginId,
+		const exitClass = classnames(utilsCss.pointable, css.exit, {
+			[css.visible]: this.props.origins.selectedOriginId &&
+				this.props.exploration.mode === 'interactive',
 		});
 		return (
 			<div

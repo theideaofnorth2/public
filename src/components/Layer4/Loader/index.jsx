@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
+import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -8,8 +10,9 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
+		const thisClass = classnames(utilsCss.pointable, css.loader);
 		return (
-			<div className={css.loader}>
+			<div className={thisClass}>
 				<div className={css.csLoader}>
 					<div className={css.csLoaderInner}>
 						<label>	●</label>

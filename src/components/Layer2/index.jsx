@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getGmContainer } from 'tion2/components/Mapp/utils';
 import OriginInterviewCovers from './OriginInterviewCovers';
+import classnames from 'classnames';
 import appCss from 'tion2/components/App/css';
 
 export class MyComponent extends Component {
@@ -16,10 +17,11 @@ export class MyComponent extends Component {
 		}
 	}
 	render() {
+		const thisClass = classnames(appCss.layer2);
 		return !this.props.map.ready ? null : (
 			<div
 				ref="layer2"
-				className={appCss.layer2}
+				className={thisClass}
 			>
 				<OriginInterviewCovers />
 			</div>

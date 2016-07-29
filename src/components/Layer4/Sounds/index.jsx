@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Sound from './Sound';
-import layer4Css from '../css';
+import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -17,7 +17,7 @@ export class MyComponent extends Component {
 			/>
 		));
 		return (
-			<div className={layer4Css.pointable}>
+			<div className={utilsCss.pointable}>
 				{content}
 			</div>
 		);

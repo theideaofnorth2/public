@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Storie from './Storie';
 import next from './next.svg';
 import css from './css';
-import layer4Css from '../../css';
+import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -47,8 +47,9 @@ export class MyComponent extends Component {
 				storie={storie}
 			/>
 		));
-		const timelineClass = classnames(css.timeline, layer4Css.pointable, {
+		const timelineClass = classnames(css.timeline, {
 			[css.home]: this.props.app.home,
+			[utilsCss.pointable]: this.props.exploration.mode === 'interactive',
 			[css.interactive]: this.props.exploration.mode === 'interactive',
 		});
 		const storiesStyle = {

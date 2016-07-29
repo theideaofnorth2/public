@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { SuperPromise } from 'tion2/utils/tools';
 import Zoomer from './Zoomer';
 import classnames from 'classnames';
-import layer4Css from '../css';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -34,7 +33,7 @@ export class MyComponent extends Component {
 				onMount={this.zoomerMount}
 			/>
 		));
-		const thisClass = classnames(css.zoomers, layer4Css.pointable);
+		const thisClass = classnames(css.zoomers);
 		return (
 			<div className={thisClass}>
 				{content}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import dropdownCss from 'tion2/components/common/dropdown.css';
+import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -18,7 +19,7 @@ export class MyComponent extends Component {
 		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'interactive' });
 	}
 	render() {
-		const explorationClass = classnames(dropdownCss.dropdown, css.exploration, {
+		const explorationClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.exploration, {
 			[css.centered]: this.props.exploration.centered,
 			[css.open]: this.props.exploration.open,
 			[css.split]: this.props.exploration.split,
