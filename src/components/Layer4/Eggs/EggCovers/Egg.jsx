@@ -34,7 +34,6 @@ export class MyComponent extends Component {
 				<video
 					ref="video"
 					mute
-					poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
 					id="bgvid"
 					loop
 				>

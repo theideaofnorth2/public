@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import TopBar from './Bar/TopBar';
-import Menu from './Bar/Menu';
-import Language from './Bar/Language';
-import Exploration from './Bar/Exploration';
-import Timeline from './Bar/Timeline';
+import Bar from './Bar';
 import EggCovers from './Eggs/EggCovers';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
 import EggInterviewCovers from './Eggs/EggInterviewCovers';
 import Sounds from './Sounds';
 import Zoomers from './Zoomers';
-import Exit from './Exit';
 import Interface from './Interface';
 import Loader from './Loader';
 import Tourer from './Tourer';
@@ -34,12 +29,7 @@ export class MyComponent extends Component {
 				<Slideshow />
 				<Tourer />
 				<Sounds />
-				<Exit />
-				<TopBar />
-				<Menu />
-				<Timeline />
-				<Language />
-				<Exploration />
+				<Bar />
 				<Interface />
 			</div>
 		);

@@ -11,6 +11,22 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
+		this.onMouseMove = this.onMouseMove.bind(this);
+		this.mouseMoved = this.mouseMoved.bind(this);
+		this.mouseStopped = this.mouseStopped.bind(this);
+	}
+	onMouseMove() {
+		this.mouseMoved();
+		clearTimeout(this.timer);
+		this.timer = setTimeout(this.mouseStopped, 5000);
+	}
+	mouseMoved() {
+		if (!this.props.app.mouseMoving) {
+			this.props.dispatch({ type: 'MOUSE_MOVE' });
+		}
+	}
+	mouseStopped() {
+		this.props.dispatch({ type: 'MOUSE_STOP' });
 	}
 	render() {
 		const content = isCapture ? (
@@ -18,7 +34,10 @@ export class MyComponent extends Component {
 				<Mapp capture />
 			</div>
 		) : (
-			<div className={css.app}>
+			<div
+				className={css.app}
+				onMouseMove={this.onMouseMove}
+			>
 				<Layer0 />
 				<Layer2 />
 				<Mapp />

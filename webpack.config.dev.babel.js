@@ -27,7 +27,6 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
 		}),
-		new webpack.IgnorePlugin(/\.png|\.jpg$/),
 	],
 	module: {
 		preLoaders: [
@@ -65,6 +64,10 @@ module.exports = {
 			{
 				test: /\.svg$/,
 				loader: 'raw-loader',
+			},
+			{
+				test: /\.(jpg|png)$/,
+				loader: 'url?limit=25000',
 			},
 		],
 	},

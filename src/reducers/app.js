@@ -3,6 +3,7 @@ const defaultState = {
 	ready: false,
 	configed: false,
 	language: 'english',
+	mouseMoving: true,
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -32,6 +33,18 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				home: true,
 			};
+		case 'MOUSE_MOVE': {
+			return {
+				...state,
+				mouseMoving: true,
+			};
+		}
+		case 'MOUSE_STOP': {
+			return {
+				...state,
+				mouseMoving: false,
+			};
+		}
 		default:
 			return state;
 	}

@@ -1,5 +1,6 @@
 import { takeEvery, delay } from 'redux-saga';
 import { take, put, select } from 'redux-saga/effects';
+import { lastPastIndex } from 'tion2/reducers/selectors/stories';
 
 export const getState = state => state;
 
@@ -71,34 +72,28 @@ export function* watchExitClick() {
 	yield* takeEvery(['EXIT_CLICK'], onExitClick);
 }
 
-function* changeOriginAndEggIfNecessary(currentStorie, nextStorie) {
-	if (currentStorie.eggId && currentStorie.eggId !== nextStorie.eggId) {
+function* changeOriginAndEggIfNecessary(fromStorie, toStorie) {
+	if (fromStorie.eggId && fromStorie.eggId !== toStorie.eggId) {
 		yield put({ type: 'EGG_UNSELECTION' });
 	}
-	if (currentStorie.originId !== nextStorie.originId) {
+	if (fromStorie.originId !== toStorie.originId) {
 		yield fromOriginToMain();
-		yield fromMainToOrigin({ originId: nextStorie.originId });
+		yield fromMainToOrigin({ originId: toStorie.originId });
 	}
-	if (nextStorie.eggId && currentStorie.eggId !== nextStorie.eggId) {
-		yield put({ type: 'EGG_SELECTION', eggId: nextStorie.eggId });
+	if (toStorie.eggId && fromStorie.eggId !== toStorie.eggId) {
+		yield put({ type: 'EGG_SELECTION', eggId: toStorie.eggId });
 	}
 }
 
-function* onStorieClick(arg) {
-	const state = yield select(getState);
-	const currentStorieIndex = state.stories.data.filter(s => !s.future).length - 1;
-	const currentStorie = state.stories.data[currentStorieIndex];
-	const nextStorie = state.stories.data[arg.index];
-	if (arg.mode) yield put({ type: 'EXPLORATION_SELECTION', mode: 'tour' });
-	yield put(Object.assign({}, arg, { type: 'STORIE_SELECTION' }));
-	switch (`${currentStorie.view}_${nextStorie.view}`) {
+function* storieTransition(fromStorie, toStorie) {
+	switch (`${fromStorie.view}_${toStorie.view}`) {
 		case 'origin_main': {
 			yield fromOriginToMain();
 			break;
 		}
 		case 'interview_main': {
 			yield put({ type: 'INTERVIEW_UNSELECTION' });
-			if (currentStorie.eggId) yield put({ type: 'EGG_UNSELECTION' });
+			if (fromStorie.eggId) yield put({ type: 'EGG_UNSELECTION' });
 			yield fromOriginToMain();
 			break;
 		}
@@ -108,62 +103,70 @@ function* onStorieClick(arg) {
 			break;
 		}
 		case 'main_origin': {
-			yield fromMainToOrigin({ originId: nextStorie.originId });
+			yield fromMainToOrigin({ originId: toStorie.originId });
 			break;
 		}
 		case 'origin_origin': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'egg_origin': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'interview_origin': {
 			yield put({ type: 'INTERVIEW_UNSELECTION' });
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'main_egg': {
-			yield fromMainToOrigin({ originId: nextStorie.originId });
-			yield put({ type: 'EGG_SELECTION', eggId: nextStorie.eggId });
+			yield fromMainToOrigin({ originId: toStorie.originId });
+			yield put({ type: 'EGG_SELECTION', eggId: toStorie.eggId });
 			break;
 		}
 		case 'origin_egg': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'egg_egg': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'interview_egg': {
 			yield put({ type: 'INTERVIEW_UNSELECTION' });
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
 			break;
 		}
 		case 'main_interview': {
-			yield fromMainToInterview(nextStorie);
+			yield fromMainToInterview(toStorie);
 			break;
 		}
 		case 'origin_interview': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
-			yield put({ type: 'INTERVIEW_SELECTION', interviewId: nextStorie.interviewId });
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
+			yield put({ type: 'INTERVIEW_SELECTION', interviewId: toStorie.interviewId });
 			break;
 		}
 		case 'egg_interview': {
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
-			yield put({ type: 'INTERVIEW_SELECTION', interviewId: nextStorie.interviewId });
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
+			yield put({ type: 'INTERVIEW_SELECTION', interviewId: toStorie.interviewId });
 			break;
 		}
 		case 'interview_interview': {
 			yield put({ type: 'INTERVIEW_UNSELECTION' });
-			yield changeOriginAndEggIfNecessary(currentStorie, nextStorie);
-			yield put({ type: 'INTERVIEW_SELECTION', interviewId: nextStorie.interviewId });
+			yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
+			yield put({ type: 'INTERVIEW_SELECTION', interviewId: toStorie.interviewId });
 			break;
 		}
 		default: break;
 	}
+}
+
+function* onStorieClick(arg) {
+	const state = yield select(getState);
+	const currentStorie = state.stories.data[lastPastIndex(state)];
+	const nextStorie = state.stories.data[arg.index];
+	yield put(Object.assign({}, arg, { type: 'STORIE_SELECTION' }));
+	yield storieTransition(currentStorie, nextStorie);
 }
 
 export function* watchStorieClick() {
@@ -172,10 +175,15 @@ export function* watchStorieClick() {
 
 function* onTourerClick(arg) {
 	const state = yield select(getState);
+	const currentStorie = state.stories.data[lastPastIndex(state)];
 	const indexDiff = arg.direction === 'previous' ? -1 : 1;
-	const currentIndex = state.stories.data.filter(s => !s.future).length - 1;
-	const nextIndex = Math.min(state.stories.data.length - 1, Math.max(0, currentIndex + indexDiff));
-	yield onStorieClick.call(null, { index: nextIndex });
+	const nextIndex = Math.min(
+		state.stories.data.length - 1,
+		Math.max(0, lastPastIndex(state) + indexDiff)
+	);
+	const nextStorie = state.stories.data[nextIndex];
+	yield put(Object.assign({}, { type: 'STORIE_SELECTION', index: nextIndex }));
+	yield storieTransition(currentStorie, nextStorie);
 }
 
 export function* watchTourerClick() {
@@ -198,11 +206,10 @@ function* onExplorationClick(arg) {
 	} else {
 		const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
 		if (window.confirm(message)) {
-			if (arg.mode === 'tour') {
-				yield onStorieClick.call(null, { index: 0, mode: 'tour' });
-			} else {
-				yield put({ type: 'EXPLORATION_SELECTION', mode: 'interactive' });
-			}
+			const currentStorie = state.stories.data[lastPastIndex(state)];
+			const nextStorie = state.stories.data[0];
+			yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
+			if (arg.mode === 'tour') yield storieTransition(currentStorie, nextStorie);
 		}
 	}
 }
