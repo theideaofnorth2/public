@@ -31,21 +31,32 @@ export class MyComponent extends Component {
 		const interactiveClass = classnames(css.interactive, {
 			[dropdownCss.selected]: this.props.exploration.mode === 'interactive',
 		});
+		const en = this.props.app.language === 'en';
+		const text = {
+			tour: en ? 'Guided tour' : 'Tour guidé',
+			tourDescription: en ? 'Take me on a journey' : 'Emmène-moi en voyage',
+			interactive: en ? 'Interactive' : 'Interactif',
+			interactiveDescription: en ? 'Explore independently' : 'Explorer indépendamment',
+		};
 		return (
 			<div className={explorationClass}>
 				<div
 					className={tourClass}
 					onClick={this.onTourClick}
 				>
-					Guided Tour
-					<div className={css.description}>Take me on a journey</div>
+					{text.tour}
+					<div className={css.description}>
+						{text.tourDescription}
+					</div>
 				</div>
 				<div
 					className={interactiveClass}
 					onClick={this.onInteractiveClick}
 				>
-					Interactive
-					<div className={css.description}>Explore independently</div>
+					{text.interactive}
+					<div className={css.description}>
+						{text.interactiveDescription}
+					</div>
 				</div>
 			</div>
 		);

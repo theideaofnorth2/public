@@ -2,7 +2,7 @@ const defaultState = {
 	view: 'home',
 	ready: false,
 	configed: false,
-	language: 'english',
+	language: navigator.language === 'fr' ? 'fr' : 'en',
 	mouseMoving: true,
 };
 

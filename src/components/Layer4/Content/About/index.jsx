@@ -14,12 +14,21 @@ export class MyComponent extends Component {
 		const thisClass = classnames(utilsCss.pointable, contentCss.content, {
 			[contentCss.visible]: this.props.app.view === 'about',
 		});
+		const en = this.props.app.language === 'en';
+		const text = en ? (
+			<div className={css.about}>
+				<h1>About</h1>
+				<p>Content for the about page</p>
+			</div>
+		) : (
+			<div className={css.about}>
+				<h1>À propos</h1>
+				<p>Contenu de la page à propos</p>
+			</div>
+		);
 		return (
 			<div className={thisClass}>
-				<div className={css.about}>
-					<h1>About</h1>
-					<p>Content for the about page</p>
-				</div>
+				{text}
 			</div>
 		);
 	}

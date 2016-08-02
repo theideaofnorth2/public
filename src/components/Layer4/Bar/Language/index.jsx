@@ -13,18 +13,18 @@ export class MyComponent extends Component {
 		this.onFrenchClick = this.onFrenchClick.bind(this);
 	}
 	onEnglishClick() {
-		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'english' });
+		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'en' });
 	}
 	onFrenchClick() {
-		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'french' });
+		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'fr' });
 	}
 	render() {
 		const languageClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.language);
 		const englishClass = classnames({
-			[dropdownCss.selected]: this.props.app.language === 'english',
+			[dropdownCss.selected]: this.props.app.language === 'en',
 		});
 		const frenchClass = classnames({
-			[dropdownCss.selected]: this.props.app.language === 'french',
+			[dropdownCss.selected]: this.props.app.language === 'fr',
 		});
 		return (
 			<div className={languageClass}>
@@ -38,7 +38,7 @@ export class MyComponent extends Component {
 					className={frenchClass}
 					onClick={this.onFrenchClick}
 				>
-					Francais
+					Français
 				</div>
 			</div>
 		);
