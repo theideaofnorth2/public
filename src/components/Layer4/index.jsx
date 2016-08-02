@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Bar from './Bar';
+import Interface from './Interface';
 import EggCovers from './Eggs/EggCovers';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
 import EggInterviewCovers from './Eggs/EggInterviewCovers';
@@ -10,7 +10,6 @@ import Sounds from './Sounds';
 import Zoomers from './Zoomers';
 import Blocker from './Blocker';
 import Loader from './Loader';
-import Tourer from './Tourer';
 import Slideshow from './Slideshow';
 import appCss from 'tion2/components/App/css';
 
@@ -28,10 +27,9 @@ export class MyComponent extends Component {
 				<EggInterviewCovers />
 				<EggInterviewIcons />
 				<Slideshow />
-				<Tourer />
 				<Sounds />
 				<Content />
-				<Bar />
+				<Interface />
 				<Blocker />
 			</div>
 		);

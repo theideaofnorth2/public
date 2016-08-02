@@ -18,6 +18,7 @@ import {
 	getMapOptionsFromUrl,
 	areCentersEqual,
 } from './utils';
+import utilsCss from 'tion2/components/common/utils';
 import appCss from 'tion2/components/App/css';
 import css from './css';
 
@@ -107,6 +108,7 @@ export class MyComponent extends Component {
 			[css.capture]: isCapture,
 			[css.ready]: this.props.map.ready,
 			[css.zooming]: this.props.map.zooming,
+			[utilsCss.pointable]: this.props.exploration.mode === 'interactive',
 		});
 		return (
 			<div className={appCss.mapp}>
@@ -124,6 +126,7 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
+	exploration: state.exploration,
 	origins: state.origins,
 	map: state.map,
 });

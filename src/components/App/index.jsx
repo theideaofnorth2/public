@@ -12,21 +12,36 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 		this.onMouseMove = this.onMouseMove.bind(this);
-		this.mouseMoved = this.mouseMoved.bind(this);
-		this.mouseStopped = this.mouseStopped.bind(this);
+		this.mouseStop = this.mouseStop.bind(this);
+		this.clearMouseStopTimer = this.clearMouseStopTimer.bind(this);
+		this.setMouseStopTimer = this.setMouseStopTimer.bind(this);
+	}
+	componentWillReceiveProps(nextProps) {
+		if (
+			!this.props.app.interfaceDissmissable &&
+			nextProps.app.interfaceDissmissable
+		) {
+			this.setMouseStopTimer();
+		} else if (
+			this.props.app.interfaceDissmissable &&
+			!nextProps.app.interfaceDissmissable
+		) this.clearMouseStopTimer();
 	}
 	onMouseMove() {
-		this.mouseMoved();
-		clearTimeout(this.timer);
-		this.timer = setTimeout(this.mouseStopped, 5000);
-	}
-	mouseMoved() {
-		if (!this.props.app.mouseMoving) {
-			this.props.dispatch({ type: 'MOUSE_MOVE' });
+		if (this.props.app.interfaceDissmissed) {
+			this.props.dispatch({ type: 'MOUSE_MOVE_NOT_ON_INTERFACE' });
 		}
+		if (this.props.app.interfaceDissmissable) this.setMouseStopTimer();
 	}
-	mouseStopped() {
-		this.props.dispatch({ type: 'MOUSE_STOP' });
+	mouseStop() {
+		this.props.dispatch({ type: 'MOUSE_STOP_FOR_5_SECONDS_NOT_ON_INTERFACE' });
+	}
+	clearMouseStopTimer() {
+		clearTimeout(this.mouseStopTimer);
+	}
+	setMouseStopTimer() {
+		clearTimeout(this.mouseStopTimer);
+		this.mouseStopTimer = setTimeout(this.mouseStop, 5000);
 	}
 	render() {
 		const content = isCapture ? (

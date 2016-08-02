@@ -3,7 +3,8 @@ const defaultState = {
 	ready: false,
 	configed: false,
 	language: navigator.language === 'fr' ? 'fr' : 'en',
-	mouseMoving: true,
+	interfaceDissmissed: false,
+	interfaceDissmissable: false,
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -48,16 +49,28 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				ready: true,
 			};
-		case 'MOUSE_MOVE': {
+		case 'MOUSE_MOVE_NOT_ON_INTERFACE': {
 			return {
 				...state,
-				mouseMoving: true,
+				interfaceDissmissed: false,
 			};
 		}
-		case 'MOUSE_STOP': {
+		case 'MOUSE_STOP_FOR_5_SECONDS_NOT_ON_INTERFACE': {
 			return {
 				...state,
-				mouseMoving: false,
+				interfaceDissmissed: true,
+			};
+		}
+		case 'INTERFACE_MOUSE_ENTER': {
+			return {
+				...state,
+				interfaceDissmissable: false,
+			};
+		}
+		case 'INTERFACE_MOUSE_LEAVE': {
+			return {
+				...state,
+				interfaceDissmissable: true,
 			};
 		}
 		default:

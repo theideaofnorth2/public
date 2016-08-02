@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import TopBar from './TopBar';
+import Tourer from './Tourer';
 import Exit from './Exit';
 import Menu from './Menu';
 import Language from './Language';
@@ -13,13 +14,26 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
+		this.onMouseEnter = this.onMouseEnter.bind(this);
+		this.onMouseLeave = this.onMouseLeave.bind(this);
+	}
+	onMouseEnter() {
+		this.props.dispatch({ type: 'INTERFACE_MOUSE_ENTER' });
+	}
+	onMouseLeave() {
+		this.props.dispatch({ type: 'INTERFACE_MOUSE_LEAVE' });
 	}
 	render() {
-		const thisClass = classnames(css.bar, {
-			[css.hidden]: !this.props.app.mouseMoving,
+		const thisClass = classnames(css.interface, {
+			[css.hidden]: this.props.app.interfaceDissmissed,
 		});
 		return (
-			<div className={thisClass}>
+			<div
+				className={thisClass}
+				onMouseEnter={this.onMouseEnter}
+				onMouseLeave={this.onMouseLeave}
+			>
+				<Tourer />
 				<Exit />
 				<TopBar />
 				<Menu />

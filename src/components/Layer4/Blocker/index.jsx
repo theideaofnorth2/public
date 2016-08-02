@@ -10,11 +10,11 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const interfaceClass = classnames(utilsCss.pointable, css.interface, {
+		const blockerClass = classnames(utilsCss.pointable, css.blocker, {
 			[css.displayed]: this.props.map.animating || this.props.exploration.animating,
 		});
 		return (
-			<div className={interfaceClass}></div>
+			<div className={blockerClass}></div>
 		);
 	}
 }

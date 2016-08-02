@@ -1,4 +1,4 @@
-.interface {
+.blocker {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -7,6 +7,6 @@
 	display: none;
 }
 
-.interface.displayed {
+.blocker.displayed {
 	display: block;
 }

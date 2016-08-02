@@ -17,6 +17,7 @@
 	height: 100%;
 }
 .layer2,
+.mapp,
 .layer4 {
 	pointer-events: none;
 }

@@ -19,14 +19,16 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisClass = classnames(css.tourer, {
-			[css.displayed]: this.props.exploration.mode === 'tour',
-			[utilsCss.pointable]: this.props.exploration.mode === 'tour',
-			[css.mouseMoving]: this.props.app.mouseMoving,
+			[css.displayed]: this.props.app.view === 'mapp' &&
+				this.props.exploration.mode === 'tour',
+			[css.interfaceDissmissed]: !this.props.app.interfaceDissmissed,
 		});
 		const previousClass = classnames(css.previous, {
+			[utilsCss.pointable]: this.props.exploration.mode === 'tour',
 			[css.visible]: this.props.lastPastIndex > 0,
 		});
 		const nextClass = classnames(css.next, {
+			[utilsCss.pointable]: this.props.exploration.mode === 'tour',
 			[css.visible]: this.props.lastPastIndex < this.props.stories.data.length - 1,
 		});
 		return (

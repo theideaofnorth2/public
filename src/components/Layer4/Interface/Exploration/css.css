@@ -15,7 +15,7 @@
 	display: none;
 }
 .exploration.open > div {
-  transition: transform 500ms linear;
+  transition: all 500ms linear;
 }
 .exploration.open > div.tour {
 	transform: translate(0, 0);
@@ -23,7 +23,9 @@
 .exploration.open > div.interactive {
 	transform: translate(0, 20px);
 }
-
+.exploration.open > div:hover {
+	color: white;
+}
 .exploration.split > div.tour {
 	transform: translate(-300%, 0) scale(3);
 }
