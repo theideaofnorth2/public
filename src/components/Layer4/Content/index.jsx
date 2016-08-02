@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import utilsCss from 'tion2/components/common/utils';
+import Approach from './Approach';
+import About from './About';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -10,15 +11,16 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(utilsCss.pointable, css.topBar, {
-			[css.home]: this.props.app.view === 'home',
-		});
+		const thisClass = classnames(css.content);
 		return (
-			<div className={thisClass}></div>
+			<div className={thisClass}>
+				<Approach />
+				<About />
+			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(MyComponent);

@@ -48,7 +48,7 @@ export class MyComponent extends Component {
 			/>
 		));
 		const timelineClass = classnames(css.timeline, {
-			[css.home]: this.props.app.home,
+			[css.home]: this.props.app.view === 'home',
 			[utilsCss.pointable]: this.props.exploration.mode === 'interactive',
 			[css.interactive]: this.props.exploration.mode === 'interactive',
 		});

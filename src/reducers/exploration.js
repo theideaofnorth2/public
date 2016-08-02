@@ -36,6 +36,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				mode: action.mode,
 			};
+		case 'MENU_HOME_CLICK':
+			return {
+				...state,
+				...defaultState,
+			};
 		default:
 			return state;
 	}

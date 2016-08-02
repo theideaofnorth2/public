@@ -12,8 +12,10 @@ const baseUri = 'http://theideaofnorth2.com';
 
 export const apiUri = `${baseUri}/api/`;
 
-export const assetsUri = 	process.env.NODE_ENV === 'development' ?
-	'/assets' : 'http://theideaofnorth2.com/assets';
+const productionUri = document.URL.match(/cdn/) ?
+	'http://assets.theideaofnorth2.com' : 'http://theideaofnorth2.com/assets';
+
+export const assetsUri = process.env.NODE_ENV === 'development' ? '/assets' : productionUri;
 
 export const imagesUri = `${assetsUri}/images`;
 export const videosUri = `${assetsUri}/videos`;

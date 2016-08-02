@@ -10,15 +10,17 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(utilsCss.pointable, css.topBar, {
-			[css.home]: this.props.app.view === 'home',
+		const thisClass = classnames(utilsCss.pointable, css.approach, {
+			[css.visible]: this.props.app.view === 'approach',
 		});
 		return (
-			<div className={thisClass}></div>
+			<div className={thisClass}>
+				approach
+			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(MyComponent);

@@ -14,6 +14,7 @@ export class MyComponent extends Component {
 	onCloseClick() {
 		this.props.dispatch({
 			type: 'EXIT_CLICK',
+			content: this.props.app.view === 'about' || this.props.app.view === 'approach',
 			originId: this.props.origins.selectedOriginId,
 			eggId: this.props.eggs.selectedEggId,
 			interviewId: this.props.interviews.selectedInterviewId,
@@ -21,8 +22,10 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const exitClass = classnames(utilsCss.pointable, css.exit, {
-			[css.visible]: this.props.origins.selectedOriginId &&
-				this.props.exploration.mode === 'interactive',
+			[css.visible]: (this.props.origins.selectedOriginId &&
+				this.props.exploration.mode === 'interactive') ||
+				this.props.app.view === 'about' ||
+				this.props.app.view === 'approach',
 		});
 		return (
 			<div

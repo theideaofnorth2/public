@@ -1,5 +1,5 @@
 const defaultState = {
-	home: true,
+	view: 'home',
 	ready: false,
 	configed: false,
 	language: 'english',
@@ -21,17 +21,32 @@ export default function reducer(state = defaultState, action = null) {
 		case 'EXPLORATION_ANIMATION_FINISHED':
 			return {
 				...state,
-				home: false,
+				view: 'mapp',
+			};
+		case 'MENU_HOME_CLICK':
+			return {
+				...state,
+				view: 'home',
+			};
+		case 'MENU_APPROACH_CLICK':
+			return {
+				...state,
+				view: 'approach',
+			};
+		case 'MENU_ABOUT_CLICK':
+			return {
+				...state,
+				view: 'about',
+			};
+		case 'CONTENT_EXIT':
+			return {
+				...state,
+				view: 'mapp',
 			};
 		case 'APP_READY':
 			return {
 				...state,
 				ready: true,
-			};
-		case 'HOME_BACK':
-			return {
-				...state,
-				home: true,
 			};
 		case 'MOUSE_MOVE': {
 			return {

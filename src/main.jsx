@@ -6,7 +6,6 @@ import { store, sagaMiddleware } from './store';
 import App from './components/App';
 import rootSaga from './sagas';
 import './global.css';
-
 // if (process.env.NODE_ENV === 'development') {
 // 	whyDidYouUpdate(React);
 // }
