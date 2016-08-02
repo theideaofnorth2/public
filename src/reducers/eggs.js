@@ -42,6 +42,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				selectedEggId: null,
 			};
+		case 'EXIT_EGG_CLICK':
+			return {
+				...state,
+				selectedEggId: null,
+			};
 		default:
 			return state;
 	}

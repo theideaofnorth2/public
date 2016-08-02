@@ -55,6 +55,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				selectedInterviewId: null,
 			};
+		case 'EXIT_INTERVIEW_CLICK':
+			return {
+				...state,
+				selectedInterviewId: null,
+			};
 		default:
 			return state;
 	}

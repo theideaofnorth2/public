@@ -12,13 +12,22 @@ export class MyComponent extends Component {
 		this.onCloseClick = this.onCloseClick.bind(this);
 	}
 	onCloseClick() {
-		this.props.dispatch({
-			type: 'EXIT_CLICK',
-			content: this.props.app.view === 'about' || this.props.app.view === 'approach',
-			originId: this.props.origins.selectedOriginId,
-			eggId: this.props.eggs.selectedEggId,
-			interviewId: this.props.interviews.selectedInterviewId,
-		});
+		if (this.props.app.view === 'approach' || this.props.app.view === 'about') {
+			this.props.dispatch({ type: 'EXIT_CONTENT_CLICK' });
+		} else if (this.props.interviews.selectedInterviewId) {
+			this.props.dispatch({
+				type: 'EXIT_INTERVIEW_CLICK',
+				eggId: this.props.eggs.selectedEggId,
+				originId: this.props.origins.selectedOriginId,
+			});
+		} else if (this.props.eggs.selectedEggId) {
+			this.props.dispatch({
+				type: 'EXIT_EGG_CLICK',
+				originId: this.props.origins.selectedOriginId,
+			});
+		} else if (this.props.origins.selectedOriginId) {
+			this.props.dispatch({ type: 'EXIT_ORIGIN_CLICK' });
+		}
 	}
 	render() {
 		const exitClass = classnames(utilsCss.pointable, css.exit, {

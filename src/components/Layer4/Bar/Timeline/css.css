@@ -5,9 +5,10 @@
   top: 20px;
   margin-left: -250px;
   height: 60px;
-}
-.timeline.home {
   display: none;
+}
+.timeline.visible {
+  display: block;
 }
 .timelineContent {
   position: absolute;

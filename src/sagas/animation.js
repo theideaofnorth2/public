@@ -62,15 +62,8 @@ function* fromOriginToMain() {
 	yield take('MAP_ZOOM_FINISHED');
 }
 
-function* onExitClick(arg) {
-	if (arg.content) yield put({ type: 'CONTENT_EXIT' });
-	else if (arg.interviewId) yield put({ type: 'INTERVIEW_UNSELECTION' });
-	else if (arg.eggId) yield put({ type: 'EGG_UNSELECTION' });
-	else yield fromOriginToMain();
-}
-
 export function* watchExitClick() {
-	yield* takeEvery(['EXIT_CLICK'], onExitClick);
+	yield* takeEvery(['EXIT_ORIGIN_CLICK'], fromOriginToMain);
 }
 
 function* changeOriginAndEggIfNecessary(fromStorie, toStorie) {
@@ -176,8 +169,12 @@ export function* watchStorieClick() {
 
 function* onExplorationClick(arg) {
 	const state = yield select(getState);
+	const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
+	if (state.app.view !== 'home' && !window.confirm(message)) return false;
+	const currentStorie = state.stories.data[lastPastIndex(state)];
+	const firstStorie = state.stories.data[0];
+	yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
 	if (state.app.view === 'home') {
-		yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_DESCRIPTIVE' });
 		yield delay(400);
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_SPLIT' });
@@ -187,15 +184,9 @@ function* onExplorationClick(arg) {
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_CENTERED' });
 		yield delay(1000);
 		yield put({ type: 'EXPLORATION_ANIMATION_FINISHED' });
-	} else {
-		const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
-		if (window.confirm(message)) {
-			const currentStorie = state.stories.data[lastPastIndex(state)];
-			const nextStorie = state.stories.data[0];
-			yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
-			if (arg.mode === 'tour') yield storieTransition(currentStorie, nextStorie);
-		}
 	}
+	if (arg.mode === 'tour') yield storieTransition(currentStorie, firstStorie);
+	return true;
 }
 
 export function* watchExplorationClick() {

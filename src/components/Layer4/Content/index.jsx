@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(css.content);
+		const thisClass = classnames(css.contentContainer);
 		return (
 			<div className={thisClass}>
 				<Approach />

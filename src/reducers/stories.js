@@ -108,31 +108,42 @@ export default function reducer(state = defaultState, action = null) {
 				positionIndex: 0,
 			};
 		}
-		case 'EXIT_CLICK': {
-			let storie;
-			if (action.interviewId && action.eggId) {
-				storie = {
-					view: 'egg',
-					eggId: action.eggId,
-					originId: action.originId,
-					future: false,
-				};
-			} else if (
-				(action.interviewId && !action.eggId) ||
-				(!action.interviewId && action.eggId)
-			) {
-				storie = {
-					view: 'origin',
-					originId: action.originId,
-					future: false,
-				};
-			} else {
-				storie = {
-					view: 'main',
-					future: false,
-				};
-			}
-			const data = [...getPastData(state.data), storie];
+		case 'EXIT_INTERVIEW_CLICK': {
+			const data = [...getPastData(state.data), action.eggId ? {
+				view: 'egg',
+				eggId: action.eggId,
+				originId: action.originId,
+				future: false,
+			} : {
+				view: 'origin',
+				originId: action.originId,
+				future: false,
+			}];
+			return {
+				...state,
+				data,
+				timelineIndex: 0,
+				positionIndex: 0,
+			};
+		}
+		case 'EXIT_EGG_CLICK': {
+			const data = [...getPastData(state.data), {
+				view: 'origin',
+				originId: action.originId,
+				future: false,
+			}];
+			return {
+				...state,
+				data,
+				timelineIndex: 0,
+				positionIndex: 0,
+			};
+		}
+		case 'EXIT_ORIGIN_CLICK': {
+			const data = [...getPastData(state.data), {
+				view: 'main',
+				future: false,
+			}];
 			return {
 				...state,
 				data,

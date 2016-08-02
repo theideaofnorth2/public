@@ -38,7 +38,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				view: 'about',
 			};
-		case 'CONTENT_EXIT':
+		case 'EXIT_CONTENT_CLICK':
 			return {
 				...state,
 				view: 'mapp',
