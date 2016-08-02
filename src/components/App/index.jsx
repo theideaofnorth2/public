@@ -12,35 +12,33 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 		this.onMouseMove = this.onMouseMove.bind(this);
-		this.mouseStopFor5Seconds = this.mouseStopFor5Seconds.bind(this);
+		this.onMouseStopFor5Seconds = this.onMouseStopFor5Seconds.bind(this);
 		this.clearMouseStopTimer = this.clearMouseStopTimer.bind(this);
 		this.setMouseStopTimer = this.setMouseStopTimer.bind(this);
 	}
 	componentWillReceiveProps(nextProps) {
 		if (
-			!this.props.app.interfaceDissmissable &&
-			nextProps.app.interfaceDissmissable
+			this.props.controls.hovered &&
+			!nextProps.controls.hovered
 		) this.setMouseStopTimer();
 		else if (
-			this.props.app.interfaceDissmissable &&
-			!nextProps.app.interfaceDissmissable
+			!this.props.controls.hovered &&
+			nextProps.controls.hovered
 		) this.clearMouseStopTimer();
 	}
 	onMouseMove() {
-		if (this.props.app.interfaceDissmissable) this.setMouseStopTimer();
-		if (this.props.app.interfaceDissmissed) {
-			this.props.dispatch({ type: 'MOUSE_MOVE_NOT_ON_INTERFACE' });
-		}
+		if (!this.props.controls.hovered) this.setMouseStopTimer();
+		if (!this.props.controls.visible) this.props.dispatch({ type: 'CONTROLS_SHOW' });
 	}
-	mouseStopFor5Seconds() {
-		this.props.dispatch({ type: 'MOUSE_STOP_FOR_5_SECONDS_NOT_ON_INTERFACE' });
+	onMouseStopFor5Seconds() {
+		this.props.dispatch({ type: 'CONTROLS_HIDE' });
 	}
 	clearMouseStopTimer() {
 		clearTimeout(this.mouseStopTimer);
 	}
 	setMouseStopTimer() {
 		this.clearMouseStopTimer();
-		this.mouseStopTimer = setTimeout(this.mouseStopFor5Seconds, 5000);
+		this.mouseStopTimer = setTimeout(this.onMouseStopFor5Seconds, 5000);
 	}
 	render() {
 		const content = isCapture ? (

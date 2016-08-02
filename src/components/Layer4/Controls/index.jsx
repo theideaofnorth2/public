@@ -18,14 +18,14 @@ export class MyComponent extends Component {
 		this.onMouseLeave = this.onMouseLeave.bind(this);
 	}
 	onMouseEnter() {
-		this.props.dispatch({ type: 'INTERFACE_MOUSE_ENTER' });
+		this.props.dispatch({ type: 'CONTROLS_MOUSE_ENTER' });
 	}
 	onMouseLeave() {
-		this.props.dispatch({ type: 'INTERFACE_MOUSE_LEAVE' });
+		this.props.dispatch({ type: 'CONTROLS_MOUSE_LEAVE' });
 	}
 	render() {
-		const thisClass = classnames(css.interface, {
-			[css.hidden]: this.props.app.interfaceDissmissed,
+		const thisClass = classnames(css.controls, {
+			[css.hidden]: !this.props.controls.visible,
 		});
 		return (
 			<div

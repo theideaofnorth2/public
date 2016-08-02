@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Interface from './Interface';
+import Controls from './Controls';
 import EggCovers from './Eggs/EggCovers';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
 import EggInterviewCovers from './Eggs/EggInterviewCovers';
@@ -29,7 +29,7 @@ export class MyComponent extends Component {
 				<Slideshow />
 				<Sounds />
 				<Content />
-				<Interface />
+				<Controls />
 				<Blocker />
 			</div>
 		);

@@ -1,4 +1,4 @@
-.interface {
+.controls {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -7,6 +7,6 @@
 	opacity: 1;
 	transition: opacity 500ms cubic-bezier(0,0,0.32,1);
 }
-.interface.hidden {
+.controls.hidden {
 	opacity: 0;
 }
