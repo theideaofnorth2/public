@@ -28,5 +28,3 @@ $config = json_decode(file_get_contents('./config.json'));
 $config->assets = ReadFolderDirectory("../assets");
 
 echo json_encode($config);
-
-?>
