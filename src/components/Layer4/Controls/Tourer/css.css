@@ -28,9 +28,8 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	cursor: pointer;
-	opacity: 0.4;
-	transition: opacity 500ms cubic-bezier(0,0,0.32,1);
-	background-color: rgba(0,0,0,1);
+	transition: all 500ms cubic-bezier(0,0,0.32,1);
+	background-color: rgba(0,0,0,0.4);
 	border: 2px solid white;
 	display: none;
 }
@@ -40,7 +39,7 @@
 }
 .previous:hover,
 .next:hover {
-	opacity: 1;
+	background-color: rgba(0,0,0,1);
 }
 .previous {
 	left: 20px;

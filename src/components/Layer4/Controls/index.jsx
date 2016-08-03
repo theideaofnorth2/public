@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import TopBar from './TopBar';
+import Background from './Background';
 import Tourer from './Tourer';
 import Exit from './Exit';
 import Menu from './Menu';
@@ -25,7 +25,8 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisClass = classnames(css.controls, {
-			[css.hidden]: !this.props.controls.visible,
+			[css.hidden]: this.props.app.view === 'mapp' &&
+				!this.props.controls.visible,
 		});
 		return (
 			<div
@@ -35,7 +36,7 @@ export class MyComponent extends Component {
 			>
 				<Tourer />
 				<Exit />
-				<TopBar />
+				<Background />
 				<Menu />
 				<Timeline />
 				<Language />

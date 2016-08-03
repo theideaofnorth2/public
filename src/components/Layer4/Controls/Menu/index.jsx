@@ -25,6 +25,12 @@ export class MyComponent extends Component {
 		const menuClass = classnames(utilsCss.pointable, css.menu, {
 			[css.hidden]: this.props.app.view === 'home',
 		});
+		const approachClass = classnames(css.approach, {
+			[css.selected]: this.props.app.view === 'approach',
+		});
+		const aboutClass = classnames(css.about, {
+			[css.selected]: this.props.app.view === 'about',
+		});
 		const en = this.props.app.language === 'en';
 		const text = {
 			home: en ? 'Home' : 'Accueil',
@@ -40,13 +46,13 @@ export class MyComponent extends Component {
 					{text.home}
 				</div>
 				<div
-					className={css.approach}
+					className={approachClass}
 					onClick={this.onApproachClick}
 				>
 					{text.approach}
 				</div>
 				<div
-					className={css.about}
+					className={aboutClass}
 					onClick={this.onAboutClick}
 				>
 					{text.about}
