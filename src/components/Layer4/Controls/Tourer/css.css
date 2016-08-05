@@ -5,14 +5,11 @@
 	left: 0;
 	right: 0;
 	display: none;
-	opacity: 0;
+	opacity: 1;
 	transition: opacity 200ms cubic-bezier(0,0,0.32,1);
 }
 .displayed {
 	display: block;
-}
-.visible	{
-	opacity: 1;
 }
 .previous,
 .next {

@@ -8,6 +8,7 @@ import Menu from './Menu';
 import Language from './Language';
 import Exploration from './Exploration';
 import Timeline from './Timeline';
+import Sounds from './Sounds';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -36,6 +37,7 @@ export class MyComponent extends Component {
 			>
 				<Tourer />
 				<Exit />
+				<Sounds />
 				<Background />
 				<Menu />
 				<Timeline />

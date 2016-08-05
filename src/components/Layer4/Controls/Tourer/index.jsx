@@ -21,7 +21,6 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.tourer, {
 			[css.displayed]: this.props.app.view === 'mapp' &&
 				this.props.exploration.mode === 'tour',
-			[css.visible]: this.props.controls.visible,
 		});
 		const previousClass = classnames(css.previous, {
 			[utilsCss.pointable]: this.props.exploration.mode === 'tour',

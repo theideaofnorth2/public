@@ -6,7 +6,6 @@ import EggCovers from './Eggs/EggCovers';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
 import EggInterviewCovers from './Eggs/EggInterviewCovers';
 import Content from './Content';
-import Sounds from './Sounds';
 import Zoomers from './Zoomers';
 import Blocker from './Blocker';
 import Loader from './Loader';
@@ -28,7 +27,6 @@ export class MyComponent extends Component {
 				<EggInterviewCovers />
 				<EggInterviewIcons />
 				<Slideshow />
-				<Sounds />
 				<Content />
 				<Controls />
 				<Blocker />

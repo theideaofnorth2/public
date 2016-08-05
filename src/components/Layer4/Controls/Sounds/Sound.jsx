@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import play from './play.svg';
 import pause from './pause.svg';
+import volume from './volume.svg';
 import { Howl } from 'howler';
 import { soundsUri } from 'tion2/utils/tools';
 import css from './css';
@@ -61,7 +62,7 @@ export class MyComponent extends Component {
 		else this.pause();
 	}
 	updateSeek() {
-		if (this.props.play) window.requestAnimationFrame(this.updateSeek);
+		if (this.state.soundPlaying) window.requestAnimationFrame(this.updateSeek);
 		this.setState({ soundSeek: this.sound.seek() });
 	}
 	getClickPosition(e) {
@@ -70,7 +71,9 @@ export class MyComponent extends Component {
 		return (cx - rect.left) / rect.width;
 	}
 	setSeek(e) {
-		this.sound.seek(this.getClickPosition(e) * this.soundDuration);
+		const soundPosition = this.getClickPosition(e) * this.soundDuration;
+		this.sound.seek(soundPosition);
+		this.setState({ soundSeek: soundPosition });
 	}
 	render() {
 		const thisClass = classnames(css.sound, {
@@ -109,7 +112,8 @@ export class MyComponent extends Component {
 					</div>
 				</div>
 				<div
-					className={css.options}
+					className={css.volume}
+					dangerouslySetInnerHTML={{ __html: volume }}
 				></div>
 			</div>
 		);
