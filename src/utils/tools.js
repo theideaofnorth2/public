@@ -8,15 +8,16 @@ export const SuperPromise = () => {
 
 export const isCapture = document.location.search.indexOf('capture') !== -1;
 
-const baseUri = 'http://theideaofnorth2.com';
+const productionDomain = 'theideaofnorth2.com';
 
-export const apiUri = `${baseUri}/api/`;
+export const apiUri = `http://${productionDomain}/api/`;
 
-const productionUri = document.URL.match(/cdn/) ?
-	'http://assets.theideaofnorth2.com' : 'http://theideaofnorth2.com/assets';
-
-export const assetsUri = process.env.NODE_ENV === 'development' ? '/assets' : productionUri;
-
-export const imagesUri = `${assetsUri}/images`;
-export const videosUri = `${assetsUri}/videos`;
-export const soundsUri = `${assetsUri}/sounds`;
+export const imagesUri = process.env.NODE_ENV === 'development'
+	? '/assets/images'
+	: `http://images.${productionDomain}`;
+export const videosUri = process.env.NODE_ENV === 'development'
+	? '/assets/videos'
+	: `http://videos.${productionDomain}`;
+export const soundsUri = process.env.NODE_ENV === 'development'
+	? '/assets/sounds'
+	: `http://sounds.${productionDomain}`;
