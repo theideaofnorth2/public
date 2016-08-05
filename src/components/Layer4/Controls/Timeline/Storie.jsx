@@ -24,13 +24,13 @@ export class MyComponent extends Component {
 				break;
 			}
 			case 'egg': {
-				const egg = this.props.eggs.data.find(o => o._id === this.props.storie.eggId);
+				const egg = this.props.eggs.data.find(e => e._id === this.props.storie.eggId);
 				name = egg.name;
 				break;
 			}
 			case 'interview': {
 				const interview = this.props.interviews.data.find(
-					o => o._id === this.props.storie.interviewId
+					i => i._id === this.props.storie.interviewId
 				);
 				name = interview.name;
 				break;

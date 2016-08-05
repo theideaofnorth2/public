@@ -1,3 +1,11 @@
+import Papa from 'papaparse';
+
+const papaConfig = {
+	delimiter: '\t',
+	newline: '\r\n',
+	dynamicTyping: true,
+};
+
 const defaultState = {
 	data: [],
 	originData: [],
@@ -7,7 +15,17 @@ const defaultState = {
 	selectedInterviewId: null,
 };
 
-const getInterviews = (data) =>
+const formatThemesCsv = interviews =>
+	interviews.map(interview => {
+		const parsedThemes = Papa.parse(interview.themes, papaConfig).data;
+		const formattedThemes = parsedThemes.map(parsedTheme => Object.assign({
+			time: parsedTheme[0],
+			theme: parsedTheme[1],
+		}));
+		return Object.assign({}, interview, { themes: formattedThemes });
+	});
+
+const augmentWithCities = data =>
 	data.interviews
 		.map(interview => Object.assign({
 			...interview,
@@ -18,11 +36,12 @@ const getInterviews = (data) =>
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
+			const fullData = formatThemesCsv(augmentWithCities(action.data));
 			return {
 				...state,
-				data: getInterviews(action.data),
-				originData: getInterviews(action.data).filter(i => i.parent === 'origin'),
-				eggData: getInterviews(action.data).filter(i => i.parent === 'egg'),
+				data: fullData,
+				originData: fullData.filter(i => i.parent === 'origin'),
+				eggData: fullData.filter(i => i.parent === 'egg'),
 			};
 		}
 		case 'DESTINATION_INTERVIEW_MOUSE_ENTER':

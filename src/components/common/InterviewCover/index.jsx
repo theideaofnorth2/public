@@ -13,7 +13,7 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisStyle = !this.props.interview.image ? {} : {
-			backgroundImage: `url(${interviewsImagesUri}/${this.props.interview.image})`,
+			backgroundImage: `url(${interviewsImagesUri}/${this.props.interview.image}/cover.jpg)`,
 		};
 		const thisClass = classnames(css.interview, {
 			[css.visible]: this.props.interviews.hoveredInterviewId === this.props.interview._id,

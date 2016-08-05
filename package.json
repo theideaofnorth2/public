@@ -43,6 +43,7 @@
     "howler": "git://github.com/goldfire/howler.js.git#v2.0.0-beta14",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
+    "papaparse": "^4.1.2",
     "raw-loader": "^0.5.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.2",
