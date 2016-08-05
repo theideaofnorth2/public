@@ -20,7 +20,8 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisClass = classnames(appCss.layer4);
-		return !this.props.app.configed ? (<Loader />) : (
+		const loaderContent = this.props.app.ready ? null : (<Loader />);
+		return !this.props.app.configed ? loaderContent : (
 			<div className={thisClass}>
 				<Zoomers />
 				<EggCovers />
@@ -31,6 +32,7 @@ export class MyComponent extends Component {
 				<Content />
 				<Controls />
 				<Blocker />
+				{loaderContent}
 			</div>
 		);
 	}
