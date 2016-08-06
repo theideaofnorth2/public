@@ -4,7 +4,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: purple;
+	background: black;
 	display: none;
 }
 
@@ -21,13 +21,23 @@
 	right: 0;
 }
 
-.egg video {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
+@media screen and (min-aspect-ratio: 1920/1080) {
+	.egg iframe {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 100vw;
+		height: 56.25vw;
+		transform: translate(-50%, -50%);
+	}
+}
+@media screen and (max-aspect-ratio: 1920/1080) {
+	.egg iframe {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 177.77777vh;
+		height: 100vh;
+		transform: translate(-50%, -50%);
+	}
 }

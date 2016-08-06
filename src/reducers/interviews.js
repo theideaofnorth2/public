@@ -25,18 +25,32 @@ const formatThemesCsv = interviews =>
 		return Object.assign({}, interview, { themes: formattedThemes });
 	});
 
-const augmentWithCities = data =>
-	data.interviews
-		.map(interview => Object.assign({
-			...interview,
-			origin: data.origins.find(o => o._id === interview.originId),
-			destination: data.destinations.find(d => d._id === interview.destinationId),
-		}));
+const augmentWithData = data => {
+	const interviewsImagesFolder = data.assets
+		.find(d => typeof d.images !== 'undefined')
+		.images
+		.find(d => typeof d.interviews !== 'undefined')
+		.interviews;
+	return data.interviews
+		.map(interview => {
+			const interviewImagesFolder = interviewsImagesFolder
+				.find(d => typeof d[interview.image] !== 'undefined');
+			const interviewImages = !interviewImagesFolder
+				? null
+				: interviewImagesFolder[interview.image].sort();
+			return Object.assign({
+				...interview,
+				images: interviewImages,
+				origin: data.origins.find(o => o._id === interview.originId),
+				destination: data.destinations.find(d => d._id === interview.destinationId),
+			});
+		});
+};
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
 		case 'CONFIG_READY': {
-			const fullData = formatThemesCsv(augmentWithCities(action.data));
+			const fullData = formatThemesCsv(augmentWithData(action.data));
 			return {
 				...state,
 				data: fullData,

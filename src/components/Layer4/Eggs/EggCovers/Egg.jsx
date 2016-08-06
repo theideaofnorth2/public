@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { videosUri } from 'tion2/utils/tools';
 import css from './css';
-
-const eggsVideosUri = `${videosUri}/eggs`;
 
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
-	}
-	componentDidUpdate() {
-		if (this.props.eggs.selectedEggId === this.props.egg._id &&
-		this.props.map.level === 'origin' && !this.props.map.animating) {
-			this.refs.video.play();
-		} else {
-			this.refs.video.pause();
-		}
+		this.videoUri = `https://www.youtube.com/embed/${this.props.egg.video}?rel=0&controls=0&showinfo=0&autoplay=1`;
 	}
 	render() {
 		const isVisible = this.props.eggs.selectedEggId === this.props.egg._id &&
@@ -25,23 +14,20 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.egg, {
 			[css.visible]: isVisible,
 		});
-		const videoUri = !this.props.egg.video ? '' : `${eggsVideosUri}/${this.props.egg.video}`;
+		const videoUri = this.props.eggs.selectedEggId !== this.props.egg._id ||
+			this.props.interviews.selectedInterviewId
+			? ''
+			: this.videoUri;
 		return (
 			<div
 				ref="egg"
 				className={thisClass}
 			>
-				<video
-					ref="video"
-					muted
-					id="bgvid"
-					loop
-				>
-					<source
-						src={videoUri}
-						type="video/mp4"
-					/>
-				</video>
+				<iframe
+					src={videoUri}
+					frameBorder="0"
+					allowFullScreen
+				></iframe>
 				{this.props.egg.name}
 			</div>
 		);
@@ -50,6 +36,7 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	eggs: state.eggs,
+	interviews: state.interviews,
 	map: state.map,
 });
 
