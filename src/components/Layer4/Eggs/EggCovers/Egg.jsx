@@ -6,7 +6,7 @@ import css from './css';
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.videoUri = `https://www.youtube.com/embed/${this.props.egg.video}?rel=0&controls=0&showinfo=0&autoplay=1`;
+		this.videoUri = `https://www.youtube.com/embed/${this.props.egg.video}?rel=0&controls=0&autoplay=1&modestbranding=1`;
 	}
 	render() {
 		const isVisible = this.props.eggs.selectedEggId === this.props.egg._id &&

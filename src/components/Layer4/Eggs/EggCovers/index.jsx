@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Egg from './Egg';
-import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -16,7 +15,7 @@ export class MyComponent extends Component {
 			/>
 		));
 		return (
-			<div className={utilsCss.pointable}>
+			<div>
 				{content}
 			</div>
 		);
