@@ -4,7 +4,6 @@ import Layer0 from 'tion2/components/Layer0';
 import Layer2 from 'tion2/components/Layer2';
 import Layer4 from 'tion2/components/Layer4';
 import Mapp from 'tion2/components/Mapp';
-import { isCapture } from 'tion2/utils/tools';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -41,22 +40,44 @@ export class MyComponent extends Component {
 		this.mouseStopTimer = setTimeout(this.onMouseStopFor5Seconds, 5000);
 	}
 	render() {
-		const content = isCapture ? (
-			<div className={css.capture}>
-				<Mapp capture />
-			</div>
-		) : (
+		if (this.props.app.isCapture) {
+			return (
+				<div className={css.capture}>
+					<Mapp />
+				</div>
+			);
+		} else if (!this.props.app.zoomersLoaded) {
+			return (
+				<div
+					className={css.app}
+					onMouseMove={this.onMouseMove}
+				>
+					<Layer4 />
+				</div>
+			);
+		} else if (!this.props.app.ready) {
+			return (
+				<div
+					className={css.app}
+					onMouseMove={this.onMouseMove}
+				>
+					<Layer4 />
+					<Layer0 />
+					<Mapp />
+				</div>
+			);
+		}
+		return (
 			<div
 				className={css.app}
 				onMouseMove={this.onMouseMove}
 			>
-				<Layer0 />
-				<Layer2 />
-				<Mapp />
 				<Layer4 />
+				<Layer0 />
+				<Mapp />
+				<Layer2 />
 			</div>
 		);
-		return content;
 	}
 }
 

@@ -33,7 +33,7 @@ export class MyComponent extends Component {
 			>
 				<video
 					ref="video"
-					mute
+					muted
 					id="bgvid"
 					loop
 				>

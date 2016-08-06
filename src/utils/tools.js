@@ -6,8 +6,6 @@ export const SuperPromise = () => {
 	return superPromise;
 };
 
-export const isCapture = document.location.search.indexOf('capture') !== -1;
-
 const productionDomain = 'theideaofnorth2.com';
 
 export const apiUri = `http://${productionDomain}/api/`;

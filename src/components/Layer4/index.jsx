@@ -19,8 +19,21 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const thisClass = classnames(appCss.layer4);
-		const loaderContent = this.props.app.ready ? null : (<Loader />);
-		return !this.props.app.configed ? loaderContent : (
+		if (!this.props.app.configed) {
+			return (
+				<div className={thisClass}>
+					<Loader />
+				</div>
+			);
+		} else if (!this.props.app.zoomersLoaded) {
+			return (
+				<div className={thisClass}>
+					<Zoomers />
+					<Loader />
+				</div>
+			);
+		}
+		return (
 			<div className={thisClass}>
 				<Zoomers />
 				<EggCovers />
@@ -30,7 +43,6 @@ export class MyComponent extends Component {
 				<Content />
 				<Controls />
 				<Blocker />
-				{loaderContent}
 			</div>
 		);
 	}

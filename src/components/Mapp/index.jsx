@@ -11,7 +11,6 @@ import EggIcons from 'tion2/components/Mapp/EggIcons';
 import Distances from 'tion2/components/Mapp/Distances';
 import Origins from 'tion2/components/Mapp/Origins';
 import Destinations from 'tion2/components/Mapp/Destinations';
-import { isCapture } from 'tion2/utils/tools';
 import {
 	waitForMapIdle,
 	setLayers,
@@ -63,7 +62,7 @@ export class MyComponent extends Component {
 			await waitForMapIdle(this.gmap);
 			setLayers(css.layer1, css.layer3);
 			this.props.dispatch({ type: 'MAP_READY' });
-			if (isCapture) this.setCaptureMapOptions.call(this);
+			if (this.props.app.isCapture) this.setCaptureMapOptions.call(this);
 		}
 		asyncFunc.call(this);
 	}
@@ -105,7 +104,7 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const mapClass = classnames(css.map, {
-			[css.capture]: isCapture,
+			[css.capture]: this.props.app.isCapture,
 			[css.ready]: this.props.map.ready,
 			[css.zooming]: this.props.map.zooming,
 			[utilsCss.pointable]: this.props.exploration.mode === 'interactive',
@@ -128,6 +127,7 @@ export class MyComponent extends Component {
 const mapStateToProps = (state) => Object.assign({
 	exploration: state.exploration,
 	origins: state.origins,
+	app: state.app,
 	map: state.map,
 });
 

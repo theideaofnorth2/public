@@ -1,8 +1,10 @@
 const defaultState = {
-	view: 'home',
-	ready: false,
+	isCapture: document.location.search.indexOf('capture') !== -1,
 	configed: false,
+	zoomersLoaded: false,
+	ready: false,
 	language: navigator.language === 'fr' ? 'fr' : 'en',
+	view: 'home',
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -11,6 +13,16 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				configed: true,
+			};
+		case 'ZOOMERS_MOUNTED':
+			return {
+				...state,
+				zoomersLoaded: true,
+			};
+		case 'APP_READY':
+			return {
+				...state,
+				ready: true,
 			};
 		case 'LANGUAGE_SELECTION':
 			return {
@@ -41,11 +53,6 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				view: 'mapp',
-			};
-		case 'APP_READY':
-			return {
-				...state,
-				ready: true,
 			};
 		default:
 			return state;
