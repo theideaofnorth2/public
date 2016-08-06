@@ -11,6 +11,9 @@ import Blocker from './Blocker';
 import Loader from './Loader';
 import Slideshow from './Slideshow';
 import appCss from 'tion2/components/App/css';
+import { imagesUri } from 'tion2/utils/tools';
+
+const backgroundImageUri = `${imagesUri}/background.jpg`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -28,6 +31,10 @@ export class MyComponent extends Component {
 		} else if (!this.props.app.zoomersLoaded) {
 			return (
 				<div className={thisClass}>
+					<link
+						rel="preload"
+						href={backgroundImageUri}
+					/>
 					<Zoomers />
 					<Loader />
 				</div>
