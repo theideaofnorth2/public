@@ -27,9 +27,8 @@ export const waitForMapIdle = (map) => {
 export const getGmContainer = () => document.querySelector('.gm-style > div:nth-child(1)');
 
 export const setLayers = (layer1Class, layer3Class) => {
-	const gmContainer = getGmContainer();
-	const layer1 = gmContainer.querySelector(':scope > div:nth-child(1)');
-	const layer3 = gmContainer.querySelector(':scope > div:nth-child(4)');
+	const layer1 = document.querySelector('.gm-style > div:nth-child(1) > div:nth-child(1)');
+	const layer3 = document.querySelector('.gm-style > div:nth-child(1) > div:nth-child(4)');
 	layer1.classList.add(layer1Class);
 	layer3.classList.add(layer3Class);
 };
