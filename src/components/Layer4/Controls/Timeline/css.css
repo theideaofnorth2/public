@@ -141,3 +141,9 @@
 .nextButton:hover svg :global(#next){
   fill: white;
 }
+.timeline:not(.interactive) .nextButton {
+  transform: scaleX(0.8) scaleY(1.2) translateY(0.5px);
+}
+.nextButton:not(.interactive) svg :global(#next) {
+  fill: #888;
+}

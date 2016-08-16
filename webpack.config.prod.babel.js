@@ -4,6 +4,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 module.exports = {
 	entry: [
+		'babel-polyfill',
 		path.join(__dirname, 'src', 'main'),
 	],
 	output: {

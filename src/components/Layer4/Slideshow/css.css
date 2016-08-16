@@ -4,14 +4,31 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: purple;
+	background: #222;
 	display: none;
-	padding-top: 300px;
-	font-size: 48px;
-	text-align: center;
-	color: white;
 }
 
 .slider.visible {
 	display: block;
+}
+
+.slide {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-position: center center;
+ 	background-size: cover;
+	opacity: 0;
+}
+.slide:nth-child(1) {
+	opacity: 1;
+}
+.slide:nth-child(2) {
+	opacity: 0;
+}
+.slide:nth-child(2).loaded {
+	opacity: 1;
+	transition: opacity 2s linear;
 }

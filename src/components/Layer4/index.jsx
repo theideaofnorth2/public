@@ -31,12 +31,12 @@ export class MyComponent extends Component {
 		} else if (!this.props.app.zoomersLoaded) {
 			return (
 				<div className={thisClass}>
+					<Zoomers />
+					<Loader />
 					<link
 						rel="preload"
 						href={backgroundImageUri}
 					/>
-					<Zoomers />
-					<Loader />
 				</div>
 			);
 		}

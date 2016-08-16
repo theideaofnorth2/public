@@ -4,6 +4,16 @@ import { lastPastIndex } from 'tion2/reducers/selectors/stories';
 
 export const getState = state => state;
 
+function* onInterviewSelection(arg) {
+	const state = yield select(getState);
+	const interview = state.interviews.data.find(i => i._id === arg.interviewId);
+	console.log('onInterviewSelection', interview);
+}
+
+export function* watchInterviewSelection() {
+	yield* takeEvery(['INTERVIEW_SELECTION'], onInterviewSelection);
+}
+
 function* onInterviewSelectionClick(arg) {
 	yield put({ type: 'INTERVIEW_SELECTION', interviewId: arg.interviewId });
 }
@@ -12,12 +22,12 @@ export function* watchInterviewSelectionClick() {
 	yield* takeEvery(['INTERVIEW_CLICK'], onInterviewSelectionClick);
 }
 
-function* onInterviewUnselectionClick() {
+function* onExitInterviewClick() {
 	yield put({ type: 'INTERVIEW_UNSELECTION' });
 }
 
 export function* watchInterviewUnselectionClick() {
-	yield* takeEvery(['INTERVIEW_UNSELECTION_CLICK'], onInterviewUnselectionClick);
+	yield* takeEvery(['EXIT_INTERVIEW_CLICK'], onExitInterviewClick);
 }
 
 function* onEggClick(arg) {

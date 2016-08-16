@@ -13,6 +13,9 @@ const defaultState = {
 	hoveredDestinationInterviewId: null,
 	hoveredInterviewId: null,
 	selectedInterviewId: null,
+	slideshowFirstImageIndex: 0,
+	slideshowSecondImageIndex: 1,
+	slideshowThirdImageIndex: 1,
 };
 
 const formatThemesCsv = interviews =>
@@ -36,7 +39,7 @@ const augmentWithData = data => {
 			const interviewImagesFolder = interviewsImagesFolder
 				.find(d => typeof d[interview.image] !== 'undefined');
 			const interviewImages = !interviewImagesFolder
-				? null
+				? []
 				: interviewImagesFolder[interview.image].sort();
 			return Object.assign({
 				...interview,
@@ -87,12 +90,25 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				selectedInterviewId: null,
+				slideshowFirstImageIndex: 0,
+				slideshowSecondImageIndex: 1,
+				slideshowThirdImageIndex: 2,
 			};
-		case 'EXIT_INTERVIEW_CLICK':
+		case 'NEXT_INTERVIEW_IMAGE': {
+			const selectedInterview = state.data.find(i => i._id === action.interviewId);
+			const secondIndex = state.slideshowSecondImageIndex === selectedInterview.images.length - 1
+				? 1
+				: state.slideshowSecondImageIndex + 1;
+			const thirdIndex = state.slideshowThirdImageIndex === selectedInterview.images.length - 1
+				? 1
+				: state.slideshowThirdImageIndex + 1;
 			return {
 				...state,
-				selectedInterviewId: null,
+				slideshowFirstImageIndex: state.slideshowSecondImageIndex,
+				slideshowSecondImageIndex: secondIndex,
+				slideshowThirdImageIndex: thirdIndex,
 			};
+		}
 		default:
 			return state;
 	}
