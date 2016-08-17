@@ -15,7 +15,7 @@ const defaultState = {
 	selectedInterviewId: null,
 	slideshowFirstImageIndex: 0,
 	slideshowSecondImageIndex: 1,
-	slideshowThirdImageIndex: 1,
+	slideshowThirdImageIndex: 2,
 };
 
 const formatThemesCsv = interviews =>
@@ -100,7 +100,7 @@ export default function reducer(state = defaultState, action = null) {
 				? 1
 				: state.slideshowSecondImageIndex + 1;
 			const thirdIndex = state.slideshowThirdImageIndex === selectedInterview.images.length - 1
-				? 1
+				? 2
 				: state.slideshowThirdImageIndex + 1;
 			return {
 				...state,

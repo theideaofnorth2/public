@@ -50,16 +50,15 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.slider, {
 			[css.visible]: this.props.display,
 		});
-		const firstDivStyle = { backgroundImage:
-			`url(${interviewsImagesUri}/${this.props.interview.image}/` +
-			`${this.props.interview.images[this.props.interviews.slideshowFirstImageIndex]})`,
-		};
-		const secondDivStyle = { backgroundImage:
-			`url(${interviewsImagesUri}/${this.props.interview.image}/` +
-			`${this.props.interview.images[this.props.interviews.slideshowSecondImageIndex]})`,
-		};
-		const thirdImagePath = `${interviewsImagesUri}/${this.props.interview.image}/` +
-			`${this.props.interview.images[this.props.interviews.slideshowThirdImageIndex]}`;
+		const imagesDir = `${interviewsImagesUri}/${this.props.interview.image}/`;
+		const imagesPaths = [
+			this.props.interview.images[this.props.interviews.slideshowFirstImageIndex],
+			this.props.interview.images[this.props.interviews.slideshowSecondImageIndex],
+			this.props.interview.images[this.props.interviews.slideshowThirdImageIndex],
+		];
+		const firstDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[0]})` };
+		const secondDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[1]})` };
+		const thirdImagePath = `${imagesDir}/${imagesPaths[2]}`;
 		return (
 			<div className={thisClass}>
 				<div
