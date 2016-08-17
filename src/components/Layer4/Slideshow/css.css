@@ -30,5 +30,5 @@
 }
 .slide:nth-child(2).loaded {
 	opacity: 1;
-	transition: opacity 2s linear;
+	transition: opacity 5s linear;
 }
