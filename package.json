@@ -41,7 +41,6 @@
     "express": "^4.13.4",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
-    "howler": "git://github.com/goldfire/howler.js.git#v2.0.0-beta14",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
     "papaparse": "^4.1.2",

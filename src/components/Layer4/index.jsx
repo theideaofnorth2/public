@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import Audio from './Audio';
 import Controls from './Controls';
 import EggCovers from './Eggs/EggCovers';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
@@ -26,6 +27,10 @@ export class MyComponent extends Component {
 			return (
 				<div className={thisClass}>
 					<Loader />
+					<link
+						rel="preload"
+						href={backgroundImageUri}
+					/>
 				</div>
 			);
 		} else if (!this.props.app.zoomersLoaded) {
@@ -33,16 +38,13 @@ export class MyComponent extends Component {
 				<div className={thisClass}>
 					<Zoomers />
 					<Loader />
-					<link
-						rel="preload"
-						href={backgroundImageUri}
-					/>
 				</div>
 			);
 		}
 		return (
 			<div className={thisClass}>
 				<Zoomers />
+				<Audio />
 				<EggCovers />
 				<EggInterviewCovers />
 				<EggInterviewIcons />

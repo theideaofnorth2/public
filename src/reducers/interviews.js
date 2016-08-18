@@ -13,9 +13,13 @@ const defaultState = {
 	hoveredDestinationInterviewId: null,
 	hoveredInterviewId: null,
 	selectedInterviewId: null,
+	selectedInterview: null,
 	slideshowFirstImageIndex: 0,
 	slideshowSecondImageIndex: 1,
 	slideshowThirdImageIndex: 2,
+	audioPlaying: false,
+	audioTime: 0,
+	audioTimeSets: 0,
 };
 
 const formatThemesCsv = interviews =>
@@ -29,21 +33,30 @@ const formatThemesCsv = interviews =>
 	});
 
 const augmentWithData = data => {
+	const interviewsSoundsFolder = data.assets
+		.find(entry => entry.name === 'sounds')
+		.content;
 	const interviewsImagesFolder = data.assets
-		.find(d => typeof d.images !== 'undefined')
-		.images
-		.find(d => typeof d.interviews !== 'undefined')
-		.interviews;
+		.find(entry => entry.name === 'images')
+		.content
+		.find(entry => entry.name === 'interviews')
+		.content;
 	return data.interviews
 		.map(interview => {
 			const interviewImagesFolder = interviewsImagesFolder
-				.find(d => typeof d[interview.image] !== 'undefined');
+				.find(entry => entry.name === interview.image);
 			const interviewImages = !interviewImagesFolder
 				? []
-				: interviewImagesFolder[interview.image].sort();
+				: interviewImagesFolder.content.map(e => e.name).sort();
+			const interviewSoundFile = interviewsSoundsFolder
+				.find(entry => entry.name === interview.sound);
+			const interviewSoundDuration = !interviewSoundFile
+				? 0
+				: interviewSoundFile.duration;
 			return Object.assign({
 				...interview,
 				images: interviewImages,
+				duration: interviewSoundDuration,
 				origin: data.origins.find(o => o._id === interview.originId),
 				destination: data.destinations.find(d => d._id === interview.destinationId),
 			});
@@ -85,21 +98,44 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				selectedInterviewId: action.interviewId,
+				selectedInterview: state.data.find(i => i._id === action.interviewId),
+				audioPlaying: true,
+				audioTime: 0,
+				audioTimeSets: 0,
 			};
 		case 'INTERVIEW_UNSELECTION':
 			return {
 				...state,
 				selectedInterviewId: null,
+				selectedInterview: null,
 				slideshowFirstImageIndex: 0,
 				slideshowSecondImageIndex: 1,
 				slideshowThirdImageIndex: 2,
+				audioPlaying: false,
+			};
+		case 'INTERVIEW_AUDIO_PLAYING_TOGGLE':
+			return {
+				...state,
+				audioPlaying: !state.audioPlaying,
+			};
+		case 'INTERVIEW_AUDIO_TIME_GET':
+			return {
+				...state,
+				audioTime: action.time,
+			};
+		case 'INTERVIEW_AUDIO_TIME_SET':
+			return {
+				...state,
+				audioTime: action.time,
+				audioTimeSets: state.audioTimeSets + 1,
 			};
 		case 'NEXT_INTERVIEW_IMAGE': {
-			const selectedInterview = state.data.find(i => i._id === action.interviewId);
-			const secondIndex = state.slideshowSecondImageIndex === selectedInterview.images.length - 1
+			const secondIndex =
+				state.slideshowSecondImageIndex === state.selectedInterview.images.length - 1
 				? 1
 				: state.slideshowSecondImageIndex + 1;
-			const thirdIndex = state.slideshowThirdImageIndex === selectedInterview.images.length - 1
+			const thirdIndex =
+				state.slideshowThirdImageIndex === state.selectedInterview.images.length - 1
 				? 2
 				: state.slideshowThirdImageIndex + 1;
 			return {
