@@ -46,9 +46,9 @@ const augmentWithData = data => {
 			const duration = !soundFile
 				? null
 				: soundFile.duration;
-			const slideDuration = !images.length || !duration
-				? 0
-				: duration / images.length;
+			const slideDuration = images.length < 2 || !duration
+				? 1000
+				: duration / (images.length - 1);
 			return Object.assign({
 				...interview,
 				images,

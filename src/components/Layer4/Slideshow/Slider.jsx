@@ -10,12 +10,14 @@ const SLIDE_DURATION = 15000;
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { slideIndex: 0 };
+		this.imagesDir = `${interviewsImagesUri}/${this.props.interview.image}`;
+		this.loadImages = this.loadImages.bind(this);
 		this.nextImage = this.nextImage.bind(this);
 		this.onImageUpdate = this.onImageUpdate.bind(this);
 	}
 	componentDidUpdate(prevProps) {
 		if (!prevProps.display && this.props.display) {
+			this.loadImages();
 			setTimeout(this.nextImage, SLIDE_DURATION);
 			this.onImageUpdate();
 		}
@@ -25,6 +27,12 @@ export class MyComponent extends Component {
 		) {
 			this.onImageUpdate();
 		}
+	}
+	loadImages() {
+		this.props.interview.images.forEach(image => {
+			const thisImage = new Image();
+			thisImage.src = `${this.imagesDir}/${image}`;
+		});
 	}
 	nextImage() {
 		if (this.props.display) {
@@ -50,13 +58,10 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.slider, {
 			[css.visible]: this.props.display,
 		});
-		const imagesDir = `${interviewsImagesUri}/${this.props.interview.image}`;
 		const prevImagePath = this.props.interview.images[this.props.player.prevImageIndex];
 		const currentImagePath = this.props.interview.images[this.props.player.currentImageIndex];
-		const nextImagePath = this.props.interview.images[this.props.player.nextImageIndex];
-		const prevSlideStyle = { backgroundImage: `url(${imagesDir}/${prevImagePath})` };
-		const currentSlideStyle = { backgroundImage: `url(${imagesDir}/${currentImagePath})` };
-		const nextSlideStyle = { backgroundImage: `url(${imagesDir}/${nextImagePath})` };
+		const prevSlideStyle = { backgroundImage: `url(${this.imagesDir}/${prevImagePath})` };
+		const currentSlideStyle = { backgroundImage: `url(${this.imagesDir}/${currentImagePath})` };
 		return (
 			<div className={thisClass}>
 				<div
@@ -67,10 +72,6 @@ export class MyComponent extends Component {
 					ref="currentSlide"
 					className={css.slide}
 					style={currentSlideStyle}
-				></div>
-				<div
-					className={css.slide}
-					style={nextSlideStyle}
 				></div>
 			</div>
 		);

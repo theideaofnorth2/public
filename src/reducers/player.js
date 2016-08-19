@@ -2,7 +2,6 @@ const defaultState = {
 	interview: null,
 	prevImageIndex: 0,
 	currentImageIndex: 0,
-	nextImageIndex: 1,
 	audioPlaying: false,
 	audioTime: 0,
 	audioTimeSets: 0,
@@ -15,7 +14,6 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				interview: action.interview,
 				currentImageIndex: 1,
-				nextImageIndex: 2,
 				audioPlaying: true,
 				audioTime: 0,
 				audioTimeSets: 0,
@@ -26,7 +24,6 @@ export default function reducer(state = defaultState, action = null) {
 				interview: null,
 				prevImageIndex: 0,
 				currentImageIndex: 0,
-				nextImageIndex: 1,
 				audioPlaying: false,
 			};
 		case 'INTERVIEW_AUDIO_PLAYING_TOGGLE':
@@ -39,15 +36,11 @@ export default function reducer(state = defaultState, action = null) {
 			const prevImageIndex = currentImageIndex !== state.currentImageIndex
 				? state.currentImageIndex
 				: state.prevImageIndex;
-			const nextImageIndex = currentImageIndex < state.interview.images.length
-				? currentImageIndex + 1
-				: currentImageIndex;
 			return {
 				...state,
 				audioTime: action.time,
 				prevImageIndex,
 				currentImageIndex,
-				nextImageIndex,
 			};
 		}
 		case 'INTERVIEW_AUDIO_TIME_SET':
