@@ -90,7 +90,7 @@ export default function reducer(state = defaultState, action = null) {
 		case 'INTERVIEW_SELECTION':
 			return {
 				...state,
-				selectedInterviewId: action.interview._id,
+				selectedInterviewId: action.interviewId,
 			};
 		case 'INTERVIEW_UNSELECTION':
 			return {

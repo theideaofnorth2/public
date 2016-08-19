@@ -7,7 +7,7 @@ export const getState = state => state;
 function* onInterviewSelection(arg) {
 	const state = yield select(getState);
 	const interview = state.interviews.data.find(i => i._id === arg.interviewId);
-	console.log('onInterviewSelection', interview);
+	yield put({ type: 'PLAYER_INTERVIEW', interview });
 }
 
 export function* watchInterviewSelection() {
@@ -15,9 +15,7 @@ export function* watchInterviewSelection() {
 }
 
 function* onInterviewSelectionClick(arg) {
-	const state = yield select(getState);
-	const interview = state.interviews.data.find(i => i._id === arg.interviewId);
-	yield put({ type: 'INTERVIEW_SELECTION', interview });
+	yield put({ type: 'INTERVIEW_SELECTION', interviewId: arg.interviewId });
 }
 
 export function* watchInterviewSelectionClick() {

@@ -10,7 +10,7 @@ const defaultState = {
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
-		case 'INTERVIEW_SELECTION':
+		case 'PLAYER_INTERVIEW':
 			return {
 				...state,
 				selectedInterview: action.interview,
