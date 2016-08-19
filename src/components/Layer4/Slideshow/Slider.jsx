@@ -11,13 +11,16 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.imagesDir = `${interviewsImagesUri}/${this.props.interview.image}`;
-		this.loadImages = this.loadImages.bind(this);
+		this.loadFirstImages = this.loadFirstImages.bind(this);
 		this.nextImage = this.nextImage.bind(this);
 		this.onImageUpdate = this.onImageUpdate.bind(this);
 	}
+	componentDidMount() {
+		this.loadFirstImages();
+		console.log('mounting ', this.props.interview);
+	}
 	componentDidUpdate(prevProps) {
 		if (!prevProps.display && this.props.display) {
-			this.loadImages();
 			setTimeout(this.nextImage, SLIDE_DURATION);
 			this.onImageUpdate();
 		}
@@ -28,11 +31,15 @@ export class MyComponent extends Component {
 			this.onImageUpdate();
 		}
 	}
-	loadImages() {
-		this.props.interview.images.forEach(image => {
-			const thisImage = new Image();
-			thisImage.src = `${this.imagesDir}/${image}`;
-		});
+	loadFirstImages() {
+		if (this.props.interview.images[0]) {
+			const firstImage = new Image();
+			firstImage.src = `${this.imagesDir}/${this.props.interview.images[0]}`;
+		}
+		if (this.props.interview.images[1]) {
+			const secondImage = new Image();
+			secondImage.src = `${this.imagesDir}/${this.props.interview.images[1]}`;
+		}
 	}
 	nextImage() {
 		if (this.props.display) {
@@ -55,24 +62,24 @@ export class MyComponent extends Component {
 			!this.props.interview.image ||
 			!this.props.interview.images
 		) return null;
-		const thisClass = classnames(css.slider, {
-			[css.visible]: this.props.display,
-		});
-		const prevImagePath = this.props.interview.images[this.props.player.prevImageIndex];
-		const currentImagePath = this.props.interview.images[this.props.player.currentImageIndex];
-		const prevSlideStyle = { backgroundImage: `url(${this.imagesDir}/${prevImagePath})` };
-		const currentSlideStyle = { backgroundImage: `url(${this.imagesDir}/${currentImagePath})` };
+		const slidesContent =
+			this.props.interview.images.map((image, index) => {
+				const slideStyle = { backgroundImage: `url(${this.imagesDir}/${image})` };
+				const slideClass = classnames(css.slide, {
+					[css.prevSlide]: this.props.player.prevImageIndex === index,
+					[css.currentSlide]: this.props.player.currentImageIndex === index,
+				});
+				return (
+					<div
+						key={index}
+						style={slideStyle}
+						className={slideClass}
+					></div>
+				);
+			});
 		return (
-			<div className={thisClass}>
-				<div
-					className={css.slide}
-					style={prevSlideStyle}
-				></div>
-				<div
-					ref="currentSlide"
-					className={css.slide}
-					style={currentSlideStyle}
-				></div>
+			<div className={css.slider}>
+				{slidesContent}
 			</div>
 		);
 	}
