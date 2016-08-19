@@ -10,11 +10,20 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
+		this.imagesDir = `${interviewsImagesUri}/${this.props.interview.image}`;
+	}
+	componentDidMount() {
+		this.preloadColorImage();
+	}
+	preloadColorImage = () => {
+		if (this.props.interview.images[1]) {
+			const colorImage = new Image();
+			colorImage.src = `${this.imagesDir}/${this.props.interview.images[1]}`;
+		}
 	}
 	render() {
 		const thisStyle = !this.props.interview.image ? {} : {
-			backgroundImage: `url(${interviewsImagesUri}/` +
-				`${this.props.interview.image}/${this.props.interview.images[0]})`,
+			backgroundImage: `url(${this.imagesDir}/${this.props.interview.images[0]})`,
 		};
 		const thisClass = classnames(css.interview, {
 			[css.visible]: this.props.interviews.hoveredInterviewId === this.props.interview._id,

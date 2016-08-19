@@ -6,6 +6,9 @@ export const SuperPromise = () => {
 	return superPromise;
 };
 
+export const pickInArray = (items) =>
+	items[Math.floor(Math.random() * items.length)];
+
 const productionDomain = 'theideaofnorth2.com';
 
 export const apiUri = `http://${productionDomain}/api/`;

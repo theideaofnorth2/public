@@ -20,7 +20,7 @@ const formatThemesCsv = interviews =>
 		const parsedThemes = Papa.parse(interview.themes, papaConfig).data;
 		const formattedThemes = parsedThemes.map(parsedTheme => Object.assign({
 			time: parsedTheme[0],
-			theme: parsedTheme[1],
+			name: parsedTheme[1],
 		}));
 		return Object.assign({}, interview, { themes: formattedThemes });
 	});

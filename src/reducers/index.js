@@ -9,6 +9,7 @@ import interviews from './interviews';
 import map from './map';
 import origins from './origins';
 import player from './player';
+import themes from './themes';
 import zoomers from './zoomers';
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
 	map,
 	origins,
 	player,
+	themes,
 	zoomers,
 });
 

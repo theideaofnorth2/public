@@ -3,13 +3,6 @@ import { connect } from 'react-redux';
 import { soundsUri } from 'tion2/utils/tools';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.play = this.play.bind(this);
-		this.pause = this.pause.bind(this);
-		this.getCurrentTime = this.getCurrentTime.bind(this);
-		this.setCurrentTime = this.setCurrentTime.bind(this);
-	}
 	componentDidUpdate(prevProps) {
 		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
 		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying &&
@@ -18,16 +11,16 @@ export class MyComponent extends Component {
 			this.setCurrentTime();
 		}
 	}
-	play() {
+	play = () => {
 		this.setCurrentTime();
 		this.refs.audio.play();
 		this.getCurrentTime();
 	}
-	pause() {
+	pause = () => {
 		this.refs.audio.pause();
 		this.setCurrentTime();
 	}
-	getCurrentTime() {
+	getCurrentTime = () => {
 		if (!this.props.player.audioPlaying) return;
 		clearTimeout(this.timeout);
 		this.timeout = setTimeout(this.getCurrentTime, 1000);
@@ -39,7 +32,7 @@ export class MyComponent extends Component {
 			});
 		});
 	}
-	setCurrentTime() {
+	setCurrentTime = () => {
 		this.refs.audio.currentTime = this.props.player.audioTime;
 	}
 	render() {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import play from './play.svg';
 import pause from './pause.svg';
-import volume from './volume.svg';
 import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
@@ -43,6 +42,8 @@ export class MyComponent extends Component {
 			: { transform: `scaleX(${this.props.player.audioTime /
 				this.props.player.interview.duration})`,
 		};
+		const displayTime = `${this.props.player.displayCurrentTime} / ` +
+			`${this.props.player.displayTotalTime}`;
 		return (
 			<div className={thisClass}>
 				<div
@@ -71,8 +72,9 @@ export class MyComponent extends Component {
 				</div>
 				<div
 					className={css.volume}
-					dangerouslySetInnerHTML={{ __html: volume }}
-				></div>
+				>
+					{displayTime}
+				</div>
 			</div>
 		);
 	}

@@ -1,14 +1,14 @@
-.slider {
+.slideshow {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: #222;
 	z-index: 0;
 }
 
-.slide {
+.slide,
+.theme {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -19,11 +19,29 @@
 	opacity: 0;
 	z-index: 0;
 }
+.slide {
+	background-color: #222;
+}
 .slide.prevSlide {
 	opacity: 1;
 }
 .slide.currentSlide {
-	opacity: 1;
 	z-index: 1;
+	animation: fadeIn 5s linear;
+	animation-fill-mode: forwards;
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.theme {
 	transition: opacity 5s linear;
+	z-index: 1;
+}
+.theme.currentTheme {
+	opacity: 1;
 }

@@ -7,7 +7,8 @@ export const getState = state => state;
 function* onInterviewSelection(arg) {
 	const state = yield select(getState);
 	const interview = state.interviews.data.find(i => i._id === arg.interviewId);
-	yield put({ type: 'PLAYER_INTERVIEW', interview });
+	const themes = state.themes.data;
+	yield put({ type: 'PLAYER_INTERVIEW', interview, themes });
 }
 
 export function* watchInterviewSelection() {
