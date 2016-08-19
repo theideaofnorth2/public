@@ -24,7 +24,6 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	map: state.map,
 	origins: state.origins,
 });
 

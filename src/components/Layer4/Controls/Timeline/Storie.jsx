@@ -55,7 +55,6 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	origins: state.origins,
-	stories: state.stories,
 	eggs: state.eggs,
 	interviews: state.interviews,
 });

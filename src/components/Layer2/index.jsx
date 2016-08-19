@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { getGmContainer } from 'tion2/components/Mapp/utils';
 import OriginInterviewCovers from './OriginInterviewCovers';
 import classnames from 'classnames';
@@ -28,8 +27,4 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	map: state.map,
-});
-
-export default connect(mapStateToProps)(MyComponent);
+export default MyComponent;

@@ -20,8 +20,8 @@ export class MyComponent extends Component {
 			this.onImageUpdate();
 		}
 		if (
-			prevProps.interviews.slideshowFirstImageIndex !==
-			this.props.interviews.slideshowFirstImageIndex
+			prevProps.player.slideshowFirstImageIndex !==
+			this.props.player.slideshowFirstImageIndex
 		) {
 			this.onImageUpdate();
 		}
@@ -52,9 +52,9 @@ export class MyComponent extends Component {
 		});
 		const imagesDir = `${interviewsImagesUri}/${this.props.interview.image}/`;
 		const imagesPaths = [
-			this.props.interview.images[this.props.interviews.slideshowFirstImageIndex],
-			this.props.interview.images[this.props.interviews.slideshowSecondImageIndex],
-			this.props.interview.images[this.props.interviews.slideshowThirdImageIndex],
+			this.props.interview.images[this.props.player.slideshowFirstImageIndex],
+			this.props.interview.images[this.props.player.slideshowSecondImageIndex],
+			this.props.interview.images[this.props.player.slideshowThirdImageIndex],
 		];
 		const firstDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[0]})` };
 		const secondDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[1]})` };
@@ -79,6 +79,8 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => Object.assign({
+	player: state.player,
+});
 
 export default connect(mapStateToProps)(MyComponent);

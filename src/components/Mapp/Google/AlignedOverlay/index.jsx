@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
 import css from './css';
 import Overlay from 'tion2/components/Mapp/Google/Overlay';
@@ -32,6 +31,4 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps)(MyComponent);
+export default MyComponent;

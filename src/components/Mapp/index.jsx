@@ -126,7 +126,6 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	exploration: state.exploration,
-	origins: state.origins,
 	app: state.app,
 	map: state.map,
 });

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Destinations from './Destinations';
 import appCss from 'tion2/components/App/css';
 
@@ -17,6 +16,4 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps)(MyComponent);
+export default MyComponent;

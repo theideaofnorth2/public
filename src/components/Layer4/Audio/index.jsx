@@ -11,10 +11,10 @@ export class MyComponent extends Component {
 		this.setCurrentTime = this.setCurrentTime.bind(this);
 	}
 	componentDidUpdate(prevProps) {
-		if (!prevProps.interviews.audioPlaying && this.props.interviews.audioPlaying) this.play();
-		if (prevProps.interviews.audioPlaying && !this.props.interviews.audioPlaying &&
-			this.props.interviews.selectedInterviewId) this.pause();
-		if (prevProps.interviews.audioTimeSets !== this.props.interviews.audioTimeSets) {
+		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
+		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying &&
+			this.props.player.selectedInterview) this.pause();
+		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}
 	}
@@ -28,28 +28,33 @@ export class MyComponent extends Component {
 		this.setCurrentTime();
 	}
 	getCurrentTime() {
-		if (!this.props.interviews.audioPlaying) return;
+		if (!this.props.player.audioPlaying) return;
 		setTimeout(this.getCurrentTime, 1000);
-		this.props.dispatch({
-			type: 'INTERVIEW_AUDIO_TIME_GET',
-			time: this.refs.audio.currentTime,
+		requestAnimationFrame(() => {
+			if (!this.props.player.audioPlaying) return;
+			this.props.dispatch({
+				type: 'INTERVIEW_AUDIO_TIME_GET',
+				time: this.refs.audio.currentTime,
+			});
 		});
 	}
 	setCurrentTime() {
-		this.refs.audio.currentTime = this.props.interviews.audioTime;
+		this.refs.audio.currentTime = this.props.player.audioTime;
 	}
 	render() {
-		if (!this.props.interviews.selectedInterviewId) return null;
+		if (!this.props.player.selectedInterview) return null;
 		return (
 			<audio
 				ref="audio"
 				preload="metadata"
-				src={`${soundsUri}/${this.props.interviews.selectedInterview.sound}`}
+				src={`${soundsUri}/${this.props.player.selectedInterview.sound}`}
 			/>
 		);
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => Object.assign({
+	player: state.player,
+});
 
 export default connect(mapStateToProps)(MyComponent);

@@ -19,6 +19,9 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => Object.assign({
+	map: state.map,
+	exploration: state.exploration,
+});
 
 export default connect(mapStateToProps)(MyComponent);

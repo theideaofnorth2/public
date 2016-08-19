@@ -25,7 +25,6 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = (state) => Object.assign({
-	map: state.map,
 	interviews: state.interviews,
 });
 

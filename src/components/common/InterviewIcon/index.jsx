@@ -67,7 +67,6 @@ const mapStateToProps = (state) => Object.assign({
 	eggs: state.eggs,
 	origins: state.origins,
 	interviews: state.interviews,
-	map: state.map,
 });
 
 export default connect(mapStateToProps)(MyComponent);

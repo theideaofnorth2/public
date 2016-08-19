@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import css from './css';
 import { TION2Overlay } from './utils';
 
@@ -25,6 +24,4 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps)(MyComponent);
+export default MyComponent;

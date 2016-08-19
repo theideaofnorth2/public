@@ -49,7 +49,6 @@ export class MyComponent extends Component {
 
 const mapStateToProps = (state) => Object.assign({
 	app: state.app,
-	controls: state.controls,
 	stories: state.stories,
 	exploration: state.exploration,
 	lastPastIndex: lastPastIndex(state),

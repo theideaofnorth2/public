@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
 import Approach from './Approach';
 import About from './About';
@@ -21,6 +20,4 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => state;
-
-export default connect(mapStateToProps)(MyComponent);
+export default MyComponent;

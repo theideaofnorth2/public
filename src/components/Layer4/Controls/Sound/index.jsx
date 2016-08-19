@@ -27,21 +27,21 @@ export class MyComponent extends Component {
 	setCurrentTime(e) {
 		this.props.dispatch({
 			type: 'INTERVIEW_AUDIO_TIME_SET',
-			time: this.getClickPosition(e) * this.props.interviews.selectedInterview.duration,
+			time: this.getClickPosition(e) * this.props.player.selectedInterview.duration,
 		});
 	}
 	render() {
 		const thisClass = classnames(utilsCss.pointable, css.sound, {
 			[css.visible]: this.props.app.view === 'mapp' &&
-				this.props.interviews.selectedInterviewId !== null,
+				this.props.player.selectedInterview !== null,
 		});
 		const buttonClass = classnames(css.button, {
-			[css.playing]: this.props.interviews.audioPlaying,
+			[css.playing]: this.props.player.audioPlaying,
 		});
-		const seekStyle = !this.props.interviews.selectedInterviewId
+		const seekStyle = !this.props.player.selectedInterview
 			? {}
-			: { transform: `scaleX(${this.props.interviews.audioTime /
-				this.props.interviews.selectedInterview.duration})`,
+			: { transform: `scaleX(${this.props.player.audioTime /
+				this.props.player.selectedInterview.duration})`,
 		};
 		return (
 			<div className={thisClass}>
@@ -78,6 +78,9 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = state => Object.assign({
+	app: state.app,
+	player: state.player,
+});
 
 export default connect(mapStateToProps)(MyComponent);
