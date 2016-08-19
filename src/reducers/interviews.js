@@ -36,20 +36,24 @@ const augmentWithData = data => {
 		.content;
 	return data.interviews
 		.map(interview => {
-			const interviewImagesFolder = interviewsImagesFolder
+			const imagesFolder = interviewsImagesFolder
 				.find(entry => entry.name === interview.image);
-			const interviewImages = !interviewImagesFolder
+			const images = !imagesFolder
 				? []
-				: interviewImagesFolder.content.map(e => e.name).sort();
-			const interviewSoundFile = interviewsSoundsFolder
+				: imagesFolder.content.map(e => e.name).sort();
+			const soundFile = interviewsSoundsFolder
 				.find(entry => entry.name === interview.sound);
-			const interviewSoundDuration = !interviewSoundFile
+			const duration = !soundFile
+				? null
+				: soundFile.duration;
+			const slideDuration = !images.length || !duration
 				? 0
-				: interviewSoundFile.duration;
+				: duration / images.length;
 			return Object.assign({
 				...interview,
-				images: interviewImages,
-				duration: interviewSoundDuration,
+				images,
+				duration,
+				slideDuration,
 				origin: data.origins.find(o => o._id === interview.originId),
 				destination: data.destinations.find(d => d._id === interview.destinationId),
 			});

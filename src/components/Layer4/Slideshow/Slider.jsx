@@ -20,8 +20,8 @@ export class MyComponent extends Component {
 			this.onImageUpdate();
 		}
 		if (
-			prevProps.player.slideshowFirstImageIndex !==
-			this.props.player.slideshowFirstImageIndex
+			prevProps.player.currentImageIndex !==
+			this.props.player.currentImageIndex
 		) {
 			this.onImageUpdate();
 		}
@@ -36,9 +36,9 @@ export class MyComponent extends Component {
 		}
 	}
 	onImageUpdate() {
-		if (this.refs && this.refs.secondSlide) {
-			this.refs.secondSlide.classList.remove(css.loaded);
-			requestAnimationFrame(() => this.refs.secondSlide.classList.add(css.loaded));
+		if (this.refs && this.refs.currentSlide) {
+			this.refs.currentSlide.classList.remove(css.loaded);
+			requestAnimationFrame(() => this.refs.currentSlide.classList.add(css.loaded));
 		}
 	}
 	render() {
@@ -50,30 +50,28 @@ export class MyComponent extends Component {
 		const thisClass = classnames(css.slider, {
 			[css.visible]: this.props.display,
 		});
-		const imagesDir = `${interviewsImagesUri}/${this.props.interview.image}/`;
-		const imagesPaths = [
-			this.props.interview.images[this.props.player.slideshowFirstImageIndex],
-			this.props.interview.images[this.props.player.slideshowSecondImageIndex],
-			this.props.interview.images[this.props.player.slideshowThirdImageIndex],
-		];
-		const firstDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[0]})` };
-		const secondDivStyle = { backgroundImage: `url(${imagesDir}/${imagesPaths[1]})` };
-		const thirdImagePath = `${imagesDir}/${imagesPaths[2]}`;
+		const imagesDir = `${interviewsImagesUri}/${this.props.interview.image}`;
+		const prevImagePath = this.props.interview.images[this.props.player.prevImageIndex];
+		const currentImagePath = this.props.interview.images[this.props.player.currentImageIndex];
+		const nextImagePath = this.props.interview.images[this.props.player.nextImageIndex];
+		const prevSlideStyle = { backgroundImage: `url(${imagesDir}/${prevImagePath})` };
+		const currentSlideStyle = { backgroundImage: `url(${imagesDir}/${currentImagePath})` };
+		const nextSlideStyle = { backgroundImage: `url(${imagesDir}/${nextImagePath})` };
 		return (
 			<div className={thisClass}>
 				<div
 					className={css.slide}
-					style={firstDivStyle}
+					style={prevSlideStyle}
 				></div>
 				<div
-					ref="secondSlide"
+					ref="currentSlide"
 					className={css.slide}
-					style={secondDivStyle}
+					style={currentSlideStyle}
 				></div>
-				<link
-					rel="preload"
-					href={thirdImagePath}
-				/>
+				<div
+					className={css.slide}
+					style={nextSlideStyle}
+				></div>
 			</div>
 		);
 	}

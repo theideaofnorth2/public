@@ -1,8 +1,8 @@
 const defaultState = {
-	selectedInterview: null,
-	slideshowFirstImageIndex: 0,
-	slideshowSecondImageIndex: 1,
-	slideshowThirdImageIndex: 2,
+	interview: null,
+	prevImageIndex: 0,
+	currentImageIndex: 0,
+	nextImageIndex: 1,
 	audioPlaying: false,
 	audioTime: 0,
 	audioTimeSets: 0,
@@ -13,7 +13,9 @@ export default function reducer(state = defaultState, action = null) {
 		case 'PLAYER_INTERVIEW':
 			return {
 				...state,
-				selectedInterview: action.interview,
+				interview: action.interview,
+				currentImageIndex: 1,
+				nextImageIndex: 2,
 				audioPlaying: true,
 				audioTime: 0,
 				audioTimeSets: 0,
@@ -21,10 +23,10 @@ export default function reducer(state = defaultState, action = null) {
 		case 'INTERVIEW_UNSELECTION':
 			return {
 				...state,
-				selectedInterview: null,
-				slideshowFirstImageIndex: 0,
-				slideshowSecondImageIndex: 1,
-				slideshowThirdImageIndex: 2,
+				interview: null,
+				prevImageIndex: 0,
+				currentImageIndex: 0,
+				nextImageIndex: 1,
 				audioPlaying: false,
 			};
 		case 'INTERVIEW_AUDIO_PLAYING_TOGGLE':
@@ -32,33 +34,28 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				audioPlaying: !state.audioPlaying,
 			};
-		case 'INTERVIEW_AUDIO_TIME_GET':
+		case 'INTERVIEW_AUDIO_TIME_GET': {
+			const currentImageIndex = parseInt(action.time / state.interview.slideDuration, 10) + 1;
+			const prevImageIndex = currentImageIndex !== state.currentImageIndex
+				? state.currentImageIndex
+				: state.prevImageIndex;
+			const nextImageIndex = currentImageIndex < state.interview.images.length
+				? currentImageIndex + 1
+				: currentImageIndex;
 			return {
 				...state,
 				audioTime: action.time,
+				prevImageIndex,
+				currentImageIndex,
+				nextImageIndex,
 			};
+		}
 		case 'INTERVIEW_AUDIO_TIME_SET':
 			return {
 				...state,
 				audioTime: action.time,
 				audioTimeSets: state.audioTimeSets + 1,
 			};
-		case 'NEXT_INTERVIEW_IMAGE': {
-			const secondIndex =
-				state.slideshowSecondImageIndex === state.selectedInterview.images.length - 1
-				? 1
-				: state.slideshowSecondImageIndex + 1;
-			const thirdIndex =
-				state.slideshowThirdImageIndex === state.selectedInterview.images.length - 1
-				? 2
-				: state.slideshowThirdImageIndex + 1;
-			return {
-				...state,
-				slideshowFirstImageIndex: state.slideshowSecondImageIndex,
-				slideshowSecondImageIndex: secondIndex,
-				slideshowThirdImageIndex: thirdIndex,
-			};
-		}
 		default:
 			return state;
 	}

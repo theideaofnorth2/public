@@ -13,7 +13,7 @@ export class MyComponent extends Component {
 	componentDidUpdate(prevProps) {
 		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
 		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying &&
-			this.props.player.selectedInterview) this.pause();
+			this.props.player.interview) this.pause();
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}
@@ -29,7 +29,8 @@ export class MyComponent extends Component {
 	}
 	getCurrentTime() {
 		if (!this.props.player.audioPlaying) return;
-		setTimeout(this.getCurrentTime, 1000);
+		clearTimeout(this.timeout);
+		this.timeout = setTimeout(this.getCurrentTime, 1000);
 		requestAnimationFrame(() => {
 			if (!this.props.player.audioPlaying) return;
 			this.props.dispatch({
@@ -42,12 +43,12 @@ export class MyComponent extends Component {
 		this.refs.audio.currentTime = this.props.player.audioTime;
 	}
 	render() {
-		if (!this.props.player.selectedInterview) return null;
+		if (!this.props.player.interview) return null;
 		return (
 			<audio
 				ref="audio"
 				preload="metadata"
-				src={`${soundsUri}/${this.props.player.selectedInterview.sound}`}
+				src={`${soundsUri}/${this.props.player.interview.sound}`}
 			/>
 		);
 	}

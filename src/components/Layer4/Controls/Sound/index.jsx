@@ -27,21 +27,21 @@ export class MyComponent extends Component {
 	setCurrentTime(e) {
 		this.props.dispatch({
 			type: 'INTERVIEW_AUDIO_TIME_SET',
-			time: this.getClickPosition(e) * this.props.player.selectedInterview.duration,
+			time: this.getClickPosition(e) * this.props.player.interview.duration,
 		});
 	}
 	render() {
 		const thisClass = classnames(utilsCss.pointable, css.sound, {
 			[css.visible]: this.props.app.view === 'mapp' &&
-				this.props.player.selectedInterview !== null,
+				this.props.player.interview !== null,
 		});
 		const buttonClass = classnames(css.button, {
 			[css.playing]: this.props.player.audioPlaying,
 		});
-		const seekStyle = !this.props.player.selectedInterview
+		const seekStyle = !this.props.player.interview
 			? {}
 			: { transform: `scaleX(${this.props.player.audioTime /
-				this.props.player.selectedInterview.duration})`,
+				this.props.player.interview.duration})`,
 		};
 		return (
 			<div className={thisClass}>
