@@ -12,6 +12,12 @@ export class MyComponent extends Component {
 		this.onEnglishClick = this.onEnglishClick.bind(this);
 		this.onFrenchClick = this.onFrenchClick.bind(this);
 	}
+	onMouseEnter = () => {
+		this.props.dispatch({ type: 'LANGUAGE_MOUSE_OVER' });
+	}
+	onMouseLeave = () => {
+		this.props.dispatch({ type: 'LANGUAGE_MOUSE_LEAVE' });
+	}
 	onEnglishClick() {
 		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'en' });
 	}
@@ -19,7 +25,9 @@ export class MyComponent extends Component {
 		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'fr' });
 	}
 	render() {
-		const languageClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.language);
+		const languageClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.language, {
+			[dropdownCss.hovered]: this.props.app.languageHovered,
+		});
 		const englishClass = classnames({
 			[dropdownCss.selected]: this.props.app.language === 'en',
 		});
@@ -27,7 +35,11 @@ export class MyComponent extends Component {
 			[dropdownCss.selected]: this.props.app.language === 'fr',
 		});
 		return (
-			<div className={languageClass}>
+			<div
+				onMouseEnter={this.onMouseEnter}
+				onMouseLeave={this.onMouseLeave}
+				className={languageClass}
+			>
 				<div
 					className={englishClass}
 					onClick={this.onEnglishClick}

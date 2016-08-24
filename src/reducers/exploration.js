@@ -5,10 +5,21 @@ const defaultState = {
 	split: true,
 	descriptive: true,
 	animating: false,
+	hovered: true,
 };
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
+		case 'EXPLORATION_MOUSE_OVER':
+			return {
+				...state,
+				hovered: true,
+			};
+		case 'EXPLORATION_MOUSE_LEAVE':
+			return {
+				...state,
+				hovered: false,
+			};
 		case 'EXPLORATION_ANIMATION_NON_DESCRIPTIVE':
 			return {
 				...state,

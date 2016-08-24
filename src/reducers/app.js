@@ -5,6 +5,7 @@ const defaultState = {
 	ready: false,
 	language: navigator.language === 'fr' ? 'fr' : 'en',
 	view: 'home',
+	languageHovered: false,
 };
 
 export default function reducer(state = defaultState, action = null) {
@@ -23,6 +24,16 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				ready: true,
+			};
+		case 'LANGUAGE_MOUSE_OVER':
+			return {
+				...state,
+				languageHovered: true,
+			};
+		case 'LANGUAGE_MOUSE_LEAVE':
+			return {
+				...state,
+				languageHovered: false,
 			};
 		case 'LANGUAGE_SELECTION':
 			return {

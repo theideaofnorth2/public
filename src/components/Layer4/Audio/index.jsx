@@ -4,9 +4,9 @@ import { soundsUri } from 'tion2/utils/tools';
 
 export class MyComponent extends Component {
 	componentDidUpdate(prevProps) {
+		if (!this.props.player.interview) return;
 		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
-		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying &&
-			this.props.player.interview) this.pause();
+		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying) this.pause();
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}

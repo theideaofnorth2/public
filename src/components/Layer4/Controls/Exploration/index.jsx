@@ -12,6 +12,16 @@ export class MyComponent extends Component {
 		this.onTourClick = this.onTourClick.bind(this);
 		this.onInteractiveClick = this.onInteractiveClick.bind(this);
 	}
+	onMouseEnter = () => {
+		if (this.props.app.view !== 'home') {
+			this.props.dispatch({ type: 'EXPLORATION_MOUSE_OVER' });
+		}
+	}
+	onMouseLeave = () => {
+		if (this.props.app.view !== 'home') {
+			this.props.dispatch({ type: 'EXPLORATION_MOUSE_LEAVE' });
+		}
+	}
 	onTourClick() {
 		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'tour' });
 	}
@@ -20,6 +30,7 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const explorationClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.exploration, {
+			[dropdownCss.hovered]: this.props.exploration.hovered,
 			[css.centered]: this.props.exploration.centered,
 			[css.open]: this.props.exploration.open,
 			[css.split]: this.props.exploration.split,
@@ -39,7 +50,11 @@ export class MyComponent extends Component {
 			interactiveDescription: en ? 'Explore independently' : 'Explorer indépendamment',
 		};
 		return (
-			<div className={explorationClass}>
+			<div
+				onMouseEnter={this.onMouseEnter}
+				onMouseLeave={this.onMouseLeave}
+				className={explorationClass}
+			>
 				<div
 					className={tourClass}
 					onClick={this.onTourClick}

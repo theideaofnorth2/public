@@ -191,6 +191,8 @@ function* onExplorationClick(arg) {
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_SPLIT' });
 		yield delay(1000);
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_OPEN' });
+		yield delay(300);
+		yield put({ type: 'EXPLORATION_MOUSE_LEAVE' });
 		yield delay(1000);
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_CENTERED' });
 		yield delay(1000);
