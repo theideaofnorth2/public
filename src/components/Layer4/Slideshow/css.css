@@ -40,7 +40,7 @@
 }
 .theme {
 	transition: opacity 5s linear;
-	z-index: 0;
+	z-index: 1;
 }
 .theme.currentTheme {
 	opacity: 1;

@@ -83,7 +83,7 @@ export default function reducer(state = defaultState, action = null) {
 				audioPlaying: !state.audioPlaying,
 			};
 		case 'INTERVIEW_AUDIO_TIME_GET': {
-			const displayCurrentTime = action.time;
+			const displayCurrentTime = parseInt(action.time, 10);
 			const currentPhotoSlideIndex = state.photoSlides.findIndex(slide => slide.current);
 			const nextCurrentPhotoSlideIndex = state.photoSlides.findIndex(slide =>
 				slide.startTime <= action.time && slide.endTime > action.time);
