@@ -30,6 +30,7 @@ export class MyComponent extends Component {
 		});
 	}
 	render() {
+		if (!this.props.player.interview) return null;
 		const thisClass = classnames(utilsCss.pointable, css.sound, {
 			[css.visible]: this.props.app.view === 'mapp' &&
 				this.props.player.interview !== null,
@@ -42,8 +43,8 @@ export class MyComponent extends Component {
 			: { transform: `scaleX(${this.props.player.audioTime /
 				this.props.player.interview.duration})`,
 		};
-		const displayTime = `${this.props.player.displayCurrentTime} / ` +
-			`${this.props.player.displayTotalTime}`;
+		const displayTime = `${parseInt(this.props.player.audioTime, 10)} / ` +
+			`${this.props.player.interview.duration}`;
 		return (
 			<div className={thisClass}>
 				<div
