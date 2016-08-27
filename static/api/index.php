@@ -1,15 +1,21 @@
 <?php
 
-//Audio File information library
+/*
+    Audio File information library
+*/
 require_once('getid3/getid3.php');
 
-// http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+/*
+    http://stackoverflow.com/questions/834303/startswith-and-endswith-functions-in-php
+*/
 function endsWith($haystack, $needle) {
     // search forward starting from end minus needle length characters
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
-// Adaptation of http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
+/*
+    Adaptation of http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
+*/
 function getAudioFileDuration($path) {
     $getID3 = new getID3;
     $mixinfo = $getID3->analyze($path);
@@ -59,5 +65,6 @@ function ReadFolderDirectory($dir,$listDir= array())
 
 $config = json_decode(file_get_contents('./config.json'));
 $config->assets = ReadFolderDirectory("../assets");
+$config->slideshow = json_decode(file_get_contents('./slideshow.json'));
 
 echo json_encode($config);

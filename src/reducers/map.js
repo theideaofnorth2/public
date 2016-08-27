@@ -48,7 +48,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				zooming: true,
-				zoom: action.direction === 'in' ? parseInt(action.zoom, 10) : 4,
+				zoom: action.direction === 'in' ? action.zoom : 4,
 				level: action.direction === 'in' ? 'origin' : 'main',
 			};
 		case 'MAP_ZOOM_FINISHED':

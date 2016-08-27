@@ -3,11 +3,12 @@ import mainStyles from './data/mainStyles.json';
 
 export const getMapOptionsFromUrl = () => {
 	const params = new URLSearchParams(window.location);
+	const zoom = parseInt(params.get('zoom'), 10);
 	return {
 		disableDefaultUI: true,
-		zoom: parseInt(params.get('zoom'), 10),
-		minZoom: parseInt(params.get('zoom'), 10),
-		maxZoom: parseInt(params.get('zoom'), 10),
+		zoom,
+		minZoom: zoom,
+		maxZoom: zoom,
 		center: {
 			lat: parseFloat(params.get('lat')),
 			lng: parseFloat(params.get('lng')),

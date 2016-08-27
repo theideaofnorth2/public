@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.lastLevel = parseInt(this.props.origin.zoom, 10);
+		this.lastLevel = this.props.origin.zoom;
 		this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => Object.assign({
 			level,
 			src: `${originsImagesUri}/${this.props.origin.key}/${level}.png`,

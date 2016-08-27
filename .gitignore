@@ -33,6 +33,7 @@ node_modules
 .node_repl_history
 
 static/api/getid3*
+static/api/*.json
 static/assets*
 static/experiments*
 src/**/*.json

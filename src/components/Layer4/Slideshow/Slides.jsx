@@ -11,15 +11,13 @@ export class MyComponent extends Component {
 	render() {
 		if (
 			!this.props.player.interview ||
-			!this.props.player.interview.image ||
-			!this.props.player.interview.images
+			!this.props.player.photoSlides
 		) return null;
-		const imagesDir = `${interviewsImagesUri}/${this.props.player.interview.image}`;
-		const slidesContent = this.props.player.interview.images.map((image, index) => {
-			const slideStyle = { backgroundImage: `url(${imagesDir}/${image})` };
+		const slidesContent = this.props.player.photoSlides.map((slide, index) => {
+			const slideStyle = { backgroundImage: `url(${interviewsImagesUri}/${slide.path})` };
 			const slideClass = classnames(utilsCss.pointable, css.slide, {
-				[css.prevSlide]: this.props.player.prevImageIndex === index,
-				[css.currentSlide]: this.props.player.currentImageIndex === index,
+				[css.prevSlide]: slide.previous,
+				[css.currentSlide]: slide.current,
 			});
 			return (
 				<div
