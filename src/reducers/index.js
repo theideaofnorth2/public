@@ -6,6 +6,7 @@ import eggs from './eggs';
 import exploration from './exploration';
 import stories from './stories';
 import interviews from './interviews';
+import introduction from './introduction';
 import map from './map';
 import origins from './origins';
 import player from './player';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	exploration,
 	stories,
 	interviews,
+	introduction,
 	map,
 	origins,
 	player,
