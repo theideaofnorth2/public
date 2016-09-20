@@ -4,7 +4,7 @@ const defaultState = {
 	zoomersLoaded: false,
 	ready: false,
 	language: navigator.language === 'fr' ? 'fr' : 'en',
-	view: 'home',
+	view: 'intro',
 	languageHovered: false,
 };
 
@@ -24,6 +24,16 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				ready: true,
+			};
+		case 'INTRODUCTION_END':
+			return {
+				...state,
+				view: 'waiting',
+			};
+		case 'EXPLORATION_ANIMATION_START':
+			return {
+				...state,
+				view: 'home',
 			};
 		case 'LANGUAGE_MOUSE_OVER':
 			return {

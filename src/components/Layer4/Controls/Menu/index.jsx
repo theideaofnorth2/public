@@ -23,7 +23,9 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const menuClass = classnames(utilsCss.pointable, css.menu, {
-			[css.hidden]: this.props.app.view === 'home',
+			[css.displayed]: this.props.app.view !== 'intro' &&
+				this.props.app.view !== 'waiting' &&
+				this.props.app.view !== 'home',
 		});
 		const approachClass = classnames(css.approach, {
 			[css.selected]: this.props.app.view === 'approach',

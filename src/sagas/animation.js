@@ -181,12 +181,14 @@ export function* watchStorieClick() {
 function* onExplorationClick(arg) {
 	const state = yield select(getState);
 	const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
-	if (state.app.view !== 'home' && !window.confirm(message)) return false;
+	if (state.app.view !== 'waiting' && state.app.view !== 'home' &&
+		!window.confirm(message)
+	) return false;
 	const currentStorie = state.stories.data[lastPastIndex(state)];
 	const firstStorie = state.stories.data[0];
 	yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
-	if (state.app.view === 'home') {
-		yield put({ type: 'EXPLORATION_ANIMATION_NON_DESCRIPTIVE' });
+	if (state.app.view === 'waiting' || state.app.view === 'home') {
+		yield put({ type: 'EXPLORATION_ANIMATION_START' });
 		yield delay(400);
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_SPLIT' });
 		yield delay(1000);

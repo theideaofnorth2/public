@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import utilsCss from 'tion2/components/common/utils';
-import { imagesUri } from 'tion2/utils/tools';
 import css from './css';
-
-const backgroundImageUri = `${imagesUri}/background.jpg`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -13,29 +10,23 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(css.background, {
-			[css.home]: this.props.app.view === 'home',
-		});
-		const barClass = classnames(utilsCss.pointable, css.bar);
-		const imgClass = classnames({
-			[css.visible]: this.props.exploration.descriptive,
+		const thisClass = classnames(utilsCss.pointable, css.background, {
+			[css.visible]: this.props.app.view !== 'intro' &&
+				this.props.app.view !== 'waiting',
+			[css.all]: this.props.app.view === 'home',
+			[css.some]: this.props.app.view !== 'intro' &&
+				this.props.app.view !== 'waiting' &&
+				this.props.app.view !== 'home',
 		});
 		return (
-			<div className={thisClass}>
-				<div className={barClass} />
-				<img
-					role="presentation"
-					className={imgClass}
-					src={backgroundImageUri}
-				/>
-			</div>
+			<div className={thisClass}></div>
 		);
 	}
 }
 
 const mapStateToProps = state => Object.assign({
 	app: state.app,
-	exploration: state.exploration,
+	introduction: state.introduction,
 });
 
 export default connect(mapStateToProps)(MyComponent);

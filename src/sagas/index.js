@@ -12,6 +12,7 @@ import {
 } from './animation';
 import { watchApp } from './app';
 import { loadConfig } from './config';
+import { launchIntroduction } from './introduction';
 
 export default function *rootSaga() {
 	yield [
@@ -27,5 +28,6 @@ export default function *rootSaga() {
 		watchTourerClick(),
 		watchExplorationClick(),
 		loadConfig(),
+		launchIntroduction(),
 	];
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 import Audio from './Audio';
 import Controls from './Controls';
 import EggCovers from './Eggs/EggCovers';
@@ -9,12 +8,12 @@ import EggInterviewCovers from './Eggs/EggInterviewCovers';
 import Content from './Content';
 import Zoomers from './Zoomers';
 import Blocker from './Blocker';
-import Loader from './Loader';
+import Introduction from './Introduction';
 import Slideshow from './Slideshow';
 import appCss from 'tion2/components/App/css';
 import { imagesUri } from 'tion2/utils/tools';
 
-const backgroundImageUri = `${imagesUri}/background.jpg`;
+const introductionImageUri = `${imagesUri}/introduction.png`;
 
 export class MyComponent extends Component {
 	constructor(props) {
@@ -22,27 +21,27 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(appCss.layer4);
 		if (!this.props.app.configed) {
 			return (
-				<div className={thisClass}>
-					<Loader />
+				<div className={appCss.layer4}>
+					<Introduction />
 					<link
 						rel="preload"
-						href={backgroundImageUri}
+						href={introductionImageUri}
 					/>
 				</div>
 			);
 		} else if (!this.props.app.zoomersLoaded) {
 			return (
-				<div className={thisClass}>
+				<div className={appCss.layer4}>
+					<Introduction />
 					<Zoomers />
-					<Loader />
 				</div>
 			);
 		}
 		return (
-			<div className={thisClass}>
+			<div className={appCss.layer4}>
+				<Introduction />
 				<Zoomers />
 				<Audio />
 				<EggCovers />

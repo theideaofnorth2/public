@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
-import origin from './origin.svg';
+import origin from 'tion2/components/common/origin.svg';
 import css from './css';
 
 export class MyComponent extends Component {

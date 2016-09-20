@@ -20,7 +20,7 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				hovered: false,
 			};
-		case 'EXPLORATION_ANIMATION_NON_DESCRIPTIVE':
+		case 'EXPLORATION_ANIMATION_START':
 			return {
 				...state,
 				animating: true,

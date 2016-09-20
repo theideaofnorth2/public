@@ -13,12 +13,14 @@ export class MyComponent extends Component {
 		this.onInteractiveClick = this.onInteractiveClick.bind(this);
 	}
 	onMouseEnter = () => {
-		if (this.props.app.view !== 'home') {
+		if (this.props.app.view !== 'home' &&
+			this.props.app.view !== 'waiting') {
 			this.props.dispatch({ type: 'EXPLORATION_MOUSE_OVER' });
 		}
 	}
 	onMouseLeave = () => {
-		if (this.props.app.view !== 'home') {
+		if (this.props.app.view !== 'home' &&
+			this.props.app.view !== 'waiting') {
 			this.props.dispatch({ type: 'EXPLORATION_MOUSE_LEAVE' });
 		}
 	}
@@ -30,6 +32,7 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const explorationClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.exploration, {
+			[css.displayed]: this.props.app.view !== 'intro',
 			[dropdownCss.hovered]: this.props.exploration.hovered,
 			[css.centered]: this.props.exploration.centered,
 			[css.open]: this.props.exploration.open,

@@ -57,6 +57,6 @@
     "webpack-dev-middleware": "^1.6.1",
     "whatwg-fetch": "^1.0.0",
     "why-did-you-update": "0.0.8",
-    "zoomer": "0.0.6"
+    "zoomer": "0.0.7"
   }
 }

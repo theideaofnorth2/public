@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.listen(8081, 'localhost', (err) => {
+app.listen(8081, '0.0.0.0', (err) => {
 	if (err) {
 		console.log(err);
 		return;

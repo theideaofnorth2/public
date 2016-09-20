@@ -3,13 +3,13 @@
 	top: 0;
 	left: 0;
 	width: 200px;
-	display: flex;
 	flex-direction: row;
 	line-height: 20px;
 	padding-left: 10px;
-}
-.menu.hidden {
 	display: none;
+}
+.menu.displayed {
+	display: flex;
 }
 .menu > div {
 	padding: 10px;
