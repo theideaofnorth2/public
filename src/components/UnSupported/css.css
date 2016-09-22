@@ -1,0 +1,21 @@
+.unsupported {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 360px;
+	color: #DDD;
+	padding: 20px;
+	transform: translate(-50%, -60%);
+}
+.headline {
+	text-align: center;
+	font-size: 2.2rem;
+	padding: 0 0 2rem;
+}
+.reason {
+	font-size: 1.1rem;
+	max-width: 350px;
+}
+.link {
+	color: #DDD;
+}
