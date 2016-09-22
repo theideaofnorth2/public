@@ -77,6 +77,7 @@ export class MyComponent extends Component {
 	}
 	setGmapOptions() {
 		this.gmapOptions = {
+			backgroundColor: 'transparent',
 			disableDefaultUI: true,
 			zoom: this.props.map.zoom,
 			minZoom: this.props.map.zoom,
