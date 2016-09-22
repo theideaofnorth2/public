@@ -8,5 +8,6 @@ export const isGoodBrowser = bowser.check({
 	edge: '12',
 });
 
-export const isSupported = isDesktop && isGoodBrowser;
+export const browserName = bowser.name;
 
+export const isSupported = isDesktop && isGoodBrowser;
