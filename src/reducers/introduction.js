@@ -11,10 +11,26 @@ const defaultState = {
 	imageVisible: false,
 	mapUntranslated: false,
 	imageRotating: false,
+	skipped: false,
 };
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
+		case 'INTRODUCTION_SKIP':
+			return {
+				...state,
+				originVisible: false,
+				destinationVisible: false,
+				distanceVisible: false,
+				text1Visible: false,
+				text2Visible: false,
+				text3Visible: false,
+				text4Visible: false,
+				imageVisible: true,
+				mapUntranslated: true,
+				imageRotating: true,
+				skipped: true,
+			};
 		case 'INTRODUCTION_ORIGIN_SHOW':
 			return {
 				...state,

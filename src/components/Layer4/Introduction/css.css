@@ -25,6 +25,9 @@
 	transform: translate3d(0,0,0);
   transition: transform 8s linear;
 }
+.introduction.skipped .map.untranslated {
+	transition: none;
+}
 .introduction img {
 	opacity: 0;
 	transform-origin: 1102px 1102px;
@@ -142,4 +145,14 @@
 .text4.visible p {
 	opacity: 1;
   transition: opacity 1500ms linear;
+}
+
+.skip {
+	display: inline-block;
+	position: absolute;
+	top: 9px;
+	left: 50%;
+	transform: translateX(-50%);
+	cursor: pointer;
+	text-decoration: underline;
 }

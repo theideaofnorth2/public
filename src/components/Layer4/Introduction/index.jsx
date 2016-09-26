@@ -13,10 +13,14 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 	}
+	onSkip = () => {
+		this.props.dispatch({ type: 'INTRODUCTION_SKIP' });
+	}
 	render() {
 		const thisClass = classnames(utilsCss.pointable, css.introduction, {
 			[css.displayed]: this.props.app.view === 'intro' ||
 				this.props.app.view === 'waiting',
+			[css.skipped]: this.props.introduction.skipped,
 		});
 		const mapClass = classnames(css.map, {
 			[css.untranslated]: this.props.introduction.mapUntranslated,
@@ -98,6 +102,12 @@ export class MyComponent extends Component {
 					<p>
 						The Idea Of North 2.0
 					</p>
+				</div>
+				<div
+					className={css.skip}
+					onClick={this.onSkip}
+				>
+					Skip intro
 				</div>
 			</div>
 		);

@@ -30,6 +30,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				view: 'waiting',
 			};
+		case 'INTRODUCTION_SKIP':
+			return {
+				...state,
+				view: 'waiting',
+			};
 		case 'EXPLORATION_ANIMATION_START':
 			return {
 				...state,
