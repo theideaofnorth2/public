@@ -38,6 +38,7 @@ function* playIntroduction() {
 			yield put({ type: 'INTRODUCTION_TEXT4_HIDE' });
 			yield delay(2000);
 			yield put({ type: 'INTRODUCTION_END' });
+			return;
 		}
 	} finally {
 		if (yield cancelled()) {
