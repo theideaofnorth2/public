@@ -7,6 +7,8 @@ const defaultState = {
 	audioPlaying: false,
 	audioTime: 0,
 	audioTimeSets: 0,
+	volumeHovered: false,
+	volume: 0.8,
 };
 
 const getPhotoSlideEndTime = (slides, index, action) => {
@@ -80,6 +82,24 @@ export default function reducer(state = defaultState, action = null) {
 				photoSlides: getPhotoSlides(action),
 				themeSlides: getThemeSlides(action),
 				audioPlaying: true,
+			};
+		}
+		case 'PLAYER_VOLUME_MOUSE_ENTER': {
+			return {
+				...state,
+				volumeHovered: true,
+			};
+		}
+		case 'PLAYER_VOLUME_MOUSE_LEAVE': {
+			return {
+				...state,
+				volumeHovered: false,
+			};
+		}
+		case 'PLAYER_VOLUME_CHANGE': {
+			return {
+				...state,
+				volume: action.volume,
 			};
 		}
 		case 'INTERVIEW_UNSELECTION':

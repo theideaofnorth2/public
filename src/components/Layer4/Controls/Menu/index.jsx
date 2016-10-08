@@ -33,11 +33,11 @@ export class MyComponent extends Component {
 		const aboutClass = classnames(css.about, {
 			[css.selected]: this.props.app.view === 'about',
 		});
-		const en = this.props.app.language === 'en';
-		const text = {
-			home: en ? 'Home' : 'Accueil',
-			approach: en ? 'Approach' : 'Approche',
-			about: en ? 'About' : 'À propos',
+		const { language } = this.props.app;
+		const i18nJsx = {
+			home: { en: 'Home', fr: 'Accueil' },
+			approach: { en: 'Approach', fr: 'Approche' },
+			about: { en: 'About', fr: 'À propos' },
 		};
 		return (
 			<div className={menuClass}>
@@ -45,19 +45,19 @@ export class MyComponent extends Component {
 					className={css.home}
 					onClick={this.onHomeClick}
 				>
-					{text.home}
+					{i18nJsx.home[language]}
 				</div>
 				<div
 					className={approachClass}
 					onClick={this.onApproachClick}
 				>
-					{text.approach}
+					{i18nJsx.approach[language]}
 				</div>
 				<div
 					className={aboutClass}
 					onClick={this.onAboutClick}
 				>
-					{text.about}
+					{i18nJsx.about[language]}
 				</div>
 			</div>
 		);

@@ -148,11 +148,14 @@
 }
 
 .skip {
-	display: inline-block;
+	display: none;
 	position: absolute;
 	top: 9px;
 	left: 50%;
 	transform: translateX(-50%);
 	cursor: pointer;
 	text-decoration: underline;
+}
+.skip.displayed {
+	display: inline-block;
 }

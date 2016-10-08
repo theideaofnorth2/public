@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="61px" viewBox="0 0 70 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="speaker" transform="translate(3.000000, 5.000000)" stroke-width="5" stroke="#FFFFFF">
+            <g id="g1">
+                <path d="M33.389,0.769 L16.235,15.606 L0,15.606 L0,34.699 L15.989,34.699 L33.389,49.75 L33.389,0.769 L33.389,0.769 Z" id="polygon1" fill="#FFFFFF"></path>
+                <path d="M42.128,36.03 C44.057,32.934 45.19,29.291 45.19,25.377 C45.19,21.399 44.026,17.703 42.043,14.577" id="path1"></path>
+                <path d="M49.082,7.537 C52.777,12.523 54.966,18.694 54.966,25.377 C54.966,31.998 52.815,38.115 49.178,43.076" id="path2"></path>
+                <path d="M55.71,49.611 C60.977,42.945 64.128,34.531 64.128,25.378 C64.128,16.161 60.936,7.696 55.609,1.01" id="path1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

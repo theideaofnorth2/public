@@ -7,8 +7,8 @@
 	overflow: hidden;
 }
 .layer0,
-.layer2,
 .mapp,
+.layer2,
 .layer4 {
 	position: absolute;
 	top: 0;
@@ -16,14 +16,14 @@
 	width: 100%;
 	height: 100%;
 }
-.layer2,
-.mapp,
-.layer4 {
-	pointer-events: none;
-}
 .layer0 {
 	opacity: 0.55;
 	z-index: 0;
+}
+.mapp,
+.layer2,
+.layer4 {
+	pointer-events: none;
 }
 .mapp {
 	z-index: 1;

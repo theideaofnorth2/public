@@ -58,6 +58,52 @@ export class MyComponent extends Component {
 		const text4Class = classnames(css.text, css.text4, {
 			[css.visible]: this.props.introduction.text4Visible,
 		});
+		const { language } = this.props.app;
+		const i18nJsx = {
+			text1: {
+				en: (
+					<p>
+						In 2014 we began interviewing
+						<br />
+						Canadians in their home town
+					</p>
+				),
+				fr: (
+					<p>
+						En 2014, nous avons interrogé
+						<br />
+						des Canadiens dans leurs villes
+					</p>
+				),
+			},
+			text2: {
+				en: (
+					<p>
+						Asking questions like:<br />
+						"What's the furthest North<br />
+						you've been in Canada?"
+					</p>
+				),
+				fr: (
+					<p>
+						En posant des questions comme:<br />
+						"À quel endroit le plus au Nord<br />
+						avez vous été au Canada?"
+					</p>
+				),
+			},
+			text3: {
+				en: <p>Explore the North as a listener</p>,
+				fr: <p>Explorez le Nord à travers ces témoignages</p>,
+			},
+			skip: {
+				en: 'skip intro',
+				fr: 'passer l\'intro',
+			},
+		};
+		const skipClass = classnames(css.skip, {
+			[css.displayed]: this.props.app.view === 'intro',
+		});
 		return (
 			<div className={thisClass}>
 				<div className={mapClass}>
@@ -81,22 +127,13 @@ export class MyComponent extends Component {
 					</svg>
 				</div>
 				<div className={text1Class}>
-					<p>
-						In 2014 we began interviewing<br />
-						Canadians in their home town
-					</p>
+					{i18nJsx.text1[language]}
 				</div>
 				<div className={text2Class}>
-					<p>
-						Asking questions like:<br />
-						"What's the furthest North<br />
-						you've been in Canada?"
-					</p>
+					{i18nJsx.text2[language]}
 				</div>
 				<div className={text3Class}>
-					<p>
-						Explore the North as a listener
-					</p>
+					{i18nJsx.text3[language]}
 				</div>
 				<div className={text4Class}>
 					<p>
@@ -104,10 +141,10 @@ export class MyComponent extends Component {
 					</p>
 				</div>
 				<div
-					className={css.skip}
+					className={skipClass}
 					onClick={this.onSkip}
 				>
-					Skip intro
+					{i18nJsx.skip[language]}
 				</div>
 			</div>
 		);

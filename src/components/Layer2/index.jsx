@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getGmContainer } from 'tion2/components/Mapp/utils';
 import OriginInterviewCovers from './OriginInterviewCovers';
 import classnames from 'classnames';
@@ -10,11 +11,14 @@ export class MyComponent extends Component {
 		super(props);
 		this.initialized = true;
 	}
-	componentDidMount() {
-		const gmContainer = getGmContainer();
-		gmContainer.appendChild(this.refs.layer2);
+	componentDidUpdate(prevProps) {
+		if (this.props.app.ready && !prevProps.app.ready) {
+			const gmContainer = getGmContainer();
+			gmContainer.appendChild(this.refs.layer2);
+		}
 	}
 	render() {
+		if (!this.props.app.ready) return null;
 		const thisClass = classnames(appCss.layer2, css.layer2);
 		return (
 			<div
@@ -27,4 +31,5 @@ export class MyComponent extends Component {
 	}
 }
 
-export default MyComponent;
+const mapStateToProps = state => ({ app: state.app });
+export default connect(mapStateToProps)(MyComponent);

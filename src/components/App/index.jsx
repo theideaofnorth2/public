@@ -55,17 +55,6 @@ export class MyComponent extends Component {
 					<Layer4 />
 				</div>
 			);
-		} else if (!this.props.app.ready) {
-			return (
-				<div
-					className={css.app}
-					onMouseMove={this.onMouseMove}
-				>
-					<Layer4 />
-					<Layer0 />
-					<Mapp />
-				</div>
-			);
 		}
 		return (
 			<div

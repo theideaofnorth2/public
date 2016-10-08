@@ -45,12 +45,12 @@ export class MyComponent extends Component {
 		const interactiveClass = classnames(css.interactive, {
 			[dropdownCss.selected]: this.props.exploration.mode === 'interactive',
 		});
-		const en = this.props.app.language === 'en';
-		const text = {
-			tour: en ? 'Guided tour' : 'Tour guidé',
-			tourDescription: en ? 'Take me on a journey' : 'Emmène-moi en voyage',
-			interactive: en ? 'Interactive' : 'Interactif',
-			interactiveDescription: en ? 'Explore independently' : 'Explorer indépendamment',
+		const { language } = this.props.app;
+		const i18nJsx = {
+			tour: { en: 'Guided tour', fr: 'Tour guidé' },
+			tourDescription: { en: 'Take me on a journey', fr: 'Emmène-moi en voyage' },
+			interactive: { en: 'Interactive', fr: 'Interactif' },
+			interactiveDescription: { en: 'Explore independently', fr: 'Explorer indépendamment' },
 		};
 		return (
 			<div
@@ -62,18 +62,18 @@ export class MyComponent extends Component {
 					className={tourClass}
 					onClick={this.onTourClick}
 				>
-					{text.tour}
+					{i18nJsx.tour[language]}
 					<div className={css.description}>
-						{text.tourDescription}
+						{i18nJsx.tourDescription[language]}
 					</div>
 				</div>
 				<div
 					className={interactiveClass}
 					onClick={this.onInteractiveClick}
 				>
-					{text.interactive}
+					{i18nJsx.interactive[language]}
 					<div className={css.description}>
-						{text.interactiveDescription}
+						{i18nJsx.interactiveDescription[language]}
 					</div>
 				</div>
 			</div>

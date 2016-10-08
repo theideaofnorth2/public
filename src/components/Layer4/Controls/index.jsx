@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Background from './Background';
 import Tourer from './Tourer';
 import Exit from './Exit';
+import Player from './Player';
+import Background from './Background';
+import Timeline from './Timeline';
 import Menu from './Menu';
 import Language from './Language';
 import Exploration from './Exploration';
-import Timeline from './Timeline';
-import Sound from './Sound';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -37,7 +37,7 @@ export class MyComponent extends Component {
 			>
 				<Tourer />
 				<Exit />
-				<Sound />
+				<Player />
 				<Background />
 				<Menu />
 				<Timeline />

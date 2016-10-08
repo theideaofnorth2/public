@@ -23,25 +23,12 @@
 .path {
 	stroke: rgba(255,255,255,0.8);
 	stroke-width: 1.5;
-	animation: dashOut 150ms cubic-bezier(0,0,0.32,1) forwards;
+	transition: all 150ms cubic-bezier(0,0,0.32,1);
 }
-
 .path.hover,
 .path.delayedHover {
-  animation: dashIn 300ms cubic-bezier(0,0,0.32,1) forwards;
+	stroke-dashoffset: 0 !important;
 }
 .path.delayedHover {
-  animation-delay: 200ms;
-}
-
-@keyframes dashIn {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes dashOut {
-  from {
-    stroke-dashoffset: 0;
-  }
+  transition-delay: 200ms;
 }

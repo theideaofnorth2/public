@@ -10,14 +10,17 @@ export class MyComponent extends Component {
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}
+		if (this.props.player.volume !== prevProps.player.volume) {
+			this.audioRef.volume = this.props.player.volume;
+		}
 	}
 	play = () => {
 		this.setCurrentTime();
-		this.refs.audio.play();
+		this.audioRef.play();
 		this.getCurrentTime();
 	}
 	pause = () => {
-		this.refs.audio.pause();
+		this.audioRef.pause();
 		this.setCurrentTime();
 	}
 	getCurrentTime = () => {
@@ -28,18 +31,18 @@ export class MyComponent extends Component {
 			if (!this.props.player.audioPlaying) return;
 			this.props.dispatch({
 				type: 'INTERVIEW_AUDIO_TIME_GET',
-				time: this.refs.audio.currentTime,
+				time: this.audioRef.currentTime,
 			});
 		});
 	}
 	setCurrentTime = () => {
-		this.refs.audio.currentTime = this.props.player.audioTime;
+		this.audioRef.currentTime = this.props.player.audioTime;
 	}
 	render() {
 		if (!this.props.player.interview) return null;
 		return (
 			<audio
-				ref="audio"
+				ref={ref => { this.audioRef = ref; }}
 				preload="metadata"
 				src={`${soundsUri}/${this.props.player.interview.sound}`}
 			/>

@@ -1,4 +1,4 @@
-:global(.gm-style > div:nth-child(2)),
+:global(.gm-style) > div:nth-child(2),
 :global(.gmnoprint),
 :global(.gm-style-cc) {
 	display: none !important;
@@ -16,7 +16,7 @@
 	opacity: 1;
 }
 .zooming {
-	opacity: 0;
+	display: none;
 }
 
 .layer1 {
