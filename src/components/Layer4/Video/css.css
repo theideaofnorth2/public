@@ -1,18 +1,13 @@
-.egg {
+.video {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	background: black;
-	display: none;
 }
 
-.egg.visible {
-	display: block;
-}
-
-.egg:after {
+.video:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -22,7 +17,7 @@
 }
 
 @media screen and (min-aspect-ratio: 1920/1080) {
-	.egg iframe {
+	.video iframe {
 		position: fixed;
 		top: 50%;
 		left: 50%;
@@ -32,7 +27,7 @@
 	}
 }
 @media screen and (max-aspect-ratio: 1920/1080) {
-	.egg iframe {
+	.video iframe {
 		position: fixed;
 		top: 50%;
 		left: 50%;

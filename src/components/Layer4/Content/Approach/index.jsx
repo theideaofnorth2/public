@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(utilsCss.pointable, contentCss.content, {
+		const thisClass = classnames(utilsCss.pointable, contentCss.contentPage, {
 			[contentCss.visible]: this.props.app.view === 'approach',
 		});
 		const { language } = this.props.app;
@@ -37,8 +37,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
-	app: state.app,
-});
+const mapStateToProps = state => ({ app: state.app });
 
 export default connect(mapStateToProps)(MyComponent);

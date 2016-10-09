@@ -1,14 +1,18 @@
 import { pickInArray } from 'tion2/utils/tools';
 
 const defaultState = {
+	volume: 0.8,
+	volumeHovered: false,
+	egg: null,
+	videoPlaying: false,
+	videoTime: 0,
+	videoTimeSets: 0,
 	interview: null,
 	photoSlides: [],
 	themeSlides: [],
 	audioPlaying: false,
 	audioTime: 0,
 	audioTimeSets: 0,
-	volumeHovered: false,
-	volume: 0.8,
 };
 
 const getPhotoSlideEndTime = (slides, index, action) => {
@@ -75,6 +79,13 @@ const updateSlides = (slides, action) => {
 
 export default function reducer(state = defaultState, action = null) {
 	switch (action.type) {
+		case 'PLAYER_EGG': {
+			return {
+				...state,
+				egg: action.egg,
+				videoPlaying: true,
+			};
+		}
 		case 'PLAYER_INTERVIEW': {
 			return {
 				...state,
@@ -82,6 +93,7 @@ export default function reducer(state = defaultState, action = null) {
 				photoSlides: getPhotoSlides(action),
 				themeSlides: getThemeSlides(action),
 				audioPlaying: true,
+				videoPlaying: false,
 			};
 		}
 		case 'PLAYER_VOLUME_MOUSE_ENTER': {
@@ -102,9 +114,24 @@ export default function reducer(state = defaultState, action = null) {
 				volume: action.volume,
 			};
 		}
+		case 'EXIT_EGG_CLICK':
+			return {
+				...state,
+				egg: null,
+				videoPlaying: false,
+				videoTime: 0,
+				videoTimeSets: 0,
+			};
 		case 'INTERVIEW_UNSELECTION':
 			return {
-				...defaultState,
+				...state,
+				interview: null,
+				videoPlaying: state.egg !== null,
+				photoSlides: [],
+				themeSlides: [],
+				audioPlaying: false,
+				audioTime: 0,
+				audioTimeSets: 0,
 			};
 		case 'INTERVIEW_AUDIO_TIME_GET': {
 			return {

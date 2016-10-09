@@ -4,6 +4,16 @@ import { lastPastIndex } from 'tion2/reducers/selectors/stories';
 
 export const getState = state => state;
 
+function* onEggSelection(arg) {
+	const state = yield select(getState);
+	const egg = state.eggs.data.find(e => e._id === arg.eggId);
+	yield put({ type: 'PLAYER_EGG', egg });
+}
+
+export function* watchEggSelection() {
+	yield* takeEvery(['EGG_SELECTION'], onEggSelection);
+}
+
 function* onInterviewSelection(arg) {
 	const state = yield select(getState);
 	const interview = state.interviews.data.find(i => i._id === arg.interviewId);

@@ -10,7 +10,7 @@ export class MyComponent extends Component {
 		this.initialized = true;
 	}
 	render() {
-		const thisClass = classnames(css.contentContainer);
+		const thisClass = classnames(css.content);
 		return (
 			<div className={thisClass}>
 				<Approach />

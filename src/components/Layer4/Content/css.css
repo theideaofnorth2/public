@@ -1,11 +1,11 @@
-.contentContainer {
+.content {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 }
-.content {
+.contentPage {
 	position: absolute;
 	background: rgba(0,0,0,0.85);
 	top: 0;
@@ -18,14 +18,14 @@
 	display: none;
 	color: #CCC;
 }
-.content.visible {
+.contentPage.visible {
 	display: block;
 }
-.content > div {
+.contentPage > div {
 	width: 600px;
 	margin: 0 auto;
 }
-.content > div > h1 {
+.contentPage > div > h1 {
 	text-align: center;
 	margin: 0;
 }
