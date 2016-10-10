@@ -14,13 +14,14 @@ const opts = {
 
 export class Video extends Component {
 	componentDidUpdate(prevProps) {
-		if (this.props.player.volume !== prevProps.player.volume) { this.setVolume(); }
+		if (this.props.player.videoPlaying &&
+			this.props.player.volume !== prevProps.player.volume) this.setVolume();
 	}
 	onReady = e => { this.player = e.target; }
 	setVolume = () => this.player.setVolume(this.props.player.volume * 100);
 	onPlay = () => this.setVolume();
 	render() {
-		if (!this.props.player.egg || this.props.player.interview) return null;
+		if (!this.props.player.videoPlaying) return null;
 		return (
 			<div className={css.video}>
 				<YouTube

@@ -102,7 +102,8 @@ export class MyComponent extends Component {
 			},
 		};
 		const skipClass = classnames(css.skip, {
-			[css.displayed]: this.props.app.view === 'intro',
+			[css.displayed]: this.props.app.view === 'intro' &&
+				this.props.app.zoomersLoaded,
 		});
 		return (
 			<div className={thisClass}>

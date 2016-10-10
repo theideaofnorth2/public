@@ -10,13 +10,13 @@ export class MyComponent extends Component {
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}
-		if (this.props.player.volume !== prevProps.player.volume) {
-			this.audioRef.volume = this.props.player.volume;
-		}
+		if (this.props.player.volume !== prevProps.player.volume) this.setVolume();
 	}
+	setVolume = () => { this.audioRef.volume = this.props.player.volume; }
 	play = () => {
 		this.setCurrentTime();
 		this.audioRef.play();
+		this.setVolume();
 		this.getCurrentTime();
 	}
 	pause = () => {
