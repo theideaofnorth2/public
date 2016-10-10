@@ -14,47 +14,11 @@ const opts = {
 
 export class Video extends Component {
 	componentDidUpdate(prevProps) {
-		if (this.props.player.volume !== prevProps.player.volume) {
-			this.player.setVolume(this.props.player.volume * 100);
-		}
+		if (this.props.player.volume !== prevProps.player.volume) { this.setVolume(); }
 	}
-	onReady = e => {
-		this.player = e.target;
-	}
-	onPlay = e => {
-		console.log('onPlay', e);
-	}
-	onStateChange = e => {
-		console.log('onStateChange', e);
-	}
-
-
-	play = () => {
-		this.setCurrentTime();
-		this.audioRef.play();
-		this.getCurrentTime();
-	}
-	pause = () => {
-		this.audioRef.pause();
-		this.setCurrentTime();
-	}
-	getCurrentTime = () => {
-		if (!this.props.player.audioPlaying) return;
-		clearTimeout(this.timeout);
-		this.timeout = setTimeout(this.getCurrentTime, 1000);
-		requestAnimationFrame(() => {
-			if (!this.props.player.audioPlaying) return;
-			this.props.dispatch({
-				type: 'INTERVIEW_AUDIO_TIME_GET',
-				time: this.audioRef.currentTime,
-			});
-		});
-	}
-	setCurrentTime = () => {
-		this.audioRef.currentTime = this.props.player.audioTime;
-	}
-
-
+	onReady = e => { this.player = e.target; }
+	setVolume = () => this.player.setVolume(this.props.player.volume * 100);
+	onPlay = () => this.setVolume();
 	render() {
 		if (!this.props.player.egg || this.props.player.interview) return null;
 		return (

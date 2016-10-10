@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import Tourer from './Tourer';
 import Exit from './Exit';
 import Player from './Player';
+import Volume from './Volume';
 import Background from './Background';
 import Timeline from './Timeline';
 import Menu from './Menu';
@@ -38,6 +39,7 @@ export class MyComponent extends Component {
 				<Tourer />
 				<Exit />
 				<Player />
+				<Volume />
 				<Background />
 				<Menu />
 				<Timeline />
