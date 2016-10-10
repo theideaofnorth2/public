@@ -16,7 +16,6 @@
 		</div>
 		<script type="text/javascript">
 			(function() {
-
 				var fillCities = function(config) {
 					config.origins.forEach(function(origin) {
 						var option = document.createElement("option");
@@ -27,10 +26,7 @@
 				}
 				fetch('http://theideaofnorth2.com/api/')
 					.then(function(response) { return response.json(); })
-					.then(fillCities)
-
-
-
+					.then(fillCities);
 				var form = document.querySelector('#captureForm');
 				var select = form.querySelector('select');
 				form.addEventListener('submit', function(e) {
