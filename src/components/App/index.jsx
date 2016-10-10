@@ -7,14 +7,6 @@ import Mapp from 'tion2/components/Mapp';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-		this.onMouseMove = this.onMouseMove.bind(this);
-		this.onMouseStopFor5Seconds = this.onMouseStopFor5Seconds.bind(this);
-		this.clearMouseStopTimer = this.clearMouseStopTimer.bind(this);
-		this.setMouseStopTimer = this.setMouseStopTimer.bind(this);
-	}
 	componentWillReceiveProps(nextProps) {
 		if (
 			this.props.controls.hovered &&
@@ -25,17 +17,17 @@ export class MyComponent extends Component {
 			nextProps.controls.hovered
 		) this.clearMouseStopTimer();
 	}
-	onMouseMove() {
+	onMouseMove = () => {
 		if (!this.props.controls.hovered) this.setMouseStopTimer();
 		if (!this.props.controls.visible) this.props.dispatch({ type: 'CONTROLS_SHOW' });
 	}
-	onMouseStopFor5Seconds() {
+	onMouseStopFor5Seconds = () => {
 		this.props.dispatch({ type: 'CONTROLS_HIDE' });
 	}
-	clearMouseStopTimer() {
+	clearMouseStopTimer = () => {
 		clearTimeout(this.mouseStopTimer);
 	}
-	setMouseStopTimer() {
+	setMouseStopTimer = () => {
 		this.clearMouseStopTimer();
 		this.mouseStopTimer = setTimeout(this.onMouseStopFor5Seconds, 5000);
 	}
@@ -70,7 +62,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	controls: state.controls,
 });

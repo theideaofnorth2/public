@@ -9,9 +9,8 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onCloseClick = this.onCloseClick.bind(this);
 	}
-	onCloseClick() {
+	onCloseClick = () => {
 		if (this.props.app.view === 'approach' || this.props.app.view === 'about') {
 			this.props.dispatch({ type: 'EXIT_CONTENT_CLICK' });
 		} else if (this.props.interviews.selectedInterviewId) {
@@ -45,7 +44,7 @@ export class MyComponent extends Component {
 		);
 	}
 }
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	eggs: state.eggs,
 	interviews: state.interviews,

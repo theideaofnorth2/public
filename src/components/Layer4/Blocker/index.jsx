@@ -19,7 +19,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	map: state.map,
 	exploration: state.exploration,
 });

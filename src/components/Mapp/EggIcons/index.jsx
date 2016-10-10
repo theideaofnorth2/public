@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import Egg from './Egg';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.eggs.data.map(egg => Object.assign(
 			<Egg
@@ -23,8 +19,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	eggs: state.eggs,
-});
+const mapStateToProps = state => ({ eggs: state.eggs });
 
 export default connect(mapStateToProps)(MyComponent);

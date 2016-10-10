@@ -9,8 +9,6 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onTourClick = this.onTourClick.bind(this);
-		this.onInteractiveClick = this.onInteractiveClick.bind(this);
 	}
 	onMouseEnter = () => {
 		if (this.props.app.view !== 'home' &&
@@ -24,10 +22,10 @@ export class MyComponent extends Component {
 			this.props.dispatch({ type: 'EXPLORATION_MOUSE_LEAVE' });
 		}
 	}
-	onTourClick() {
+	onTourClick = () => {
 		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'tour' });
 	}
-	onInteractiveClick() {
+	onInteractiveClick = () => {
 		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'interactive' });
 	}
 	render() {
@@ -81,7 +79,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	exploration: state.exploration,
 });

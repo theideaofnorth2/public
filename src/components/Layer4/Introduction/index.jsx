@@ -9,10 +9,6 @@ import css from './css';
 const imageUri = `${imagesUri}/introduction.png`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	onSkip = () => {
 		this.props.dispatch({ type: 'INTRODUCTION_SKIP' });
 	}
@@ -152,7 +148,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	introduction: state.introduction,
 });

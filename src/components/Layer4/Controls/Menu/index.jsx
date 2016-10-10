@@ -5,20 +5,13 @@ import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-		this.onHomeClick = this.onHomeClick.bind(this);
-		this.onApproachClick = this.onApproachClick.bind(this);
-		this.onAboutClick = this.onAboutClick.bind(this);
-	}
-	onHomeClick() {
+	onHomeClick = () => {
 		this.props.dispatch({ type: 'MENU_HOME_CLICK' });
 	}
-	onApproachClick() {
+	onApproachClick = () => {
 		this.props.dispatch({ type: 'MENU_APPROACH_CLICK' });
 	}
-	onAboutClick() {
+	onAboutClick = () => {
 		this.props.dispatch({ type: 'MENU_ABOUT_CLICK' });
 	}
 	render() {
@@ -64,8 +57,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
-	app: state.app,
-});
+const mapStateToProps = state => ({ app: state.app });
 
 export default connect(mapStateToProps)(MyComponent);

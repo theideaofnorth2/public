@@ -8,17 +8,16 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-		this.coords = this.getCoords.call(this);
-		this.onMount = this.onMount.bind(this);
+		this.coords = this.getCoords();
 	}
-	onMount() {
+	onMount = () => {
 		this.divRect = this.refs.distance.getBoundingClientRect();
-		this.pathLength = this.getPathLength.call(this);
-		this.pathDirection = this.getPathDirection.call(this);
-		this.pathD = this.getPathD.call(this);
+		this.pathLength = this.getPathLength();
+		this.pathDirection = this.getPathDirection();
+		this.pathD = this.getPathD();
 		this.setState({ mounted: true });
 	}
-	getCoords() {
+	getCoords = () => {
 		const origin = this.props.interview.origin;
 		const destination = this.props.interview.destination;
 		return {
@@ -28,10 +27,9 @@ export class MyComponent extends Component {
 			neLng: Math.max(origin.lng, destination.lng),
 		};
 	}
-	getPathLength() {
-		return Math.sqrt(Math.pow(this.divRect.width, 2) + Math.pow(this.divRect.height, 2));
-	}
-	getPathDirection() {
+	getPathLength = () =>
+		Math.sqrt(Math.pow(this.divRect.width, 2) + Math.pow(this.divRect.height, 2));
+	getPathDirection = () => {
 		const origin = this.props.interview.origin;
 		const destination = this.props.interview.destination;
 		return {
@@ -39,7 +37,7 @@ export class MyComponent extends Component {
 			vertical: origin.lat > destination.lat ? 'toBottom' : 'toTop',
 		};
 	}
-	getPathD() {
+	getPathD = () => {
 		const x0 = this.pathDirection.horizontal === 'toRight' ? 0 : this.divRect.width;
 		const x1 = this.pathDirection.horizontal === 'toRight' ? this.divRect.width : 0;
 		const y0 = this.pathDirection.vertical === 'toBottom' ? 0 : this.divRect.height;
@@ -90,7 +88,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	map: state.map,
 	interviews: state.interviews,
 	origins: state.origins,

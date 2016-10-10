@@ -9,19 +9,16 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onClick = this.onClick.bind(this);
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.onMouseLeave = this.onMouseLeave.bind(this);
 	}
-	onClick() {
+	onClick = () => {
 		if (!this.props.map.dragging) {
 			this.props.dispatch({ type: 'ORIGIN_CLICK', originId: this.props.origin._id });
 		}
 	}
-	onMouseEnter() {
+	onMouseEnter = () => {
 		this.props.dispatch({ type: 'ORIGIN_MOUSE_ENTER', originId: this.props.origin._id });
 	}
-	onMouseLeave() {
+	onMouseLeave = () => {
 		this.props.dispatch({ type: 'ORIGIN_MOUSE_LEAVE', originId: this.props.origin._id });
 	}
 	render() {
@@ -48,8 +45,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	map: state.map,
-});
+const mapStateToProps = state => ({ map: state.map });
 
 export default connect(mapStateToProps)(MyComponent);

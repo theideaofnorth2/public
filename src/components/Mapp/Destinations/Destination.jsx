@@ -6,19 +6,13 @@ import DestinationInterview from './DestinationInterview';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.onMouseLeave = this.onMouseLeave.bind(this);
-	}
-	onMouseEnter() {
+	onMouseEnter = () => {
 		this.props.dispatch({
 			type: 'DESTINATION_MOUSE_ENTER',
 			destinationId: this.props.destination._id,
 		});
 	}
-	onMouseLeave() {
+	onMouseLeave = () => {
 		this.props.dispatch({ type: 'DESTINATION_MOUSE_LEAVE' });
 	}
 	render() {
@@ -66,7 +60,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	destinations: state.destinations,
 	map: state.map,
 });

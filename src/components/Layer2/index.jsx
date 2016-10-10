@@ -32,4 +32,5 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = state => ({ app: state.app });
+
 export default connect(mapStateToProps)(MyComponent);

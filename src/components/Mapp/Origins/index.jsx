@@ -23,8 +23,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	origins: state.origins,
-});
+const mapStateToProps = state => ({ origins: state.origins });
 
 export default connect(mapStateToProps)(MyComponent);

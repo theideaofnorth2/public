@@ -5,14 +5,7 @@ import circledArrow from './circled-arrow.svg';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-		this.onClick = this.onClick.bind(this);
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.onMouseLeave = this.onMouseLeave.bind(this);
-	}
-	onClick() {
+	onClick = () => {
 		if (!this.props.map.dragging) {
 			this.props.dispatch({
 				type: 'DESTINATION_INTERVIEW_CLICK',
@@ -22,13 +15,13 @@ export class MyComponent extends Component {
 			});
 		}
 	}
-	onMouseEnter() {
+	onMouseEnter = () => {
 		this.props.dispatch({
 			type: 'DESTINATION_INTERVIEW_MOUSE_ENTER',
 			interviewId: this.props.interview._id,
 		});
 	}
-	onMouseLeave() {
+	onMouseLeave = () => {
 		this.props.dispatch({
 			type: 'DESTINATION_INTERVIEW_MOUSE_LEAVE',
 			interviewId: this.props.interview._id,
@@ -53,8 +46,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	map: state.map,
-});
+const mapStateToProps = state => ({ map: state.map });
 
 export default connect(mapStateToProps)(MyComponent);

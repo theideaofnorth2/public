@@ -16,8 +16,6 @@ export class MyComponent extends Component {
 			level,
 			src: `${originsImagesUri}/${this.props.origin.key}/${level}.png`,
 		}));
-		this.mountZoomer = this.mountZoomer.bind(this);
-		this.animateZoomer = this.animateZoomer.bind(this);
 	}
 	componentDidMount() {
 		this.mountZoomer();
@@ -30,7 +28,7 @@ export class MyComponent extends Component {
 			this.animateZoomer();
 		}
 	}
-	mountZoomer() {
+	mountZoomer = () => {
 		this.zoomer = new Zoomer({
 			selector: `#zoomer_${this.props.origin.key}`,
 			width: 1920,
@@ -44,7 +42,7 @@ export class MyComponent extends Component {
 			this.props.onMount(this.props.origin.key);
 		});
 	}
-	animateZoomer() {
+	animateZoomer = () => {
 		const spl = 6;
 		const fromStep = this.props.zoomers.direction === 'in' ? spl * 4 : spl * this.lastLevel;
 		const toStep = this.props.zoomers.direction === 'in' ? spl * this.lastLevel : spl * 4;
@@ -73,8 +71,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	zoomers: state.zoomers,
-});
+const mapStateToProps = state => ({ zoomers: state.zoomers });
 
 export default connect(mapStateToProps)(MyComponent);

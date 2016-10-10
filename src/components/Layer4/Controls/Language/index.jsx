@@ -9,8 +9,6 @@ export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.initialized = true;
-		this.onEnglishClick = this.onEnglishClick.bind(this);
-		this.onFrenchClick = this.onFrenchClick.bind(this);
 	}
 	onMouseEnter = () => {
 		this.props.dispatch({ type: 'LANGUAGE_MOUSE_OVER' });
@@ -18,10 +16,10 @@ export class MyComponent extends Component {
 	onMouseLeave = () => {
 		this.props.dispatch({ type: 'LANGUAGE_MOUSE_LEAVE' });
 	}
-	onEnglishClick() {
+	onEnglishClick = () => {
 		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'en' });
 	}
-	onFrenchClick() {
+	onFrenchClick = () => {
 		this.props.dispatch({ type: 'LANGUAGE_SELECTION', language: 'fr' });
 	}
 	render() {
@@ -57,8 +55,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
-	app: state.app,
-});
+const mapStateToProps = state => ({ app: state.app });
 
 export default connect(mapStateToProps)(MyComponent);

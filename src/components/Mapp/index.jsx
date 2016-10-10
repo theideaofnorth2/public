@@ -31,10 +31,6 @@ const polygonOptions = {
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.setPolygonAndLayers = this.setPolygonAndLayers.bind(this);
-		this.animateCenter = this.animateCenter.bind(this);
-		this.setZoomAndStyles = this.setZoomAndStyles.bind(this);
-		this.setGmapOptions = this.setGmapOptions.bind(this);
 		this.setGmapOptions();
 	}
 	componentDidMount() {
@@ -55,7 +51,7 @@ export class MyComponent extends Component {
 			this.animateCenter();
 		}
 	}
-	setPolygonAndLayers() {
+	setPolygonAndLayers = () => {
 		async function asyncFunc() {
 			const polygon = new google.maps.Polygon(polygonOptions);
 			polygon.setMap(this.gmap);
@@ -66,7 +62,7 @@ export class MyComponent extends Component {
 		}
 		asyncFunc.call(this);
 	}
-	setCaptureMapOptions() {
+	setCaptureMapOptions = () => {
 		this.gmapOptions = getMapOptionsFromUrl();
 		this.gmap.panTo(this.gmapOptions.center);
 		this.gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
@@ -75,7 +71,7 @@ export class MyComponent extends Component {
 			this.gmap.setOptions(this.gmapOptions);
 		}, 0);
 	}
-	setGmapOptions() {
+	setGmapOptions = () => {
 		this.gmapOptions = {
 			backgroundColor: 'transparent',
 			disableDefaultUI: true,
@@ -86,12 +82,12 @@ export class MyComponent extends Component {
 			center: this.props.map.center,
 		};
 	}
-	setZoomAndStyles() {
+	setZoomAndStyles = () => {
 		this.setGmapOptions();
 		this.gmap.setOptions({ minZoom: undefined, maxZoom: undefined });
 		this.gmap.setOptions(this.gmapOptions);
 	}
-	animateCenter() {
+	animateCenter = () => {
 		async function asyncFunc() {
 			await delay(0);
 			if (!areCentersEqual(this.props.map.center, this.gmap.getCenter())) {
@@ -125,7 +121,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	exploration: state.exploration,
 	app: state.app,
 	map: state.map,

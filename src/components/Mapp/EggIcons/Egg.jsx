@@ -8,16 +8,11 @@ import css from './css';
 const eggsImagesUri = `${imagesUri}/eggs`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-		this.onMount = this.onMount.bind(this);
-		this.onClick = this.onClick.bind(this);
-	}
-	onMount() {
+	state = {}
+	onMount = () => {
 		this.setState({ mounted: true });
 	}
-	onClick() {
+	onClick = () => {
 		this.props.dispatch({
 			type: 'EGG_CLICK',
 			eggId: this.props.egg._id,
@@ -56,7 +51,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	origins: state.origins,
 	interviews: state.interviews,
 	map: state.map,

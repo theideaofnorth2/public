@@ -56,8 +56,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
-	app: state.app,
-});
+const mapStateToProps = state => ({ app: state.app });
 
 export default connect(mapStateToProps)(MyComponent);

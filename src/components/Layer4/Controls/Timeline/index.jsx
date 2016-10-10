@@ -7,17 +7,11 @@ import css from './css';
 import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.onStoriesLengthChange = this.onStoriesLengthChange.bind(this);
-		this.prevClick = this.prevClick.bind(this);
-		this.nextClick = this.nextClick.bind(this);
-	}
 	componentDidUpdate(prevProps) {
 		const slDiff = this.props.stories.data.length - prevProps.stories.data.length;
 		if (slDiff !== 0) this.onStoriesLengthChange(slDiff);
 	}
-	onStoriesLengthChange() {
+	onStoriesLengthChange = () => {
 		Object.assign(this.refs.stories.style, {
 			transition: 'none',
 			transform: `translateX(${
@@ -33,10 +27,10 @@ export class MyComponent extends Component {
 			});
 		}, 0);
 	}
-	prevClick() {
+	prevClick = () => {
 		this.props.dispatch({ type: 'STORIES_PREVIOUS_CLICK' });
 	}
-	nextClick() {
+	nextClick = () => {
 		this.props.dispatch({ type: 'STORIES_NEXT_CLICK' });
 	}
 	render() {
@@ -88,7 +82,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	exploration: state.exploration,
 	stories: state.stories,

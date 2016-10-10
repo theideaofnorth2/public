@@ -6,15 +6,10 @@ import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.onPreviousClick = this.onPreviousClick.bind(this);
-		this.onNextClick = this.onNextClick.bind(this);
-	}
-	onPreviousClick() {
+	onPreviousClick = () => {
 		this.props.dispatch({ type: 'TOURER_CLICK', direction: 'previous' });
 	}
-	onNextClick() {
+	onNextClick = () => {
 		this.props.dispatch({ type: 'TOURER_CLICK', direction: 'next' });
 	}
 	render() {
@@ -47,7 +42,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	stories: state.stories,
 	exploration: state.exploration,

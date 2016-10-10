@@ -36,8 +36,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
-	player: state.player,
-});
+const mapStateToProps = state => ({ player: state.player });
 
 export default connect(mapStateToProps)(MyComponent);

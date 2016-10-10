@@ -24,7 +24,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => Object.assign({
+const mapStateToProps = state => ({
 	app: state.app,
 	introduction: state.introduction,
 });

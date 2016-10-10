@@ -4,12 +4,7 @@ import classnames from 'classnames';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { mounted: false };
-		this.onClick = this.onClick.bind(this);
-	}
-	onClick() {
+	onClick = () => {
 		this.props.dispatch({ type: 'STORIE_CLICK', index: this.props.index });
 	}
 	render() {
@@ -53,7 +48,7 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
+const mapStateToProps = state => ({
 	origins: state.origins,
 	eggs: state.eggs,
 	interviews: state.interviews,

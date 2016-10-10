@@ -8,21 +8,19 @@ import css from './css';
 export class MyComponent extends Component {
 	constructor(props) {
 		super(props);
-		this.initialized = true;
-		this.zoomerMount = this.zoomerMount.bind(this);
-		this.initZoomerPromises.call(this);
+		this.initZoomerPromises();
 	}
-	initZoomerPromises() {
+	initZoomerPromises = () => {
 		this.zommerPromises = this.props.origins.data.map(origin => Object.assign({
 			key: origin.key,
 			...new SuperPromise(),
 		}));
-		Promise.all(this.zommerPromises.map(zP => zP.promise)).then(this.zoomersMount.bind(this));
+		Promise.all(this.zommerPromises.map(zP => zP.promise)).then(this.zoomersMount());
 	}
-	zoomerMount(arg) {
+	zoomerMount = arg => {
 		this.zommerPromises.find(zP => zP.key === arg).resolve(arg);
 	}
-	zoomersMount() {
+	zoomersMount = () => {
 		this.props.dispatch({ type: 'ZOOMERS_MOUNTED' });
 	}
 	render() {
@@ -42,8 +40,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = (state) => Object.assign({
-	origins: state.origins,
-});
+const mapStateToProps = state => ({ origins: state.origins });
 
 export default connect(mapStateToProps)(MyComponent);
