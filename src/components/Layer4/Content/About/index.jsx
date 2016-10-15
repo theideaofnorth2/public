@@ -6,10 +6,6 @@ import contentCss from '../css';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const thisClass = classnames(utilsCss.pointable, contentCss.contentPage, {
 			[contentCss.visible]: this.props.app.view === 'about',

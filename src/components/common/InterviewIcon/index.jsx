@@ -5,33 +5,28 @@ import interview from './interview.svg';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-		this.style = !this.props.interview.eggId ? {} : {
-			top: `${this.props.interview.top}%`,
-			left: `${this.props.interview.left}%`,
-		};
-		this.onClick = this.onClick.bind(this);
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.onMouseLeave = this.onMouseLeave.bind(this);
-	}
-	onClick() {
-		return this.props.dispatch({
+	onClick = () => {
+		this.props.dispatch({
 			type: 'INTERVIEW_CLICK',
 			interviewId: this.props.interview._id,
 			originId: this.props.interview.originId,
 			eggId: this.props.interview.eggId,
 		});
 	}
-	onMouseEnter() {
+	onMouseEnter = () => {
 		this.props.dispatch({
 			type: 'INTERVIEW_MOUSE_ENTER',
 			interviewId: this.props.interview._id,
 		});
 	}
-	onMouseLeave() {
+	onMouseLeave = () => {
 		this.props.dispatch({ type: 'INTERVIEW_MOUSE_LEAVE' });
+	}
+	get style() {
+		return !this.props.interview.eggId ? {} : {
+			top: `${this.props.interview.top}%`,
+			left: `${this.props.interview.left}%`,
+		};
 	}
 	render() {
 		const visible = (this.props.interview.parent === 'origin' &&

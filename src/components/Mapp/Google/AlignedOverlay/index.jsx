@@ -4,10 +4,6 @@ import css from './css';
 import Overlay from 'tion2/components/Mapp/Google/Overlay';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const alignmentClass = classnames(
 			css.alignment,

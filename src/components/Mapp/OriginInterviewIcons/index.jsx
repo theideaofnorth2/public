@@ -4,10 +4,6 @@ import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
 import InterviewIcon from 'tion2/components/common/InterviewIcon';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.interviews.originData
 			.map(interview => {

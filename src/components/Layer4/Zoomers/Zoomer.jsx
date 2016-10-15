@@ -8,11 +8,11 @@ import css from './css';
 const originsImagesUri = `${imagesUri}/origins`;
 
 export class MyComponent extends Component {
+	state = {}
 	constructor(props) {
 		super(props);
-		this.state = {};
 		this.lastLevel = this.props.origin.zoom;
-		this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => Object.assign({
+		this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => ({
 			level,
 			src: `${originsImagesUri}/${this.props.origin.key}/${level}.png`,
 		}));

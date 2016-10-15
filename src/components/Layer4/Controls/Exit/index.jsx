@@ -6,10 +6,6 @@ import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	onCloseClick = () => {
 		if (this.props.app.view === 'approach' || this.props.app.view === 'about') {
 			this.props.dispatch({ type: 'EXIT_CONTENT_CLICK' });

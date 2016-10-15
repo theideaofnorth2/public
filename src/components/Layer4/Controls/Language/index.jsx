@@ -6,10 +6,6 @@ import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	onMouseEnter = () => {
 		this.props.dispatch({ type: 'LANGUAGE_MOUSE_OVER' });
 	}

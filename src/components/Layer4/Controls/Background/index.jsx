@@ -5,10 +5,6 @@ import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const thisClass = classnames(utilsCss.pointable, css.background, {
 			[css.visible]: this.props.app.view !== 'intro' &&

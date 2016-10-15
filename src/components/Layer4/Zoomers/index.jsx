@@ -15,7 +15,7 @@ export class MyComponent extends Component {
 			key: origin.key,
 			...new SuperPromise(),
 		}));
-		Promise.all(this.zommerPromises.map(zP => zP.promise)).then(this.zoomersMount());
+		Promise.all(this.zommerPromises.map(zP => zP.promise)).then(this.zoomersMount);
 	}
 	zoomerMount = arg => {
 		this.zommerPromises.find(zP => zP.key === arg).resolve(arg);

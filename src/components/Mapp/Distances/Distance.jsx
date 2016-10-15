@@ -5,9 +5,9 @@ import Overlay from 'tion2/components/Mapp/Google/Overlay';
 import css from './css';
 
 export class MyComponent extends Component {
+	state = {}
 	constructor(props) {
 		super(props);
-		this.state = {};
 		this.coords = this.getCoords();
 	}
 	onMount = () => {

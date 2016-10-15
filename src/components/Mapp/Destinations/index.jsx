@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import Destination from './Destination';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.destinations.data.map(destination => Object.assign(
 			<Destination

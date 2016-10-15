@@ -6,10 +6,6 @@ import origin from 'tion2/components/common/origin.svg';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	onClick = () => {
 		if (!this.props.map.dragging) {
 			this.props.dispatch({ type: 'ORIGIN_CLICK', originId: this.props.origin._id });

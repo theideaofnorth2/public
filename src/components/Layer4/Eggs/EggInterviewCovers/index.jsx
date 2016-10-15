@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import InterviewCover from 'tion2/components/common/InterviewCover';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const interviewCoversContent = this.props.interviews.eggData
 			.map(interview => Object.assign(

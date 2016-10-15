@@ -7,10 +7,8 @@ import css from './css';
 const interviewsImagesUri = `${imagesUri}/interviews`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-		this.imagesDir = `${interviewsImagesUri}/${this.props.interview.customId}`;
+	get imagesDir() {
+		return `${interviewsImagesUri}/${this.props.interview.customId}`;
 	}
 	componentDidMount() {
 		this.preloadColorImage();

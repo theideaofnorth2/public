@@ -4,10 +4,6 @@ import Distance from './Distance';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.interviews.map(interview => Object.assign(
 			<Distance

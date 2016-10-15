@@ -7,10 +7,6 @@ import { imagesUri } from 'tion2/utils/tools';
 const destinationsImagesUri = `${imagesUri}/destinations`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.destinations.data
 			.map(destination => {

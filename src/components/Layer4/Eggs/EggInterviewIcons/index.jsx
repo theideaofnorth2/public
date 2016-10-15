@@ -4,10 +4,6 @@ import InterviewIcon from 'tion2/components/common/InterviewIcon';
 import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		const content = this.props.interviews.eggData
 			.map(interview => Object.assign(

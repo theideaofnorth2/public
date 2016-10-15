@@ -16,10 +16,6 @@ import { imagesUri } from 'tion2/utils/tools';
 const introductionImageUri = `${imagesUri}/introduction.png`;
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	render() {
 		if (!this.props.app.configed) {
 			return (

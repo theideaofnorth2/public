@@ -7,10 +7,6 @@ import appCss from 'tion2/components/App/css';
 import css from './css';
 
 export class MyComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.initialized = true;
-	}
 	componentDidUpdate(prevProps) {
 		if (this.props.app.ready && !prevProps.app.ready) {
 			const gmContainer = getGmContainer();
