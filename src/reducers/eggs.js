@@ -4,7 +4,7 @@ const defaultState = {
 	selectedEggId: null,
 };
 
-const getEggs = (data) =>
+const getEggs = data =>
 	data.eggs
 		.map(egg => {
 			const interviews = data.interviews.filter(interview => egg._id === interview.eggId);

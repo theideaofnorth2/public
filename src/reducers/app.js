@@ -3,7 +3,7 @@ const defaultState = {
 	configed: false,
 	zoomersLoaded: false,
 	ready: false,
-	language: navigator.language === 'fr' ? 'fr' : 'en',
+	language: window.navigator.language === 'fr' ? 'fr' : 'en',
 	view: 'intro',
 	languageHovered: false,
 };

@@ -53,7 +53,7 @@ export class MyComponent extends Component {
 							</div>
 						</div>
 					</div>
-					<div className={css.circle}></div>
+					<div className={css.circle} />
 				</div>
 			</AlignedOverlay>
 		);

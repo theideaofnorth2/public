@@ -2,7 +2,7 @@ import { SuperPromise } from 'tion2/utils/tools';
 import mainStyles from './data/mainStyles.json';
 
 export const getMapOptionsFromUrl = () => {
-	const params = new URLSearchParams(window.location);
+	const params = new window.URLSearchParams(window.location);
 	const zoom = parseInt(params.get('zoom'), 10);
 	return {
 		disableDefaultUI: true,
@@ -17,7 +17,7 @@ export const getMapOptionsFromUrl = () => {
 	};
 };
 
-export const waitForMapIdle = (map) => {
+export const waitForMapIdle = map => {
 	const myPromise = new SuperPromise();
 	google.maps.event.addListenerOnce(map, 'idle', () => {
 		myPromise.resolve(map);

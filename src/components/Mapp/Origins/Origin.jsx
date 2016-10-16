@@ -35,7 +35,7 @@ export class MyComponent extends Component {
 					onMouseLeave={this.onMouseLeave}
 					className={originClass}
 					dangerouslySetInnerHTML={{ __html: origin }}
-				></div>
+				/>
 			</AlignedOverlay>
 		);
 	}

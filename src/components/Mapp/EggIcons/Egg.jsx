@@ -40,12 +40,10 @@ export class MyComponent extends Component {
 				onMount={this.onMount}
 			>
 				<div
-					ref="egg"
 					className={thisClass}
 					onClick={this.onClick}
 					style={thisStyle}
-				>
-				</div>
+				/>
 			</AlignedOverlay>
 		);
 	}

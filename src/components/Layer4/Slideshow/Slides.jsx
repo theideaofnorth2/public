@@ -24,7 +24,7 @@ export class MyComponent extends Component {
 					key={index}
 					style={slideStyle}
 					className={slideClass}
-				></div>
+				/>
 			);
 		});
 		return (

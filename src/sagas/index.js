@@ -11,11 +11,11 @@ import {
 	watchTourerClick,
 	watchExplorationClick,
 } from './animation';
-import { watchApp } from './app';
-import { loadConfig } from './config';
-import { launchIntroduction } from './introduction';
+import watchApp from './app';
+import loadConfig from './config';
+import launchIntroduction from './introduction';
 
-export default function *rootSaga() {
+export default function* rootSaga() {
 	yield [
 		watchApp(),
 		watchOriginClick(),

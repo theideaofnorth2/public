@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { delay } from 'redux-saga';
-import canadaCoords from './data/canadaCoords';
-import worldCoords from './data/worldCoords';
-import mainStyles from './data/mainStyles.json';
-import originStyles from './data/originStyles.json';
 import OriginInterviewIcons from 'tion2/components/Mapp/OriginInterviewIcons';
 import EggIcons from 'tion2/components/Mapp/EggIcons';
 import Distances from 'tion2/components/Mapp/Distances';
 import Origins from 'tion2/components/Mapp/Origins';
 import Destinations from 'tion2/components/Mapp/Destinations';
+import utilsCss from 'tion2/components/common/utils';
+import appCss from 'tion2/components/App/css';
+import canadaCoords from './data/canadaCoords';
+import worldCoords from './data/worldCoords';
+import mainStyles from './data/mainStyles.json';
+import originStyles from './data/originStyles.json';
 import {
 	waitForMapIdle,
 	setLayers,
 	getMapOptionsFromUrl,
 	areCentersEqual,
 } from './utils';
-import utilsCss from 'tion2/components/common/utils';
-import appCss from 'tion2/components/App/css';
 import css from './css';
 
 const polygonOptions = {
@@ -34,7 +34,7 @@ export class MyComponent extends Component {
 		this.setGmapOptions();
 	}
 	componentDidMount() {
-		this.gmap = new google.maps.Map(this.refs.map, this.gmapOptions);
+		this.gmap = new google.maps.Map(this.mapRef, this.gmapOptions);
 		this.props.dispatch({ type: 'MAP_INITIALIZED' });
 	}
 	componentDidUpdate(prevProps) {
@@ -117,7 +117,10 @@ export class MyComponent extends Component {
 					<OriginInterviewIcons gmap={this.gmap} />
 					<EggIcons gmap={this.gmap} />
 				</div>
-				<div ref="map" className={mapClass}></div>
+				<div
+					ref={ref => { this.mapRef = ref; }}
+					className={mapClass}
+				/>
 			</div>
 		);
 	}

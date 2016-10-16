@@ -25,7 +25,7 @@ export class MyComponent extends Component {
 					key={index}
 					style={themeStyle}
 					className={themeClass}
-				></div>
+				/>
 			);
 		});
 		return (

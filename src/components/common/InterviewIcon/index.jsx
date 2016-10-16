@@ -45,15 +45,13 @@ export class MyComponent extends Component {
 		);
 		return (
 			<div
-				ref="interview"
 				className={thisClass}
 				onClick={this.onClick}
 				onMouseEnter={this.onMouseEnter}
 				onMouseLeave={this.onMouseLeave}
 				dangerouslySetInnerHTML={{ __html: interview }}
 				style={this.style}
-			>
-			</div>
+			/>
 		);
 	}
 }

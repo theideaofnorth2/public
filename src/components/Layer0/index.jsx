@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Destinations from './Destinations';
 import appCss from 'tion2/components/App/css';
+import Destinations from './Destinations';
 
 export class MyComponent extends Component {
 	render() {

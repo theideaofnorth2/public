@@ -5,7 +5,10 @@ import css from './css';
 
 export class MyComponent extends Component {
 	onClick = () => {
-		this.props.dispatch({ type: 'STORIE_CLICK', index: this.props.index });
+		this.props.dispatch({
+			type: 'STORIE_CLICK',
+			index: this.props.index,
+		});
 	}
 	render() {
 		let name;
@@ -38,7 +41,6 @@ export class MyComponent extends Component {
 		});
 		return (
 			<div
-				ref="storie"
 				onClick={this.onClick}
 				className={thisClass}
 			>

@@ -10,7 +10,7 @@ export class MyComponent extends Component {
 			[css.displayed]: this.props.map.animating || this.props.exploration.animating,
 		});
 		return (
-			<div className={blockerClass}></div>
+			<div className={blockerClass} />
 		);
 	}
 }

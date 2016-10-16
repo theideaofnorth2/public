@@ -8,7 +8,7 @@ const defaultState = {
 	positionIndex: 0,
 };
 
-const getPastData = (data) => data.filter(entrie => !entrie.future);
+const getPastData = data => data.filter(entrie => !entrie.future);
 
 const getFullGuide = (data, guide) => {
 	const interview = data.interviews.find(i => i._id === guide.interviewId);

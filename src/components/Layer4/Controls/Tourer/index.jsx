@@ -30,13 +30,11 @@ export class MyComponent extends Component {
 				<div
 					onClick={this.onPreviousClick}
 					className={previousClass}
-				>
-				</div>
+				/>
 				<div
 					onClick={this.onNextClick}
 					className={nextClass}
-				>
-				</div>
+				/>
 			</div>
 		);
 	}

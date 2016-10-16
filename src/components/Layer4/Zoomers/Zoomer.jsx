@@ -66,7 +66,7 @@ export class MyComponent extends Component {
 				<div
 					className={css.zoomer}
 					id={`zoomer_${this.props.origin.key}`}
-				></div>
+				/>
 			</div>
 		);
 	}

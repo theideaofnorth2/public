@@ -4,7 +4,7 @@ const defaultState = {
 	hoveredDestinationId: null,
 };
 
-const getDestinations = (data) =>
+const getDestinations = data =>
 	data.destinations
 		.map(destination => {
 			const interviews = data.interviews.filter(

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import css from './css';
 import { imagesUri } from 'tion2/utils/tools';
+import css from './css';
 
 const destinationsImagesUri = `${imagesUri}/destinations`;
 

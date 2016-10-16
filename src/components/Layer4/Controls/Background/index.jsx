@@ -15,7 +15,7 @@ export class MyComponent extends Component {
 				this.props.app.view !== 'home',
 		});
 		return (
-			<div className={thisClass}></div>
+			<div className={thisClass} />
 		);
 	}
 }

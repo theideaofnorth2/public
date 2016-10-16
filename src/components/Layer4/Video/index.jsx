@@ -12,7 +12,7 @@ const opts = {
 	},
 };
 
-export class Video extends Component {
+class Video extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.player.videoPlaying &&
 			this.props.player.volume !== prevProps.player.volume) this.setVolume();
@@ -37,6 +37,6 @@ export class Video extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({ player: state.player });
+const mapStateToProps = state => ({ player: state.player });
 
 export default connect(mapStateToProps)(Video);

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import utilsCss from 'tion2/components/common/utils';
 import Storie from './Storie';
 import next from './next.svg';
 import css from './css';
-import utilsCss from 'tion2/components/common/utils';
 
 export class MyComponent extends Component {
 	componentDidUpdate(prevProps) {
@@ -12,14 +12,14 @@ export class MyComponent extends Component {
 		if (slDiff !== 0) this.onStoriesLengthChange(slDiff);
 	}
 	onStoriesLengthChange = () => {
-		Object.assign(this.refs.stories.style, {
+		Object.assign(this.storiesRef.style, {
 			transition: 'none',
 			transform: `translateX(${
 				(this.props.stories.positionIndex + 1) * 100
 			}px)`,
 		});
 		setTimeout(() => {
-			Object.assign(this.refs.stories.style, {
+			Object.assign(this.storiesRef.style, {
 				transition: 'transform 300ms cubic-bezier(0,0,0.32,1)',
 				transform: `translateX(${
 					(this.props.stories.positionIndex) * 100
@@ -56,14 +56,14 @@ export class MyComponent extends Component {
 			<div className={timelineClass}>
 				<div className={css.timelineContent}>
 					<div
-						ref="stories"
+						ref={ref => { this.storiesRef = ref; }}
 						className={css.stories}
 						style={storiesStyle}
 					>
 						<div
 							className={css.line}
 							style={lineStyle}
-						></div>
+						/>
 						{storiesContent}
 					</div>
 				</div>
@@ -71,12 +71,12 @@ export class MyComponent extends Component {
 					className={css.prevButton}
 					onClick={this.prevClick}
 					dangerouslySetInnerHTML={{ __html: next }}
-				></div>
+				/>
 				<div
 					className={css.nextButton}
 					onClick={this.nextClick}
 					dangerouslySetInnerHTML={{ __html: next }}
-				></div>
+				/>
 			</div>
 		);
 	}

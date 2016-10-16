@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import appCss from 'tion2/components/App/css';
+import { imagesUri } from 'tion2/utils/tools';
 import Audio from './Audio';
 import Controls from './Controls';
 import EggInterviewIcons from './Eggs/EggInterviewIcons';
@@ -10,8 +12,6 @@ import Blocker from './Blocker';
 import Introduction from './Introduction';
 import Slideshow from './Slideshow';
 import Video from './Video';
-import appCss from 'tion2/components/App/css';
-import { imagesUri } from 'tion2/utils/tools';
 
 const introductionImageUri = `${imagesUri}/introduction.png`;
 

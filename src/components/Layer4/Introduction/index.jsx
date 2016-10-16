@@ -76,15 +76,15 @@ export class MyComponent extends Component {
 				en: (
 					<p>
 						Asking questions like:<br />
-						"What's the furthest North<br />
-						you've been in Canada?"
+						{'"'}What{'"'}s the furthest North<br />
+						you{'"'}ve been in Canada?{'"'}
 					</p>
 				),
 				fr: (
 					<p>
 						En posant des questions comme:<br />
-						"À quel endroit le plus au Nord<br />
-						avez vous été au Canada?"
+						{'"'}À quel endroit le plus au Nord<br />
+						avez vous été au Canada?{'"'}
 					</p>
 				),
 			},
@@ -112,8 +112,8 @@ export class MyComponent extends Component {
 					<div
 						className={originClass}
 						dangerouslySetInnerHTML={{ __html: origin }}
-					></div>
-					<div className={destinationClass}></div>
+					/>
+					<div className={destinationClass} />
 					<svg className={distanceClass}>
 						<path
 							id="line-1"

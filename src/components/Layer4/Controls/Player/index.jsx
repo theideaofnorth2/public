@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import utilsCss from 'tion2/components/common/utils';
 import play from './play.svg';
 import pause from './pause.svg';
-import utilsCss from 'tion2/components/common/utils';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 		this.props.dispatch({ type: 'INTERVIEW_AUDIO_PLAYING_TOGGLE' });
 	}
 	getClickPosition = e => {
-		const rect = this.refs.seekContainer.getBoundingClientRect();
+		const rect = this.seekContainerRef.getBoundingClientRect();
 		const cx = e.clientX;
 		return (cx - rect.left) / rect.width;
 	}
@@ -46,22 +46,21 @@ export class MyComponent extends Component {
 					<div
 						className={css.play}
 						dangerouslySetInnerHTML={{ __html: play }}
-					></div>
+					/>
 					<div
 						className={css.pause}
 						dangerouslySetInnerHTML={{ __html: pause }}
-					></div>
+					/>
 				</div>
 				<div
-					ref="seekContainer"
+					ref={ref => { this.seekContainerRef = ref; }}
 					className={css.seekContainer}
 					onClick={this.setCurrentTime}
 				>
 					<div
 						className={css.seek}
 						style={seekStyle}
-					>
-					</div>
+					/>
 				</div>
 				<div
 					className={css.time}

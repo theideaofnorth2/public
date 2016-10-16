@@ -47,7 +47,7 @@ function* playIntroduction() {
 	}
 }
 
-export function* launchIntroduction() {
+export default function* launchIntroduction() {
 	const introductionTask = yield fork(playIntroduction);
 	yield take('INTRODUCTION_SKIP');
 	yield cancel(introductionTask);

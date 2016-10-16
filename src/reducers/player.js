@@ -41,7 +41,7 @@ const getPhotoSlides = action => {
 	return [firstSlide, ...followingSlides];
 };
 
-const getThemeSlideEndTime = (slide) => slide.startTime + 15;
+const getThemeSlideEndTime = slide => slide.startTime + 15;
 
 const getThemeSlides = action => Object.assign(
 	action.interview.slideshow
@@ -50,7 +50,7 @@ const getThemeSlides = action => Object.assign(
 			const imagesDir = action.themes.find(themeDir =>
 				themeDir.name === slide.name);
 			if (!imagesDir) {
-				alert(`!! No theme directory named ${slide.name}`);
+				window.alert(`!! No theme directory named ${slide.name}`);
 				return null;
 			}
 			const randomImageFile = pickInArray(imagesDir.content);

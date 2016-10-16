@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import Rcslider from 'rc-slider';
-import speaker from './speaker.svg';
 import utilsCss from 'tion2/components/common/utils';
 import 'rc-slider/assets/index.css';
+import speaker from './speaker.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -34,7 +34,7 @@ export class MyComponent extends Component {
 				<div
 					className={css.speaker}
 					dangerouslySetInnerHTML={{ __html: speaker }}
-				></div>
+				/>
 				<div className={css.slider}>
 					<Rcslider
 						vertical

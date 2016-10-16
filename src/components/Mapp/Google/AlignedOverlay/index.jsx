@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import css from './css';
 import Overlay from 'tion2/components/Mapp/Google/Overlay';
+import css from './css';
 
 export class MyComponent extends Component {
 	render() {

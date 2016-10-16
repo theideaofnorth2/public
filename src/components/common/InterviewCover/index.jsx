@@ -15,7 +15,7 @@ export class MyComponent extends Component {
 	}
 	preloadColorImage = () => {
 		if (this.props.interview.photos[1]) {
-			const colorImage = new Image();
+			const colorImage = new window.Image();
 			colorImage.src = `${this.imagesDir}/${this.props.interview.photos[1]}`;
 		}
 	}

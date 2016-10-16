@@ -6,7 +6,7 @@ export const SuperPromise = () => {
 	return superPromise;
 };
 
-export const pickInArray = (items) =>
+export const pickInArray = items =>
 	items[Math.floor(Math.random() * items.length)];
 
 const productionDomain = 'theideaofnorth2.com';

@@ -4,7 +4,7 @@ const defaultState = {
 	selectedOriginId: null,
 };
 
-const getOrigins = (data) =>
+const getOrigins = data =>
 	data.origins
 		.map(origin => {
 			const interviews = data.interviews.filter(interview => origin._id === interview.originId);

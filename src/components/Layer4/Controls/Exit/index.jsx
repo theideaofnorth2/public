@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import exit from './exit.svg';
 import utilsCss from 'tion2/components/common/utils';
+import exit from './exit.svg';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -36,7 +36,7 @@ export class MyComponent extends Component {
 				onClick={this.onCloseClick}
 				className={exitClass}
 				dangerouslySetInnerHTML={{ __html: exit }}
-			></div>
+			/>
 		);
 	}
 }

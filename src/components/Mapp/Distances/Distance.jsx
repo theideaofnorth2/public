@@ -11,7 +11,7 @@ export class MyComponent extends Component {
 		this.coords = this.getCoords();
 	}
 	onMount = () => {
-		this.divRect = this.refs.distance.getBoundingClientRect();
+		this.divRect = this.distanceRef.getBoundingClientRect();
 		this.pathLength = this.getPathLength();
 		this.pathDirection = this.getPathDirection();
 		this.pathD = this.getPathD();
@@ -80,7 +80,10 @@ export class MyComponent extends Component {
 				northEastLng={this.coords.neLng}
 				onMount={this.onMount}
 			>
-				<div ref="distance" className={thisClass}>
+				<div
+					ref={ref => { this.distanceRef = ref; }}
+					className={thisClass}
+				>
 					{svgContent}
 				</div>
 			</Overlay>
