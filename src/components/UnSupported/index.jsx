@@ -3,7 +3,7 @@ import { isDesktop, browserName } from 'tion2/utils/platform';
 import css from './css';
 
 const language = navigator.language === 'fr' ? 'fr' : 'en';
-const reason = isDesktop ? 'desktop' : 'mobile';
+const platform = isDesktop ? 'desktop' : 'mobile';
 
 const i18nJsx = {
 	headline: {
@@ -51,7 +51,7 @@ const MyComponent = () => (
 		<div className={css.headline}>
 			{i18nJsx.headline[language]}
 		</div>
-		{i18nJsx[reason][language]}
+		{i18nJsx.reason[platform][language]}
 	</div>
 );
 

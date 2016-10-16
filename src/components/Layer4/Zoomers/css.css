@@ -1,5 +1,6 @@
 .zoomers {
-	position: fixed;
+	position: absolute;
+	overflow: hidden;
 	left: 50%;
 	top: 50%;
 	margin-left: -960px;
@@ -8,10 +9,14 @@
 	height: 1080px;
 }
 .zoomerContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	opacity: 0;
 	display: none;
+	overflow: hidden;
 }
 .zoomerContainer.displayed {
 	display: block;
