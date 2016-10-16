@@ -13,13 +13,19 @@ export class MyComponent extends Component {
 				/>
 			));
 		return (
-			<div className={utilsCss.pointable}>
+			<div
+				className={utilsCss.pointable}
+				hidden={this.props.map.zooming}
+			>
 				{content}
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = state => ({ interviews: state.interviews });
+const mapStateToProps = state => ({
+	interviews: state.interviews,
+	map: state.map,
+});
 
 export default connect(mapStateToProps)(MyComponent);

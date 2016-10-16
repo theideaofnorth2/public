@@ -102,12 +102,14 @@ export class MyComponent extends Component {
 	render() {
 		const mapClass = classnames(css.map, {
 			[css.capture]: this.props.app.isCapture,
-			[css.ready]: this.props.map.ready,
-			[css.zooming]: this.props.map.zooming,
+			[css.visible]: this.props.map.ready,
 			[utilsCss.pointable]: this.props.exploration.mode === 'interactive',
 		});
 		return (
-			<div className={appCss.mapp}>
+			<div
+				className={appCss.mapp}
+				hidden={this.props.map.zooming}
+			>
 				<div className={css.geoPositionedContent}>
 					<Distances gmap={this.gmap} />
 					<Destinations gmap={this.gmap} />

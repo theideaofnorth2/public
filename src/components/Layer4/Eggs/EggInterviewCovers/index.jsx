@@ -12,13 +12,16 @@ export class MyComponent extends Component {
 				/>
 			));
 		return (
-			<div>
+			<div hidden={this.props.map.zooming}>
 				{interviewCoversContent}
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = state => ({ interviews: state.interviews });
+const mapStateToProps = state => ({
+	interviews: state.interviews,
+	map: state.map,
+});
 
 export default connect(mapStateToProps)(MyComponent);

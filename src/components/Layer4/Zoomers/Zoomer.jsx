@@ -55,10 +55,11 @@ export class MyComponent extends Component {
 		});
 	}
 	render() {
+		const zooming = this.props.zoomers.zooming &&
+				this.props.origin._id === this.props.zoomers.originId;
 		const thisClass = classnames(css.zoomerContainer, {
-			[css.mounted]: this.state.mounted,
-			[css.zooming]: this.props.zoomers.zooming &&
-				this.props.origin._id === this.props.zoomers.originId,
+			[css.displayed]: !this.state.mounted || zooming,
+			[css.visible]: zooming,
 		});
 		return (
 			<div className={thisClass}>

@@ -11,13 +11,13 @@
 	width: 100%;
 	height: 100%;
 	opacity: 0;
-}
-.zoomerContainer.mounted {
 	display: none;
 }
-.zoomerContainer.zooming {
+.zoomerContainer.displayed {
 	display: block;
-	opacity: 0.4;
+}
+.zoomerContainer.visible {
+	opacity: 0.5;
 }
 .zoomer {
 	width: 100%;

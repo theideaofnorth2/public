@@ -10,12 +10,12 @@ export class MyComponent extends Component {
 	render() {
 		const content = this.props.destinations.data
 			.map(destination => {
-				const thisStyle = !destination.image ? {} : {
-					backgroundImage: `url(${destinationsImagesUri}/${destination.image})`,
-				};
 				const thisClass = classnames(css.destination, {
 					[css.visible]: this.props.destinations.coverDestinationId === destination._id,
 				});
+				const thisStyle = !destination.image ? {} : {
+					backgroundImage: `url(${destinationsImagesUri}/${destination.image})`,
+				};
 				return (
 					<div
 						key={destination._id}

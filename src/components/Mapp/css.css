@@ -12,13 +12,9 @@
 	right: 0;
 	background: transparent !important;
 }
-.ready {
+.visible {
 	opacity: 1;
 }
-.zooming {
-	display: none;
-}
-
 .layer1 {
 	opacity: 0.5;
 }
