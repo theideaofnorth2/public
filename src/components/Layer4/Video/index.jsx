@@ -20,6 +20,9 @@ class Video extends Component {
 	onReady = e => { this.player = e.target; }
 	setVolume = () => this.player.setVolume(this.props.player.volume * 100);
 	onPlay = () => this.setVolume();
+	onStateChange = e => {
+		if (e.data === 0) this.props.dispatch({ type: 'VIDEO_END' });
+	}
 	render() {
 		if (!this.props.player.videoPlaying) return null;
 		return (

@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 import { soundsUri } from 'tion2/utils/tools';
 
 export class MyComponent extends Component {
+	componentDidMount() {
+		this.audioRef.addEventListener('ended', this.onEnded);
+	}
 	componentDidUpdate(prevProps) {
-		if (!this.props.player.interview) return;
 		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
 		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying) this.pause();
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
 		}
 		if (this.props.player.volume !== prevProps.player.volume) this.setVolume();
+	}
+	componentWillUnmount() {
+		this.audioRef.removeEventListener('ended', this.onEnded);
 	}
 	setVolume = () => { this.audioRef.volume = this.props.player.volume; }
 	play = () => {
@@ -27,7 +32,7 @@ export class MyComponent extends Component {
 		if (!this.props.player.audioPlaying) return;
 		clearTimeout(this.timeout);
 		this.timeout = setTimeout(this.getCurrentTime, 1000);
-		requestAnimationFrame(() => {
+		window.requestAnimationFrame(() => {
 			if (!this.props.player.audioPlaying) return;
 			this.props.dispatch({
 				type: 'INTERVIEW_AUDIO_TIME_GET',
@@ -38,13 +43,17 @@ export class MyComponent extends Component {
 	setCurrentTime = () => {
 		this.audioRef.currentTime = this.props.player.audioTime;
 	}
+	onEnded = () => {
+		this.props.dispatch({ type: 'AUDIO_END' });
+	}
 	render() {
-		if (!this.props.player.interview) return null;
+		const src = !this.props.player.interview ? null :
+			`${soundsUri}/${this.props.player.interview.sound}`;
 		return (
 			<audio
 				ref={ref => { this.audioRef = ref; }}
 				preload="metadata"
-				src={`${soundsUri}/${this.props.player.interview.sound}`}
+				src={src}
 			/>
 		);
 	}

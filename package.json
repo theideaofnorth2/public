@@ -44,6 +44,7 @@
     "file-loader": "^0.8.5",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
+    "moment": "^2.15.1",
     "raw-loader": "^0.5.1",
     "rc-slider": "^5.1.1",
     "react": "^15.3.1",

@@ -1,5 +1,6 @@
 const defaultState = {
 	isCapture: document.location.search.indexOf('capture') !== -1,
+	isDebug: document.location.search.indexOf('debug') !== -1,
 	configed: false,
 	zoomersLoaded: false,
 	ready: false,

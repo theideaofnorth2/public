@@ -100,7 +100,7 @@ function* changeOriginAndEggIfNecessary(fromStorie, toStorie) {
 	}
 }
 
-function* storieTransition(fromStorie, toStorie) {
+export function* storieTransition(fromStorie, toStorie) {
 	switch (`${fromStorie.view}_${toStorie.view}`) {
 		case 'origin_main': {
 			yield fromOriginToMain();
@@ -216,21 +216,4 @@ function* onExplorationClick(arg) {
 
 export function* watchExplorationClick() {
 	yield* takeEvery(['EXPLORATION_CLICK'], onExplorationClick);
-}
-
-function* onTourerClick(arg) {
-	const state = yield select(getState);
-	const currentStorie = state.stories.data[lastPastIndex(state)];
-	const indexDiff = arg.direction === 'previous' ? -1 : 1;
-	const nextIndex = Math.min(
-		state.stories.data.length - 1,
-		Math.max(0, lastPastIndex(state) + indexDiff)
-	);
-	const nextStorie = state.stories.data[nextIndex];
-	yield put(Object.assign({}, { type: 'STORIE_SELECTION', index: nextIndex }));
-	yield storieTransition(currentStorie, nextStorie);
-}
-
-export function* watchTourerClick() {
-	yield* takeEvery(['TOURER_CLICK'], onTourerClick);
 }

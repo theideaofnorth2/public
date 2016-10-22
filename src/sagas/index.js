@@ -8,9 +8,10 @@ import {
 	watchInterviewUnselectionClick,
 	watchExitClick,
 	watchStorieClick,
-	watchTourerClick,
 	watchExplorationClick,
 } from './animation';
+import { watchTourerClick } from './tour';
+import { watchMediaEnd } from './media';
 import watchApp from './app';
 import loadConfig from './config';
 import launchIntroduction from './introduction';
@@ -28,6 +29,7 @@ export default function* rootSaga() {
 		watchExitClick(),
 		watchStorieClick(),
 		watchTourerClick(),
+		watchMediaEnd(),
 		watchExplorationClick(),
 		loadConfig(),
 		launchIntroduction(),

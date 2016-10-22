@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment, { duration } from 'moment';
 import classnames from 'classnames';
 import utilsCss from 'tion2/components/common/utils';
 import play from './play.svg';
 import pause from './pause.svg';
 import css from './css';
+
+const formatTime = seconds => {
+	const time = duration(parseInt(seconds, 10), 'seconds');
+	return moment(time.asMilliseconds()).format('m:ss');
+};
 
 export class MyComponent extends Component {
 	togglePlay = () => {
@@ -35,8 +41,10 @@ export class MyComponent extends Component {
 			: { transform: `scaleX(${this.props.player.audioTime /
 				this.props.player.interview.duration})`,
 		};
-		const displayTime = `${parseInt(this.props.player.audioTime, 10)} / ` +
-			`${this.props.player.interview.duration}`;
+		const displayTime = this.props.app.isDebug
+			? parseInt(this.props.player.audioTime, 10)
+			: `${formatTime(this.props.player.audioTime)} / ` +
+			`${formatTime(this.props.player.interview.duration)}`;
 		return (
 			<div className={thisClass}>
 				<div
