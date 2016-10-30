@@ -1,6 +1,5 @@
 const defaultState = {
 	data: [],
-	coverDestinationId: null,
 	hoveredDestinationId: null,
 };
 
@@ -29,7 +28,6 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				hoveredDestinationId: action.destinationId,
-				coverDestinationId: action.destinationId,
 			};
 		case 'DESTINATION_MOUSE_LEAVE':
 			return {

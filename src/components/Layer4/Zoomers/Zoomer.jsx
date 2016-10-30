@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { imagesUri } from 'tion2/utils/tools';
 import css from './css';
 
-const originsImagesUri = `${imagesUri}/origins`;
+const zoomersImagesUri = `${imagesUri}/zoomers`;
 
 export class MyComponent extends Component {
 	state = {}
@@ -14,7 +14,7 @@ export class MyComponent extends Component {
 		this.lastLevel = this.props.origin.zoom;
 		this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => ({
 			level,
-			src: `${originsImagesUri}/${this.props.origin.key}/${level}.png`,
+			src: `${zoomersImagesUri}/${this.props.origin.key}/${level}.png`,
 		}));
 	}
 	componentDidMount() {

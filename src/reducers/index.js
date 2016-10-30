@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import app from './app';
+import background from './background';
 import controls from './controls';
 import destinations from './destinations';
 import eggs from './eggs';
@@ -15,6 +16,7 @@ import zoomers from './zoomers';
 
 const rootReducer = combineReducers({
 	app,
+	background,
 	controls,
 	destinations,
 	eggs,
