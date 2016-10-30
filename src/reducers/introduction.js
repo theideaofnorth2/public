@@ -113,6 +113,26 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				text4Visible: false,
 			};
+		case 'INTRODUCTION_TEXT5_SHOW':
+			return {
+				...state,
+				text5Visible: true,
+			};
+		case 'INTRODUCTION_TEXT5_HIDE':
+			return {
+				...state,
+				text5Visible: false,
+			};
+		case 'INTRODUCTION_TEXT6_SHOW':
+			return {
+				...state,
+				text6Visible: true,
+			};
+		case 'INTRODUCTION_TEXT6_HIDE':
+			return {
+				...state,
+				text6Visible: false,
+			};
 		default:
 			return state;
 	}

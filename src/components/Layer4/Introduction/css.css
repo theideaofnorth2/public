@@ -126,23 +126,29 @@
 .text1 p,
 .text2 p,
 .text3 p,
-.text4 p {
+.text4 p,
+.text5 p,
+.text6 p {
 	opacity: 0;
   transition: opacity 1000ms linear;
 	width: 40vw;
 }
 .text1 p,
-.text2 p {
-	transform: translate3d(26vw,0,0);
-}
+.text2 p,
 .text3 p,
 .text4 p {
+	transform: translate3d(26vw,0,0);
+}
+.text5 p,
+.text6 p {
 	text-align: center;
 }
 .text1.visible p,
 .text2.visible p,
 .text3.visible p,
-.text4.visible p {
+.text4.visible p,
+.text5.visible p,
+.text6.visible p {
 	opacity: 1;
   transition: opacity 1500ms linear;
 }

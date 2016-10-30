@@ -49,10 +49,7 @@ const getThemeSlides = action => Object.assign(
 		.map(slide => {
 			const imagesDir = action.themes.find(themeDir =>
 				themeDir.name === slide.name);
-			if (!imagesDir) {
-				window.alert(`!! No theme directory named ${slide.name}`);
-				return null;
-			}
+			if (!imagesDir) return null;
 			const randomImageFile = pickInArray(imagesDir.content);
 			return Object.assign({
 				previous: false,

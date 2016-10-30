@@ -54,42 +54,76 @@ export class MyComponent extends Component {
 		const text4Class = classnames(css.text, css.text4, {
 			[css.visible]: this.props.introduction.text4Visible,
 		});
+		const text5Class = classnames(css.text, css.text5, {
+			[css.visible]: this.props.introduction.text5Visible,
+		});
+		const text6Class = classnames(css.text, css.text6, {
+			[css.visible]: this.props.introduction.text6Visible,
+		});
 		const { language } = this.props.app;
 		const i18nJsx = {
 			text1: {
 				en: (
 					<p>
-						In 2014 we began interviewing
+						We set out to engage Canadians
 						<br />
-						Canadians in their home town
+						in a longitudinal conversation
 					</p>
 				),
 				fr: (
 					<p>
-						En 2014, nous avons interrogé
+						Nous avons rencontré des Canadiens et initié
 						<br />
-						des Canadiens dans leurs villes
+						une conversation transversale
 					</p>
 				),
 			},
 			text2: {
 				en: (
 					<p>
-						Asking questions like:<br />
-						{'"'}What{'"'}s the furthest North<br />
-						you{'"'}ve been in Canada?{'"'}
+						between the North and South of our country
 					</p>
 				),
 				fr: (
 					<p>
-						En posant des questions comme:<br />
-						{'"'}À quel endroit le plus au Nord<br />
-						avez vous été au Canada?{'"'}
+						entre le Nord et le Sud de notre pays
 					</p>
 				),
 			},
 			text3: {
-				en: <p>Explore the North as a listener</p>,
+				en: (
+					<p>
+						Inspired by Glenn Gould{'\''}s 1967
+						<br />
+						radio documentary <i>The Idea of North</i>
+					</p>
+				),
+				fr: (
+					<p>
+						Inspiré par le documentaire radio de 1967
+						<br />
+						de Glenn Gould <i>The Idea of North</i>
+					</p>
+				),
+			},
+			text4: {
+				en: (
+					<p>
+						50 years later – where does
+						<br />
+						this ‘idea’ live today?
+					</p>
+				),
+				fr: (
+					<p>
+						50 ans plus tard,
+						<br />
+						Qu{'\''} en est il de cette {'"'}idée{'"'}?
+					</p>
+				),
+			},
+			text5: {
+				en: <p>This is an act of listening</p>,
 				fr: <p>Explorez le Nord à travers ces témoignages</p>,
 			},
 			skip: {
@@ -133,6 +167,12 @@ export class MyComponent extends Component {
 					{i18nJsx.text3[language]}
 				</div>
 				<div className={text4Class}>
+					{i18nJsx.text4[language]}
+				</div>
+				<div className={text5Class}>
+					{i18nJsx.text5[language]}
+				</div>
+				<div className={text6Class}>
 					<p>
 						The Idea Of North 2.0
 					</p>
