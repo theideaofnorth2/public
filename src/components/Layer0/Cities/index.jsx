@@ -4,7 +4,18 @@ import classnames from 'classnames';
 import { imagesUri } from 'tion2/utils/tools';
 import css from './css';
 
+const preloadImage = src => {
+	const srcImage = new window.Image();
+	srcImage.src = `${imagesUri}/cities/${src}`;
+};
+
 export class MyComponent extends Component {
+	componentDidMount() {
+		const images = [...this.props.origins.data, ...this.props.destinations.data]
+			.map(citie => citie.image)
+			.filter(image => image);
+		images.forEach(preloadImage);
+	}
 	shouldComponentUpdate(nextProps) {
 		if (
 			this.props.background.currentCitieId === nextProps.background.currentCitieId &&
