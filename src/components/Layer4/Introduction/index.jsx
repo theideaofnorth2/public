@@ -81,12 +81,16 @@ export class MyComponent extends Component {
 			text2: {
 				en: (
 					<p>
-						between the North and South of our country
+						between the North and South
+						<br />
+						of our country
 					</p>
 				),
 				fr: (
 					<p>
-						entre le Nord et le Sud de notre pays
+						entre le Nord et le Sud
+						<br />
+						de notre pays
 					</p>
 				),
 			},
@@ -174,7 +178,7 @@ export class MyComponent extends Component {
 				</div>
 				<div className={text6Class}>
 					<p>
-						The Idea Of North 2.0
+						The Idea of North 2.0
 					</p>
 				</div>
 				<div
