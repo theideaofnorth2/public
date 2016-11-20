@@ -44,7 +44,9 @@ export class MyComponent extends Component {
 				onClick={this.onClick}
 				className={thisClass}
 			>
-				{name}
+				<div className={css.storieText}>
+					{name}
+				</div>
 			</div>
 		);
 	}

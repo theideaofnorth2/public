@@ -2,9 +2,9 @@
   position: absolute;
   width: 500px;
   left: 50%;
-  top: 20px;
+  top: 0;
   margin-left: -250px;
-  height: 60px;
+  height: 80px;
   display: none;
 }
 .timeline.visible {
@@ -20,7 +20,7 @@
   position: absolute;
   right: 0px;
   left: 0px;
-  top: 35px;
+  top: 55px;
   content: '';
   height: 1px;
   background: #656565;
@@ -30,13 +30,13 @@
   right: 50%;
   margin-right: -50px;
   display: flex;
+	bottom: 20px;
   flex-direction: row;
-  height: 30px;
   transition: transform 300ms cubic-bezier(0,0,0.32,1);
 }
 .line {
   position: absolute;
-  top: 35px;
+  bottom: 4px;
   left: -445px;
   right: 55px;
   height: 1px;
@@ -44,16 +44,23 @@
   background: white;
 }
 .storie {
+	display: table;
+	bottom: 13px;
+	height: 47px;
   position: relative;
   width: 100px;
   text-align: center;
-  line-height: 30px;
   animation: mountStorie 300ms cubic-bezier(0,0,0.32,1);
   animation-fill-mode: forwards;
   transform: scaleX(0);
   color: #797979;
   cursor: pointer;
   transition: color 200ms cubic-bezier(0,0,0.32,1);
+}
+.storieText {
+	vertical-align: bottom;
+	display: table-cell;
+	line-height: 140%;
 }
 .storie:hover {
   color: white;
@@ -62,15 +69,15 @@
   color: white;
 }
 .storie:after {
-  position: absolute;
-  top: 30px;
-  left: 45px;
-  content: '';
-  width: 4px;
-  height: 4px;
-  border-radius: 10px;
-  border: 3px solid #797979;
-  background: #353535;
+	position: absolute;
+	bottom: -13px;
+	left: 45px;
+	content: '';
+	width: 4px;
+	height: 4px;
+	border-radius: 10px;
+	border: 3px solid #797979;
+	background: #353535;
 }
 .storie:hover:after,
 .storie.active:after {
@@ -87,7 +94,7 @@
 .prevButton,
 .nextButton {
   position: absolute;
-  top: 20px;
+  bottom: 10px;
   width: 30px;
   height: 30px;
   text-align: center;
