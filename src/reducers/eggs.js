@@ -11,6 +11,7 @@ const getEggs = data =>
 			return Object.assign({
 				...egg,
 				interviews,
+				videoLoop: egg.key === 'train-to-churchill',
 			});
 		});
 

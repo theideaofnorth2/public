@@ -21,15 +21,23 @@ class Video extends Component {
 	setVolume = () => this.player.setVolume(this.props.player.volume * 100);
 	onPlay = () => this.setVolume();
 	onStateChange = e => {
-		if (e.data === 0) this.props.dispatch({ type: 'VIDEO_END' });
+		if (
+			e.data === 0 &&
+			!this.props.player.egg.videoLoop
+		) this.props.dispatch({ type: 'VIDEO_END' });
 	}
 	render() {
 		if (!this.props.player.videoPlaying) return null;
+		const vOpts = { playerVars: { ...opts.playerVars } };
+		if (this.props.player.egg.videoLoop) {
+			vOpts.playerVars.loop = 1;
+			vOpts.playerVars.playlist = this.props.player.egg.video;
+		}
 		return (
 			<div className={css.video}>
 				<YouTube
 					videoId={this.props.player.egg.video}
-					opts={opts}
+					opts={vOpts}
 					onReady={this.onReady}
 					onPlay={this.onPlay}
 					onStateChange={this.onStateChange}
