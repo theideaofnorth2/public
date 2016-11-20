@@ -20,6 +20,6 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ interviews: state.interviews.data });
+const mapStateToProps = state => ({ interviews: state.interviews.distanceData });
 
 export default connect(mapStateToProps)(MyComponent);

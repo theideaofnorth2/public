@@ -45,6 +45,7 @@ export default function reducer(state = defaultState, action = null) {
 			return {
 				...state,
 				data: augmentedData,
+				distanceData: augmentedData.filter(i => i.destinationId),
 				originData: augmentedData.filter(i => i.parent === 'origin'),
 				eggData: augmentedData.filter(i => i.parent === 'egg'),
 			};
