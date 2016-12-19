@@ -106,7 +106,7 @@
 }
 .timeline:not(.interactive) .prevButton {
   border-right: 2px solid white;
-  top: 27px;
+  bottom: 16px;
   height: 16px;
 }
 .interactive .prevButton {

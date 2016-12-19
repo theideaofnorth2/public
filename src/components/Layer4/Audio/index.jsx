@@ -7,7 +7,11 @@ export class MyComponent extends Component {
 		this.audioRef.addEventListener('ended', this.onEnded);
 	}
 	componentDidUpdate(prevProps) {
-		if (!prevProps.player.audioPlaying && this.props.player.audioPlaying) this.play();
+		if (this.props.player.audioPlaying) {
+			if (!prevProps.player.audioPlaying ||
+				prevProps.player.interview !== this.props.player.interview
+			) this.play();
+		}
 		if (prevProps.player.audioPlaying && !this.props.player.audioPlaying) this.pause();
 		if (prevProps.player.audioTimeSets !== this.props.player.audioTimeSets) {
 			this.setCurrentTime();
