@@ -188,16 +188,20 @@ export function* watchStorieClick() {
 	yield* takeEvery(['STORIE_CLICK'], onStorieClick);
 }
 
+const isIntroduction = state => state.app.view === 'waiting' || state.app.view === 'home';
+
 function* onExplorationClick(arg) {
-	const state = yield select(getState);
-	const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
-	if (state.app.view !== 'waiting' && state.app.view !== 'home' &&
-		!window.confirm(message)
-	) return false;
-	const currentStorie = state.stories.data[lastPastIndex(state)];
-	const firstStorie = state.stories.data[0];
+	const stateBeforeSelection = yield select(getState);
+	if (!isIntroduction(stateBeforeSelection)) {
+		const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
+		if (!window.confirm(message)) return false;
+	}
 	yield put(Object.assign({}, arg, { type: 'EXPLORATION_SELECTION' }));
-	if (state.app.view === 'waiting' || state.app.view === 'home') {
+	const stateAfterSelection = yield select(getState);
+	const currentStorie = stateBeforeSelection.stories.data[lastPastIndex(stateBeforeSelection)];
+	const firstStorie = stateBeforeSelection.stories.data[0];
+	const secondStorie = stateAfterSelection.stories.data[1];
+	if (isIntroduction(stateAfterSelection)) {
 		yield put({ type: 'EXPLORATION_ANIMATION_START' });
 		yield delay(400);
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_SPLIT' });
@@ -209,8 +213,13 @@ function* onExplorationClick(arg) {
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_CENTERED' });
 		yield delay(1000);
 		yield put({ type: 'EXPLORATION_ANIMATION_FINISHED' });
+		yield storieTransition(currentStorie, secondStorie);
+		return true;
 	}
-	if (arg.mode === 'tour') yield storieTransition(currentStorie, firstStorie);
+	if (arg.mode === 'tour') {
+		yield storieTransition(currentStorie, firstStorie);
+		yield storieTransition(firstStorie, secondStorie);
+	}
 	return true;
 }
 
