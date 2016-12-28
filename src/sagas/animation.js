@@ -213,8 +213,6 @@ function* onExplorationClick(arg) {
 		yield put({ type: 'EXPLORATION_ANIMATION_NON_CENTERED' });
 		yield delay(1000);
 		yield put({ type: 'EXPLORATION_ANIMATION_FINISHED' });
-		yield storieTransition(currentStorie, secondStorie);
-		return true;
 	}
 	if (arg.mode === 'tour') {
 		yield storieTransition(currentStorie, firstStorie);
