@@ -10,13 +10,16 @@ export class MyComponent extends Component {
 	get imagesDir() {
 		return `${interviewsImagesUri}/${this.props.interview.customId}`;
 	}
-	componentDidMount() {
-		this.preloadColorImage();
+	componentDidUpdate() {
+		if (!this.isColorImagePreoladed &&
+			this.props.interviews.hoveredInterviewId === this.props.interview._id
+		) this.preloadColorImage();
 	}
 	preloadColorImage = () => {
 		if (this.props.interview.photos[1]) {
 			const colorImage = new window.Image();
 			colorImage.src = `${this.imagesDir}/${this.props.interview.photos[1]}`;
+			this.isColorImagePreoladed = true;
 		}
 	}
 	render() {

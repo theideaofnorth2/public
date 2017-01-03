@@ -110,13 +110,15 @@ export class MyComponent extends Component {
 				className={appCss.mapp}
 				hidden={this.props.map.zooming}
 			>
-				<div className={css.geoPositionedContent}>
-					<Distances gmap={this.gmap} />
-					<Destinations gmap={this.gmap} />
-					<Origins gmap={this.gmap} />
-					<OriginInterviewIcons gmap={this.gmap} />
-					<EggIcons gmap={this.gmap} />
-				</div>
+				{!this.props.app.isCapture && (
+					<div className={css.geoPositionedContent}>
+						<Distances gmap={this.gmap} />
+						<Destinations gmap={this.gmap} />
+						<Origins gmap={this.gmap} />
+						<OriginInterviewIcons gmap={this.gmap} />
+						<EggIcons gmap={this.gmap} />
+					</div>
+				)}
 				<div
 					ref={ref => { this.mapRef = ref; }}
 					className={mapClass}
