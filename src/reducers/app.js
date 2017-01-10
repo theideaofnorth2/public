@@ -69,17 +69,17 @@ export default function reducer(state = defaultState, action = null) {
 		case 'MENU_APPROACH_CLICK':
 			return {
 				...state,
-				view: 'approach',
+				view: 'page',
 			};
 		case 'MENU_ABOUT_CLICK':
 			return {
 				...state,
-				view: 'about',
+				view: 'page',
 			};
 		case 'TOUR_END':
 			return {
 				...state,
-				view: 'tourEnd',
+				view: 'page',
 			};
 		case 'EXIT_CONTENT_CLICK':
 			return {

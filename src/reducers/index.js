@@ -10,6 +10,7 @@ import interviews from './interviews';
 import introduction from './introduction';
 import map from './map';
 import origins from './origins';
+import pages from './pages';
 import player from './player';
 import themes from './themes';
 import zoomers from './zoomers';
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
 	introduction,
 	map,
 	origins,
+	pages,
 	player,
 	themes,
 	zoomers,

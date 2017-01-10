@@ -25,7 +25,7 @@
 	width: 600px;
 	margin: 0 auto;
 }
-.contentPage > div > h1 {
+.contentPage > div h1 {
 	text-align: center;
 	margin: 0;
 }

@@ -7,11 +7,7 @@ import css from './css';
 
 export class MyComponent extends Component {
 	onCloseClick = () => {
-		if (
-			this.props.app.view === 'approach' ||
-			this.props.app.view === 'about' ||
-			this.props.app.view === 'tourEnd'
-		) {
+		if (this.props.app.view === 'page') {
 			this.props.dispatch({ type: 'EXIT_CONTENT_CLICK' });
 		} else if (this.props.interviews.selectedInterviewId) {
 			this.props.dispatch({
@@ -30,11 +26,12 @@ export class MyComponent extends Component {
 	}
 	render() {
 		const exitClass = classnames(utilsCss.pointable, css.exit, {
-			[css.visible]: (this.props.origins.selectedOriginId &&
-				this.props.exploration.mode === 'interactive') ||
-				this.props.app.view === 'about' ||
-				this.props.app.view === 'approach' ||
-				this.props.app.view === 'tourEnd',
+			[css.visible]:
+				(
+					this.props.origins.selectedOriginId &&
+					this.props.exploration.mode === 'interactive'
+				) ||
+				this.props.app.view === 'page',
 		});
 		return (
 			<div

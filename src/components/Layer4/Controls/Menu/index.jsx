@@ -21,10 +21,10 @@ export class MyComponent extends Component {
 				this.props.app.view !== 'home',
 		});
 		const approachClass = classnames(css.approach, {
-			[css.selected]: this.props.app.view === 'approach',
+			[css.selected]: this.props.app.view === 'page' && this.props.pages.selectedPage === 'approach',
 		});
 		const aboutClass = classnames(css.about, {
-			[css.selected]: this.props.app.view === 'about',
+			[css.selected]: this.props.app.view === 'page' && this.props.pages.selectedPage === 'about',
 		});
 		const { language } = this.props.app;
 		const i18nJsx = {
@@ -57,6 +57,9 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ app: state.app });
+const mapStateToProps = state => ({
+	app: state.app,
+	pages: state.pages,
+});
 
 export default connect(mapStateToProps)(MyComponent);
