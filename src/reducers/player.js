@@ -5,8 +5,6 @@ const defaultState = {
 	volumeHovered: false,
 	egg: null,
 	videoPlaying: false,
-	videoTime: 0,
-	videoTimeSets: 0,
 	interview: null,
 	photoSlides: [],
 	themeSlides: [],
@@ -116,8 +114,12 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				egg: null,
 				videoPlaying: false,
-				videoTime: 0,
-				videoTimeSets: 0,
+			};
+		case 'EGG_UNSELECTION':
+			return {
+				...state,
+				egg: null,
+				videoPlaying: false,
 			};
 		case 'INTERVIEW_UNSELECTION':
 			return {

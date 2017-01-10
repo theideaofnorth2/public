@@ -7,7 +7,11 @@ import css from './css';
 
 export class MyComponent extends Component {
 	onCloseClick = () => {
-		if (this.props.app.view === 'approach' || this.props.app.view === 'about') {
+		if (
+			this.props.app.view === 'approach' ||
+			this.props.app.view === 'about' ||
+			this.props.app.view === 'tourEnd'
+		) {
 			this.props.dispatch({ type: 'EXIT_CONTENT_CLICK' });
 		} else if (this.props.interviews.selectedInterviewId) {
 			this.props.dispatch({
@@ -29,7 +33,8 @@ export class MyComponent extends Component {
 			[css.visible]: (this.props.origins.selectedOriginId &&
 				this.props.exploration.mode === 'interactive') ||
 				this.props.app.view === 'about' ||
-				this.props.app.view === 'approach',
+				this.props.app.view === 'approach' ||
+				this.props.app.view === 'tourEnd',
 		});
 		return (
 			<div

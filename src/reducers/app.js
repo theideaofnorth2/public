@@ -76,6 +76,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				view: 'about',
 			};
+		case 'TOUR_END':
+			return {
+				...state,
+				view: 'tourEnd',
+			};
 		case 'EXIT_CONTENT_CLICK':
 			return {
 				...state,

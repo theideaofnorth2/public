@@ -1,28 +1,16 @@
 import { takeEvery } from 'redux-saga';
 import { put, select } from 'redux-saga/effects';
-import { lastPastIndex } from 'tion2/reducers/selectors/stories';
-import { storieTransition } from './animation';
 
 const getState = state => state;
-const getNextIndex = (state, direction) => {
-	const indexDiff = direction === 'previous' ? -1 : 1;
-	return Math.min(
-		state.stories.data.length - 1,
-		Math.max(0, lastPastIndex(state) + indexDiff)
-	);
-};
 
-function* onTourMediaEnd() {
+function* onMediaEnd() {
 	const state = yield select(getState);
-	const currentStorie = state.stories.data[lastPastIndex(state)];
-	const nextIndex = getNextIndex(state, 'next');
-	const nextStorie = state.stories.data[nextIndex];
-	yield put({ type: 'STORIE_SELECTION', index: nextIndex });
-	yield storieTransition(currentStorie, nextStorie);
-}
-
-function* onInteractiveMediaEnd() {
-	const state = yield select(getState);
+	if (state.exploration.mode === 'tour') {
+		return yield put({
+			type: 'TOURER_CLICK',
+			direction: 'next',
+		});
+	}
 	if (state.interviews.selectedInterviewId) {
 		yield put({
 			type: 'EXIT_INTERVIEW_CLICK',
@@ -35,12 +23,7 @@ function* onInteractiveMediaEnd() {
 			originId: state.origins.selectedOriginId,
 		});
 	}
-}
-
-function* onMediaEnd() {
-	const state = yield select(getState);
-	if (state.exploration.mode === 'tour') return yield onTourMediaEnd();
-	return yield onInteractiveMediaEnd();
+	return true;
 }
 
 export function* watchMediaEnd() {

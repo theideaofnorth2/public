@@ -21,9 +21,8 @@ export class MyComponent extends Component {
 			[utilsCss.pointable]: this.props.exploration.mode === 'tour',
 			[css.visible]: this.props.lastPastIndex > 0,
 		});
-		const nextClass = classnames(css.next, {
+		const nextClass = classnames(css.next, css.visible, {
 			[utilsCss.pointable]: this.props.exploration.mode === 'tour',
-			[css.visible]: this.props.lastPastIndex < this.props.stories.data.length - 1,
 		});
 		return (
 			<div className={thisClass}>

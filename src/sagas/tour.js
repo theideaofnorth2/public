@@ -12,13 +12,22 @@ const getNextIndex = (state, direction) => {
 	);
 };
 
+function isTourEnd(state, direction) {
+	return (
+		lastPastIndex(state) === state.stories.data.length - 1 &&
+		direction === 'next'
+	);
+}
+
 function* onTourerClick(arg) {
 	const state = yield select(getState);
+	const hasTourEnded = isTourEnd(state, arg.direction);
 	const currentStorie = state.stories.data[lastPastIndex(state)];
-	const nextIndex = getNextIndex(state, arg.direction);
+	const nextIndex = hasTourEnded ? 0 : getNextIndex(state, arg.direction);
 	const nextStorie = state.stories.data[nextIndex];
 	yield put({ type: 'STORIE_SELECTION', index: nextIndex });
 	yield storieTransition(currentStorie, nextStorie);
+	if (hasTourEnded) yield put({ type: 'TOUR_END' });
 }
 
 export function* watchTourerClick() {

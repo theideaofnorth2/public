@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Approach from './Approach';
 import About from './About';
+import TourEnd from './TourEnd';
 import css from './css';
 
 export class MyComponent extends Component {
@@ -13,6 +14,7 @@ export class MyComponent extends Component {
 			>
 				<Approach />
 				<About />
+				<TourEnd />
 			</div>
 		);
 	}
