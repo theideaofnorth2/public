@@ -46,6 +46,9 @@ export class MyComponent extends Component {
 							<div className={css.nameContainer}>
 								<span className={css.name}>
 									{this.props.destination.name}
+									{!!this.props.destination.nativeName && (
+										<div className={css.nativeName}>{this.props.destination.nativeName}</div>
+									)}
 								</span>
 							</div>
 							<div className={css.interviews}>

@@ -21,6 +21,9 @@ export class MyComponent extends Component {
 		const originClass = classnames(css.origin, {
 			[css.visible]: this.props.map.level === 'main',
 		});
+		const nameClass = classnames(css.name, {
+			[css.hover]: this.props.origins.hoveredOriginId === this.props.origin._id,
+		});
 		return (
 			<AlignedOverlay
 				gmap={this.props.gmap}
@@ -29,6 +32,12 @@ export class MyComponent extends Component {
 				vertical={this.props.origin.vertical}
 				horizontal={this.props.origin.horizontal}
 			>
+				<div className={nameClass}>
+					{this.props.origin.name}
+					{!!this.props.origin.nativeName && (
+						<div className={css.nativeName}>{this.props.origin.nativeName}</div>
+					)}
+				</div>
 				<div
 					onClick={this.onClick}
 					onMouseEnter={this.onMouseEnter}
@@ -41,6 +50,9 @@ export class MyComponent extends Component {
 	}
 }
 
-const mapStateToProps = state => ({ map: state.map });
+const mapStateToProps = state => ({
+	map: state.map,
+	origins: state.origins,
+});
 
 export default connect(mapStateToProps)(MyComponent);
