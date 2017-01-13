@@ -7,8 +7,8 @@ const platform = isDesktop ? 'desktop' : 'mobile';
 
 const i18nJsx = {
 	headline: {
-		en: 'We\'re sorry!',
-		fr: 'Nous sommes désolés!',
+		en: '¯\_(ツ)_/¯ We\'re sorry!',
+		fr: '¯\_(ツ)_/¯ Nous sommes désolés!',
 	},
 	reason: {
 		desktop: {
