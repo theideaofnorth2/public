@@ -7,8 +7,8 @@ const platform = isDesktop ? 'desktop' : 'mobile';
 
 const i18nJsx = {
 	headline: {
-		en: '¯\_(ツ)_/¯ We\'re sorry!',
-		fr: '¯\_(ツ)_/¯ Nous sommes désolés!',
+		en: 'We\'re sorry!',
+		fr: 'Nous sommes désolés!',
 	},
 	reason: {
 		desktop: {
@@ -49,6 +49,7 @@ const i18nJsx = {
 const MyComponent = () => (
 	<div className={css.unsupported}>
 		<div className={css.headline}>
+			{'¯\\_(ツ)_/¯'}<br />
 			{i18nJsx.headline[language]}
 		</div>
 		{i18nJsx.reason[platform][language]}
