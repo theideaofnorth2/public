@@ -13,7 +13,7 @@
 	left: 0;
 	right: 0;
 	padding-top: 100px;
-	font-size: 21px;
+	font-size: 18px;
 	line-height: 1.4;
 	display: none;
 	color: #CCC;
@@ -22,10 +22,26 @@
 	display: block;
 }
 .contentPage > div {
-	width: 600px;
+	width: 700px;
 	margin: 0 auto;
+	height: 95%;
 }
-.contentPage > div h1 {
+.contentPage div.contentDiv {
+	padding: 0 50px;
+}
+.contentPage div.contentDiv h1 {
 	text-align: center;
 	margin: 0;
+}
+.renderTrackVertical {
+	background: rgba(255,255,255,0.2);
+	height: 100%;
+	right: 15px;
+	width: 10px;
+	border-radius: 5px;
+	position: absolute;
+}
+.renderThumbVertical {
+	background: rgba(255,255,255,0.8);
+	border-radius: 5px;
 }

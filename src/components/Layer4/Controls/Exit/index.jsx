@@ -30,8 +30,10 @@ export class MyComponent extends Component {
 				(
 					this.props.origins.selectedOriginId &&
 					this.props.exploration.mode === 'interactive'
-				) ||
-				this.props.app.view === 'page',
+				) || (
+					this.props.app.view === 'page' &&
+					this.props.pages.selectedPage !== 'tourEnd'
+				),
 		});
 		return (
 			<div
@@ -44,6 +46,7 @@ export class MyComponent extends Component {
 }
 const mapStateToProps = state => ({
 	app: state.app,
+	pages: state.pages,
 	eggs: state.eggs,
 	interviews: state.interviews,
 	exploration: state.exploration,

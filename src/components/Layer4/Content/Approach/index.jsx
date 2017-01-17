@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import utilsCss from 'tion2/components/common/utils';
+import Scroller from '../Scroller';
 import contentCss from '../css';
 
 export class MyComponent extends Component {
@@ -12,7 +13,14 @@ export class MyComponent extends Component {
 		const { language } = this.props.app;
 		return (
 			<div className={thisClass}>
-				<div dangerouslySetInnerHTML={{ __html: this.props.pages.data.approach[language] }} />
+				<div>
+					<Scroller>
+						<div
+							className={contentCss.contentDiv}
+							dangerouslySetInnerHTML={{ __html: this.props.pages.data.approach[language] }}
+						/>
+					</Scroller>
+				</div>
 			</div>
 		);
 	}

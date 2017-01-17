@@ -192,7 +192,7 @@ const isIntroduction = state => state.app.view === 'waiting' || state.app.view =
 
 function* onExplorationClick(arg) {
 	const stateBeforeSelection = yield select(getState);
-	if (!isIntroduction(stateBeforeSelection)) {
+	if (arg.confirm && !isIntroduction(stateBeforeSelection)) {
 		const message = arg.mode === 'interactive' ? 'Leave guided tour?' : 'Leave interactive mode?';
 		if (!window.confirm(message)) return false;
 	}

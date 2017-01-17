@@ -19,10 +19,10 @@ export class MyComponent extends Component {
 		}
 	}
 	onTourClick = () => {
-		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'tour' });
+		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'tour', confirm: true });
 	}
 	onInteractiveClick = () => {
-		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'interactive' });
+		this.props.dispatch({ type: 'EXPLORATION_CLICK', mode: 'interactive', confirm: true });
 	}
 	render() {
 		const explorationClass = classnames(dropdownCss.dropdown, utilsCss.pointable, css.exploration, {
