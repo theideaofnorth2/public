@@ -52,6 +52,11 @@ export default function reducer(state = defaultState, action = null) {
 				...state,
 				...defaultState,
 			};
+		case 'TOUR_END':
+			return {
+				...state,
+				mode: 'interactive',
+			};
 		default:
 			return state;
 	}
