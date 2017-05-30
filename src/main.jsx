@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 // import { whyDidYouUpdate } from 'why-did-you-update';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { store, sagaMiddleware } from './store';
-import { isSupported } from './utils/platform';
-import UnSupported from './components/UnSupported';
-import App from './components/App';
-import rootSaga from './sagas';
-import './global.css';
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { store, sagaMiddleware } from "./store";
+import { isSupported } from "./utils/platform";
+import UnSupported from "./components/UnSupported";
+import App from "./components/App";
+import rootSaga from "./sagas";
+import "./global.css";
 
 // if (process.env.NODE_ENV === 'development') {
 // 	whyDidYouUpdate(React);
@@ -16,21 +16,18 @@ import './global.css';
 let renderedComponent;
 
 if (!isSupported) {
-	renderedComponent = <UnSupported />;
+  renderedComponent = <UnSupported />;
 } else {
-	sagaMiddleware.run(rootSaga);
-	renderedComponent = (
-		<Provider store={store}>
-			<App />
-		</Provider>
-	);
+  sagaMiddleware.run(rootSaga);
+  renderedComponent = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 }
 
-const rootElement = document.querySelector('.root');
+const rootElement = document.querySelector(".root");
 const renderApp = () => {
-	render(
-		renderedComponent,
-		rootElement
-	);
+  render(renderedComponent, rootElement);
 };
 renderApp();

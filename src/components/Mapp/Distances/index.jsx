@@ -1,25 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Distance from './Distance';
-import css from './css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Distance from "./Distance";
+import css from "./css";
 
 export class MyComponent extends Component {
-	render() {
-		const content = this.props.interviews.map(interview => Object.assign(
-			<Distance
-				key={interview._id}
-				gmap={this.props.gmap}
-				interview={interview}
-			/>
-		));
-		return !this.props.gmap ? null : (
-			<div className={css.distances}>
-				{content}
-			</div>
-		);
-	}
+  render() {
+    const content = this.props.interviews.map(interview =>
+      Object.assign(
+        <Distance
+          key={interview._id}
+          gmap={this.props.gmap}
+          interview={interview}
+        />
+      )
+    );
+    return !this.props.gmap
+      ? null
+      : <div className={css.distances}>{content}</div>;
+  }
 }
 
-const mapStateToProps = state => ({ interviews: state.interviews.distanceData });
+const mapStateToProps = state => ({
+  interviews: state.interviews.distanceData
+});
 
 export default connect(mapStateToProps)(MyComponent);
