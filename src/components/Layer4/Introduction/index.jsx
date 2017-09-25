@@ -1,63 +1,72 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
-import { imagesUri } from "tion2/utils/tools";
-import origin from "tion2/components/common/origin.svg";
-import utilsCss from "tion2/components/common/utils";
-import css from "./css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import { imagesUri } from 'tion2/utils/tools';
+import origin from 'tion2/components/common/origin.svg';
+import utilsCss from 'tion2/components/common/utils';
+import css from './css';
 
 const imageUri = `${imagesUri}/introduction.jpg`;
 
 export class MyComponent extends Component {
   onSkip = () => {
-    this.props.dispatch({ type: "INTRODUCTION_SKIP" });
+    this.props.dispatch({ type: 'INTRODUCTION_SKIP' });
   };
+  componentDidUpdate() {
+    if (
+      this.props.app.isLight &&
+      this.props.app.zoomersLoaded &&
+      this.props.app.view === 'intro'
+    ) {
+      this.props.dispatch({ type: 'INTRODUCTION_SKIP' });
+    }
+  }
   render() {
     const thisClass = classnames(utilsCss.pointable, css.introduction, {
-      [css.displayed]: this.props.app.view === "intro" ||
-        this.props.app.view === "waiting",
-      [css.skipped]: this.props.introduction.skipped
+      [css.displayed]:
+        this.props.app.view === 'intro' || this.props.app.view === 'waiting',
+      [css.skipped]: this.props.introduction.skipped,
     });
     const mapClass = classnames(css.map, {
-      [css.untranslated]: this.props.introduction.mapUntranslated
+      [css.untranslated]: this.props.introduction.mapUntranslated,
     });
     const imgClass = classnames({
       [css.visible]: this.props.introduction.imageVisible,
-      [css.rotating]: this.props.introduction.imageRotating
+      [css.rotating]: this.props.introduction.imageRotating,
     });
     const originClass = classnames(css.origin, {
       [css.visible]: this.props.introduction.originVisible,
-      [css.untranslated]: this.props.introduction.originUntranslated
+      [css.untranslated]: this.props.introduction.originUntranslated,
     });
     const destinationClass = classnames(css.destination, {
-      [css.visible]: this.props.introduction.destinationVisible
+      [css.visible]: this.props.introduction.destinationVisible,
     });
     const distanceClass = classnames(css.distance, {
       [css.visible]: this.props.introduction.distanceVisible,
-      [css.grown]: this.props.introduction.distanceGrown
+      [css.grown]: this.props.introduction.distanceGrown,
     });
     const pathLength = Math.sqrt(Math.pow(97, 2) + Math.pow(711, 2));
     const pathStyle = {
       strokeDashoffset: pathLength,
-      strokeDasharray: pathLength
+      strokeDasharray: pathLength,
     };
     const text1Class = classnames(css.text, css.text1, {
-      [css.visible]: this.props.introduction.text1Visible
+      [css.visible]: this.props.introduction.text1Visible,
     });
     const text2Class = classnames(css.text, css.text2, {
-      [css.visible]: this.props.introduction.text2Visible
+      [css.visible]: this.props.introduction.text2Visible,
     });
     const text3Class = classnames(css.text, css.text3, {
-      [css.visible]: this.props.introduction.text3Visible
+      [css.visible]: this.props.introduction.text3Visible,
     });
     const text4Class = classnames(css.text, css.text4, {
-      [css.visible]: this.props.introduction.text4Visible
+      [css.visible]: this.props.introduction.text4Visible,
     });
     const text5Class = classnames(css.text, css.text5, {
-      [css.visible]: this.props.introduction.text5Visible
+      [css.visible]: this.props.introduction.text5Visible,
     });
     const text6Class = classnames(css.text, css.text6, {
-      [css.visible]: this.props.introduction.text6Visible
+      [css.visible]: this.props.introduction.text6Visible,
     });
     const { language } = this.props.app;
     const i18nJsx = {
@@ -75,7 +84,7 @@ export class MyComponent extends Component {
             <br />
             une conversation transversale
           </p>
-        )
+        ),
       },
       text2: {
         en: (
@@ -91,7 +100,7 @@ export class MyComponent extends Component {
             <br />
             de notre pays
           </p>
-        )
+        ),
       },
       text3: {
         en: (
@@ -107,7 +116,7 @@ export class MyComponent extends Component {
             <br />
             de Glenn Gould <i>The Idea of North</i>
           </p>
-        )
+        ),
       },
       text4: {
         en: (
@@ -123,20 +132,20 @@ export class MyComponent extends Component {
             <br />
             Qu{"'"} en est il de cette {'"'}idée{'"'}?
           </p>
-        )
+        ),
       },
       text5: {
         en: <p>This is an act of listening</p>,
-        fr: <p>Explorez le Nord à travers ces témoignages</p>
+        fr: <p>Explorez le Nord à travers ces témoignages</p>,
       },
       skip: {
-        en: "skip intro",
-        fr: "passer l'intro"
-      }
+        en: 'skip intro',
+        fr: "passer l'intro",
+      },
     };
     const skipClass = classnames(css.skip, {
-      [css.displayed]: this.props.app.view === "intro" &&
-        this.props.app.zoomersLoaded
+      [css.displayed]:
+        this.props.app.view === 'intro' && this.props.app.zoomersLoaded,
     });
     return (
       <div className={thisClass}>
@@ -156,25 +165,13 @@ export class MyComponent extends Component {
             />
           </svg>
         </div>
-        <div className={text1Class}>
-          {i18nJsx.text1[language]}
-        </div>
-        <div className={text2Class}>
-          {i18nJsx.text2[language]}
-        </div>
-        <div className={text3Class}>
-          {i18nJsx.text3[language]}
-        </div>
-        <div className={text4Class}>
-          {i18nJsx.text4[language]}
-        </div>
-        <div className={text5Class}>
-          {i18nJsx.text5[language]}
-        </div>
+        <div className={text1Class}>{i18nJsx.text1[language]}</div>
+        <div className={text2Class}>{i18nJsx.text2[language]}</div>
+        <div className={text3Class}>{i18nJsx.text3[language]}</div>
+        <div className={text4Class}>{i18nJsx.text4[language]}</div>
+        <div className={text5Class}>{i18nJsx.text5[language]}</div>
         <div className={text6Class}>
-          <p>
-            The Idea of North 2.0
-          </p>
+          <p>The Idea of North 2.0</p>
         </div>
         <div className={skipClass} onClick={this.onSkip}>
           {i18nJsx.skip[language]}
@@ -186,7 +183,7 @@ export class MyComponent extends Component {
 
 const mapStateToProps = state => ({
   app: state.app,
-  introduction: state.introduction
+  introduction: state.introduction,
 });
 
 export default connect(mapStateToProps)(MyComponent);

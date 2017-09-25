@@ -1,37 +1,36 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
-import AlignedOverlay from "tion2/components/Mapp/Google/AlignedOverlay";
-import origin from "tion2/components/common/origin.svg";
-import css from "./css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
+import origin from 'tion2/components/common/origin.svg';
+import css from './css';
 
 export class MyComponent extends Component {
   onClick = () => {
-    if (!this.props.map.dragging) {
-      this.props.dispatch({
-        type: "ORIGIN_CLICK",
-        originId: this.props.origin._id
-      });
-    }
+    if (this.props.app.isLight || this.props.map.dragging) return;
+    this.props.dispatch({
+      type: 'ORIGIN_CLICK',
+      originId: this.props.origin._id,
+    });
   };
   onMouseEnter = () => {
     this.props.dispatch({
-      type: "ORIGIN_MOUSE_ENTER",
-      originId: this.props.origin._id
+      type: 'ORIGIN_MOUSE_ENTER',
+      originId: this.props.origin._id,
     });
   };
   onMouseLeave = () => {
     this.props.dispatch({
-      type: "ORIGIN_MOUSE_LEAVE",
-      originId: this.props.origin._id
+      type: 'ORIGIN_MOUSE_LEAVE',
+      originId: this.props.origin._id,
     });
   };
   render() {
     const originClass = classnames(css.origin, {
-      [css.visible]: this.props.map.level === "main"
+      [css.visible]: this.props.map.level === 'main',
     });
     const nameClass = classnames(css.name, {
-      [css.hover]: this.props.origins.hoveredOriginId === this.props.origin._id
+      [css.hover]: this.props.origins.hoveredOriginId === this.props.origin._id,
     });
     return (
       <AlignedOverlay
@@ -43,10 +42,9 @@ export class MyComponent extends Component {
       >
         <div className={nameClass}>
           {this.props.origin.name}
-          {!!this.props.origin.nativeName &&
-            <div className={css.nativeName}>
-              {this.props.origin.nativeName}
-            </div>}
+          {!!this.props.origin.nativeName && (
+            <div className={css.nativeName}>{this.props.origin.nativeName}</div>
+          )}
         </div>
         <div
           onClick={this.onClick}
@@ -61,8 +59,9 @@ export class MyComponent extends Component {
 }
 
 const mapStateToProps = state => ({
+  app: state.app,
   map: state.map,
-  origins: state.origins
+  origins: state.origins,
 });
 
 export default connect(mapStateToProps)(MyComponent);
