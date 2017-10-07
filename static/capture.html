@@ -1,41 +1,47 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0">
-	</head>
-	<body>
-		<div class="root">
-			<h1>Capture Tool</h1>
-			<p>
-				You should allow your browser to open multiple tabs for this domain.
-			</p>
-			<form id="captureForm">
-				<select></select>
-				<input type="submit" value="Open tabs for this city">
-			</form>
-		</div>
-		<script type="text/javascript">
-			(function() {
-				var fillCities = function(config) {
-					config.origins.forEach(function(origin) {
-						var option = document.createElement("option");
-						option.value = `/?capture&origin=${origin.key}&lat=${origin.lat}&lng=${origin.lng}`;
-						option.innerHTML = origin.name;
-						select.appendChild(option);
-					})
-				}
-				fetch('http://theideaofnorth2.com/api/')
-					.then(function(response) { return response.json(); })
-					.then(fillCities);
-				var form = document.querySelector('#captureForm');
-				var select = form.querySelector('select');
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
-					[4, 6, 8, 10, 12, 13, 14].forEach(function(zoomLevel) {
-						window.open(`${select.value}&zoom=${zoomLevel}`)
-					})
-				});
-			})();
-		</script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+</head>
+
+<body>
+  <div class="root">
+    <h1>Capture Tool</h1>
+    <p>
+      You should allow your browser to open multiple tabs for this domain.
+    </p>
+    <form id="captureForm">
+      <select></select>
+      <input type="submit" value="Open tabs for this city">
+    </form>
+  </div>
+  <script type="text/javascript">
+    (function () {
+      var fillCities = function (config) {
+        config.origins.forEach(function (origin) {
+          var option = document.createElement("option");
+          option.value = `/?capture&origin=${origin.key}&lat=${origin.lat}&lng=${origin.lng}`;
+          option.innerHTML = origin.name;
+          select.appendChild(option);
+        })
+      }
+      var apiUri = document.location.search.indexOf('light') !== -1
+        ? 'http://theideaofnorth2.com/api-light/'
+        : 'http://theideaofnorth2.com/api/';
+      fetch(apiUri)
+        .then(function (response) { return response.json(); })
+        .then(fillCities);
+      var form = document.querySelector('#captureForm');
+      var select = form.querySelector('select');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        [4, 6, 8, 10, 12, 13, 14].forEach(function (zoomLevel) {
+          window.open(`${select.value}&zoom=${zoomLevel}`)
+        })
+      });
+    })();
+  </script>
+</body>
+
 </html>
