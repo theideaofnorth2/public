@@ -4,7 +4,13 @@ const defaultState = {
   dragging: false,
   animating: false,
   centering: false,
-  zoom: document.location.search.indexOf('light') !== -1 ? 3 : 4,
+  zoom:
+    document.location.search.indexOf('zoom') !== -1
+      ? parseInt(
+          new window.URLSearchParams(window.location.search).get('zoom'),
+          10,
+        )
+      : 4,
   zooming: false,
   level: 'main',
   center: { lat: 62.536813, lng: -97.445291 },
