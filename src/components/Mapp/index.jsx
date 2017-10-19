@@ -58,8 +58,10 @@ export class MyComponent extends Component {
   }
   setPolygonAndLayers = () => {
     async function asyncFunc() {
-      const polygon = new google.maps.Polygon(polygonOptions);
-      polygon.setMap(this.gmap);
+      if (!this.props.app.isLight) {
+        const polygon = new google.maps.Polygon(polygonOptions);
+        polygon.setMap(this.gmap);
+      }
       await waitForMapIdle(this.gmap);
       setLayers(css.layer1, css.layer3);
       this.props.dispatch({ type: 'MAP_READY' });
