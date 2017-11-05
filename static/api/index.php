@@ -63,7 +63,8 @@ function ReadFolderDirectory($dir,$listDir= array())
     return $listDir;
 }
 
-$config = json_decode(file_get_contents('./config.json'));
+$input = file_get_contents('./config.json');
+$config = json_decode(iconv('UTF-8', 'UTF-8//IGNORE', utf8_encode($input)));
 $config->assets = ReadFolderDirectory("../assets");
 $config->slideshow = json_decode(file_get_contents('./slideshow.json'));
 
