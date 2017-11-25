@@ -68,4 +68,5 @@ $config = json_decode(iconv('UTF-8', 'UTF-8//IGNORE', utf8_encode($input)));
 $config->assets = ReadFolderDirectory("../assets");
 $config->slideshow = json_decode(file_get_contents('./slideshow.json'));
 
+header('Access-Control-Allow-Origin: *');
 echo json_encode($config);
