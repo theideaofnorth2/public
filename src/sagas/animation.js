@@ -17,8 +17,7 @@ export function* watchEggSelection() {
 function* onInterviewSelection(arg) {
   const state = yield select(getState);
   const interview = state.interviews.data.find(i => i._id === arg.interviewId);
-  const themes = state.themes.data;
-  yield put({ type: "PLAYER_INTERVIEW", interview, themes });
+  yield put({ type: "PLAYER_INTERVIEW", interview });
 }
 
 export function* watchInterviewSelection() {
@@ -54,14 +53,14 @@ function* fromMainToOrigin(arg) {
   const origin = state.origins.data.find(o => o._id === arg.originId);
   yield put({
     type: "MAP_CENTER",
-    center: { lat: origin.lat, lng: origin.lng }
+    center: { lat: origin.lat, lng: origin.lng },
   });
   yield take("MAP_CENTER_FINISHED");
   yield put({
     type: "MAP_ZOOM",
     direction: "in",
     originId: arg.originId,
-    zoom: origin.zoom
+    zoom: origin.zoom,
   });
   yield take("MAP_ZOOM_FINISHED");
   yield put({ type: "ORIGIN_SELECTION", originId: arg.originId });
@@ -84,11 +83,11 @@ export function* watchDestinationInterviewClick() {
 function* fromOriginToMain() {
   const state = yield select(getState);
   const origin = state.origins.data.find(
-    o => o._id === state.origins.selectedOriginId
+    o => o._id === state.origins.selectedOriginId,
   );
   yield put({
     type: "MAP_CENTER",
-    center: { lat: origin.lat, lng: origin.lng }
+    center: { lat: origin.lat, lng: origin.lng },
   });
   yield take("MAP_CENTER_FINISHED");
   yield put({ type: "ORIGIN_UNSELECTION" });
@@ -173,7 +172,7 @@ export function* storieTransition(fromStorie, toStorie) {
       yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
       yield put({
         type: "INTERVIEW_SELECTION",
-        interviewId: toStorie.interviewId
+        interviewId: toStorie.interviewId,
       });
       break;
     }
@@ -181,7 +180,7 @@ export function* storieTransition(fromStorie, toStorie) {
       yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
       yield put({
         type: "INTERVIEW_SELECTION",
-        interviewId: toStorie.interviewId
+        interviewId: toStorie.interviewId,
       });
       break;
     }
@@ -190,7 +189,7 @@ export function* storieTransition(fromStorie, toStorie) {
       yield changeOriginAndEggIfNecessary(fromStorie, toStorie);
       yield put({
         type: "INTERVIEW_SELECTION",
-        interviewId: toStorie.interviewId
+        interviewId: toStorie.interviewId,
       });
       break;
     }
@@ -217,9 +216,10 @@ const isIntroduction = state =>
 function* onExplorationClick(arg) {
   const stateBeforeSelection = yield select(getState);
   if (arg.confirm && !isIntroduction(stateBeforeSelection)) {
-    const message = arg.mode === "interactive"
-      ? "Leave guided tour?"
-      : "Leave interactive mode?";
+    const message =
+      arg.mode === "interactive"
+        ? "Leave guided tour?"
+        : "Leave interactive mode?";
     if (!window.confirm(message)) return false;
   }
   yield put(Object.assign({}, arg, { type: "EXPLORATION_SELECTION" }));

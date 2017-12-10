@@ -12,25 +12,23 @@ import map from './map';
 import origins from './origins';
 import pages from './pages';
 import player from './player';
-import themes from './themes';
 import zoomers from './zoomers';
 
 const rootReducer = combineReducers({
-	app,
-	background,
-	controls,
-	destinations,
-	eggs,
-	exploration,
-	stories,
-	interviews,
-	introduction,
-	map,
-	origins,
-	pages,
-	player,
-	themes,
-	zoomers,
+  app,
+  background,
+  controls,
+  destinations,
+  eggs,
+  exploration,
+  stories,
+  interviews,
+  introduction,
+  map,
+  origins,
+  pages,
+  player,
+  zoomers,
 });
 
 export default rootReducer;

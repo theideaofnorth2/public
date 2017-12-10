@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { imagesUri } from 'tion2/utils/tools';
+import { introductionImageUri } from 'tion2/utils/tools';
 import origin from 'tion2/components/common/origin.svg';
 import utilsCss from 'tion2/components/common/utils';
 import css from './css';
-
-const imageUri = `${imagesUri}/introduction.jpg`;
 
 export class MyComponent extends Component {
   onSkip = () => {
@@ -150,7 +148,11 @@ export class MyComponent extends Component {
     return (
       <div className={thisClass}>
         <div className={mapClass}>
-          <img role="presentation" className={imgClass} src={imageUri} />
+          <img
+            role="presentation"
+            className={imgClass}
+            src={introductionImageUri}
+          />
           <div
             className={originClass}
             dangerouslySetInnerHTML={{ __html: origin }}

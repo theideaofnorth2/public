@@ -5,20 +5,10 @@ export const SuperPromise = () => {
   });
   return superPromise;
 };
-
-export const pickInArray = items =>
-  items[Math.floor(Math.random() * items.length)];
-
-const productionDomain = 'theideaofnorth2.com';
+const productionDomain = "theideaofnorth2.com";
 
 export const getApiUri = isLight =>
-  `http://${productionDomain}/api${isLight ? '-light' : ''}/`;
+  `http://${productionDomain}/api${isLight ? "-light" : ""}/`;
 
-export const imagesUri =
-  process.env.NODE_ENV === 'development'
-    ? '/assets/images'
-    : `http://images.${productionDomain}`;
-export const soundsUri =
-  process.env.NODE_ENV === 'development'
-    ? '/assets/sounds'
-    : `http://sounds.${productionDomain}`;
+export const introductionImageUri =
+  "http://images.theideaofnorth2.com/00000000659.jpg";

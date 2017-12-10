@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
-import { imagesUri } from "tion2/utils/tools";
-import css from "./css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import css from './css';
 
 const preloadImage = src => {
   const srcImage = new window.Image();
-  srcImage.src = `${imagesUri}/cities/${src}`;
+  srcImage.src = src;
 };
 
 export class MyComponent extends Component {
@@ -39,7 +38,7 @@ export class MyComponent extends Component {
     const prevCitie = !this.props.background.prevCitieType
       ? {}
       : this.props[this.props.background.prevCitieType].data.find(
-          c => c._id === this.props.background.prevCitieId
+          c => c._id === this.props.background.prevCitieId,
         );
     const currentCitie = this.props[
       this.props.background.currentCitieType
@@ -48,10 +47,10 @@ export class MyComponent extends Component {
     const currentClass = classnames(css.citie, css.prevCitie);
     const prevStyle = !prevCitie.image
       ? {}
-      : { backgroundImage: `url(${imagesUri}/cities/${prevCitie.image})` };
+      : { backgroundImage: `url(${prevCitie.image})` };
     const currentStyle = !currentCitie.image
       ? {}
-      : { backgroundImage: `url(${imagesUri}/cities/${currentCitie.image})` };
+      : { backgroundImage: `url(${currentCitie.image})` };
     return (
       <div>
         <div
@@ -76,7 +75,7 @@ export class MyComponent extends Component {
 const mapStateToProps = state => ({
   background: state.background,
   origins: state.origins,
-  destinations: state.destinations
+  destinations: state.destinations,
 });
 
 export default connect(mapStateToProps)(MyComponent);

@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Zoomer from "zoomer";
-import classnames from "classnames";
-import { imagesUri } from "tion2/utils/tools";
-import css from "./css";
-
-const zoomersImagesUri = `${imagesUri}/zoomers`;
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Zoomer from 'zoomer';
+import classnames from 'classnames';
+import css from './css';
 
 export class MyComponent extends Component {
   state = {};
@@ -14,7 +11,7 @@ export class MyComponent extends Component {
     this.lastLevel = this.props.origin.zoom;
     this.images = [4, 6, 8, 10, 12, this.lastLevel].map(level => ({
       level,
-      src: `${zoomersImagesUri}/${this.props.origin.key}/${level}.png`
+      src: this.props.origin[`zoomer_${level}`],
     }));
   }
   componentDidMount() {
@@ -30,34 +27,32 @@ export class MyComponent extends Component {
   }
   mountZoomer = () => {
     this.zoomer = new Zoomer({
-      selector: `#zoomer_${this.props.origin.key}`,
+      selector: `#zoomer_${this.props.origin._id}`,
       width: 1920,
       height: 1080,
       stepsPerLevel: 6,
       step: 24,
-      images: this.images
+      images: this.images,
     });
-    this.zoomer.on("ready", () => {
+    this.zoomer.on('ready', () => {
       this.setState({ mounted: true });
-      this.props.onMount(this.props.origin.key);
+      this.props.onMount(this.props.origin._id);
     });
   };
   animateZoomer = () => {
     const spl = 6;
-    const fromStep = this.props.zoomers.direction === "in"
-      ? spl * 4
-      : spl * this.lastLevel;
-    const toStep = this.props.zoomers.direction === "in"
-      ? spl * this.lastLevel
-      : spl * 4;
+    const fromStep =
+      this.props.zoomers.direction === 'in' ? spl * 4 : spl * this.lastLevel;
+    const toStep =
+      this.props.zoomers.direction === 'in' ? spl * this.lastLevel : spl * 4;
     this.zoomer
       .animateZoom({
         stepsPerLevel: spl,
         fromStep,
-        toStep
+        toStep,
       })
       .then(() => {
-        this.props.dispatch({ type: "MAP_ZOOM_FINISHED" });
+        this.props.dispatch({ type: 'MAP_ZOOM_FINISHED' });
       });
   };
   render() {
@@ -66,11 +61,11 @@ export class MyComponent extends Component {
       this.props.origin._id === this.props.zoomers.originId;
     const thisClass = classnames(css.zoomerContainer, {
       [css.displayed]: !this.state.mounted || zooming,
-      [css.visible]: zooming
+      [css.visible]: zooming,
     });
     return (
       <div className={thisClass}>
-        <div className={css.zoomer} id={`zoomer_${this.props.origin.key}`} />
+        <div className={css.zoomer} id={`zoomer_${this.props.origin._id}`} />
       </div>
     );
   }

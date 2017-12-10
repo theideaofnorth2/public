@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
-import AlignedOverlay from "tion2/components/Mapp/Google/AlignedOverlay";
-import { imagesUri } from "tion2/utils/tools";
-import css from "./css";
-
-const eggsImagesUri = `${imagesUri}/eggs`;
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
+import AlignedOverlay from 'tion2/components/Mapp/Google/AlignedOverlay';
+import css from './css';
 
 export class MyComponent extends Component {
   state = {};
@@ -14,22 +11,22 @@ export class MyComponent extends Component {
   };
   onClick = () => {
     this.props.dispatch({
-      type: "EGG_CLICK",
+      type: 'EGG_CLICK',
       eggId: this.props.egg._id,
-      originId: this.props.egg.originId
+      originId: this.props.egg.originId,
     });
   };
   render() {
     const visible =
       this.props.origins.selectedOriginId === this.props.egg.originId &&
-      this.props.map.level === "origin";
+      this.props.map.level === 'origin';
     const faded = this.props.interviews.hoveredInterviewId !== null;
     const thisClass = classnames(css.egg, {
       [css.visible]: visible,
-      [css.faded]: faded
+      [css.faded]: faded,
     });
     const thisStyle = {
-      backgroundImage: `url(${eggsImagesUri}/${this.props.egg.image})`
+      backgroundImage: `url(${this.props.egg.image})`,
     };
     return (
       <AlignedOverlay
@@ -49,7 +46,7 @@ export class MyComponent extends Component {
 const mapStateToProps = state => ({
   origins: state.origins,
   interviews: state.interviews,
-  map: state.map
+  map: state.map,
 });
 
 export default connect(mapStateToProps)(MyComponent);
