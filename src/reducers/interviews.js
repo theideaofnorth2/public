@@ -12,7 +12,7 @@ const augmentData = data =>
     const slideshow = data.slides
       .filter(s => s.interviewId === interview._id)
       .sort((s1, s2) => s1.startTime - s2.startTime);
-    const duration = 100;
+    const duration = -1;
     return Object.assign({
       ...interview,
       slideshow,
