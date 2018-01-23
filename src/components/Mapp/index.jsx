@@ -90,6 +90,7 @@ export class MyComponent extends Component {
         this.gmap.panTo(this.props.map.center);
         await waitForMapIdle(this.gmap);
       }
+      await delay(300);
       this.props.dispatch({ type: 'MAP_CENTER_FINISHED' });
       this.setZoomAndStyles();
     }
@@ -112,12 +113,7 @@ export class MyComponent extends Component {
             <EggIcons gmap={this.gmap} />
           </div>
         )}
-        <div
-          ref={ref => {
-            this.mapRef = ref;
-          }}
-          className={mapClass}
-        />
+        <div ref={ref => (this.mapRef = ref)} className={mapClass} />
       </div>
     );
   }

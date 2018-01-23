@@ -39,13 +39,22 @@ export class MyComponent extends Component {
       this.props.onMount(this.props.origin._id);
     });
   };
+  isScreenTooWideToAnimate = () =>
+    window.innerWidth * window.devicePixelRatio > 1980;
   animateZoomer = () => {
     const spl = 6;
     const fromStep =
       this.props.zoomers.direction === 'in' ? spl * 4 : spl * this.lastLevel;
     const toStep =
       this.props.zoomers.direction === 'in' ? spl * this.lastLevel : spl * 4;
-    this.zoomer
+    if (this.isScreenTooWideToAnimate()) {
+      this.zoomer.setZoom({ step: toStep });
+      return setTimeout(
+        () => this.props.dispatch({ type: 'MAP_ZOOM_FINISHED' }),
+        500,
+      );
+    }
+    return this.zoomer
       .animateZoom({
         stepsPerLevel: spl,
         fromStep,
