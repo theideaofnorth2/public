@@ -40,7 +40,7 @@ export class MyComponent extends Component {
     });
   };
   isScreenTooWideToAnimate = () =>
-    window.innerWidth * window.devicePixelRatio > 1980;
+    window.innerWidth * window.devicePixelRatio > 1920;
   animateZoomer = () => {
     const spl = 6;
     const fromStep =
