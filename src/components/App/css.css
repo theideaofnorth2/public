@@ -1,34 +1,38 @@
 .app {
-	background: black;
+  background: black;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .capture {
-	position: relative;
-	width: 1920px;
-	height: 1080px;
-	overflow: hidden;
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
 }
 .layer0,
 .mapp,
 .layer2,
 .layer4 {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
 }
 .layer0 {
-	opacity: 0.55;
-	z-index: 0;
+  opacity: 0.55;
+  z-index: 0;
 }
 .mapp,
 .layer2,
 .layer4 {
-	pointer-events: none;
+  pointer-events: none;
 }
 .mapp {
-	z-index: 1;
+  z-index: 1;
 }
 .layer4 {
-	z-index: 2;
+  z-index: 2;
 }

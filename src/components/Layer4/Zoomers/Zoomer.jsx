@@ -39,8 +39,8 @@ export class MyComponent extends Component {
       this.props.onMount(this.props.origin._id);
     });
   };
-  isScreenTooWideToAnimate = () =>
-    window.innerWidth * window.devicePixelRatio > 1920;
+  isScreenTooWideToAnimate = () => false;
+  // window.innerWidth * window.devicePixelRatio > 1920;
   animateZoomer = () => {
     const spl = 6;
     const fromStep =

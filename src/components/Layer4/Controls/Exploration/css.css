@@ -1,74 +1,76 @@
 .exploration {
-	display: none;
-	position: absolute;
-	top: 0;
-	right: 0px;
-	transform: translate(-110px, 0);
-  transition: transform 500ms cubic-bezier(0,0,0.32,1);
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  transform: translate(-110px, 0);
+  transition: all 500ms cubic-bezier(0, 0, 0.32, 1);
 }
 .exploration.displayed {
-	display: block;
-	animation: fadeIt 600ms cubic-bezier(0,0,0.32,1);
-	animation-fill-mode: forwards;
+  display: block;
+  animation: fadeIt 600ms cubic-bezier(0, 0, 0.32, 1);
+  animation-fill-mode: forwards;
 }
 @keyframes fadeIt {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .exploration.centered {
-	transform: translate(calc(-50vw + 50%), calc(50vh - 100%));
+  transform: translate(0, 0);
+  right: calc(50% - 30px);
+  top: calc(50% - 20px);
 }
 .exploration.open {
-  transition: transform 500ms linear;
+  transition: all 500ms linear;
 }
 .exploration.open:after {
-	display: none;
+  display: none;
 }
 .exploration.open > div {
   transition: all 500ms linear;
 }
 .exploration.open > div.tour {
-	transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 .exploration.open > div.interactive {
-	transform: translate(0, 20px);
+  transform: translate(0, 20px);
 }
 .exploration.open > div {
-	color: #BBB;
+  color: #bbb;
 }
 .exploration.open > div:hover {
-	color: white;
+  color: white;
 }
 .exploration.split > div.tour {
-	transform: translate(-300%, 0) scale(3);
+  transform: translate(-300%, 0) scale(3);
 }
 .exploration.split > div.interactive {
-	transform: translate(300%, calc(-100% + 20px)) scale(3);
+  transform: translate(300%, calc(-100% + 20px)) scale(3);
 }
 
 .description {
-	position: absolute;
-	top: 75%;
-	left: -10px;
-	right: -10px;
-	font-size: 7px;
-	display: block;
-	animation: collapseIt 300ms cubic-bezier(0,0,0.32,1);
-	animation-fill-mode: forwards;
-	white-space: nowrap;
+  position: absolute;
+  top: 75%;
+  left: -10px;
+  right: -10px;
+  font-size: 7px;
+  display: block;
+  animation: collapseIt 300ms cubic-bezier(0, 0, 0.32, 1);
+  animation-fill-mode: forwards;
+  white-space: nowrap;
 }
 @keyframes collapseIt {
-	0% {
-		transform: scaleY(1);
-	}
-	100% {
-		transform: scaleY(0);
-	}
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
 }
 .exploration.descriptive .description {
-	animation: none;
+  animation: none;
 }
