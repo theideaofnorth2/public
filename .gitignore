@@ -37,5 +37,4 @@ static/api/getid3*
 static/api/*.json
 static/assets*
 static/experiments*
-src/**/*.json
 .vscode*
