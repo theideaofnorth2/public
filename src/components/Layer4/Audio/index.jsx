@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 export class MyComponent extends Component {
   componentDidMount() {
-    this.audioRef.addEventListener('ended', this.onEnded);
-    this.audioRef.addEventListener('loadedmetadata', this.onLoadedmetadata);
+    this.audioRef.addEventListener("ended", this.onEnded);
+    this.audioRef.addEventListener("loadedmetadata", this.onLoadedmetadata);
   }
   componentDidUpdate(prevProps) {
     if (this.props.player.audioPlaying) {
@@ -22,7 +22,7 @@ export class MyComponent extends Component {
     if (this.props.player.volume !== prevProps.player.volume) this.setVolume();
   }
   componentWillUnmount() {
-    this.audioRef.removeEventListener('ended', this.onEnded);
+    this.audioRef.removeEventListener("ended", this.onEnded);
   }
   setVolume = () => {
     this.audioRef.volume = this.props.player.volume;
@@ -44,8 +44,8 @@ export class MyComponent extends Component {
     window.requestAnimationFrame(() => {
       if (!this.props.player.audioPlaying) return;
       this.props.dispatch({
-        type: 'INTERVIEW_AUDIO_TIME_GET',
-        time: this.audioRef.currentTime,
+        type: "INTERVIEW_AUDIO_TIME_GET",
+        time: this.audioRef.currentTime
       });
     });
   };
@@ -54,18 +54,20 @@ export class MyComponent extends Component {
   };
   onLoadedmetadata = () => {
     this.props.dispatch({
-      type: 'INTERVIEW_AUDIO_DURATION',
+      type: "INTERVIEW_AUDIO_DURATION",
       interviewId: this.props.player.interview._id,
-      duration: this.audioRef.duration,
+      duration: this.audioRef.duration
     });
   };
   onEnded = () => {
-    this.props.dispatch({ type: 'AUDIO_END' });
+    this.props.dispatch({ type: "AUDIO_END" });
   };
   render() {
     const src = !this.props.player.interview
       ? null
-      : this.props.player.interview.sound;
+      : this.props.player.interview.sound
+          .replace("images.", "")
+          .replace(".com", ".com/assets/images");
     return (
       <audio
         ref={ref => {
