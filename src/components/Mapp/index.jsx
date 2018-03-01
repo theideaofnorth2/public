@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import { connect } from 'react-redux';
-import { delay } from 'redux-saga';
-import OriginInterviewIcons from 'tion2/components/Mapp/OriginInterviewIcons';
-import EggIcons from 'tion2/components/Mapp/EggIcons';
-import Distances from 'tion2/components/Mapp/Distances';
-import Origins from 'tion2/components/Mapp/Origins';
-import Destinations from 'tion2/components/Mapp/Destinations';
-import utilsCss from 'tion2/components/common/utils';
-import appCss from 'tion2/components/App/css';
-import canadaCoords from './data/canadaCoords';
-import worldCoords from './data/worldCoords';
-import mainStyles from './data/mainStyles.json';
-import originStyles from './data/originStyles.json';
+import React, { Component } from "react";
+import classnames from "classnames";
+import { connect } from "react-redux";
+import { delay } from "redux-saga";
+import OriginInterviewIcons from "tion2/components/Mapp/OriginInterviewIcons";
+import EggIcons from "tion2/components/Mapp/EggIcons";
+import Distances from "tion2/components/Mapp/Distances";
+import Origins from "tion2/components/Mapp/Origins";
+import Destinations from "tion2/components/Mapp/Destinations";
+import utilsCss from "tion2/components/common/utils";
+import appCss from "tion2/components/App/css";
+import canadaCoords from "./data/canadaCoords";
+import worldCoords from "./data/worldCoords";
+import mainStyles from "./data/mainStyles.json";
+import originStyles from "./data/originStyles.json";
 import {
   waitForMapIdle,
   setLayers,
   getMapOptionsFromUrl,
-  areCentersEqual,
-} from './utils';
-import css from './css';
+  areCentersEqual
+} from "./utils";
+import css from "./css";
 
 const polygonOptions = {
   strokeWeight: 0,
-  fillColor: '#000000',
+  fillColor: "#000000",
   fillOpacity: 0.8,
-  paths: [worldCoords, canadaCoords],
+  paths: [worldCoords, canadaCoords]
 };
 
 export class MyComponent extends Component {
@@ -37,17 +37,16 @@ export class MyComponent extends Component {
   }
   componentDidMount() {
     this.gmap = new google.maps.Map(this.mapRef, this.gmapOptions);
-    this.props.dispatch({ type: 'MAP_INITIALIZED' });
+    this.props.dispatch({ type: "MAP_INITIALIZED" });
   }
   componentDidUpdate(prevProps) {
-    if (this.props.app.isCapture) return;
     if (!prevProps.map.initialized && this.props.map.initialized) {
-      this.gmap.addListener('dragstart', () => {
-        this.props.dispatch({ type: 'MAP_DRAG_START' });
+      this.gmap.addListener("dragstart", () => {
+        this.props.dispatch({ type: "MAP_DRAG_START" });
       });
-      this.gmap.addListener('dragend', () => {
+      this.gmap.addListener("dragend", () => {
         setTimeout(() => {
-          this.props.dispatch({ type: 'MAP_DRAG_END' });
+          this.props.dispatch({ type: "MAP_DRAG_END" });
         }, 0);
       });
       this.setPolygonAndLayers();
@@ -64,19 +63,18 @@ export class MyComponent extends Component {
       }
       await waitForMapIdle(this.gmap);
       setLayers(css.layer1, css.layer3);
-      this.props.dispatch({ type: 'MAP_READY' });
-      if (this.props.app.isCapture) this.setCaptureMapOptions.call(this);
+      this.props.dispatch({ type: "MAP_READY" });
     }
     asyncFunc.call(this);
   };
   getGmapOptions = () => ({
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     disableDefaultUI: true,
     zoom: this.props.map.zoom,
     minZoom: this.props.map.zoom,
     maxZoom: this.props.map.zoom,
-    styles: this.props.map.styles === 'main' ? mainStyles : originStyles,
-    center: this.props.map.center,
+    styles: this.props.map.styles === "main" ? mainStyles : originStyles,
+    center: this.props.map.center
   });
   setZoomAndStyles = () => {
     this.gmapOptions = this.getGmapOptions();
@@ -91,7 +89,7 @@ export class MyComponent extends Component {
         await waitForMapIdle(this.gmap);
       }
       await delay(300);
-      this.props.dispatch({ type: 'MAP_CENTER_FINISHED' });
+      this.props.dispatch({ type: "MAP_CENTER_FINISHED" });
       this.setZoomAndStyles();
     }
     asyncFunc.call(this);
@@ -100,7 +98,7 @@ export class MyComponent extends Component {
     const mapClass = classnames(css.map, {
       [css.capture]: this.props.app.isCapture,
       [css.visible]: this.props.map.ready,
-      [utilsCss.pointable]: this.props.exploration.mode === 'interactive',
+      [utilsCss.pointable]: this.props.exploration.mode === "interactive"
     });
     return (
       <div className={appCss.mapp} hidden={this.props.map.zooming}>
@@ -122,7 +120,7 @@ export class MyComponent extends Component {
 const mapStateToProps = state => ({
   exploration: state.exploration,
   app: state.app,
-  map: state.map,
+  map: state.map
 });
 
 export default connect(mapStateToProps)(MyComponent);
