@@ -43,7 +43,9 @@ const getPhotoSlides = action => {
 const updateSlides = (slides, action) => {
   const currentSlideIndex = slides.findIndex(slide => slide.current);
   const nextCurrentSlideIndex = slides.findIndex(
-    slide => slide.startTime <= action.time && slide.endTime > action.time,
+    slide =>
+      slide.startTime <= action.time &&
+      (slide.endTime > action.time || slide.endTime === -1),
   );
   return slides.map((slide, index) =>
     Object.assign({
