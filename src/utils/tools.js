@@ -8,7 +8,7 @@ export const SuperPromise = () => {
 const productionDomain = 'theideaofnorth2.com';
 
 export const getApiUri = isLight =>
-  `http://${productionDomain}/api${isLight ? '-light' : ''}/`;
+  `https://${productionDomain}/api${isLight ? '-light' : ''}/`;
 
 export const introductionImageUri =
-  'http://images.theideaofnorth2.com/00000000660.jpg';
+  'https://theideaofnorth2.com/assets/images/00000000660.jpg';
