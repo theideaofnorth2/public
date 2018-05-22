@@ -65,9 +65,7 @@ export class MyComponent extends Component {
   render() {
     const src = !this.props.player.interview
       ? null
-      : this.props.player.interview.sound
-          .replace("images.", "")
-          .replace(".com", ".com/assets/images");
+      : this.props.player.interview.sound;
     return (
       <audio
         ref={ref => {
