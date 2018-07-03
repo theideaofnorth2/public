@@ -5,10 +5,10 @@ export const SuperPromise = () => {
   });
   return superPromise;
 };
-const productionDomain = 'theideaofnorth2.com';
+const productionDomain = "theideaofnorth2.com";
 
 export const getApiUri = isLight =>
-  `https://${productionDomain}/api${isLight ? '-light' : ''}/`;
+  `https://${productionDomain}/api/wordpressApi.php${isLight ? "-light" : ""}/`;
 
 export const introductionImageUri =
-  'https://theideaofnorth2.com/assets/images/00000000660.jpg';
+  "https://theideaofnorth2.com/assets/images/00000000660.jpg";

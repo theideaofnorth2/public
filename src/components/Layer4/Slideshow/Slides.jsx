@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
-import utilsCss from 'tion2/components/common/utils';
-import css from './css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import utilsCss from "tion2/components/common/utils";
+import css from "./css";
 
 export class MyComponent extends Component {
   render() {
@@ -10,7 +10,7 @@ export class MyComponent extends Component {
       return null;
     const slidesContent = this.props.player.photoSlides.map((slide, index) => {
       const slideStyle = {
-        backgroundImage: `url(${slide.name})`,
+        backgroundImage: `url(${slide.image})`,
       };
       const slideClass = classnames(utilsCss.pointable, css.slide, {
         [css.prevSlide]: slide.previous,

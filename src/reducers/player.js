@@ -11,7 +11,7 @@ const defaultState = {
 };
 
 const getPhotoSlideEndTime = (slides, index, action) => {
-  if (index < slides.length - 1) return slides[index + 1].startTime;
+  if (index < slides.length - 1) return slides[index + 1].time;
   return action.interview.duration;
 };
 
@@ -19,22 +19,19 @@ const getPhotoSlides = action => {
   const firstSlide = {
     previous: true,
     current: true,
-    startTime: 0,
+    time: 0,
     endTime: 0,
-    name: action.interview.image,
+    image: action.interview.image,
   };
-  const followingSlidesData = action.interview.slideshow.filter(
-    entry => entry.type === "photo",
-  );
-  const followingSlides = followingSlidesData.map((slide, index) =>
+  const followingSlides = action.interview.slideshow.map((slide, index) =>
     Object.assign({
       previous: false,
       current: false,
-      startTime: slide.startTime,
+      time: slide.time,
       endTime:
         slide.endTime ||
-        getPhotoSlideEndTime(followingSlidesData, index, action),
-      name: slide.name,
+        getPhotoSlideEndTime(action.interview.slideshow, index, action),
+      image: slide.image,
     }),
   );
   return [firstSlide, ...followingSlides];
@@ -44,7 +41,7 @@ const updateSlides = (slides, action) => {
   const currentSlideIndex = slides.findIndex(slide => slide.current);
   const nextCurrentSlideIndex = slides.findIndex(
     slide =>
-      slide.startTime <= action.time &&
+      slide.time <= action.time &&
       (slide.endTime > action.time || slide.endTime === -1),
   );
   return slides.map((slide, index) =>
