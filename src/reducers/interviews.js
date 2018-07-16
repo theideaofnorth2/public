@@ -12,7 +12,7 @@ const augmentData = data =>
     const duration = -1;
     return Object.assign({
       ...interview,
-      slideshow: interview.slides,
+      slideshow: interview.slides || [],
       duration,
       origin: data.origins.find(o => o._id === interview.originId),
       destination: data.destinations.find(
