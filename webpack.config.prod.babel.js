@@ -8,13 +8,13 @@ module.exports = {
 		path.join(__dirname, 'src', 'main'),
 	],
 	output: {
-		path: path.join(__dirname, 'static'),
+		path: path.join(__dirname, 'docs'),
 		filename: '[name].js',
 	},
 	resolve: {
 		alias: {
 			tion2: path.resolve(__dirname, 'src'),
-			tion2Static: path.resolve(__dirname, 'static'),
+			tion2Static: path.resolve(__dirname, 'docs'),
 		},
 		extensions: ['', '.js', '.jsx', '.json', '.css'],
 	},

@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'docs')));
 
 app.listen(8081, '0.0.0.0', (err) => {
 	if (err) {
