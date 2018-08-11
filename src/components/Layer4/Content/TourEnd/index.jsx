@@ -27,13 +27,19 @@ export class MyComponent extends Component {
     if (interactiveLink)
       interactiveLink.addEventListener("click", this.interactiveHandler);
   };
-  approachHandler = () => {
+  approachHandler = e => {
+    e.preventDefault();
+    e.stopPropagation();
     this.props.dispatch({ type: "MENU_APPROACH_CLICK" });
   };
-  aboutHandler = () => {
+  aboutHandler = e => {
+    e.preventDefault();
+    e.stopPropagation();
     this.props.dispatch({ type: "MENU_ABOUT_CLICK" });
   };
-  tourHandler = () => {
+  tourHandler = e => {
+    e.preventDefault();
+    e.stopPropagation();
     this.props.dispatch({
       type: "EXPLORATION_CLICK",
       mode: "tour",
@@ -41,7 +47,9 @@ export class MyComponent extends Component {
     });
     this.props.dispatch({ type: "EXIT_CONTENT_CLICK" });
   };
-  interactiveHandler = () => {
+  interactiveHandler = e => {
+    e.preventDefault();
+    e.stopPropagation();
     this.props.dispatch({
       type: "EXPLORATION_CLICK",
       mode: "interactive",
